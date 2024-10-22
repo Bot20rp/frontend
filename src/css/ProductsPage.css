@@ -1,0 +1,179 @@
+/* General CSS */
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.containerProduct {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 20px;
+    height: 85vh;
+}
+
+/* Input Buscar */
+.buscarProduct {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.buscarProduct:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Tabla de Productos */
+.tableProduct {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    /* table-layout: fixed; */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tableProduct th, .tableProduct td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    white-space: nowrap; /* Prevent text from breaking into new line */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds "..." for long text */
+}
+
+.tableProduct th {
+    background-color: #007bff;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.tableProduct tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tableProduct tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Botones de Acción */
+.eliminarProduct, .modificarProduct {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.eliminarProduct {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.eliminarProduct:hover {
+    background-color: #e60000;
+}
+
+.modificarProduct {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modificarProduct:hover {
+    background-color: #45a049;
+}
+
+/* Botón Nuevo Producto */
+.openProduct {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.openProduct:hover {
+    background-color: #218838;
+}
+
+/* Estilo del modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+
+.modal-content input:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+.modal-content .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.modal-content .btn:first-of-type {
+    background-color: #007bff;
+    color: white;
+    margin-right: 10px;
+}
+
+.modal-content .btn:last-of-type {
+    background-color: #dc3545;
+    color: white;
+}
+
+.tableContainer {
+    max-height: 500px; /* Altura máxima de la tabla visible */
+    overflow-y: auto;  /* Muestra una barra de desplazamiento si el contenido excede la altura */
+    margin: 20px 0;    /* Margen alrededor de la tabla */
+    border: 1px solid #ccc;  /* Borde opcional para definir el área */
+    border-radius: 8px; /* Esquinas redondeadas para un diseño más limpio */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para resaltar */
+}

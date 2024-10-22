@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f0f0f0; /* Fondo suave para toda la página */
+}
+
+.containerProveedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto; /* Centrar el contenedor */
+    padding: 20px;
+    text-align: center;
+}
+
+.titleProveedor {
+    font-size: 2.5em;
+    color: #4CAF50; /* Color llamativo para el título */
+    margin-bottom: 20px;
+}
+
+.buscarProveedor {
+    width: 100%;
+    max-width: 400px; /* Ancho máximo para la barra de búsqueda */
+    padding: 10px;
+    border: 1px solid #ccc; /* Borde sutil */
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+.buscarProveedor:focus {
+    border-color: #4CAF50; /* Cambiar el color del borde al enfocar */
+}
+
+.openProveedor {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.openProveedor:hover {
+    background-color: #45a049; /* Color más oscuro al pasar el mouse */
+}
+
+.tableProveedor {
+    width: 100%;
+    border-collapse: collapse; /* Eliminar espacios entre celdas */
+    margin-top: 20px;
+}
+
+.tableProveedor th, .tableProveedor td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Línea inferior sutil para las filas */
+}
+
+.tableProveedor th {
+    background-color: #4CAF50; /* Color de fondo para encabezados */
+    color: white;
+}
+
+.tableProveedor tr:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el mouse */
+}
+
+.editProveedor {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.eliminarProveedor, .modificarProveedor {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.eliminarProveedor {
+    background-color: #f44336; /* Color de fondo para eliminar */
+    color: white;
+}
+
+.eliminarProveedor:hover {
+    background-color: #e53935; /* Color más oscuro al pasar el mouse */
+}
+
+.modificarProveedor {
+    background-color: #2196F3; /* Color de fondo para modificar */
+    color: white;
+}
+
+.modificarProveedor:hover {
+    background-color: #1976D2; /* Color más oscuro al pasar el mouse */
+}
+
+.RegistroProveedor {
+    display: none; /* Esconde el modal por defecto */
+}
+
+.RegistroProveedor.show {
+    display: block; /* Muestra el modal */
+}
+
+.containerProveedor.show2 {
+    opacity: 0.5; /* Estilo para el fondo cuando el modal está activo */
+    pointer-events: none; /* Desactiva interacciones en el fondo */
+}
+
+.modaEProveedor {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 400px; /* Ancho fijo para el modal */
+    text-align: center;
+}
+
+.modalProveedor {
+    font-size: 1.5em;
+    color: #333; /* Color del título del modal */
+    margin-bottom: 20px;
+}
+
+.form-idProveedor, .form-nombreProveedor, .form-direccionProveedor, .form-telefonoProveedor {
+    margin: 10px 0; /* Espacio entre los campos */
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Borde sutil */
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #4CAF50; /* Color del borde al enfocar */
+}
+
+.saveProveedor {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.closeProveedor {
+    padding: 10px 20px;
+    background-color: #f44336; /* Color de fondo para cerrar */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.closeProveedor:hover {
+    background-color: #e53935; /* Color más oscuro al pasar el mouse */
+}

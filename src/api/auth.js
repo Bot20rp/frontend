@@ -3,7 +3,11 @@ import axios from "./axios"
 //GESTION USUARIO
 
 export const registerRequest = user => axios.post(`/clientReg`,user) 
-export const loginRequest = user => axios.post(`/login`,user)
+export const loginRequest = user => axios.post(`/login`, user, {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
 export const logoutRequest= ()=>axios.post('/logout')
 export const obtenerRequest = () => { return axios.get('/obtener')};
 export const verityTokenResquest = () => axios.get('/verify')

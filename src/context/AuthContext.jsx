@@ -31,7 +31,7 @@ export const useAuth = () => {
 
         if(res.data.user.rol === 'Administrador'|| res.data.user.rol ==='Cliente'){
           console.log("si entre")
-           await cargarDatos();
+           cargarDatos();
         }else{
           console.log("Acceso denegado para cargar datos user")
         }

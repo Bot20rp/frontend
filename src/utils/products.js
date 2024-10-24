@@ -9,36 +9,36 @@ Cócteles: Combinaciones de diferentes bebidas alcohólicas y otros ingredientes
 
 
 import productImg02 from "../img/cerveza-02.jpg";
-import productImg03 from "../Img/cerveza-03.jpg";
-import productImg04 from "../Img/cerveza-04.jpg";
-import productImg05 from "../Img/cerveza-05.jpeg";
-import productImg06 from "../Img/cerveza-06.jpg";
-import productImg07 from "../Img/cerveza-07.jpeg";
+import productImg03 from "../img/cerveza-03.jpg";
+import productImg04 from "../img/cerveza-04.jpg";
+import productImg05 from "../img/cerveza-05.jpeg";
+import productImg06 from "../img/cerveza-06.jpg";
+import productImg07 from "../img/cerveza-07.jpeg";
 
 
-import vino1 from "../Img/vino-1.jpeg";
-import vino2 from "../Img/vino-2.jpeg";
-import vino3 from "../Img/vino-3.jpeg";
-import vino4 from "../Img/vino-4.jpeg";
-import vino5 from "../Img/vino-5.jpeg";
-import vino6 from "../Img/vino-6.jpeg";
-import vino7 from "../Img/vino-7.jpeg";
+import vino1 from "../img/vino-1.jpeg";
+import vino2 from "../img/vino-2.jpeg";
+import vino3 from "../img/vino-3.jpeg";
+import vino4 from "../img/vino-4.jpeg";
+import vino5 from "../img/vino-5.jpeg";
+import vino6 from "../img/vino-6.jpeg";
+import vino7 from "../img/vino-7.jpeg";
 
 
-import licor1 from "../Img/licores-1.jpeg";
-import licor2 from "../Img/licores-2.jpeg";
-import licor3 from "../Img/licores-3.jpeg";
-import licor4 from "../Img/licores-4.jpeg";
-import licor5 from "../Img/licores-5.jpeg";
-import licor8 from "../Img/licores-8.jpeg";
-import licor7 from "../Img/licores-7.jpeg";
+import licor1 from "../img/licores-1.jpeg";
+import licor2 from "../img/licores-2.jpeg";
+import licor3 from "../img/licores-3.jpeg";
+import licor4 from "../img/licores-4.jpeg";
+import licor5 from "../img/licores-5.jpeg";
+import licor8 from "../img/licores-8.jpeg";
+import licor7 from "../img/licores-7.jpeg";
 
 // jorgeeee
 
-import bebidaaperitivo1 from "../Img/bebidaaperitivo-1.jpeg";
-import bebidaaperitivo2 from "../Img/bebidaaperitivo-2.jpeg";
+import bebidaaperitivo1 from "../img/bebidaaperitivo-1.jpeg";
+import bebidaaperitivo2 from "../img/bebidaaperitivo-2.jpeg";
 
-import bebidaespirituosa1 from "../Img/bebidaespirituosa-1.jpeg";
+import bebidaespirituosa1 from "../img/bebidaespirituosa-1.jpeg";
 
 /* la parte del slider  */
 export const SliderData = [

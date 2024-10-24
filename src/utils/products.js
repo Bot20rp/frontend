@@ -8,7 +8,7 @@ Cócteles: Combinaciones de diferentes bebidas alcohólicas y otros ingredientes
  */
 
 
-import productImg02 from "../Img/cerveza-02.jpg";
+import productImg02 from "../img/cerveza-02.jpg";
 import productImg03 from "../Img/cerveza-03.jpg";
 import productImg04 from "../Img/cerveza-04.jpg";
 import productImg05 from "../Img/cerveza-05.jpeg";

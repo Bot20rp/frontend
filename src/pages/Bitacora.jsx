@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './bitacora.css';
-import { useAuth } from '../context/AuthContext';  
+import { bitacoraa } from '../api/auth';  
 export const Bitacora = () => {
-  const {bitacoraa} = useAuth();
   const [bitacoras, setBitacoras] = useState([]); // Estado para almacenar los registros de la bitácora
   const [loading, setLoading] = useState(true); // Estado para manejar el loading
 

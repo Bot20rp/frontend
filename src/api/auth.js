@@ -14,7 +14,11 @@ export const obtenerRequest = () => { return instance.get('/obtener',{
     withCredentials: true,
     timeout: tiempoEspera 
 })};
-export const verityTokenResquest = () => instance.get('/verify')
+export const verityTokenResquest = () => instance.get('/verify', {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+});
 export const actualizarUsuario = user => instance.patch(`/usuario/actualizar`,{data :user ,
     headers: {
         'Content-Type': 'application/json', 

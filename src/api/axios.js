@@ -1,9 +1,19 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const instance = axios.create({
-     baseURL : 'https://backend-si1-production-0e10.up.railway.app/api',
-    withCredentials: true,
-    timeout: 5000 
-})
+    baseURL: 'https://backend-si1-production-0e10.up.railway.app/api',
+    timeout: 5000
+});
 
-export default instance
+// Interceptor para añadir el token en la cabecera de autorización
+instance.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`; // Enviar el token en la cabecera
+    }
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
+
+export default instance;

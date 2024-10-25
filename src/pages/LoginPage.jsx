@@ -14,13 +14,13 @@ function LoginPage() {
     
     const onSubmit = handleSubmit(async (data) => {
       await signin(data);  // Llama a signin y espera que termine
+      window.location.reload(); // Recarga la página
     });
     
 
     useEffect( () =>{
       if (esAutenticado) {
         navigate("/dasboard/homeda"); /* redirige al dasboard */
-        window.location.reload(); // Recarga la página
       }
     }, [esAutenticado, navigate]);
   

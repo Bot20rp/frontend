@@ -5,7 +5,7 @@ import axios from "./axios"
 export const registerRequest = user => axios.post(`/clientReg`,user) 
 export const loginRequest = user => axios.post(`/login`,user)
 export const logoutRequest= ()=>axios.post('/logout')
-export const obtenerRequest = () => { return axios.get('/obtener')};
+export const obtenerRequest = () => { return axios.get('/obtener',{withCredentials: true})};
 export const verityTokenResquest = () => axios.get('/verify')
 export const actualizarUsuario = user => axios.patch(`/usuario/actualizar`,{data :user ,
     headers: {
@@ -33,7 +33,7 @@ export const actualizarProveedores = user => axios.patch(`/proveedor/update`,{da
         'Content-Type': 'application/json', 
     },
 });
-export const obtenerRequestProveedor = () => {return axios.get(`/proveedor`);}
+export const obtenerRequestProveedor = () => {return axios.get(`/proveedor`,{withCredentials: true})};
 
 
 //Gestion Empleado

@@ -12,12 +12,13 @@ function LoginPage() {
      const { signin, esAutenticado ,cargarDatos,cargarDatosProveedores} = useAuth();
      const navigate = useNavigate();
     
-    const onSubmit = handleSubmit(async (data) => {
-      await signin(data);  // Llama a signin y espera que termine
-      await cargarDatos();
-      await cargarDatosProveedores();
+     const onSubmit = handleSubmit(async (data) => {
+      await signin(data);  // Primero, inicia sesión
+      await Promise.all([
+        cargarDatos(),
+        cargarDatosProveedores()
+      ]);  // Luego, realiza las peticiones en paralelo
     });
-    
 
     useEffect( () =>{
       if (esAutenticado) {

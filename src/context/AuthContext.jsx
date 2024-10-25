@@ -83,6 +83,7 @@ export const useAuth = () => {
     const cargarDatosProveedores = async () =>{
       try {
         const respuesta = await obtenerRequestProveedor();
+        console.log("estoy aquie en aut")
         console.log(respuesta.data)
         if(respuesta.status !== 200){
           throw new Error('Error Obtener datos')

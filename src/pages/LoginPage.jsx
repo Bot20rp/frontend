@@ -15,13 +15,6 @@ function LoginPage() {
      const onSubmit = handleSubmit(async (data) => {
       try {
         await signin(data);  // Primero, inicia sesión
-        
-        // Verificar que el token esté disponible en las cookies antes de continuar
-        const token = Cookies.get();  // Asegúrate de que el nombre del token es correcto
-        if (!token) {
-          throw new Error('Token no encontrado');
-        }
-    
         // Ahora cargar los datos
         await Promise.all([
           cargarDatos(),

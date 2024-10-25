@@ -106,9 +106,9 @@ export const useAuth = () => {
   
     useEffect(() => {
       async function checkLogin() {
-        const token = Cookies.get();
+        const token = Cookies.get('token');
 
-        console.log("token")
+        console.log(token)
   
         if (!token) {
           setEsAutenticado(false);

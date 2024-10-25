@@ -28,10 +28,11 @@ export const useAuth = () => {
         setUser(res.data)
         setRol(res.data.user.rol)
         // Cargar datos inmediatamente después del inicio de sesión
-      if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
-        cargarDatos();
-        cargarDatosProveedores();
-      }
+        if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
+          console.log("debo entrar")
+          await cargarDatos(); // Asegúrate de usar await
+          await cargarDatosProveedores(); // Asegúrate de usar await
+        }
       } catch (error) {
         console.error(error);
       }

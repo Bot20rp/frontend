@@ -111,6 +111,7 @@ export const useAuth = () => {
         console.log(token)
   
         if (!token) {
+          console.log("no hay")
           setEsAutenticado(false);
           setLoading(false);
           setRol(null);
@@ -121,10 +122,12 @@ export const useAuth = () => {
         try {
           const res = await verityTokenResquest(token);
           if (!res.data) {
+            console.log("no hay 2")
             setEsAutenticado(false);
             setLoading(false);
             return;
           }
+          console.log("si hay")
   
           // Guardar datos en el estado
           setEsAutenticado(true);

@@ -17,14 +17,12 @@ function LoginPage() {
     });
     
 
-    useEffect( () =>{
+    useEffect(() => {
       if (esAutenticado) {
-        cargarDatos;
-        cargarDatosProveedores
-        navigate("/dasboard/homeda"); /* redirige al dasboard */
+        navigate("/dasboard/homeda", { replace: true }); // Reemplaza la ruta en el historial
+        window.location.reload(); // Recarga la página
       }
     }, [esAutenticado, navigate]);
-  
 
     return (
       <div className='contenedor' id='body3' >

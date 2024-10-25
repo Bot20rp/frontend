@@ -14,16 +14,25 @@ function LoginPage() {
     
      const onSubmit = handleSubmit(async (data) => {
       await signin(data);  // Primero, inicia sesión
-      await Promise.all([
-        cargarDatos(),
-        cargarDatosProveedores()
-      ]);  // Luego, realiza las peticiones en paralelo
     });
 
     useEffect( () =>{
-      if (esAutenticado) {
-        navigate("/dasboard/homeda"); /* redirige al dasboard */
-      }
+      const fetchData = async () => {
+        if (esAutenticado) {
+          try {
+            await Promise.all([
+              cargarDatos(),
+              cargarDatosProveedores()
+            ]);
+            navigate("/dasboard/homeda");
+          } catch (error) {
+            console.error("Error al cargar datos:", error);
+            // Aquí puedes manejar el error, como mostrar un mensaje al usuario
+          }
+        }
+      };   
+      
+      fetchData();
     }, [esAutenticado, navigate]);
   
 

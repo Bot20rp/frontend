@@ -42,7 +42,7 @@ export const useAuth = () => {
 
     /*  ---------   */
     const logout =async () => {
-      const cookies = Cookies.get('token');
+      const cookies = Cookies.get();
       await logoutRequest(cookies);
       setEsAutenticado(false);
       setUser(null);           
@@ -103,7 +103,7 @@ export const useAuth = () => {
   
     useEffect(() => {
       async function checkLogin() {
-        const cookies = Cookies.get();
+        const cookies = Cookies.get('token');
         const token = cookies.token;
 
         console.log(token)

@@ -70,6 +70,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         async function checkLogin() {
             const token = localStorage.getItem('token');
+            console.log(token)
             if (!token) {
                 setEsAutenticado(false);
                 setLoading(false);

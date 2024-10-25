@@ -28,6 +28,8 @@ export const useAuth = () => {
         setUser(res.data)
         setRol(res.data.user.rol)
         console.log("hola")
+        cargarDatos();
+        cargarDatosProveedores();
       } catch (error) {
         console.error(error);
       }
@@ -123,11 +125,11 @@ export const useAuth = () => {
           setRol(res.data.user.rol);
   
           // Cargar datos si el rol es "Administrador" o "encargado"
-          if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
-            console.log("entre")
-             cargarDatos();
-             cargarDatosProveedores();
-          }
+          // if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
+          //   console.log("entre")
+          //    cargarDatos();
+          //    cargarDatosProveedores();
+          // }
 
         } catch (error) {
           console.error("Error al verificar el token:", error);

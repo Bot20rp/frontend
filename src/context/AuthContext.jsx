@@ -108,7 +108,7 @@ export const useAuth = () => {
       async function checkLogin() {
         const token = Cookies.get();
 
-        console.log(token)
+        console.log("token")
   
         if (!token) {
           setEsAutenticado(false);

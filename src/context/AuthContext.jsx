@@ -35,6 +35,7 @@ export const useAuth = () => {
     /*  ---------   */
     const logout =async () => {
       const cookies = Cookies.get();
+      console.log("hola")
       await logoutRequest(cookies);
       setEsAutenticado(false);
       setUser(null);           

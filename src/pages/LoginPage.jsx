@@ -21,7 +21,6 @@ function LoginPage() {
       const handleNavigation = () => {
         if (esAutenticado) {
           navigate("/dasboard/homeda"); // Redirige al dashboard
-          window.location.reload(); // Recarga la página
         }
       };
     

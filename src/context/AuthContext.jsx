@@ -125,8 +125,8 @@ export const useAuth = () => {
           // Cargar datos si el rol es "Administrador" o "encargado"
           if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
             console.log("entre")
-            //  await cargarDatos();
-             await cargarDatosProveedores();
+             cargarDatos();
+             cargarDatosProveedores();
           }
 
         } catch (error) {

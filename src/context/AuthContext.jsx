@@ -27,6 +27,10 @@ export const useAuth = () => {
         setEsAutenticado(true)
         setUser(res.data)
         setRol(res.data.user.rol)
+        await Promise.all([
+          cargarDatos(),
+          cargarDatosProveedores()
+        ]); 
       } catch (error) {
         console.error(error);
       }

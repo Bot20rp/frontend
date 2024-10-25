@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function LoginPage() {
     
      const { register, handleSubmit } = useForm();
-     const { signin, esAutenticado } = useAuth();
+     const { signin, esAutenticado ,cargarDatos,cargarDatosProveedores} = useAuth();
      const navigate = useNavigate();
     
     const onSubmit = handleSubmit(async (data) => {
@@ -17,8 +17,10 @@ function LoginPage() {
     });
     
 
-    useEffect(() => {
+    useEffect( async () =>{
       if (esAutenticado) {
+        await cargarDatos;
+        await cargarDatosProveedores
         navigate("/dasboard/homeda"); /* redirige al dasboard */
       }
     }, [esAutenticado, navigate]);

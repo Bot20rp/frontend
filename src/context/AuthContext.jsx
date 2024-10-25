@@ -27,12 +27,6 @@ export const useAuth = () => {
         setEsAutenticado(true)
         setUser(res.data)
         setRol(res.data.user.rol)
-        // Cargar datos inmediatamente después del inicio de sesión
-        if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
-          console.log("debo entrar")
-          await cargarDatos(); // Asegúrate de usar await
-          await cargarDatosProveedores(); // Asegúrate de usar await
-        }
       } catch (error) {
         console.error(error);
       }
@@ -155,6 +149,7 @@ export const useAuth = () => {
         tableUser,
         tableProveedor,
         cargarDatosProveedores,
+        cargarDatos,
         logout
       }}>
         {children}

@@ -13,8 +13,8 @@ function LoginPage() {
      const navigate = useNavigate();
     
      const onSubmit = handleSubmit(async (data) => {
-      await signin(data);  // Primero, inicia sesión
       await Promise.all([
+        signin(data),
         cargarDatos(),
         cargarDatosProveedores()
       ]);  // Luego, realiza las peticiones en paralelo

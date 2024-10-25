@@ -86,4 +86,4 @@ export const actualizarProducto = user => axios.patch(`/producto/actualizar`,{da
     },
 }) */;
 
-export const bitacoraa = () => axios.get(`/bitacora`) 
+export const bitacoraa = () => {return axios.get(`/bitacora`)}; 

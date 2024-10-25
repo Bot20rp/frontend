@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './bitacora.css';
-import instance from '../../src/api/axios' ;       
+import { useAuth } from '../context/AuthContext';  
 export const Bitacora = () => {
+  const {bitacoraa} = useAuth();
   const [bitacoras, setBitacoras] = useState([]); // Estado para almacenar los registros de la bitácora
   const [loading, setLoading] = useState(true); // Estado para manejar el loading
 
@@ -10,7 +11,7 @@ export const Bitacora = () => {
   const fetchBitacoras = async () => {
     try {
       // const response = await axios.get('http://localhost:4000/api/bitacora'); // Cambia la URL según la configuración de tu backend
-      const response = await instance.get('/bitacora');
+      const response = await bitacoraa();
 
       console.log(response)
       // Verifica si la respuesta es un array antes de establecer el estado

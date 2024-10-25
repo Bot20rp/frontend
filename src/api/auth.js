@@ -2,10 +2,15 @@ import axios from "./axios"
 
 //GESTION USUARIO
 
+const tiempoEspera = 10000;
+
 export const registerRequest = user => axios.post(`/clientReg`,user) 
 export const loginRequest = user => axios.post(`/login`,user)
 export const logoutRequest= ()=>axios.post('/logout')
-export const obtenerRequest = () => { return axios.get('/obtener')};
+export const obtenerRequest = () => { return axios.get('/obtener',{
+    withCredentials: true,
+    timeout: tiempoEspera 
+})};
 export const verityTokenResquest = () => axios.get('/verify')
 export const actualizarUsuario = user => axios.patch(`/usuario/actualizar`,{data :user ,
     headers: {

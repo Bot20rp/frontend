@@ -43,32 +43,42 @@ export const useAuth = () => {
       // navigate('/login');    
     };
 
-    const cargarDatos = async () =>{
+    const cargarDatos = async () => {
       try {
         const respuesta = await obtenerRequest();
-        if(respuesta.status !== 200){
-          throw new Error('Error Obtener datos')
+        if (respuesta.status !== 200) {
+          throw new Error('Error Obtener datos');
         }
-        const datosNuevos = respuesta.data.usuarios.map(usuarios => ({
-          id: usuarios.id, // Ajusta según la estructura de tu respuesta
-          usuario: usuarios.usuario,
-          correo: usuarios.correo,
-          telefono: usuarios.telefono,
-          genero: usuarios.genero,
-          rol: usuarios.rol, // Suponiendo que `Rol` es un objeto que contiene el nombre
-          salario:  usuarios.salario,
-          horarioInicio: usuarios.horarioInicio,
-          horarioFin : usuarios.horarioFin
+    
+        const datosNuevos = respuesta.data.usuarios.map(usuario => ({
+          id: usuario.id,
+          usuario: usuario.usuario,
+          correo: usuario.correo,
+          telefono: usuario.telefono,
+          genero: usuario.genero,
+          rol: usuario.rol,
+          salario: usuario.salario,
+          horarioInicio: usuario.horarioInicio,
+          horarioFin: usuario.horarioFin,
         }));
-        
-
+    
         setTableUser(datosNuevos);
         console.log(datosNuevos);
-
+    
       } catch (error) {
-        console.error('Error al obtener los datos:', error);
+        // Manejo de errores de Axios
+        if (axios.isAxiosError(error)) {
+          console.error('Error de Axios:', error.message);
+          // Maneja errores específicos si es necesario
+          if (error.code === 'ECONNABORTED') {
+            console.error('La solicitud se canceló, verifica el tiempo de espera.');
+          }
+        } else {
+          console.error('Error inesperado:', error);
+        }
       }
-    }
+    };
+    
 
     const cargarDatosProveedores = async () =>{
       try {

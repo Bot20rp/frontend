@@ -9,17 +9,17 @@ import { useNavigate } from 'react-router-dom';
 function LoginPage() {
     
      const { register, handleSubmit } = useForm();
-     const { signin, esAutenticado ,cargarDatos,cargarDatosProveedores} = useAuth();
+     const { signin, esAutenticado } = useAuth();
      const navigate = useNavigate();
     
      const onSubmit = handleSubmit(async (data) => {
       try {
         await signin(data);  // Primero, inicia sesión
         // Ahora cargar los datos
-        await Promise.all([
-          cargarDatos(),
-          cargarDatosProveedores()
-        ]);
+        // await Promise.all([
+        //   cargarDatos(),
+        //   cargarDatosProveedores()
+        // ]);
     
       } catch (error) {
         console.error("Error durante el proceso de login o carga de datos:", error);

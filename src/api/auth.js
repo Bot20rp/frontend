@@ -1,29 +1,29 @@
-import axios from "./axios"
+import instance from "./axios"
 
 //GESTION USUARIO
 
 const tiempoEspera = 10000;
 
-export const registerRequest = user => axios.post(`/clientReg`,user) 
-export const loginRequest = user => axios.post(`/login`,user ,{
+export const registerRequest = user => instance.post(`/clientReg`,user) 
+export const loginRequest = user => instance.post(`/login`,user ,{
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json',
     },
 });
 
-export const logoutRequest= ()=>axios.post('/logout')
-export const obtenerRequest = () => { return axios.get('/obtener',{
+export const logoutRequest= ()=>instance.post('/logout')
+export const obtenerRequest = () => { return instance.get('/obtener',{
     withCredentials: true,
     timeout: tiempoEspera 
 })};
-export const verityTokenResquest = () => axios.get('/verify')
-export const actualizarUsuario = user => axios.patch(`/usuario/actualizar`,{data :user ,
+export const verityTokenResquest = () => instance.get('/verify')
+export const actualizarUsuario = user => instance.patch(`/usuario/actualizar`,{data :user ,
     headers: {
         'Content-Type': 'application/json', 
     },
 });
-export const eliminarUsuario = user => axios.delete('/usuario/del',{ data : user,
+export const eliminarUsuario = user => instance.delete('/usuario/del',{ data : user,
     headers: {
         'Content-Type': 'application/json', 
     },
@@ -32,40 +32,40 @@ export const eliminarUsuario = user => axios.delete('/usuario/del',{ data : user
 
 // GESTION PROVEEDOR
 
-export const registrarProveedorRequest = user => axios.post(`/proveedor`,user);
-export const extraerID = user => axios.post(`/proveedor/ex`,user);
-export const eliminarProveedor = user => axios.delete(`/proveedor/delete`,{ data : user, 
+export const registrarProveedorRequest = user => instance.post(`/proveedor`,user);
+export const extraerID = user => instance.post(`/proveedor/ex`,user);
+export const eliminarProveedor = user => instance.delete(`/proveedor/delete`,{ data : user, 
     headers: {
         'Content-Type': 'application/json', 
     },
 });
-export const actualizarProveedores = user => axios.patch(`/proveedor/update`,{data :user ,
+export const actualizarProveedores = user => instance.patch(`/proveedor/update`,{data :user ,
     headers: {
         'Content-Type': 'application/json', 
     },
 });
-export const obtenerRequestProveedor = () => {return axios.get(`/proveedor`,{withCredentials: true})};
+export const obtenerRequestProveedor = () => {return instance.get(`/proveedor`,{withCredentials: true})};
 
 
 //Gestion Empleado
 
-export const registerEmpleado = user => axios.post(`/empleadoreg`,user)
+export const registerEmpleado = user => instance.post(`/empleadoreg`,user)
 
 //Gestion Categoria
 
-export const insertarCategoriaPadre = user => axios.post(`/categoriaPadre`,{ data: user,
+export const insertarCategoriaPadre = user => instance.post(`/categoriaPadre`,{ data: user,
     headers:{
         'Content-Type': 'application/json', 
     }
 })
-export const insertarCategoriaHija = user => axios.post(`/categoriaHija`,{ data: user,
+export const insertarCategoriaHija = user => instance.post(`/categoriaHija`,{ data: user,
     headers:{
         'Content-Type': 'application/json', 
     }
 })
-export const actualizarCategoria = user => axios.patch('/catmodificar',user);
-export const obtenerCategorias = () => {return axios.get(`/getCategoria`);};
-export const eliminarCategorias = user => axios.delete(`/DeleteCategoria`,{data : user,
+export const actualizarCategoria = user => instance.patch('/catmodificar',user);
+export const obtenerCategorias = () => {return instance.get(`/getCategoria`);};
+export const eliminarCategorias = user => instance.delete(`/DeleteCategoria`,{data : user,
     headers :{
         'Content-Type': 'application/json', 
     }
@@ -73,7 +73,7 @@ export const eliminarCategorias = user => axios.delete(`/DeleteCategoria`,{data 
 
 
 //GESTION PRODUCTO
-export const insertarProducto = user => axios.post(`/productoReg`, { data: user ,
+export const insertarProducto = user => instance.post(`/productoReg`, { data: user ,
     headers:{
         'Content-Type': 'application/json', 
     },
@@ -81,9 +81,9 @@ export const insertarProducto = user => axios.post(`/productoReg`, { data: user 
 
 
 
-export const obtenerProductos = () => {return axios.get(`/producto`)};
+export const obtenerProductos = () => {return instance.get(`/producto`)};
 
-export const actualizarProducto = user => axios.patch(`/producto/actualizar`,{data :user ,
+export const actualizarProducto = user => instance.patch(`/producto/actualizar`,{data :user ,
     headers:{
         'Content-Type': 'application/json', 
     },
@@ -97,4 +97,4 @@ export const actualizarProducto = user => axios.patch(`/producto/actualizar`,{da
     },
 }) */;
 
-export const bitacoraa = () => {return axios.get(`/bitacora`)}; 
+export const bitacoraa = () => {return instance.get(`/bitacora`)}; 

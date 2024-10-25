@@ -89,7 +89,6 @@ export const useAuth = () => {
         
 
         setTableProveedor(datosNuevos);
-        console.log(datosNuevos);
 
       } catch (error) {
         console.error('Error al obtener los datos:', error);

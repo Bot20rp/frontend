@@ -14,7 +14,7 @@ export const obtenerRequest = () => { return instance.get('/obtener',{
     withCredentials: true,
     timeout: tiempoEspera 
 })};
-export const verityTokenResquest = () => instance.get('/verify', {
+export const verityTokenResquest = (token) => instance.get('/verify', {
     headers: {
         Authorization: `Bearer ${token}`
     }

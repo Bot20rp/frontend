@@ -21,8 +21,7 @@ function LoginPage() {
         if (esAutenticado) {
           try {
             await Promise.all([
-              cargarDatos(),
-              cargarDatosProveedores()
+              cargarDatos()
             ]);
             navigate("/dasboard/homeda");
           } catch (error) {

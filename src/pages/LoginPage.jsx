@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function LoginPage() {
     
      const { register, handleSubmit } = useForm();
-     const { signin, esAutenticado} = useAuth();
+     const { signin, esAutenticado ,cargarDatos,cargarDatosProveedores} = useAuth();
      const navigate = useNavigate();
     
     const onSubmit = handleSubmit(async (data) => {
@@ -17,16 +17,13 @@ function LoginPage() {
     });
     
 
-    useEffect(() => {
-      const handleNavigation = () => {
-        if (esAutenticado) {
-          navigate("/dasboard/homeda"); // Redirige al dashboard
-        }
-      };
-    
-      handleNavigation();
+    useEffect( () =>{
+      if (esAutenticado) {
+        navigate("/dasboard/homeda"); /* redirige al dasboard */
+        window.location.reload(); // Recarga la página
+      }
     }, [esAutenticado, navigate]);
-    
+  
 
     return (
       <div className='contenedor' id='body3' >

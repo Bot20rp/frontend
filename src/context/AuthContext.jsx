@@ -136,6 +136,7 @@ export const AuthProvider = ({ children }) => {
             tableUser,
             tableProveedor,
             cargarDatos,
+            cargarDatosProveedores,
             logout
         }}>
             {children}

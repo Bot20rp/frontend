@@ -7,12 +7,20 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
     const { register, handleSubmit } = useForm();
-    const { signin, esAutenticado } = useAuth();
+    const { signin, esAutenticado,cargarDatos,cargarDatosProveedores} = useAuth();
     const navigate = useNavigate();
 
     const onSubmit = handleSubmit(async (data) => {
-        await signin(data); // Ahora almacena el token en localStorage
-    });
+      try {
+          await signin(data); // Almacena el token en localStorage
+          await cargarDatos(); // Carga los datos de usuarios
+          await cargarDatosProveedores(); // Carga los datos de proveedores
+      } catch (error) {
+          console.error("Error al iniciar sesión o cargar datos:", error);
+          // Aquí puedes manejar el error, por ejemplo, mostrando un mensaje al usuario
+      }
+  });
+  
 
     useEffect(() => {
         if (esAutenticado) {

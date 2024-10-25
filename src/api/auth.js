@@ -5,7 +5,13 @@ import axios from "./axios"
 const tiempoEspera = 10000;
 
 export const registerRequest = user => axios.post(`/clientReg`,user) 
-export const loginRequest = user => axios.post(`/login`,user)
+export const loginRequest = user => axios.post(`/login`,user ,{
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+});
+
 export const logoutRequest= ()=>axios.post('/logout')
 export const obtenerRequest = () => { return axios.get('/obtener',{
     withCredentials: true,

@@ -6,10 +6,7 @@ const tiempoEspera = 10000;
 
 export const registerRequest = user => instance.post(`/clientReg`,user) 
 export const loginRequest = user => instance.post(`/login`,user ,{
-    withCredentials: true,
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    withCredentials: true
 });
 
 export const logoutRequest= ()=>instance.post('/logout')

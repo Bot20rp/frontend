@@ -130,10 +130,9 @@ export const useAuth = () => {
           setRol(res.data.user.rol);
   
           // Cargar datos si el rol es "Administrador" o "encargado"
-          // if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
-          //    cargarDatos();
-          //    cargarDatosProveedores();
-          // }
+          if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
+             cargarDatos();
+          }
 
         } catch (error) {
           console.error("Error al verificar el token:", error);

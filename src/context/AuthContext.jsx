@@ -27,6 +27,11 @@ export const useAuth = () => {
         setEsAutenticado(true)
         setUser(res.data)
         setRol(res.data.user.rol)
+        // Cargar datos inmediatamente después del inicio de sesión
+      if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
+        cargarDatos();
+        cargarDatosProveedores();
+      }
       } catch (error) {
         console.error(error);
       }

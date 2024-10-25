@@ -14,7 +14,8 @@ function LoginPage() {
     
     const onSubmit = handleSubmit(async (data) => {
       await signin(data);  // Llama a signin y espera que termine
-      window.location.reload(); // Recarga la página
+      await cargarDatos();
+      await cargarDatosProveedores();
     });
     
 

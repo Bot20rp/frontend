@@ -13,12 +13,27 @@ function LoginPage() {
      const navigate = useNavigate();
     
      const onSubmit = handleSubmit(async (data) => {
-      await signin(data);  // Primero, inicia sesión
-      await Promise.all([
-        cargarDatos(),
-        cargarDatosProveedores()
-      ]);  // Luego, realiza las peticiones en paralelo
+      try {
+        await signin(data);  // Primero, inicia sesión
+        
+        // Verificar que el token esté disponible en las cookies antes de continuar
+        const token = Cookies.get();  // Asegúrate de que el nombre del token es correcto
+        if (!token) {
+          throw new Error('Token no encontrado');
+        }
+    
+        // Ahora cargar los datos
+        await Promise.all([
+          cargarDatos(),
+          cargarDatosProveedores()
+        ]);
+    
+      } catch (error) {
+        console.error("Error durante el proceso de login o carga de datos:", error);
+        // Manejo del error (mostrar al usuario, redirigir, etc.)
+      }
     });
+    
 
     useEffect( () =>{
       if (esAutenticado) {

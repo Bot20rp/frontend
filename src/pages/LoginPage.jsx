@@ -17,17 +17,14 @@ function LoginPage() {
     });
     
 
-    useEffect(() => {
-      const fetchData = async () => {
-        if (esAutenticado) {
-          await cargarDatos(); // Llama a cargarDatos como función
-          await cargarDatosProveedores(); // Llama a cargarDatosProveedores como función
-          navigate("/dasboard/homeda"); // Redirige al dashboard
-        }
-      };
+    useEffect( () =>{
+      if (esAutenticado) {
+        cargarDatos;
+        cargarDatosProveedores
+        navigate("/dasboard/homeda"); /* redirige al dasboard */
+      }
+    }, [esAutenticado, navigate]);
   
-      fetchData(); // Ejecuta la función asíncrona
-    }, [esAutenticado, navigate, cargarDatos, cargarDatosProveedores]); // Asegúrate de incluir las funciones en las dependencias
 
     return (
       <div className='contenedor' id='body3' >

@@ -67,6 +67,29 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const cargarDatosProveedores = async () =>{
+      try {
+        const respuesta = await obtenerRequestProveedor();
+        console.log("estoy aquie en aut")
+        console.log(respuesta.data)
+        if(respuesta.status !== 200){
+          throw new Error('Error Obtener datos')
+        }
+        const datosNuevos = respuesta.data.map(data => ({
+          id: data.ProveedorID, 
+          Nombre: data.Nombre,
+          Contacto: data.Contacto,
+          Direccion : data.Direccion
+        }));
+        
+
+        setTableProveedor(datosNuevos);
+
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    }
+
     useEffect(() => {
         async function checkLogin() {
             const token = localStorage.getItem('token');
@@ -91,6 +114,7 @@ export const AuthProvider = ({ children }) => {
                 // Cargar datos si el rol es "Administrador" o "Cliente"
                 if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
                     cargarDatos();
+                    cargarDatosProveedores();
                 }
             } catch (error) {
                 console.error("Error al verificar el token:", error);

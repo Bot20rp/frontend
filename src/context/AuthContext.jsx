@@ -32,6 +32,7 @@ export const useAuth = () => {
         if(res.data.user.rol === 'Administrador'|| res.data.user.rol ==='Cliente'){
           console.log("si entre")
            cargarDatos();
+           cargarDatosProveedores();
         }else{
           console.log("Acceso denegado para cargar datos user")
         }
@@ -131,6 +132,7 @@ export const useAuth = () => {
   
           // Cargar datos si el rol es "Administrador" o "encargado"
           if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
+            console.log("entre")
              cargarDatos();
           }
 

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function LoginPage() {
     
      const { register, handleSubmit } = useForm();
-     const { signin, esAutenticado ,cargarDatos} = useAuth();
+     const { signin, esAutenticado ,cargarDatos,cargarDatosProveedores} = useAuth();
      const navigate = useNavigate();
     
      const onSubmit = handleSubmit(async (data) => {
@@ -17,21 +17,9 @@ function LoginPage() {
     });
 
     useEffect( () =>{
-      const fetchData = async () => {
-        if (esAutenticado) {
-          try {
-            await Promise.all([
-              cargarDatos()
-            ]);
-            navigate("/dasboard/homeda");
-          } catch (error) {
-            console.error("Error al cargar datos:", error);
-            // Aquí puedes manejar el error, como mostrar un mensaje al usuario
-          }
-        }
-      };   
-      
-      fetchData();
+      if (esAutenticado) {
+        navigate("/dasboard/homeda"); /* redirige al dasboard */
+      }
     }, [esAutenticado, navigate]);
   
 

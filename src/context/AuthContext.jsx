@@ -103,7 +103,7 @@ export const useAuth = () => {
   
     useEffect(() => {
       async function checkLogin() {
-        const token = Cookies.get('token');
+        const token = Cookies.get();
 
         console.log(token)
   

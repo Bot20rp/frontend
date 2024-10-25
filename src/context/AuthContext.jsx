@@ -37,6 +37,7 @@ export const useAuth = () => {
       const cookies = Cookies.get();
       console.log("hola")
       await logoutRequest(cookies);
+      Cookies.remove('token')
       setEsAutenticado(false);
       setUser(null);           
       setRol(null);            

@@ -14,6 +14,10 @@ function LoginPage() {
     
      const onSubmit = handleSubmit(async (data) => {
       await signin(data);  // Primero, inicia sesión
+      await Promise.all([
+        cargarDatos(),
+        cargarDatosProveedores()
+      ]);  // Luego, realiza las peticiones en paralelo
     });
 
     useEffect( () =>{

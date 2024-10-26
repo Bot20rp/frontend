@@ -31,12 +31,12 @@ export const Homed = () => {
       <Routes>
         <Route path="/homeda" element={<HomeDas />} /> {/* va ah hacer todas la informacion del usuario admi .. nombre correro ..c ontraseña .... editar  */}
         <Route path="/usuarioGestion" element ={ <ProtectedRoute roles={['Administrador']} element={<UsuarioPage />}/>}/>
-        <Route path="/clientRegister" element ={ <ProtectedRoute roles={['Administrador,Empleado']} element={<RegisterClientPage />}/>}/> 
+        <Route path="/clientRegister" element ={ <ProtectedRoute roles={['Administrador','Empleado']} element={<RegisterClientPage />}/>}/> 
         <Route path="/proveedorRegister" element ={ <ProtectedRoute roles={['Administrador']} element={<ProveedoresPage />}/>}/> 
-        <Route path="/products" element ={ <ProtectedRoute roles={['Administrador,Empleado']} element={<ProductsPage />}/>}/>  
+        <Route path="/products" element ={ <ProtectedRoute roles={['Administrador','Empleado']} element={<ProductsPage />}/>}/>  
         <Route path="/categoriaproducto" element ={ <ProtectedRoute roles={['Administrador']} element={<CategoriaProductPage/>}/>}/>   
         <Route path="/empleadRegister" element ={ <ProtectedRoute roles={['Administrador']} element={<RegisterEmplead/>}/>}/>    
-        <Route path="/login" element ={ <ProtectedRoute roles={['Administrador,Cliente,Empleado']} element={<LoginPage/>}/>}/>    
+        <Route path="/login" element ={ <ProtectedRoute roles={['Administrador','Cliente','Empleado']} element={<LoginPage/>}/>}/>    
         <Route path="/bitacora" element ={ <ProtectedRoute roles={['Administrador']} element={<Bitacora/>} />}/>  
         <Route path="/lote" element ={ <ProtectedRoute roles={['Administrador']} element={<Lote/>} />}/>  
         <Route path="/combos" element ={ <ProtectedRoute roles={['Administrador']} element={<CombosPage/>}/>}/>  

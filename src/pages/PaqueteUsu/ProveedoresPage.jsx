@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import '../css/ProveedoresPage.css';
-import { registrarProveedorRequest, extraerID, eliminarProveedor,actualizarProveedores } from '../api/auth';
-import { useAuth } from '../context/AuthContext';
+import '../../css/AdmiUsuarioCss/ProveedoresPage.css';
+import { registrarProveedorRequest, extraerID, eliminarProveedor,actualizarProveedores } from '../../api/auth';
+import { useAuth } from '../../context/AuthContext';
 
 function ProveedoresPage() {
     const modalContainer = useRef(null);

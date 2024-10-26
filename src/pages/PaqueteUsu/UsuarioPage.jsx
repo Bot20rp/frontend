@@ -1,7 +1,7 @@
-import { useAuth } from '../context/AuthContext';
-import '../css/UsuarioPage.css';
+import { useAuth } from '../../context/AuthContext';
+import '../../css/AdmiUsuarioCss/UsuarioPage.css'
 import { useState, useEffect } from 'react';
-import { actualizarUsuario, eliminarUsuario } from '../api/auth';
+import { actualizarUsuario, eliminarUsuario } from '../../api/auth';
 
 function UsuarioPages() {
   const { tableUser } = useAuth();

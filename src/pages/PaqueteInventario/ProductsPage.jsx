@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import '../css/ProductsPage.css';
-import { insertarProducto, obtenerProductos,actualizarProducto} from '../api/auth';
+import '../../css/AdmiInventarioCss/ProductsPage.css'
+import { insertarProducto, obtenerProductos,actualizarProducto} from '../../api/auth';
 
 function ProductsPage() {
     const tbodyProductos = useRef(null);

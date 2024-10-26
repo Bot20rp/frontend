@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import '../css/CategoriaProductPage.css';
-import { insertarCategoriaPadre, obtenerCategorias,eliminarCategorias,insertarCategoriaHija} from '../api/auth';
+import '../../css/AdmiInventarioCss/CategoriaProductPage.css'
+import { insertarCategoriaPadre, obtenerCategorias,eliminarCategorias,insertarCategoriaHija} from '../../api/auth';
 
 
 function CategoriaProductPage() {

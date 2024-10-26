@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import './lote.css';
+import '../../css/AdmiCompraCss/lote.css'
 
 export const Lote= () => {
   const [productos, setProductos] = useState([]);

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import '../css/LoginPage.css';
+import '../../css/AdmiUsuarioCss/LoginPage.css'
 import { FaUser, FaLock } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {

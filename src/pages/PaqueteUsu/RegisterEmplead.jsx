@@ -1,9 +1,9 @@
-import '../css/RegisterClientPage.css';
+import '../../css/AdmiUsuarioCss/RegisterClientPage.css'
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { registerRequest } from "../api/auth";
+import { registerEmpleado} from "../../api/auth";
 
-function RegisterClientPage() {
+function RegisterEmplead() {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
 
@@ -11,7 +11,8 @@ function RegisterClientPage() {
     const onSubmit = async (data) => {
         setLoading(true); // Iniciar carga
         try {
-            const res = await registerRequest(data);
+            console.log(data)
+            const res = await registerEmpleado(data);
             if (res.data) {
                 reset(); // Limpiar el formulario después del éxito
             }
@@ -26,28 +27,19 @@ function RegisterClientPage() {
         <div className="contenedorClient">
             <form className="formRegisterClient" onSubmit={handleSubmit(onSubmit)}>
                 <div id='titleRegisterClient'>
-                    <h1> REGISTRAR CLIENTE</h1>
+                    <h1> REGISTRAR ENCARGADO DE TIENDA</h1>
                 </div>
                 <div   disabled={loading}>
                     {loading ?<p className="successMessage" >Registrando...</p> : '...........'  }
                 </div>
                 <div className="client">
                     <div className="inputWrapper">
-                        <label htmlFor="nit">NIT</label>
-                        <input
-                            className="inputClient"
-                            type="number"
-                            placeholder="NIT"
-                            {...register('NumeroDocumento', { required: true })}
-                        />
-                    </div>
-                    <div className="inputWrapper">
-                        <label htmlFor="ci">CI</label>
+                        <label htmlFor="nit">CI</label>
                         <input
                             className="inputClient"
                             type="number"
                             placeholder="CI"
-                            {...register('ci', { required: true })}
+                            {...register('NumeroDocumento', { required: true })}
                         />
                     </div>
                     <div className="inputWrapper">
@@ -73,7 +65,7 @@ function RegisterClientPage() {
                             className="inputClient"
                             type="password"
                             placeholder="Contraseña"
-                            {...register('Contrasena', { required: true, minLength:8 })}
+                            {...register('Contrasena', { required: true, minLength:8  })}
                         />
                         {errors.Contrasena?.type === 'required' && <small>El campo no puede estar vacío</small>}
                         {errors.Contrasena?.type === 'minLength' && <small>La contraseña debe tener al menos 8 caracteres</small>}
@@ -85,6 +77,15 @@ function RegisterClientPage() {
                             type="number"
                             placeholder="telefono"
                             {...register('telefono', { required: true })}
+                        />
+                    </div>
+                    <div className="inputWrapper">
+                        <label htmlFor="Salario">Salario</label>
+                        <input
+                            className="inputClient"
+                            type="number"
+                            placeholder="Salario"
+                            {...register('Salario', { required: true })}
                         />
                     </div>
                     <div className="inputWrapper">
@@ -113,6 +114,24 @@ function RegisterClientPage() {
                             {...register('tipoDocumento')}
                          />
                     </div>
+                    <div className="inputWrapper">
+                        <label htmlFor="HorarioIni">Horario Inicio</label>
+                        <input
+                            className="inputClient"
+                            type="time"
+                            placeholder="Horario Inicio"
+                            {...register('HorarioInicio', { required: true })}
+                        />
+                    </div>
+                    <div className="inputWrapper">
+                        <label htmlFor="HorarioFin">Horario Salida</label>
+                        <input
+                            className="inputClient"
+                            type="time"
+                            placeholder="Horario Salida"
+                            {...register('HorarioFin', { required: true })}
+                        />
+                    </div>
                 </div>
                 <button type="submit">Registrar</button>
             </form>
@@ -120,4 +139,4 @@ function RegisterClientPage() {
     );
 }
 
-export default RegisterClientPage;
+export default RegisterEmplead;

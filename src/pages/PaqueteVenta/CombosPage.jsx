@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../css/Combos.css';
+import '../../css/AdmiVentaCss/Combos.css'
 
 function CombosPage() {
     const [productos, setProductos] = useState([

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { Routes, Route } from "react-router-dom";
-import { Usuarios } from "../../views/Usuarios";
-import { Empleados } from "../../views/Empleados";
-import { Clientes } from "../../views/Clientes";
 import { HomeDas } from "../../views/HomeDas";
 import { Outlet } from "react-router-dom";
 

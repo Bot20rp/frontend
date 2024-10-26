@@ -1,20 +1,16 @@
-import { Navigate,Outlet } from "react-router-dom";
-import { useAuth } from "./context/AuthContext";
+const ProtectedRoute = ({ roles, element }) => {
+  const { loading, esAutenticado, rol } = useAuth();
 
-const ProtectedRoute = ({roles, element}) =>{
+  // Asegurarse de que no se renderice nada mientras está cargando
+  if (loading) return <div>Cargando...</div>;
 
-  console.log("1")
+  if (!esAutenticado) return <Navigate to='/login' replace />;
 
-    const {loading, esAutenticado,rol } = useAuth();
+  console.log(rol)
 
-    console.log(rol)
-    if(!loading && !esAutenticado) return <Navigate to ='/login' replace/>
+  if (!rol || !roles.includes(rol)) {
+      return <h1>No tienes permiso para acceder a esta página.</h1>; // Mensaje de error o redirección
+  }
 
-    if (!rol || !roles.includes(rol)) {
-      return <h1>No tienes permiso para acceder a esta página.</h1>; // Puedes ajustar este mensaje o redirigir a otra página
-    }
-
-    return element ? element : <Outlet />;
-}
-
-export default ProtectedRoute
+  return element ? element : <Outlet />;
+};

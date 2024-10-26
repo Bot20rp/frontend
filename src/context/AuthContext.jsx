@@ -102,6 +102,7 @@ export const AuthProvider = ({ children }) => {
             }
 
             try {
+                setLoading(true);  // Asegúrate de que loading esté activo durante todo el proceso.
                 const res = await verityTokenResquest(token); // Aquí debes enviar el token en la cabecera de autorización
                 if (!res.data) {
                     setEsAutenticado(false);

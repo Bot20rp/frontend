@@ -4,8 +4,10 @@ import { useAuth } from "./context/AuthContext";
 const ProtectedRoute = ({roles, element}) =>{
 
   console.log("1")
-  console.log(rol)
+
     const {loading, esAutenticado,rol } = useAuth();
+
+    console.log(rol)
     if(!loading && !esAutenticado) return <Navigate to ='/login' replace/>
 
     if (!rol || !roles.includes(rol)) {

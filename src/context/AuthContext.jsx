@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }) => {
             setEsAutenticado(true);
             setUser(res.data);
             setRol(res.data.user.rol);
+            console.log(rol)
             // Almacena el token en localStorage
             localStorage.setItem('token', res.data.token);
         } catch (error) {

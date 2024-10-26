@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   AiOutlineLeft,
   AiOutlineHome,
@@ -9,8 +10,6 @@ import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./sidebar.css";
 import { useAuth } from "../../context/AuthContext"; // Importa useAuth
-import instance from '../../api/axios';
-
 
 
 export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {

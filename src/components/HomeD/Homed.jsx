@@ -4,8 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import { Usuarios } from "../../views/Usuarios";
 import { Empleados } from "../../views/Empleados";
 import { Clientes } from "../../views/Clientes";
-import { Proveedores } from "../../views/Proveedores";
-import { Reportes } from "../../views/Reportes";
 import { HomeDas } from "../../views/HomeDas";
 import { Outlet } from "react-router-dom";
 
@@ -20,6 +18,11 @@ import "./homed.css";
 import LoginPage from "../../pages/LoginPage";
 import {Bitacora} from '../../pages/Bitacora'
 import {Lote} from '../../pages/Lote'
+
+
+/*VAMOS A PROTEGER LAS RUTAS */
+import ProtectedRoute from "../../ProtectedRoute";
+
 export const Homed = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
  
@@ -30,18 +33,16 @@ export const Homed = () => {
       {/* Rutas protegidas */}
       <Routes>
         <Route path="/homeda" element={<HomeDas />} /> {/* va ah hacer todas la informacion del usuario admi .. nombre correro ..c ontraseña .... editar  */}
-        <Route path="/usuarioGestion" element={<UsuarioPage />} />
-        <Route path="/empleados" element={<Empleados />} />
-        <Route path="/clientRegister" element={<RegisterClientPage />} />
-        <Route path="/proveedorRegister" element={<ProveedoresPage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/clienggg" element={<Clientes/>} />
-        <Route path="/categoriaproducto" element={<CategoriaProductPage/>}  />
-        <Route path="/empleadRegister" element={<RegisterEmplead/>}  />
-        <Route path="/login" element={<LoginPage/>}  />
-        <Route path="/bitacora" element={<Bitacora/>}  />
-        <Route path="/lote" element={<Lote/>}  />
-        <Route path="/combos" element={<CombosPage/>}  />
+        <Route path="/usuarioGestion" element ={ <ProtectedRoute roles={['Administrador']} element={<UsuarioPage />}/>}/>
+        <Route path="/clientRegister" element ={ <ProtectedRoute roles={['Administrador,Empleado']} element={<RegisterClientPage />}/>}/> 
+        <Route path="/proveedorRegister" element ={ <ProtectedRoute roles={['Administrador']} element={<ProveedoresPage />}/>}/> 
+        <Route path="/products" element ={ <ProtectedRoute roles={['Administrador,Empleado']} element={<ProductsPage />}/>}/>  
+        <Route path="/categoriaproducto" element ={ <ProtectedRoute roles={['Administrador']} element={<CategoriaProductPage/>}/>}/>   
+        <Route path="/empleadRegister" element ={ <ProtectedRoute roles={['Administrador']} element={<RegisterEmplead/>}/>}/>    
+        <Route path="/login" element ={ <ProtectedRoute roles={['Administrador,Cliente,Empleado']} element={<LoginPage/>}/>}/>    
+        <Route path="/bitacora" element ={ <ProtectedRoute roles={['Administrador']} element={<Bitacora/>} />}/>  
+        <Route path="/lote" element ={ <ProtectedRoute roles={['Administrador']} element={<Lote/>} />}/>  
+        <Route path="/combos" element ={ <ProtectedRoute roles={['Administrador']} element={<CombosPage/>}/>}/>  
         
       </Routes>
 

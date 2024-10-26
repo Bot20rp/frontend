@@ -39,7 +39,7 @@ function Main() {
         <Route path="/shop/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/dasboard/*" element ={<ProtectedRoute roles={['Administrador']} element={<ProtecComponente component={Homed} />} />
+        <Route path="/dasboard/*" element ={<ProtectedRoute roles={['Administrador,Cliente,Empleado']} element={<ProtecComponente component={Homed} />} />
         }/>
       </Routes>
       {!isDashboardRoute && <Footer />}

@@ -14,9 +14,11 @@ import { Shop } from "./pages/Shop.jsx";
 import { Product } from "./pages/Product.jsx";
 import { Cart } from "./pages/Cart.jsx";
 import { Contact } from "./pages/Contact.jsx";
-import RegisterClientPage from './pages/RegisterClientPage.jsx'
-/* componente protegisdo */
+/* componente protegido */
 import { Homed } from "./components/HomeD/Homed.jsx";
+
+/*Componenete para proteger las rutas */
+import ProtectedRoute from "./ProtectedRoute.jsx";
 /* ------------------------------------------------------------ */
 
 function Main() {
@@ -28,7 +30,7 @@ function Main() {
   return (
     <>
       
-    {/*   {!isDashboardRoute && <Navbar />} */}
+    {/*   {!isDashboardRoute && <Navbar && Rutas Publicas/>} */}
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -37,8 +39,8 @@ function Main() {
         <Route path="/shop/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/clientRegister" element={<RegisterClientPage />} />
-        <Route path="/dasboard/*" element={<ProtecComponente component={Homed} />} />
+        <Route path="/dasboard/*" element ={<ProtectedRoute roles={['Administrador']} element={<ProtecComponente component={Homed} />} />
+        }/>
       </Routes>
       {!isDashboardRoute && <Footer />}
     </>

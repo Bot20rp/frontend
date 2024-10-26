@@ -111,13 +111,14 @@ export const AuthProvider = ({ children }) => {
                 }
                 setEsAutenticado(true);
                 setUser(res.data);
-                setLoading(false);
+
                 setRol(res.data.user.rol);
                 // Cargar datos si el rol es "Administrador" o "Cliente"
                 if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
                     cargarDatos();
                     cargarDatosProveedores();
                 }
+                setLoading(false);
             } catch (error) {
                 console.error("Error al verificar el token:", error);
                 setEsAutenticado(false);

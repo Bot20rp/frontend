@@ -3,18 +3,18 @@ import { Sidebar } from "../Sidebar/Sidebar";
 import { Routes, Route } from "react-router-dom";
 import { HomeDas } from "../../views/HomeDas";
 import { Outlet } from "react-router-dom";
-
-import RegisterClientPage from '../../pages/RegisterClientPage';
-import ProductsPage from '../../pages/ProductsPage';
-import ProveedoresPage from '../../pages/ProveedoresPage';
-import UsuarioPage from '../../pages/UsuarioPage';
-import CategoriaProductPage from '../../pages/CategoriaProductPage';
-import RegisterEmplead from "../../pages/RegisterEmplead";
-import CombosPage from "../../pages/CombosPage";
 import "./homed.css";
-import LoginPage from "../../pages/LoginPage";
-import { Bitacora } from '../../pages/Bitacora';
-import { Lote } from '../../pages/Lote';
+
+import RegisterClientPage from "../../pages/PaqueteUsu/RegisterClientPage";
+import ProductsPage from "../../pages/PaqueteInventario/ProductsPage";
+import ProveedoresPage from "../../pages/PaqueteUsu/ProveedoresPage";
+import UsuarioPage from "../../pages/PaqueteUsu/UsuarioPage";
+import CategoriaProductPage from "../../pages/PaqueteInventario/CategoriaProductPage";
+import RegisterEmplead from "../../pages/PaqueteUsu/RegisterEmplead";
+import CombosPage from "../../pages/PaqueteVenta/CombosPage";
+import LoginPage from "../../pages/PaqueteUsu/LoginPage";
+import { Bitacora } from "../../pages/PaqueteUsu/Bitacora";
+import { Lote } from "../../pages/PaqueteCompra/Lote";
 
 /* VAMOS A PROTEGER LAS RUTAS */
 import ProtectedRoute from "../../ProtectedRoute";

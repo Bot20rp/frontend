@@ -8,7 +8,6 @@ import { Footer } from "./components/Footer/Footer.jsx";
 import { Navbar } from "./components/Navbar/Navbar.jsx";
 /* componentes publicos  publicas que podran ver todos las personas */
 import { Home } from "./pages/Home.jsx";
-import LoginPage from "./pages/LoginPage";
 import ProtecComponente from "./ProtecComponente.jsx";
 import { Shop } from "./pages/Shop.jsx";
 import { Product } from "./pages/Product.jsx";

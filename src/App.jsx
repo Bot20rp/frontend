@@ -13,6 +13,7 @@ import { Shop } from "./pages/Shop.jsx";
 import { Product } from "./pages/Product.jsx";
 import { Cart } from "./pages/Cart.jsx";
 import { Contact } from "./pages/Contact.jsx";
+import LoginPage from "./pages/PaqueteUsu/LoginPage.jsx";
 /* componente protegido */
 import { Homed } from "./components/HomeD/Homed.jsx";
 

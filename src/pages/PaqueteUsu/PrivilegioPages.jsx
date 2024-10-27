@@ -1,60 +1,34 @@
 import React, { useState,useEffect } from 'react'
 import '../../css/AdmiUsuarioCss/PrivilegioPages.css'
+import { useAuth } from '../../context/AuthContext';
 
 function PrivilegioPages() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [privilegios, setPrivilegios] = useState({});
     const [rolSeleccionado, setRolSeleccionado] = useState("Administrador");
+    const {permisoTable} = useAuth();
 
     // Usuario estático con privilegios
     const privilegiosPorRol = {
         Administrador: {
             "privilegioADM 1": "activado",
             "privilegioADM 2": "desactivado",
-            "privilegioADM 3": "activado",
-            "privilegioADM 4": "activado",
-            "privilegioADM 5": "activado",
-            "privilegioADM 6": "activado",
-            "privilegioADM 6": "activado",
-            "privilegioADM 6": "activado",
-            "privilegioADM 6": "activado",
-            "privilegioADM 6": "activado",
-            "privilegioADM 6": "activado",
-            "privilegioADM 6": "activado",
+            "privilegioADM 3": "activado"
         },
         Empleado: {
             "privilegioEMP 1": "desactivado",
-            "privilegioEMP 2": "activado",
-            "privilegioEMP 3": "desactivado",
-            "privilegioEMP 4": "activado",
-            "privilegioEMP 5": "desactivado",
-            "privilegioEMP 6": "desactivado",
-            "privilegioEMP 6": "desactivado",
-            "privilegioEMP 6": "desactivado",
-            "privilegioEMP 6": "desactivado",
-            "privilegioEMP 6": "desactivado",
-            "privilegioEMP 6": "desactivado",
-            "privilegioEMP 6": "desactivado",
+            "privilegioEMP 2": "activado"
         },
         Cliente: {
             "privilegioCLI 1": "desactivado",
-            "privilegioCLI 2": "desactivado",
-            "privilegioCLI 3": "desactivado",
-            "privilegioCLI 4": "activado",
-            "privilegioCLI 5": "activado",
-            "privilegioCLI 6": "activado",
-            "privilegioCLI 7": "activado",
-            "privilegioCLI 8": "activado",
-            "privilegioCLI 9": "activado",
-            "privilegioCLI 10": "activado",
-            "privilegioCLI 11": "activado",
-            "privilegioCLI 12": "desactivado",
+            "privilegioCLI 2": "desactivado"
         }
     };
     
     // Cargar los privilegios iniciales cuando el componente se monta
     useEffect(() => {
+        console.log("desdePrivilegios",permisoTable)
         setPrivilegios(privilegiosPorRol[rolSeleccionado])
     }, [rolSeleccionado]);
 

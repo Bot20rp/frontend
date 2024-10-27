@@ -134,9 +134,6 @@ export const AuthProvider = ({ children }) => {
                 };
             });
 
-            console.log("los permisos actualizado")
-            console.log(permisosAdministrador)
-            // Actualizar el estado con los permisos procesados
             setPermisos({
                 administrador: permisosAdministrador,
                 cliente: permisosCliente,
@@ -204,6 +201,7 @@ export const AuthProvider = ({ children }) => {
             rol,
             tableUser,
             tableProveedor,
+            permisoTable,
             cargarDatos,
             cargarDatosProveedores,
             cargarDatosPermisos,

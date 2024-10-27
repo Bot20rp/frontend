@@ -19,6 +19,8 @@ import { Homed } from "./components/HomeD/Homed.jsx";
 
 /*Componenete para proteger las rutas */
 import ProtectedRoute from "./ProtectedRoute.jsx";
+import Compras from "./pages/PaqueteCompra/Compras.jsx";
+import OrganizacionProductPage from "./pages/PaqueteInventario/OrganizacionProductPage.jsx";
 /* ------------------------------------------------------------ */
 
 function Main() {
@@ -39,8 +41,11 @@ function Main() {
         <Route path="/shop/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/organiz" element={<OrganizacionProductPage />} />
+        
         <Route path="/dasboard/*" element ={<ProtectedRoute roles={['Administrador','Cliente','Empleado']} element={<ProtecComponente component={Homed} />} />
-        }/>
+      
+      }/>
       </Routes>
       {!isDashboardRoute && <Footer />}
     </>

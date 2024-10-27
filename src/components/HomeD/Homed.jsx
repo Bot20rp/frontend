@@ -15,6 +15,7 @@ import CombosPage from "../../pages/PaqueteVenta/CombosPage";
 import LoginPage from "../../pages/PaqueteUsu/LoginPage";
 import { Bitacora } from "../../pages/PaqueteUsu/Bitacora";
 import { Lote } from "../../pages/PaqueteCompra/Lote";
+import PrivilegioPages from "../../pages/PaqueteUsu/PrivilegioPages";
 
 /* VAMOS A PROTEGER LAS RUTAS */
 import ProtectedRoute from "../../ProtectedRoute";
@@ -39,6 +40,7 @@ export const Homed = () => {
           <Route path="/bitacora" element={<Bitacora />} />
           <Route path="/lote" element={<Lote />} />
           <Route path="/combos" element={<CombosPage />} />
+          <Route path="/privilegios" element={<PrivilegioPages />} />
         </Route>
 
         {/* Rutas protegidas para "Administrador" o "Empleado" */}

@@ -207,6 +207,11 @@ const enlaceprincipal = [
     icon: <MdOutlineAnalytics />,
     to: "/dasboard/bitacora", // Corregido a "dashboard"
   },
+  {
+    label: "Privilegios",
+    icon: <MdOutlineAnalytics />,
+    to: "/dasboard/privilegios", // Corregido a "dashboard"
+  },
 ];
 
 const enlaceinventario = [

@@ -30,9 +30,9 @@ function PrivilegioPages() {
 
     // Enviar los cambios al backend (simulado aquí)
     const enviarCambios = async () => {
-        console.log("Enviando cambios al backend:", privilegios);
+        console.log("Enviando cambios al backend:", privilegios,rolSeleccionado);
         try {
-            await actualizarPermisos(privilegios)
+            await actualizarPermisos(privilegios,rolSeleccionado)
         } catch (error) {
             console.log(error);
         }

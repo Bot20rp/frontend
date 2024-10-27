@@ -99,9 +99,11 @@ export const bitacoraa = () => {return instance.get(`/bitacora`)};
 //PRIVILEGIOS O PERMISO
 
 export const permisos = () => {return instance.get(`/permisos`)};
-export const actualizarPermisos = user => instance.patch(`/updaPermisos`,{
-    ...user,
-    headers:{
-        'Content-Type': 'application/json', 
+
+export const actualizarPermisos = (privilegios, rolSeleccionado) => instance.patch(`/updaPermisos`, {
+    privilegios,       // Enviando privilegios como parte del cuerpo de la solicitud
+    rolSeleccionado,   // Enviando el rol seleccionado como parte del cuerpo de la solicitud
+    headers: {
+        'Content-Type': 'application/json',
     }
-})
+});

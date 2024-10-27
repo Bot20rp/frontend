@@ -95,8 +95,8 @@ export const AuthProvider = ({ children }) => {
     const cargarDatosPermisos = async () => {
         try {
             const permisosNuevos = await permisos();
-            setTablePermisos(permisosNuevos.data);
-            console.log(permisosNuevos)
+            setTablePermisos(permisosNuevos.data.permisosAdministrador);
+            console.log(permisosNuevos.data)
             console.log(tablePermisos)
         } catch (error) {
             console.error('Error al obtener los datos:', error);

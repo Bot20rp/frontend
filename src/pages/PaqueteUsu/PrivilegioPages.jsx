@@ -79,8 +79,8 @@ function PrivilegioPages() {
     const enviarCambios = async () => {
 
         const usuarioRoles = await permisos();
-        console.log("Enviando cambios al backend:", usuarioRoles);
-        
+        console.log("Enviando cambios al backend:", usuarioRoles.data);
+
     };
 
     const manejarCambioRol = (event) =>{

@@ -108,40 +108,49 @@ export const AuthProvider = ({ children }) => {
           }
       
           // Mapear y transformar los permisos del Administrador
-          const permisosAdministrador = respuesta.data.permisosAdministrador.map(permiso => ({
-            id: permiso.PrivilegioID, 
-            Descripcion: permiso.Descripcion,
-            Estado: permiso.Estado
-          }));
+          const permisosAdministrador = respuesta.data.permisosAdministrador.map(permiso => {
+            console.log('Permiso Administrador:', permiso); // Aquí puedes ver cada permiso de administrador
+            return {
+              id: permiso.PrivilegioID, 
+              Descripcion: permiso.Descripcion,
+              Estado: permiso.Estado
+            };
+          });
       
           // Mapear los permisos del Cliente
-          const permisosCliente = respuesta.data.permisosCliente.map(permiso => ({
-            id: permiso.PrivilegioID, 
-            Descripcion: permiso.Descripcion,
-            Estado: permiso.Estado
-          }));
+          const permisosCliente = respuesta.data.permisosCliente.map(permiso => {
+            console.log('Permiso Cliente:', permiso); // Aquí puedes ver cada permiso de cliente
+            return {
+              id: permiso.PrivilegioID, 
+              Descripcion: permiso.Descripcion,
+              Estado: permiso.Estado
+            };
+          });
       
           // Mapear los permisos del Empleado
-          const permisosEmpleado = respuesta.data.permisosEmpleado.map(permiso => ({
-            id: permiso.PrivilegioID, 
-            Descripcion: permiso.Descripcion,
-            Estado: permiso.Estado
-          }));
-      
+          const permisosEmpleado = respuesta.data.permisosEmpleado.map(permiso => {
+            console.log('Permiso Empleado:', permiso); // Aquí puedes ver cada permiso de empleado
+            return {
+              id: permiso.PrivilegioID, 
+              Descripcion: permiso.Descripcion,
+              Estado: permiso.Estado
+            };
+          });
+          
+          console.log("los permisos actualizado")
+          console.log(permisosAdministrador)
           // Actualizar el estado con los permisos procesados
           setPermisos({
             administrador: permisosAdministrador,
             cliente: permisosCliente,
             empleado: permisosEmpleado
           });
-
-
-          console.log(permiso)
       
         } catch (error) {
           console.error('Error al obtener los permisos:', error);
         }
       };
+      
       
 
     useEffect(() => {

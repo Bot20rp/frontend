@@ -100,7 +100,7 @@ export const bitacoraa = () => {return instance.get(`/bitacora`)};
 
 export const permisos = () => {return instance.get(`/permisos`)};
 export const actualizarPermisos = user => instance.patch(`/updaPermisos`,{
-    data: user,
+    ...user,
     headers:{
         'Content-Type': 'application/json', 
     }

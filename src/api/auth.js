@@ -92,10 +92,10 @@ export const actualizarProducto = user => instance.patch(`/producto/actualizar`,
 
 
 // BITACORA 
-/* export const bitacoraa = user => axios.post(`/crearbitacora`, { data: user ,
-    headers:{
-        'Content-Type': 'application/json', 
-    },
-}) */;
 
 export const bitacoraa = () => {return instance.get(`/bitacora`)}; 
+
+
+//PRIVILEGIOS O PERMISO
+
+export const permisos = () => {return instance.get(`/permisos`)};

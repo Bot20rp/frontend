@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     const [rol, setRol] = useState(null);
     const [tableUser, setTableUser] = useState([]);
     const [tableProveedor, setTableProveedor] = useState([]);
-    const [permisos, setPermisos] = useState({
+    const [permiso, setPermisos] = useState({
         administrador: [],
         cliente: [],
         empleado: []
@@ -136,7 +136,7 @@ export const AuthProvider = ({ children }) => {
           });
 
 
-          console.log(permisos)
+          console.log(permiso)
       
         } catch (error) {
           console.error('Error al obtener los permisos:', error);

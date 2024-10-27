@@ -19,7 +19,6 @@ import { Homed } from "./components/HomeD/Homed.jsx";
 
 /*Componenete para proteger las rutas */
 import ProtectedRoute from "./ProtectedRoute.jsx";
-import Compras from "./pages/PaqueteCompra/Compras.jsx";
 import OrganizacionProductPage from "./pages/PaqueteInventario/OrganizacionProductPage.jsx";
 /* ------------------------------------------------------------ */
 

@@ -1,35 +1,16 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../css/AdmiUsuarioCss/PrivilegioPages.css'
 import { useAuth } from '../../context/AuthContext';
 
 function PrivilegioPages() {
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [privilegios, setPrivilegios] = useState({});
-    const [rolSeleccionado, setRolSeleccionado] = useState("Administrador");
-    const {permisoTable} = useAuth();
+    const [privilegios, setPrivilegios] = useState([]);
+    const [rolSeleccionado, setRolSeleccionado] = useState("administrador");  // Asegúrate de que coincida en minúsculas
+    const { permisoTable } = useAuth();
 
-    // Usuario estático con privilegios
-    const privilegiosPorRol = {
-        Administrador: {
-            "privilegioADM 1": "activado",
-            "privilegioADM 2": "desactivado",
-            "privilegioADM 3": "activado"
-        },
-        Empleado: {
-            "privilegioEMP 1": "desactivado",
-            "privilegioEMP 2": "activado"
-        },
-        Cliente: {
-            "privilegioCLI 1": "desactivado",
-            "privilegioCLI 2": "desactivado"
-        }
-    };
-    
-    // Cargar los privilegios iniciales cuando el componente se monta
+    // Cargar los privilegios iniciales cuando se cambia el rol seleccionado
     useEffect(() => {
-        console.log("desdePrivilegios",permisoTable)
-        setPrivilegios(privilegiosPorRol[rolSeleccionado])
+        setPrivilegios(permisoTable[rolSeleccionado] || []);
     }, [rolSeleccionado]);
 
     // Manejar el toggle del submenú
@@ -38,52 +19,51 @@ function PrivilegioPages() {
     };
 
     // Manejar el cambio de cada privilegio
-    const manejarCambio = (privilegio) => {
-        setPrivilegios((prevState) => {
-            const nuevoEstado = {
-                ...prevState,
-                [privilegio]: prevState[privilegio] === 'activado' ? 'desactivado' : 'activado',
-            };
-            return nuevoEstado;
-        });
+    const manejarCambio = (id) => {
+        setPrivilegios((prevState) =>
+            prevState.map((privilegio) =>
+                privilegio.id === id ? { ...privilegio, Estado: !privilegio.Estado } : privilegio
+            )
+        );
     };
 
     // Enviar los cambios al backend (simulado aquí)
     const enviarCambios = async () => {
-        console.log("Enviando cambios al backend:");
-
+        console.log("Enviando cambios al backend:", privilegios);
     };
 
-    const manejarCambioRol = (event) =>{
+    const manejarCambioRol = (event) => {
         setRolSeleccionado(event.target.value);
-    }
+    };
+
     return (
         <div className='principalPrivilegio'>
-            <h1>SOY PRIVILEGIO</h1>
+            <h1>Gestión de Privilegios</h1>
             <div className='contenedorPrivilegio'>
-                <div className='cotenedorRol'>
-                    <h2>SELECCIONAR ROL</h2>
+                <div className='contenedorRol'>
+                    <h2>Seleccionar Rol</h2>
                     <select name="rol" id='soyRol' value={rolSeleccionado} onChange={manejarCambioRol}>
-                        <option value="Administrador">Administrador</option>
-                        <option value="Empleado">Empleado</option>
-                        <option value="Cliente">Cliente</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="empleado">Empleado</option>
+                        <option value="cliente">Cliente</option>
                     </select>
-
                 </div>
-                <div className='cotenedorPrivilegio'>
+                <div className='contenedorPrivilegios'>
                     <button onClick={toggleMenu} className="toggle-menu">
                         Privilegios {isMenuOpen ? "▲" : "▼"}
                     </button>
                     {isMenuOpen && (
                         <div className="submenu">
                             <ul className="privileges-list">
-                                {Object.keys(privilegios).map((privilegio) => (
-                                    <li key={privilegio} className="privilege-item">
-                                        <span className="privilege-name">{privilegio}</span>
+                                {privilegios.map((privilegio) => (
+                                    <li key={privilegio.id} className="privilege-item">
+                                        <span className="privilege-name">{privilegio.Descripcion}</span>
                                         <button
-                                            onClick={() => manejarCambio(privilegio)}
-                                            className={`privilege-button ${privilegios[privilegio] === 'activado' ? 'active' : 'inactive'}`}
-                                        ></button>
+                                            onClick={() => manejarCambio(privilegio.id)}
+                                            className={`privilege-button ${privilegio.Estado ? 'active' : 'inactive'}`}
+                                        >
+                                            {privilegio.Estado ? 'OK' : 'NO'}
+                                        </button>
                                     </li>
                                 ))}
                             </ul>
@@ -92,11 +72,10 @@ function PrivilegioPages() {
                             </button>
                         </div>
                     )}
-
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default PrivilegioPages
+export default PrivilegioPages;

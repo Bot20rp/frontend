@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../../css/AdmiUsuarioCss/PrivilegioPages.css'
 import { useAuth } from '../../context/AuthContext';
+import { actualizarPermisos } from '../../api/auth';
 
 function PrivilegioPages() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,6 +31,11 @@ function PrivilegioPages() {
     // Enviar los cambios al backend (simulado aquí)
     const enviarCambios = async () => {
         console.log("Enviando cambios al backend:", privilegios);
+        try {
+            await actualizarPermisos(privilegios)
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const manejarCambioRol = (event) => {

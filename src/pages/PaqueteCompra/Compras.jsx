@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../css/AdmiCompraCss/Compras.css';
+import '../../css/AdmiCompraCss/compras.css';
 function Compras() {
       const [Marcas, setMarcas] = useState([]);
       const [formValues, setFormValues] = useState({

@@ -16,6 +16,8 @@ import LoginPage from "../../pages/PaqueteUsu/LoginPage";
 import { Bitacora } from "../../pages/PaqueteUsu/Bitacora";
 import { Lote } from "../../pages/PaqueteCompra/Lote";
 import PrivilegioPages from "../../pages/PaqueteUsu/PrivilegioPages";
+import OrganizacionProductPage from "../../pages/PaqueteInventario/OrganizacionProductPage";
+import Compras from "../../pages/PaqueteCompra/Compras";
 
 /* VAMOS A PROTEGER LAS RUTAS */
 import ProtectedRoute from "../../ProtectedRoute";
@@ -41,12 +43,14 @@ export const Homed = () => {
           <Route path="/lote" element={<Lote />} />
           <Route path="/combos" element={<CombosPage />} />
           <Route path="/privilegios" element={<PrivilegioPages />} />
+          <Route path="/organizacion-productos" element={<OrganizacionProductPage />} />
         </Route>
 
         {/* Rutas protegidas para "Administrador" o "Empleado" */}
         <Route element={<ProtectedRoute roles={['Administrador', 'Empleado']} />}>
           <Route path="/clientRegister" element={<RegisterClientPage />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/compras" element={<Compras />} />
         </Route>
 
         {/* Rutas protegidas para cualquier usuario autenticado */}

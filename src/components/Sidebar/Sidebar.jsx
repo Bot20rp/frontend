@@ -225,8 +225,18 @@ const enlaceinventario = [
     icon: <MdOutlineAnalytics />,
     to: "/dasboard/categoriaproducto", // Corregido a "dashboard"
   },
+  {
+    label: "OrganizacionProducto",
+    icon: <MdOutlineAnalytics />,
+    to: "/dasboard/organizacion-productos", // Corregido a "dashboard"
+  },
 ];
 const enlacecompra = [
+  {
+    label: "Lotes",
+    icon: <MdOutlineAnalytics />,
+    to: "/dasboard/compras",
+  },
   {
     label: "Lotes",
     icon: <MdOutlineAnalytics />,

@@ -31,8 +31,6 @@ export const AuthProvider = ({ children }) => {
             setEsAutenticado(true);
             setUser(res.data);
             setRol(res.data.user.rol);
-            console.log(rol)
-            // Almacena el token en localStorage
             localStorage.setItem('token', res.data.token);
         } catch (error) {
             console.error(error);
@@ -145,11 +143,6 @@ export const AuthProvider = ({ children }) => {
             console.error('Error al obtener los permisos:', error);
         }
     };
-    // Monitorear los cambios en 'permisoTable'
-    useEffect(() => {
-        console.log("PermisoTable actualizado:");
-        console.log(permisoTable);
-    }, [permisoTable]);
 
     useEffect(() => {
         async function checkLogin() {
@@ -178,8 +171,6 @@ export const AuthProvider = ({ children }) => {
                     cargarDatos();
                     cargarDatosProveedores();
                     cargarDatosPermisos();
-                    console.log(permisoTable)
-
                 }
                 setLoading(false);
             } catch (error) {

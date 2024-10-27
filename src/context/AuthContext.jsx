@@ -146,8 +146,7 @@ export const AuthProvider = ({ children }) => {
             empleado: permisosEmpleado
           });
 
-          console.log(permisoTable)
-      
+
         } catch (error) {
           console.error('Error al obtener los permisos:', error);
         }
@@ -182,6 +181,8 @@ export const AuthProvider = ({ children }) => {
                     cargarDatos();
                     cargarDatosProveedores();
                     cargarDatosPermisos();
+                    console.log(permisoTable)
+      
                 }
                 setLoading(false);
             } catch (error) {

@@ -233,7 +233,7 @@ const enlaceinventario = [
 ];
 const enlacecompra = [
   {
-    label: "Lotes",
+    label: "Compras",
     icon: <MdOutlineAnalytics />,
     to: "/dasboard/compras",
   },

@@ -100,7 +100,7 @@ export const bitacoraa = () => {return instance.get(`/bitacora`)};
 
 export const permisos = () => {return instance.get(`/permisos`)};
 
-export const actualizarPermisos = (privilegios, rolSeleccionado) => instance.patch(`/updaPermisos`, {
+export const actualizarPermisos = (privilegios, rolSeleccionado) => instance.patch(`/updaPermisos2`, {
     data: {                    // Enviando ambos como un objeto dentro de "data"
         privilegios,           // Privilegios
         rol: rolSeleccionado   // Rol seleccionado (Admi, client, emplead)

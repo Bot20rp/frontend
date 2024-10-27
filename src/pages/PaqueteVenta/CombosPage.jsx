@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import '../../css/AdmiVentaCss/Combos.css'
+import '../../css/AdmiVentaCss/Combos.css';
+import { insertarCombo } from '../../api/auth';
 
 function CombosPage() {
     const [productos, setProductos] = useState([
@@ -29,16 +30,19 @@ function CombosPage() {
     const [busquedaId, setBusquedaId] = useState('');
     const [busquedaNombre, setBusquedaNombre] = useState('');
     const [sugerencias, setSugerencias] = useState([]);
-    const [productosEnCombo, setProductosEnCombo] = useState([]); // Productos agregados a la tabla del combo
-    const [totalSinDescuento, setTotalSinDescuento] = useState(0); // Nuevo estado para el total sin descuento
+    const [productosEnCombo, setProductosEnCombo] = useState([]);
+    const [totalSinDescuento, setTotalSinDescuento] = useState(0);
+    const [nombreCombo, setNombreCombo] = useState(''); // Estado para el nombre del combo
+    const [nuevoPrecio, setNuevoPrecio] = useState(''); // Estado para el nuevo precio
+    const [fechaInicio, setFechaInicio] = useState(''); // Estado para la fecha de inicio
+    const [fechaFin, setFechaFin] = useState(''); // Estado para la fecha de fin
 
-    // Función para actualizar el total sin descuento
     useEffect(() => {
         const total = productosEnCombo.reduce((sum, product) => {
             return sum + (product.precio * product.cantidad);
         }, 0);
         setTotalSinDescuento(total);
-    }, [productosEnCombo]); // Se recalcula cada vez que cambia la lista de productos o sus cantidades
+    }, [productosEnCombo]);
 
     const handleInputChange = (index, event) => {
         const { name, value } = event.target;
@@ -78,17 +82,14 @@ function CombosPage() {
     };
 
     const seleccionarProducto = (producto) => {
-        // Verificar si el producto ya está en el combo
         const productoExistente = productosEnCombo.find(p => p.id === producto.id);
 
         if (productoExistente) {
-            // Si el producto ya existe, sumamos la cantidad
             const productosActualizados = productosEnCombo.map(p =>
                 p.id === producto.id ? { ...p, cantidad: p.cantidad + 1 } : p
             );
             setProductosEnCombo(productosActualizados);
         } else {
-            // Si no existe, lo agregamos con cantidad inicial de 1
             setProductosEnCombo([...productosEnCombo, { ...producto, cantidad: 1 }]);
         }
         setSugerencias([]);
@@ -96,15 +97,33 @@ function CombosPage() {
         setBusquedaNombre('');
     };
 
-    const obtener = () => {
-        console.log(productosEnCombo)
+    const guardar = () => {
+        try {
+            const comboData = {
+                nombre: nombreCombo,
+                precio: nuevoPrecio,
+                fechaInicio: fechaInicio,
+                fechaFin: fechaFin,
+                productos: productosEnCombo,
+            };
+            console.log(comboData);
+            // Aquí puedes hacer la llamada a insertarCombo, enviando comboData
+            // insertarCombo(comboData);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
         <div className='contenedorCombo'>
             <div className='comboContenedor'>
                 <h2>AGREGAR NUEVO COMBO</h2>
-                <input type="text" placeholder='Ingresar el nombre del combo' />
+                <input 
+                    type="text" 
+                    placeholder='Ingresar el nombre del combo' 
+                    value={nombreCombo} 
+                    onChange={(e) => setNombreCombo(e.target.value)} 
+                />
 
                 <div className='ParaCombo'>
                     <input
@@ -170,18 +189,30 @@ function CombosPage() {
 
                 <div className='costos'>
                     <h3>Total sin Descuento</h3>
-                    <input type="number" value={totalSinDescuento} readOnly /> {/* Aquí se muestra el total sin descuento */}
+                    <input type="number" value={totalSinDescuento} readOnly />
                     <h3>Nuevo Precio</h3>
-                    <input type="number" />
+                    <input 
+                        type="number" 
+                        value={nuevoPrecio} 
+                        onChange={(e) => setNuevoPrecio(e.target.value)} 
+                    />
                 </div>
                 <div className='duracionCombo'>
                     <h3>Fecha Inicio</h3>
-                    <input type="date" />
+                    <input 
+                        type="date" 
+                        value={fechaInicio} 
+                        onChange={(e) => setFechaInicio(e.target.value)} 
+                    />
                     <h3>Fecha Fin</h3>
-                    <input type="date" />
+                    <input 
+                        type="date" 
+                        value={fechaFin} 
+                        onChange={(e) => setFechaFin(e.target.value)} 
+                    />
                 </div>
 
-                <button onClick={obtener}>Agregar</button>
+                <button onClick={guardar}>Agregar</button>
                 <h2>CONSULTAR COMBOS EXISTENTES</h2>
             </div>
         </div>

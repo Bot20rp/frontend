@@ -109,3 +109,15 @@ export const actualizarPermisos = (privilegios, rolSeleccionado) => instance.pat
         'Content-Type': 'application/json',
     }
 });
+
+
+
+//COMBOS!!!!
+
+export const insertarCombo = (Descripcion, FechaInicio, FechaFin, Precio,productos) => instance.post(`/combos`,{
+    Descripcion,
+    FechaInicio,
+    FechaFin,
+    Precio,
+    productos
+});

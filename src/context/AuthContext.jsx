@@ -22,8 +22,8 @@ export const AuthProvider = ({ children }) => {
         administrador: [],
         cliente: [],
         empleado: []
-      });
-      
+    });
+
 
     const signin = async (user) => {
         try {
@@ -74,85 +74,85 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const cargarDatosProveedores = async () =>{
-      try {
-        const respuesta = await obtenerRequestProveedor();
-        console.log("estoy aquie en aut")
-        console.log(respuesta.data)
-        if(respuesta.status !== 200){
-          throw new Error('Error Obtener datos')
+    const cargarDatosProveedores = async () => {
+        try {
+            const respuesta = await obtenerRequestProveedor();
+            console.log("estoy aquie en aut")
+            console.log(respuesta.data)
+            if (respuesta.status !== 200) {
+                throw new Error('Error Obtener datos')
+            }
+            const datosNuevos = respuesta.data.map(data => ({
+                id: data.ProveedorID,
+                Nombre: data.Nombre,
+                Contacto: data.Contacto,
+                Direccion: data.Direccion
+            }));
+
+
+            setTableProveedor(datosNuevos);
+
+        } catch (error) {
+            console.error('Error al obtener los datos:', error);
         }
-        const datosNuevos = respuesta.data.map(data => ({
-          id: data.ProveedorID, 
-          Nombre: data.Nombre,
-          Contacto: data.Contacto,
-          Direccion : data.Direccion
-        }));
-        
-
-        setTableProveedor(datosNuevos);
-
-      } catch (error) {
-        console.error('Error al obtener los datos:', error);
-      }
     }
 
     const cargarDatosPermisos = async () => {
         try {
-          const respuesta = await permisos(); // Llamada a la API
-          console.log("Obteniendo permisos:");
-          console.log(respuesta.data); // Verificar la respuesta
-      
-          if (respuesta.status !== 200) {
-            throw new Error('Error al obtener los datos');
-          }
-      
-          // Mapear y transformar los permisos del Administrador
-          const permisosAdministrador = respuesta.data.permisosAdministrador.map(permiso => {
-            console.log('Permiso Administrador:', permiso); // Aquí puedes ver cada permiso de administrador
-            return {
-              id: permiso.PrivilegioID, 
-              Descripcion: permiso.Descripcion,
-              Estado: permiso.Estado
-            };
-          });
-      
-          // Mapear los permisos del Cliente
-          const permisosCliente = respuesta.data.permisosCliente.map(permiso => {
-            console.log('Permiso Cliente:', permiso); // Aquí puedes ver cada permiso de cliente
-            return {
-              id: permiso.PrivilegioID, 
-              Descripcion: permiso.Descripcion,
-              Estado: permiso.Estado
-            };
-          });
-      
-          // Mapear los permisos del Empleado
-          const permisosEmpleado = respuesta.data.permisosEmpleado.map(permiso => {
-            console.log('Permiso Empleado:', permiso); // Aquí puedes ver cada permiso de empleado
-            return {
-              id: permiso.PrivilegioID, 
-              Descripcion: permiso.Descripcion,
-              Estado: permiso.Estado
-            };
-          });
-          
-          console.log("los permisos actualizado")
-          console.log(permisosAdministrador)
-          // Actualizar el estado con los permisos procesados
-          setPermisos({
-            administrador: permisosAdministrador,
-            cliente: permisosCliente,
-            empleado: permisosEmpleado
-          });
+            const respuesta = await permisos(); // Llamada a la API
+            console.log("Obteniendo permisos:");
+            console.log(respuesta.data); // Verificar la respuesta
+
+            if (respuesta.status !== 200) {
+                throw new Error('Error al obtener los datos');
+            }
+
+            // Mapear y transformar los permisos del Administrador
+            const permisosAdministrador = respuesta.data.permisosAdministrador.map(permiso => {
+                return {
+                    id: permiso.PrivilegioID,
+                    Descripcion: permiso.Descripcion,
+                    Estado: permiso.Estado
+                };
+            });
+
+            // Mapear los permisos del Cliente
+            const permisosCliente = respuesta.data.permisosCliente.map(permiso => {
+                return {
+                    id: permiso.PrivilegioID,
+                    Descripcion: permiso.Descripcion,
+                    Estado: permiso.Estado
+                };
+            });
+
+            // Mapear los permisos del Empleado
+            const permisosEmpleado = respuesta.data.permisosEmpleado.map(permiso => {
+                return {
+                    id: permiso.PrivilegioID,
+                    Descripcion: permiso.Descripcion,
+                    Estado: permiso.Estado
+                };
+            });
+
+            console.log("los permisos actualizado")
+            console.log(permisosAdministrador)
+            // Actualizar el estado con los permisos procesados
+            setPermisos({
+                administrador: permisosAdministrador,
+                cliente: permisosCliente,
+                empleado: permisosEmpleado
+            });
 
 
         } catch (error) {
-          console.error('Error al obtener los permisos:', error);
+            console.error('Error al obtener los permisos:', error);
         }
-      };
-      
-      
+    };
+    // Monitorear los cambios en 'permisoTable'
+    useEffect(() => {
+        console.log("PermisoTable actualizado:");
+        console.log(permisoTable);
+    }, [permisoTable]);
 
     useEffect(() => {
         async function checkLogin() {
@@ -182,7 +182,7 @@ export const AuthProvider = ({ children }) => {
                     cargarDatosProveedores();
                     cargarDatosPermisos();
                     console.log(permisoTable)
-      
+
                 }
                 setLoading(false);
             } catch (error) {
@@ -196,10 +196,10 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ 
-            signin, 
+        <AuthContext.Provider value={{
+            signin,
             user,
-            esAutenticado, 
+            esAutenticado,
             loading,
             rol,
             tableUser,

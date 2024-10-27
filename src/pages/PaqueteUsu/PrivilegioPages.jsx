@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react'
 import '../../css/AdmiUsuarioCss/PrivilegioPages.css'
-import { permisos } from '../../api/auth';
 
 function PrivilegioPages() {
 
@@ -77,9 +76,7 @@ function PrivilegioPages() {
 
     // Enviar los cambios al backend (simulado aquí)
     const enviarCambios = async () => {
-
-        const usuarioRoles = await permisos();
-        console.log("Enviando cambios al backend:", usuarioRoles.data);
+        console.log("Enviando cambios al backend:");
 
     };
 

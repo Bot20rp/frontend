@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, logoutRequest, verityTokenResquest, obtenerRequest, obtenerRequestProveedor } from "../api/auth";
+import { loginRequest, logoutRequest, verityTokenResquest, obtenerRequest, obtenerRequestProveedor, permisos } from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
     const [rol, setRol] = useState(null);
     const [tableUser, setTableUser] = useState([]);
     const [tableProveedor, setTableProveedor] = useState([]);
+    const [tablePermisos,setTablePermisos] = useState([]);
 
     const signin = async (user) => {
         try {
@@ -91,6 +92,17 @@ export const AuthProvider = ({ children }) => {
       }
     }
 
+    const cargarDatosPermisos = async () => {
+        try {
+            const permisosNuevos = await permisos();
+            setTablePermisos(permisosNuevos);
+
+            console.log(tablePermisos)
+        } catch (error) {
+            console.error('Error al obtener los datos:', error);
+        }
+    }
+
     useEffect(() => {
         async function checkLogin() {
             const token = localStorage.getItem('token');
@@ -117,6 +129,7 @@ export const AuthProvider = ({ children }) => {
                 if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
                     cargarDatos();
                     cargarDatosProveedores();
+                    cargarDatosPermisos();
                 }
                 setLoading(false);
             } catch (error) {
@@ -140,6 +153,7 @@ export const AuthProvider = ({ children }) => {
             tableProveedor,
             cargarDatos,
             cargarDatosProveedores,
+            cargarDatosPermisos,
             logout
         }}>
             {children}

@@ -18,7 +18,12 @@ export const AuthProvider = ({ children }) => {
     const [rol, setRol] = useState(null);
     const [tableUser, setTableUser] = useState([]);
     const [tableProveedor, setTableProveedor] = useState([]);
-    const [tablePermisos,setTablePermisos] = useState(null);
+    const [permisos, setPermisos] = useState({
+        administrador: [],
+        cliente: [],
+        empleado: []
+      });
+      
 
     const signin = async (user) => {
         try {
@@ -94,14 +99,50 @@ export const AuthProvider = ({ children }) => {
 
     const cargarDatosPermisos = async () => {
         try {
-            const permisosNuevos = await permisos();
-            setTablePermisos(permisosNuevos.data.permisosAdministrador);
-            console.log(permisosNuevos.data)
-            console.log(tablePermisos)
+          const respuesta = await permisos(); // Llamada a la API
+          console.log("Obteniendo permisos:");
+          console.log(respuesta.data); // Verificar la respuesta
+      
+          if (respuesta.status !== 200) {
+            throw new Error('Error al obtener los datos');
+          }
+      
+          // Mapear y transformar los permisos del Administrador
+          const permisosAdministrador = respuesta.data.permisosAdministrador.map(permiso => ({
+            id: permiso.PrivilegioID, 
+            Descripcion: permiso.Descripcion,
+            Estado: permiso.Estado
+          }));
+      
+          // Mapear los permisos del Cliente
+          const permisosCliente = respuesta.data.permisosCliente.map(permiso => ({
+            id: permiso.PrivilegioID, 
+            Descripcion: permiso.Descripcion,
+            Estado: permiso.Estado
+          }));
+      
+          // Mapear los permisos del Empleado
+          const permisosEmpleado = respuesta.data.permisosEmpleado.map(permiso => ({
+            id: permiso.PrivilegioID, 
+            Descripcion: permiso.Descripcion,
+            Estado: permiso.Estado
+          }));
+      
+          // Actualizar el estado con los permisos procesados
+          setPermisos({
+            administrador: permisosAdministrador,
+            cliente: permisosCliente,
+            empleado: permisosEmpleado
+          });
+
+
+          console.log(permisos)
+      
         } catch (error) {
-            console.error('Error al obtener los datos:', error);
+          console.error('Error al obtener los permisos:', error);
         }
-    }
+      };
+      
 
     useEffect(() => {
         async function checkLogin() {

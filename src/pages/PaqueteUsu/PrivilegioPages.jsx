@@ -30,9 +30,18 @@ function PrivilegioPages() {
 
     // Enviar los cambios al backend (simulado aquí)
     const enviarCambios = async () => {
-        console.log("Enviando cambios al backend:", privilegios,rolSeleccionado);
         try {
-            await actualizarPermisos(privilegios,rolSeleccionado)
+            if(rolSeleccionado === 'administrador'){
+                const numero1 = 1
+                console.log("Enviando cambios al backend:", privilegios,numero1);
+                return await actualizarPermisos(privilegios,numero1);
+            }else if(rolSeleccionado === 'empleado' ){
+                const numero2 = 2
+                return await actualizarPermisos(privilegios,numero2)
+            }else{
+                const numero3 = 3
+                return await actualizarPermisos(privilegios,numero3)
+            }
         } catch (error) {
             console.log(error);
         }
@@ -49,9 +58,9 @@ function PrivilegioPages() {
                 <div className='contenedorRol'>
                     <h2>Seleccionar Rol</h2>
                     <select name="rol" id='soyRol' value={rolSeleccionado} onChange={manejarCambioRol}>
-                        <option value="1">Administrador</option>
-                        <option value="2">Empleado</option>
-                        <option value="3">Cliente</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="empleado">Empleado</option>
+                        <option value="cliente">Cliente</option>
                     </select>
                 </div>
                 <div className='contenedorPrivilegios'>

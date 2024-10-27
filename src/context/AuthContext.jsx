@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     const [rol, setRol] = useState(null);
     const [tableUser, setTableUser] = useState([]);
     const [tableProveedor, setTableProveedor] = useState([]);
-    const [tablePermisos,setTablePermisos] = useState();
+    const [tablePermisos,setTablePermisos] = useState(null);
 
     const signin = async (user) => {
         try {
@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const permisosNuevos = await permisos();
             setTablePermisos(permisosNuevos.data);
-
+            console.log(permisosNuevos)
             console.log(tablePermisos)
         } catch (error) {
             console.error('Error al obtener los datos:', error);

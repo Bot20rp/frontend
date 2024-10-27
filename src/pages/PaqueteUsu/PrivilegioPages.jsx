@@ -37,9 +37,11 @@ function PrivilegioPages() {
                 return await actualizarPermisos(privilegios,numero1);
             }else if(rolSeleccionado === 'empleado' ){
                 const numero2 = 2
+                console.log("Enviando cambios al backend:", privilegios,numero2);
                 return await actualizarPermisos(privilegios,numero2)
             }else{
                 const numero3 = 3
+                console.log("Enviando cambios al backend:", privilegios,numero3);
                 return await actualizarPermisos(privilegios,numero3)
             }
         } catch (error) {

@@ -21,6 +21,7 @@ import Compras from "../../pages/PaqueteCompra/Compras";
 
 /* VAMOS A PROTEGER LAS RUTAS */
 import ProtectedRoute from "../../ProtectedRoute";
+import ProtectedRoutePrivilegios from "../../ProtectPrivilegios";
 
 export const Homed = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -29,13 +30,22 @@ export const Homed = () => {
     <div className={`containe12 ${sidebarOpen ? "active12" : ""}`}>
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-      {/* Rutas protegidas */}
+      {/* Ruta pública o sin protección */}
       <Routes>
-        <Route path="/homeda" element={<HomeDas />} /> {/* Ruta pública o sin protección */}
+        <Route path="/homeda" element={<HomeDas />} />
 
         {/* Rutas protegidas solo para "Administrador" */}
         <Route element={<ProtectedRoute roles={['Administrador']} />}>
-          <Route path="/usuarioGestion" element={<UsuarioPage />} />
+
+          <Route
+            path="/usuarioGestion"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="Ver Usuarios">
+                <UsuarioPage />
+              </ProtectedRoutePrivilegios>
+            }
+          />
+
           <Route path="/proveedorRegister" element={<ProveedoresPage />} />
           <Route path="/categoriaproducto" element={<CategoriaProductPage />} />
           <Route path="/empleadRegister" element={<RegisterEmplead />} />

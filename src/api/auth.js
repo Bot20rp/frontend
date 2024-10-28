@@ -39,8 +39,8 @@ export const eliminarUsuario = user => instance.delete('/usuario/del', {
 
 export const registrarProveedorRequest = user => instance.post(`/proveedor`, user);
 export const extraerID = user => instance.post(`/proveedor/ex`, user);
-export const eliminarProveedor = user => instance.delete(`/proveedor/delete`, {
-    data: user,
+export const eliminarProveedor = id => instance.delete(`/proveedor/delete`, {
+    id,
     headers: {
         'Content-Type': 'application/json',
     },

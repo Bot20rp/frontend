@@ -4,8 +4,8 @@ import { useAuth } from './context/AuthContext';
 const ProtectedRoutePrivilegios = ({ privilegeDescription, children }) => {
   const { user } = useAuth();
   console.log(user)
-  console.log(user.permisos)
-  const hasPrivilege = user?.permisos.some(
+  console.log(user.user.permisos)
+  const hasPrivilege = user?.user.permisos.some(
     (permiso) => permiso.Descripcion === privilegeDescription && permiso.Estado === 1
   );
 

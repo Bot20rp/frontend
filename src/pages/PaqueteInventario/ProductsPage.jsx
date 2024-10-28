@@ -118,7 +118,7 @@ function ProductsPage() {
     const listar = ()=> {
         try {
             if (Array.isArray(productosBackend.data)) {
-                const productosFormateados = detos.data.map((producto) => ({
+                const productosFormateados = productosBackend.data.map((producto) => ({
                     id: producto.ProductoID,  
                     Nombre: producto.Nombre,    
                     Precio: producto.Precio,   

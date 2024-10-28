@@ -21,7 +21,7 @@ function CombosPage() {
     const [fechaInicio, setFechaInicio] = useState(''); // Estado para la fecha de inicio
     const [fechaFin, setFechaFin] = useState(''); // Estado para la fecha de fin
     const [showFacturas, setShowFacturas] = useState(false); // para mostarLista
-    const [combosEnLista,setcombosEnLista] = useState([]);
+    const [combosEnLista, setcombosEnLista] = useState([]);
 
     useEffect(() => {
         if (productosBackend && productosBackend.data) {
@@ -125,8 +125,8 @@ function CombosPage() {
     }
 
     const listar = async () => {
-        try { 
-            setShowFacturas(!showFacturas) 
+        try {
+            setShowFacturas(!showFacturas)
             const respuesta = await obtenerCombos();
             const combosFormateados = respuesta.data.map((combo) => ({
                 Codigo: combo.ComboID,
@@ -241,7 +241,7 @@ function CombosPage() {
                     />
                 </div>
 
-                <button onClick={guardar}>Agregar</button> 
+                <button onClick={guardar}>Agregar</button>
                 <h2>CONSULTAR COMBOS EXISTENTES</h2>
                 <button onClick={listar}>Listar</button>
                 {showFacturas && (
@@ -268,7 +268,9 @@ function CombosPage() {
                                         <td>{comb.Estado}</td>
                                         {/* <th className='imagenFactura'>Imagen</th> */}
                                         <td>
-                                            <button >Eliminar</button>
+                                            <button>
+                                                {comb.Estado === 1 ? 'Deshabilitar' : 'Activar'}
+                                            </button>
                                             <button >Modificar</button>
                                         </td>
                                     </tr>

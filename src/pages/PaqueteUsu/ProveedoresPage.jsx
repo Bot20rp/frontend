@@ -112,7 +112,7 @@ function ProveedoresPage() {
     };
 
     // Eliminar proveedor
-    const eliminarproveedor = async (id) => {
+    const eliminarproveedores = async (id) => {
 
         const datos = { id }; // Crea el objeto con el ID a eliminar
         console.log(datos);
@@ -189,7 +189,7 @@ function ProveedoresPage() {
                                 <td>{prod.Direccion}</td>
                                 <td>{prod.Contacto}</td>
                                 <td className='editProveedor'>
-                                    <button className='eliminarProveedor' onClick={() => eliminarproveedor(prod.id)}>Eliminar</button>
+                                    <button className='eliminarProveedor' onClick={() => eliminarproveedores(prod.id)}>Eliminar</button>
                                     <button className='modificarProveedor' onClick={() => modificarproveedor(prod.id)}>Modificar1</button>
                                 </td>
                             </tr>

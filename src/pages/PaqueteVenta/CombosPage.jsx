@@ -268,7 +268,8 @@ function CombosPage() {
                                         <td>{comb.Estado}</td>
                                         {/* <th className='imagenFactura'>Imagen</th> */}
                                         <td>
-                                            <button onClick={() => handleRemonveProduct(index)}>Eliminar</button>
+                                            <button >Eliminar</button>
+                                            <button >Modificar</button>
                                         </td>
                                     </tr>
                                 ))}

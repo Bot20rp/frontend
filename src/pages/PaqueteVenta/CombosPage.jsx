@@ -56,14 +56,15 @@ function CombosPage() {
     const buscarProductoPorId = (event) => {
         const value = event.target.value;
         setBusquedaId(value);
-
+    
         if (value.length > 0) {
-            const resultados = productos.filter(product => product.id.startsWith(value));
+            const resultados = productos.filter(product => product.id.toString().startsWith(value));
             setSugerencias(resultados);
         } else {
             setSugerencias([]);
         }
     };
+    
 
     const buscarProductoPorNombre = (event) => {
         const value = event.target.value;

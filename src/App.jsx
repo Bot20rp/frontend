@@ -20,6 +20,7 @@ import CombosPage from "./pages/PaqueteVenta/CombosPage.jsx";
 /*Componenete para proteger las rutas */
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import OrganizacionProductPage from "./pages/PaqueteInventario/OrganizacionProductPage.jsx";
+import Compras from "./pages/PaqueteCompra/Compras.jsx";
 /* ------------------------------------------------------------ */
 
 function Main() {
@@ -42,7 +43,8 @@ function Main() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/organiz" element={<OrganizacionProductPage />} />
         <Route path="/combo" element={<CombosPage />} />
-        
+        <Route path="/compras" element={<Compras />} />
+       
         <Route path="/dasboard/*" element ={<ProtectedRoute roles={['Administrador','Cliente','Empleado']} element={<ProtecComponente component={Homed} />} />
       
       }/>

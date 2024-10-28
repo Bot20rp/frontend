@@ -27,7 +27,7 @@ export const actualizarUsuario = user => instance.patch(`/usuario/actualizar`, {
         'Content-Type': 'application/json',
     },
 });
-export const eliminarUsuario = user => instance.delete('/usuario/del', {
+export const eliminarUsuario = id => instance.delete('/usuario/del', {
     data: id,
     headers: {
         'Content-Type': 'application/json',

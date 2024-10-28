@@ -1,7 +1,9 @@
 import { useAuth } from '../../context/AuthContext';
-import '../../css/AdmiUsuarioCss/UsuarioPage.css'
+import '../../css/AdmiUsuarioCss/UsuarioPage.css';
 import { useState, useEffect } from 'react';
 import { actualizarUsuario, eliminarUsuario } from '../../api/auth';
+import jsPDF from 'jspdf'; // Importa jsPDF
+import 'jspdf-autotable'; // Importa la funcionalidad para tablas
 
 function UsuarioPages() {
   const { tableUser } = useAuth();
@@ -18,7 +20,7 @@ function UsuarioPages() {
     correo: '',
     telefono: '',
     genero: '',
-    fechaNacimiento: '', 
+    fechaNacimiento: '',
     rol: '',
     salario: '',
     horarioInicio: '',
@@ -40,14 +42,14 @@ function UsuarioPages() {
 
   const eliminarDato = (id) => {
     setUsuarioSeleccionado(id);
-    setMostrarEliminar(true);  // Mostrar la ventana modal de confirmación
+    setMostrarEliminar(true); // Mostrar la ventana modal de confirmación
   };
 
   const confirmarEliminar = async () => {
     try {
       await eliminarUsuario({ id: usuarioSeleccionado });
       setDatos(datos.filter(dato => dato.id !== usuarioSeleccionado));
-      setMostrarEliminar(false);  // Ocultar la ventana modal después de eliminar
+      setMostrarEliminar(false); // Ocultar la ventana modal después de eliminar
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +58,7 @@ function UsuarioPages() {
   const actualizarDato = (id) => {
     const usuario = datos.find(dato => dato.id === id);
     setFormActualizar(usuario);
-    setMostrarActualizar(true);  // Mostrar la ventana modal de actualización
+    setMostrarActualizar(true); // Mostrar la ventana modal de actualización
   };
 
   const manejarCambio = (e) => {
@@ -70,10 +72,39 @@ function UsuarioPages() {
     try {
       await actualizarUsuario(formActualizar);
       setDatos(datos.map(dato => (dato.id === formActualizar.id ? formActualizar : dato)));
-      setMostrarActualizar(false);  // Ocultar la ventana modal después de actualizar
+      setMostrarActualizar(false); // Ocultar la ventana modal después de actualizar
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Función para generar el PDF
+  const generarReportePDF = () => {
+    const doc = new jsPDF();
+    
+    // Añadir un título al PDF
+    doc.text('Reporte de Usuarios', 14, 20);
+
+    // Convertir los datos de la tabla en un formato que jsPDF pueda interpretar
+    const columnas = ['Documento', 'Usuario', 'Correo', 'Teléfono', 'Género', 'Rol'];
+    const filas = datosFiltrados.map((dato) => [
+      dato.id,
+      dato.usuario,
+      dato.correo,
+      dato.telefono,
+      dato.genero,
+      dato.rol
+    ]);
+
+    // Generar la tabla con los datos
+    doc.autoTable({
+      head: [columnas],
+      body: filas,
+      startY: 30
+    });
+
+    // Descargar el PDF con el nombre reporte_usuarios.pdf
+    doc.save('reporte_usuarios.pdf');
   };
 
   return (
@@ -142,6 +173,10 @@ function UsuarioPages() {
             </tbody>
           </table>
         </div>
+        
+        {/* Botón para generar el PDF */}
+        <button className="btn" onClick={generarReportePDF}>Generar Reporte en PDF</button>
+
       </div>
 
       {/* Modal para Confirmar Eliminación */}
@@ -154,6 +189,7 @@ function UsuarioPages() {
           </div>
         </div>
       )}
+
       {/* Modal para Actualizar Usuario */}
       {mostrarActualizar && (
         <div className="modal">

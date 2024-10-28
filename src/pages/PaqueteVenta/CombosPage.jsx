@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/AdmiVentaCss/Combos.css';
-import { insertarCombo } from '../../api/auth';
+import { insertarCombo,actualizarEstadoCombo } from '../../api/auth';
 import { useAuth } from '../../context/AuthContext';
 import { obtenerCombos } from '../../api/auth';
+
 
 function CombosPage() {
 
@@ -182,7 +183,11 @@ function CombosPage() {
     const confirmarCambioEstado = async () => {
         try {
             const nuevoEstado = comboSeleccionado.Estado === 1 ? 0 : 1;
-            // await actualizarEstadoCombo(comboSeleccionado.Codigo, nuevoEstado); // Función para actualizar el estado
+            const cambioEstado = {
+                id: comboSeleccionado.Codigo,
+                Estado: nuevoEstado
+            };
+            await actualizarEstadoCombo(cambioEstado); // Función para actualizar el estado
             setcombosEnLista(combosEnLista.map(c => c.Codigo === comboSeleccionado.Codigo ? { ...c, Estado: nuevoEstado } : c));
             setShowModal(false);
         } catch (error) {

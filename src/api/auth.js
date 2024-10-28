@@ -133,3 +133,9 @@ export const insertarCombo = (data) => instance.post(`/combos`, {
 });
 
 export const obtenerCombos = () => {return instance.get(`getcombos`)};
+export const actualizarEstadoCombo = (data) => instance.patch(`/updateCombos`,{
+    data,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+})

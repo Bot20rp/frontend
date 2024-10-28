@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import '../../css/AdmiCompraCss/compras.css';
+import { useAuth } from '../../context/AuthContext';
 
 function Compras() {
+
+  const {productosBackend} = useAuth();
+  const [productos,setProductos] = useState([]);
+
   const [Marcas, setMarcas] = useState([]);
   const [formValues, setFormValues] = useState({
     NroFactura: "",
@@ -22,17 +27,6 @@ function Compras() {
   const [showFacturas, setShowFacturas] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [nuevaImagen, setNuevaImagen] = useState(null); // Nuevo estado para la nueva imagen
-
-  const [productos, setProductos] = useState([
-    { id: "1", nombre: "Sprite 500ml", precio: "12" },
-    { id: "2", nombre: "Sprite 1L", precio: "15" },
-    { id: "3", nombre: "Coca-Cola 500ml", precio: "13" },
-    { id: "4", nombre: "Coca-Cola 1L", precio: "18" },
-    { id: "5", nombre: "Del Valle Durazno 500ml", precio: "16" },
-    { id: "6", nombre: "Del Valle Manzana 1L", precio: "20" },
-    { id: "7", nombre: "Paceña 330ml", precio: "14" },
-    { id: "8", nombre: "Paceña 620ml", precio: "22" },
-  ]);
 
   const productosSeleccionadosAtributos = {
     id: "ID del producto",
@@ -65,13 +59,14 @@ function Compras() {
   const buscarProductoPorId = (event) => {
     const value = event.target.value;
     setBusquedaId(value);
+
     if (value.length > 0) {
-      const resultados = productos.filter(product => product.id.startsWith(value));
-      setSugerencias(resultados);
+        const resultados = productos.filter(product => product.id.toString().startsWith(value));
+        setSugerencias(resultados);
     } else {
-      setSugerencias([]);
+        setSugerencias([]);
     }
-  };
+};
 
   const buscarProductoPorNombre = (event) => {
     const value = event.target.value;
@@ -181,6 +176,18 @@ function Compras() {
   const totalPrecioCompra = productosSeleccionados.reduce((total, producto) =>
     total + (producto.precioCosto * producto.cantidad), 0
   );
+
+  useEffect(() => {
+    if (productosBackend && productosBackend.data) {
+        const productosObtenidos = productosBackend.data.map((producto) => ({
+            id: producto.ProductoID,  
+            nombre: producto.Nombre,    
+            precio: producto.Precio
+        }));
+
+        setProductos(productosObtenidos); 
+    }
+}, [productosBackend]); 
 
   return (
     <div className="containerCompraProductos">

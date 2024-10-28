@@ -97,16 +97,19 @@ function CombosPage() {
         setBusquedaNombre('');
     };
 
-    const guardar = () => {
+    const guardar = async () => {
         try {
             const comboData = {
-                nombre: nombreCombo,
-                precio: nuevoPrecio,
-                fechaInicio: fechaInicio,
-                fechaFin: fechaFin,
+                Descripcion: nombreCombo,
+                FechaInicio: fechaInicio,
+                FechaFin: fechaFin,
                 productos: productosEnCombo,
+                Precio: nuevoPrecio,
+                Estado: 1
             };
             console.log(comboData);
+
+            await insertarCombo(comboData);
             // Aquí puedes hacer la llamada a insertarCombo, enviando comboData
             // insertarCombo(comboData);
         } catch (error) {

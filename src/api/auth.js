@@ -114,10 +114,4 @@ export const actualizarPermisos = (privilegios, rolSeleccionado) => instance.pat
 
 //COMBOS!!!!
 
-export const insertarCombo = (Descripcion, FechaInicio, FechaFin, Precio,productos) => instance.post(`/combos`,{
-    Descripcion,
-    FechaInicio,
-    FechaFin,
-    Precio,
-    productos
-});
+export const insertarCombo = (data) => instance.post(`/combos`,data);

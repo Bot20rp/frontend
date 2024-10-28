@@ -23,9 +23,13 @@ function CombosPage() {
     const [showFacturas, setShowFacturas] = useState(false); // para mostarLista
     const [combosEnLista, setcombosEnLista] = useState([]);
 
-     // Estados para la ventana modal de confirmación
-     const [showModal, setShowModal] = useState(false);
-     const [comboSeleccionado, setComboSeleccionado] = useState(null);
+    // Estados para la ventana modal de confirmación
+    const [showModal, setShowModal] = useState(false);
+    const [comboSeleccionado, setComboSeleccionado] = useState(null);
+
+    const [showModalModificar, setShowModalModificar] = useState(false);
+    const [comboModificar, setComboModificar] = useState(null); // Combo a modificar
+
 
     useEffect(() => {
         if (productosBackend && productosBackend.data) {
@@ -150,6 +154,30 @@ function CombosPage() {
         setComboSeleccionado(combo);
         setShowModal(true);
     };
+
+    const abrirModalModificar = (combo) => {
+        setComboModificar(combo);
+        setShowModalModificar(true);
+    };
+
+    const confirmarModificarCombo = async () => {
+        try {
+            // Actualizar en el backend (debemos implementar la función en tu API para esto)
+            // await modificarCombo(comboModificar.Codigo, comboModificar.Precio, comboModificar.FechaFin);
+
+            // Actualizamos el estado en el frontend después de guardar los cambios
+            setcombosEnLista(combosEnLista.map(c =>
+                c.Codigo === comboModificar.Codigo
+                    ? { ...c, Precio: comboModificar.Precio, FechaFin: comboModificar.FechaFin }
+                    : c
+            ));
+            setShowModalModificar(false);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
 
     const confirmarCambioEstado = async () => {
         try {
@@ -297,7 +325,7 @@ function CombosPage() {
                                             >
                                                 {comb.Estado === 1 ? 'Deshabilitar' : 'Activar'}
                                             </button>
-                                            <button>Modificar</button>
+                                            <button onClick={() => abrirModalModificar(comb)}>Modificar</button>
                                         </td>
                                     </tr>
                                 ))}
@@ -316,7 +344,29 @@ function CombosPage() {
                         </div>
                     </div>
                 )}
-                
+
+                {showModalModificar && (
+                    <div className='modal'>
+                        <div className='modal-content'>
+                            <h3>Modificar Combo</h3>
+                            <p>Precio actual: {comboModificar.Precio}</p>
+                            <input
+                                type="number"
+                                value={comboModificar.Precio}
+                                onChange={(e) => setComboModificar({ ...comboModificar, Precio: e.target.value })}
+                            />
+                            <p>Fecha de finalización actual: {comboModificar.FechaFin}</p>
+                            <input
+                                type="date"
+                                value={comboModificar.FechaFin}
+                                onChange={(e) => setComboModificar({ ...comboModificar, FechaFin: e.target.value })}
+                            />
+                            <button onClick={confirmarModificarCombo}>Guardar Cambios</button>
+                            <button onClick={() => setShowModalModificar(false)}>Cancelar</button>
+                        </div>
+                    </div>
+                )}
+
             </div>
         </div>
     );

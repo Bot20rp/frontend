@@ -131,3 +131,5 @@ export const insertarCombo = (data) => instance.post(`/combos`, {
         'Content-Type': 'application/json',
     }
 });
+
+export const obtenerCombos = () => {return instance.get(`getcombos`)};

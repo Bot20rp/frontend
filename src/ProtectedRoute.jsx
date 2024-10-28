@@ -8,7 +8,6 @@ const ProtectedRoute = ({ roles, element }) => {
 
   if (!esAutenticado) return <Navigate to='/login' replace />;
 
-  console.log(rol)
 
   if (!rol || !roles.includes(rol)) {
     return <h1>No tienes permiso para acceder a esta página.</h1>;

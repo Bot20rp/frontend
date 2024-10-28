@@ -53,7 +53,6 @@ function ProductsPage() {
     // Agregar producto a la tabla
     const agregarProducto = async (producto) => {
         try {
-            console.log(producto)
             await insertarProducto(producto)
             setProductos([...productos, producto]);
             resetForm();

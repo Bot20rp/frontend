@@ -34,17 +34,14 @@ function PrivilegioPages() {
         try {
             if(rolSeleccionado === 'administrador'){
                 const numero1 = 1
-                console.log("Enviando cambios al backend:", privilegios,numero1);
                 await actualizarPermisos(privilegios,numero1);
                 setMensajeExitoso("Cambios guardados exitosamente");
             }else if(rolSeleccionado === 'empleado' ){
                 const numero2 = 2
-                console.log("Enviando cambios al backend:", privilegios,numero2);
                 await actualizarPermisos(privilegios,numero2);
                 setMensajeExitoso("Cambios guardados exitosamente");
             }else{
                 const numero3 = 3
-                console.log("Enviando cambios al backend:", privilegios,numero3);
                 await actualizarPermisos(privilegios,numero3);
                 setMensajeExitoso("Cambios guardados exitosamente");
             }

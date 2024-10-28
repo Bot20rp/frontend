@@ -8,7 +8,7 @@ function ProtecComponente({ component: Component }) {
  
   if (loading) return <div>Loading...</div>;
 
-console.log(esAutenticado)
+
   if (!esAutenticado) return <Navigate to="/login" replace />;
 
 

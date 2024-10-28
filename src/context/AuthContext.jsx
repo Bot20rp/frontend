@@ -108,8 +108,6 @@ export const AuthProvider = ({ children }) => {
     const cargarDatosPermisos = async () => {
         try {
             const respuesta = await permisos(); // Llamada a la API
-            console.log("Obteniendo permisos:");
-            console.log(respuesta.data); // Verificar la respuesta
 
             if (respuesta.status !== 200) {
                 throw new Error('Error al obtener los datos');

@@ -115,7 +115,6 @@ function ProveedoresPage() {
     const eliminarproveedores = async (id) => {
 
         const datos = id; // Crea el objeto con el ID a eliminar
-        console.log(datos);
 
         try {
             // Usa Axios para enviar la solicitud DELETE
@@ -149,7 +148,6 @@ function ProveedoresPage() {
 
     const listarDatos = () =>{
         try {
-            console.log(tableProveedor)
             setproveedors(tableProveedor);
           } catch (error) {
             throw new Error('Error al obtener los datos');

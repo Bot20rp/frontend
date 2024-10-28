@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import '../../css/AdmiVentaCss/Combos.css';
 import { insertarCombo } from '../../api/auth';
 import { useAuth } from '../../context/AuthContext';
+import { obtenerCombos } from '../../api/auth';
 
 function CombosPage() {
 
-    const {productosBackend} = useAuth();
-    const [productos,setProductos] = useState([]);
+    const { productosBackend } = useAuth();
+    const [productos, setProductos] = useState([]);
 
-    
-    
+
+
     const [busquedaId, setBusquedaId] = useState('');
     const [busquedaNombre, setBusquedaNombre] = useState('');
     const [sugerencias, setSugerencias] = useState([]);
@@ -19,18 +20,20 @@ function CombosPage() {
     const [nuevoPrecio, setNuevoPrecio] = useState(''); // Estado para el nuevo precio
     const [fechaInicio, setFechaInicio] = useState(''); // Estado para la fecha de inicio
     const [fechaFin, setFechaFin] = useState(''); // Estado para la fecha de fin
+    const [showFacturas, setShowFacturas] = useState(false); // para mostarLista
+    const [combosEnLista,setcombosEnLista] = useState([]);
 
     useEffect(() => {
         if (productosBackend && productosBackend.data) {
             const productosObtenidos = productosBackend.data.map((producto) => ({
-                id: producto.ProductoID,  
-                nombre: producto.Nombre,    
+                id: producto.ProductoID,
+                nombre: producto.Nombre,
                 precio: producto.Precio
             }));
 
-            setProductos(productosObtenidos); 
+            setProductos(productosObtenidos);
         }
-    }, [productosBackend]); 
+    }, [productosBackend]);
 
 
     useEffect(() => {
@@ -56,7 +59,7 @@ function CombosPage() {
     const buscarProductoPorId = (event) => {
         const value = event.target.value;
         setBusquedaId(value);
-    
+
         if (value.length > 0) {
             const resultados = productos.filter(product => product.id.toString().startsWith(value));
             setSugerencias(resultados);
@@ -64,7 +67,7 @@ function CombosPage() {
             setSugerencias([]);
         }
     };
-    
+
 
     const buscarProductoPorNombre = (event) => {
         const value = event.target.value;
@@ -121,15 +124,38 @@ function CombosPage() {
         }
     }
 
+    const listar = async () => {
+        try { 
+            setShowFacturas(!showFacturas) 
+            const respuesta = await obtenerCombos();
+            // const combosFormateados = respuesta.data
+            // const productosFormateados = productosBackend.data.map((producto) => ({
+            //     id: producto.ProductoID,  
+            //     Nombre: producto.Nombre,    
+            //     Precio: producto.Precio,   
+            //     Categoria: producto.Catego,
+            //     Volumen: producto.Vol,
+            //     Marca: producto.Marc,
+            //     Estante: producto.Estant
+            // }));
+
+            // setProductos(productosFormateados);
+            console.log(respuesta)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     return (
         <div className='contenedorCombo'>
             <div className='comboContenedor'>
                 <h2>AGREGAR NUEVO COMBO</h2>
-                <input 
-                    type="text" 
-                    placeholder='Ingresar el nombre del combo' 
-                    value={nombreCombo} 
-                    onChange={(e) => setNombreCombo(e.target.value)} 
+                <input
+                    type="text"
+                    placeholder='Ingresar el nombre del combo'
+                    value={nombreCombo}
+                    onChange={(e) => setNombreCombo(e.target.value)}
                 />
 
                 <div className='ParaCombo'>
@@ -198,29 +224,47 @@ function CombosPage() {
                     <h3>Total sin Descuento</h3>
                     <input type="number" value={totalSinDescuento} readOnly />
                     <h3>Nuevo Precio</h3>
-                    <input 
-                        type="number" 
-                        value={nuevoPrecio} 
-                        onChange={(e) => setNuevoPrecio(e.target.value)} 
+                    <input
+                        type="number"
+                        value={nuevoPrecio}
+                        onChange={(e) => setNuevoPrecio(e.target.value)}
                     />
                 </div>
                 <div className='duracionCombo'>
                     <h3>Fecha Inicio</h3>
-                    <input 
-                        type="date" 
-                        value={fechaInicio} 
-                        onChange={(e) => setFechaInicio(e.target.value)} 
+                    <input
+                        type="date"
+                        value={fechaInicio}
+                        onChange={(e) => setFechaInicio(e.target.value)}
                     />
                     <h3>Fecha Fin</h3>
-                    <input 
-                        type="date" 
-                        value={fechaFin} 
-                        onChange={(e) => setFechaFin(e.target.value)} 
+                    <input
+                        type="date"
+                        value={fechaFin}
+                        onChange={(e) => setFechaFin(e.target.value)}
                     />
                 </div>
 
-                <button onClick={guardar}>Agregar</button>
+                <button onClick={guardar}>Agregar</button> 
                 <h2>CONSULTAR COMBOS EXISTENTES</h2>
+                <button onClick={listar}>Listar</button>
+                {showFacturas && (
+                    <div className='tablaCombo'>
+                        <table className="tablaScroll">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Descripcion</th>
+                                    <th>Precio</th>
+                                    <th>FechaFin</th>
+                                    <th>Estado</th>
+                                    <th className='imagenFactura'>Imagen</th>
+                                    <th>Editar</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                )}
             </div>
         </div>
     );

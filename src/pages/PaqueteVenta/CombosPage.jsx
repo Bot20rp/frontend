@@ -163,9 +163,12 @@ function CombosPage() {
 
     const confirmarModificarCombo = async () => {
         try {
-            // Actualizar en el backend (debemos implementar la función en tu API para esto)
-            // await modificarCombo(comboModificar.Codigo, comboModificar.Precio, comboModificar.FechaFin);
-
+            const cambioDatosCombo = {
+                id: comboModificar.Codigo,
+                Precio: comboModificar.Precio,
+                FechaFin:comboModificar.FechaFin
+            };
+            await actualizarEstadoCombo(cambioDatosCombo)
             // Actualizamos el estado en el frontend después de guardar los cambios
             setcombosEnLista(combosEnLista.map(c =>
                 c.Codigo === comboModificar.Codigo

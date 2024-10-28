@@ -23,6 +23,10 @@ function CombosPage() {
     const [showFacturas, setShowFacturas] = useState(false); // para mostarLista
     const [combosEnLista, setcombosEnLista] = useState([]);
 
+     // Estados para la ventana modal de confirmación
+     const [showModal, setShowModal] = useState(false);
+     const [comboSeleccionado, setComboSeleccionado] = useState(null);
+
     useEffect(() => {
         if (productosBackend && productosBackend.data) {
             const productosObtenidos = productosBackend.data.map((producto) => ({
@@ -141,6 +145,22 @@ function CombosPage() {
             console.log(error);
         }
     }
+
+    const abrirModal = (combo) => {
+        setComboSeleccionado(combo);
+        setShowModal(true);
+    };
+
+    const confirmarCambioEstado = async () => {
+        try {
+            const nuevoEstado = comboSeleccionado.Estado === 1 ? 0 : 1;
+            // await actualizarEstadoCombo(comboSeleccionado.Codigo, nuevoEstado); // Función para actualizar el estado
+            setcombosEnLista(combosEnLista.map(c => c.Codigo === comboSeleccionado.Codigo ? { ...c, Estado: nuevoEstado } : c));
+            setShowModal(false);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
 
     return (
@@ -268,10 +288,16 @@ function CombosPage() {
                                         <td>{comb.Estado}</td>
                                         {/* <th className='imagenFactura'>Imagen</th> */}
                                         <td>
-                                            <button>
+                                            <button
+                                                style={{
+                                                    backgroundColor: comb.Estado === 1 ? 'green' : 'red',
+                                                    color: 'white'
+                                                }}
+                                                onClick={() => abrirModal(comb)}
+                                            >
                                                 {comb.Estado === 1 ? 'Deshabilitar' : 'Activar'}
                                             </button>
-                                            <button >Modificar</button>
+                                            <button>Modificar</button>
                                         </td>
                                     </tr>
                                 ))}
@@ -279,6 +305,18 @@ function CombosPage() {
                         </table>
                     </div>
                 )}
+
+                {/* Modal de confirmación */}
+                {showModal && (
+                    <div className='modal'>
+                        <div className='modal-content'>
+                            <p>¿Estás seguro que deseas {comboSeleccionado.Estado === 1 ? 'deshabilitar' : 'activar'} este combo?</p>
+                            <button onClick={confirmarCambioEstado}>Sí</button>
+                            <button onClick={() => setShowModal(false)}>Cancelar</button>
+                        </div>
+                    </div>
+                )}
+                
             </div>
         </div>
     );

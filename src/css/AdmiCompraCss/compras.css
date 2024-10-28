@@ -6,10 +6,14 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.compraTitlePage, th, .inputCompra {
+.inputProducto,.compraTitlePage, th, .inputCompra {
     text-align: center;
 }
-
+.titleCompras{
+    color: rgb(0, 77, 192);
+    width: 50%;
+    left: 10%;
+}
 .containerCompraProductos {
     display: flex;
     flex-direction: column;
@@ -57,23 +61,15 @@
     text-align: center;
 }
 
-.listarFacturas, .NuevaCompra {
-    padding: 10px 20px;
+.ListarFacturas, .NuevaCompra {
+    padding: 10px 35px;
     font-size: 16px;
     cursor: pointer;
-    border: none;
+    
     border-radius: 5px;
     background-color: #2392ec;
     color: white;
 }
-
-.botonera {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
 .paraProducto {
     position: relative;
     display: flex;
@@ -101,14 +97,69 @@
 .sugerencias li {
     padding: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Añadido para una transición suave */
+    transition: background-color 0.3s ease; 
 }
 
 .sugerencias li:hover {
-    background-color: #f0f0f0; /* Cambia a un color más claro al pasar el mouse */
+    background-color: #f0f0f0;
 }
 
-.ActualizarCompra {
-    background-color: rgb(65, 238, 88);
-    font-size: 17px;
+.ActualizarCompra,.ActualizarImagen {
+    display: inline-block;
+    width: 25%;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #0075fc; /* Color de fondo */
+    color: white; /* Color del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #00ccff; /* Borde */
+    transition: background-color 0.3s; /* Efecto de transición */
 }
+.ActualizarImagen:hover,button:hover
+{
+    background-color: #00ccff;
+}
+.imagenMiniatura {
+    width: 500px;
+    height: 500px;
+    cursor: pointer;
+  }
+  
+  .modalImagen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .imagenCompleta {
+    max-width: 40%;
+    max-height: 40%;
+  }
+  .imagenFactura{
+    width: 100px;
+  }
+  .inputTotalVenta{
+    width: 50%;
+    max-width: 130px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #8a8686;
+    text-align: center;
+  }
+
+
+  .input-file {
+    display: none; /* Ocultar el input original */
+  }

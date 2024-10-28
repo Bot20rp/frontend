@@ -11,7 +11,6 @@ export const Bitacora = () => {
       // const response = await axios.get('http://localhost:4000/api/bitacora'); // Cambia la URL según la configuración de tu backend
       const response = await bitacoraa();
 
-      console.log(response)
       // Verifica si la respuesta es un array antes de establecer el estado
       if (Array.isArray(response.data)) {
         setBitacoras(response.data);

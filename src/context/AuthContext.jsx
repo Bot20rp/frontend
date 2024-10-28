@@ -51,7 +51,6 @@ export const AuthProvider = ({ children }) => {
     const cargarDatos = async () => {
         // Utiliza el token almacenado en localStorage para las solicitudes
         const token = localStorage.getItem('token');
-        console.log(user);
         if (!token) return;
 
         try {

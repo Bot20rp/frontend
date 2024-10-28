@@ -114,7 +114,7 @@ function ProveedoresPage() {
     // Eliminar proveedor
     const eliminarproveedores = async (id) => {
 
-        const datos = { id }; // Crea el objeto con el ID a eliminar
+        const datos = id; // Crea el objeto con el ID a eliminar
         console.log(datos);
 
         try {

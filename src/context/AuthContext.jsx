@@ -51,6 +51,7 @@ export const AuthProvider = ({ children }) => {
     const cargarDatos = async () => {
         // Utiliza el token almacenado en localStorage para las solicitudes
         const token = localStorage.getItem('token');
+        console.log(user);
         if (!token) return;
 
         try {
@@ -76,8 +77,6 @@ export const AuthProvider = ({ children }) => {
     const cargarDatosProveedores = async () => {
         try {
             const respuesta = await obtenerRequestProveedor();
-            console.log("estoy aquie en aut")
-            console.log(respuesta.data)
             if (respuesta.status !== 200) {
                 throw new Error('Error Obtener datos')
             }

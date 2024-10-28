@@ -59,7 +59,7 @@ function Compras() {
     "Proveedor 1",
     "Proveedor 2",
     "Proveedor 3",
-    "Proveedor 4"
+    "Proveedor 4",
   ];
 
   const buscarProductoPorId = (event) => {

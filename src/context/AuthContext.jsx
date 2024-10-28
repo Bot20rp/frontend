@@ -181,7 +181,7 @@ export const AuthProvider = ({ children }) => {
                     cargarDatos();
                     cargarDatosProveedores();
                     cargarDatosPermisos();
-                    cargarProductos;
+                    cargarProductos();
                 }
                 setLoading(false);
             } catch (error) {

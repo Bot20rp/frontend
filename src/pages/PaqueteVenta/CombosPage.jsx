@@ -254,7 +254,7 @@ function CombosPage() {
                                     <th>Precio</th>
                                     <th>FechaFin</th>
                                     <th>Estado</th>
-                                    <th className='imagenFactura'>Imagen</th>
+                                    {/* <th className='imagenFactura'>Imagen</th> */}
                                     <th>Editar</th>
                                 </tr>
                             </thead>
@@ -266,7 +266,7 @@ function CombosPage() {
                                         <td>{comb.Precio}</td>
                                         <td>{comb.FechaFin}</td>
                                         <td>{comb.Estado}</td>
-                                        <th className='imagenFactura'>Imagen</th>
+                                        {/* <th className='imagenFactura'>Imagen</th> */}
                                         <td>
                                             <button onClick={() => handleRemonveProduct(index)}>Eliminar</button>
                                         </td>

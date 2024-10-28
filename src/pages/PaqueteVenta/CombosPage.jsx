@@ -107,8 +107,15 @@ function CombosPage() {
             console.log(comboData);
 
             await insertarCombo(comboData);
-            // Aquí puedes hacer la llamada a insertarCombo, enviando comboData
-            // insertarCombo(comboData);
+            setNombreCombo('');
+            setNuevoPrecio('');
+            setFechaInicio('');
+            setFechaFin('');
+            setProductosEnCombo([]);
+            setTotalSinDescuento(0);
+            setBusquedaId('');
+            setBusquedaNombre('');
+
         } catch (error) {
             console.log(error);
         }

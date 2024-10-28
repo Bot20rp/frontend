@@ -36,31 +36,109 @@ export const Homed = () => {
 
         {/* Rutas protegidas solo para "Administrador" */}
         <Route element={<ProtectedRoute roles={['Administrador']} />}>
+          <Route
+            path="/organizacion-productos"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina organizacionProducto">
+                <OrganizacionProductPage />
+              </ProtectedRoutePrivilegios>
+            }
+          />
+          <Route
+            path="/empleadRegister"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina empleados">
+                <RegisterEmplead />
+              </ProtectedRoutePrivilegios>
+            }
+          />
+          <Route
+            path="/privilegios"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina privilegios">
+                <PrivilegioPages />
+              </ProtectedRoutePrivilegios>
+            }
+          />
+        </Route>
 
+
+        {/* Rutas protegidas para "Administrador" o "Empleado" */}
+        <Route element={<ProtectedRoute roles={['Administrador', 'Empleado']} />}>
+
+          <Route
+            path="/bitacora"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina bitacora">
+                <Bitacora />
+              </ProtectedRoutePrivilegios>
+            }
+          />
           <Route
             path="/usuarioGestion"
             element={
-              <ProtectedRoutePrivilegios privilegeDescription="Ver Usuarios">
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina usuarios">
                 <UsuarioPage />
               </ProtectedRoutePrivilegios>
             }
           />
+          <Route
+            path="/clientRegister"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina clientes">
+                <RegisterClientPage />
+              </ProtectedRoutePrivilegios>
+            }
+          />
+          <Route
+            path="/proveedorRegister"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina proveedores">
+                <ProveedoresPage />
+              </ProtectedRoutePrivilegios>
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina productos">
+                <ProductsPage />
+              </ProtectedRoutePrivilegios>
+            }
+          />
+          <Route
+            path="/categoriaproducto"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina categorias">
+                <CategoriaProductPage />
+              </ProtectedRoutePrivilegios>
+            }
+          />
+          <Route
+            path="/combos"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina combos">
+                <CombosPage />
+              </ProtectedRoutePrivilegios>
+            }
+          />
+          <Route
+            path="/compras"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina compras">
+                <Compras />
+              </ProtectedRoutePrivilegios>
+            }
+          />
+          <Route
+            path="/lote"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver pagina lotes">
+                <Lote />
+              </ProtectedRoutePrivilegios>
+            }
+          />
 
-          <Route path="/proveedorRegister" element={<ProveedoresPage />} />
-          <Route path="/categoriaproducto" element={<CategoriaProductPage />} />
-          <Route path="/empleadRegister" element={<RegisterEmplead />} />
-          <Route path="/bitacora" element={<Bitacora />} />
-          <Route path="/lote" element={<Lote />} />
-          <Route path="/combos" element={<CombosPage />} />
-          <Route path="/privilegios" element={<PrivilegioPages />} />
-          <Route path="/organizacion-productos" element={<OrganizacionProductPage />} />
-        </Route>
-
-        {/* Rutas protegidas para "Administrador" o "Empleado" */}
-        <Route element={<ProtectedRoute roles={['Administrador', 'Empleado']} />}>
-          <Route path="/clientRegister" element={<RegisterClientPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/compras" element={<Compras />} />
         </Route>
 
         {/* Rutas protegidas para cualquier usuario autenticado */}

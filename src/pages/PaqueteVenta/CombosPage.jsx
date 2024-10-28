@@ -128,19 +128,15 @@ function CombosPage() {
         try { 
             setShowFacturas(!showFacturas) 
             const respuesta = await obtenerCombos();
-            // const combosFormateados = respuesta.data
-            // const productosFormateados = productosBackend.data.map((producto) => ({
-            //     id: producto.ProductoID,  
-            //     Nombre: producto.Nombre,    
-            //     Precio: producto.Precio,   
-            //     Categoria: producto.Catego,
-            //     Volumen: producto.Vol,
-            //     Marca: producto.Marc,
-            //     Estante: producto.Estant
-            // }));
-
-            // setProductos(productosFormateados);
-            console.log(respuesta)
+            const combosFormateados = respuesta.data.map((combo) => ({
+                Codigo: combo.ComboID,
+                Descripcion: combo.Descripcion,
+                FechaFin: combo.FechaFin,
+                Precio: combo.Precio,
+                Estado: combo.Estado
+            }))
+            console.log(combosFormateados)
+            setcombosEnLista(combosFormateados)
         } catch (error) {
             console.log(error);
         }

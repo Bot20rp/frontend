@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, logoutRequest, verityTokenResquest, obtenerRequest, obtenerRequestProveedor, permisos } from "../api/auth";
+import { loginRequest, logoutRequest, verityTokenResquest, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos} from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -13,6 +13,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [productosBackend, setProductosBackend] = useState(null);
     const [esAutenticado, setEsAutenticado] = useState(false);
     const [loading, setLoading] = useState(true);
     const [rol, setRol] = useState(null);
@@ -95,6 +96,15 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const cargarProductos = async () => {
+        try {
+            const respuesta = await obtenerProductos();
+            setProductosBackend(respuesta);
+        } catch (error) {
+            console.error('Error al obtener los datos:', error);
+        }
+    }
+
     const cargarDatosPermisos = async () => {
         try {
             const respuesta = await permisos(); // Llamada a la API
@@ -171,6 +181,7 @@ export const AuthProvider = ({ children }) => {
                     cargarDatos();
                     cargarDatosProveedores();
                     cargarDatosPermisos();
+                    cargarProductos;
                 }
                 setLoading(false);
             } catch (error) {
@@ -193,9 +204,11 @@ export const AuthProvider = ({ children }) => {
             tableUser,
             tableProveedor,
             permisoTable,
+            productosBackend,
             cargarDatos,
             cargarDatosProveedores,
             cargarDatosPermisos,
+            cargarProductos,
             logout
         }}>
             {children}

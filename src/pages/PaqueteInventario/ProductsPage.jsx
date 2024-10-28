@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
 import '../../css/AdmiInventarioCss/ProductsPage.css'
-import { insertarProducto, obtenerProductos,actualizarProducto} from '../../api/auth';
+import { insertarProducto,actualizarProducto} from '../../api/auth';
+import { useAuth } from '../../context/AuthContext';
 
 function ProductsPage() {
     const tbodyProductos = useRef(null);
-
+    const { productosBackend } = useAuth();
     const [producto, setProducto] = useState({
         id: '',
         Nombre: '',
@@ -114,11 +115,9 @@ function ProductsPage() {
         });
     };
 
-    const listar = async()=> {
+    const listar = ()=> {
         try {
-            const detos = await obtenerProductos();
-            console.log(detos)
-            if (Array.isArray(detos.data)) {
+            if (Array.isArray(productosBackend.data)) {
                 const productosFormateados = detos.data.map((producto) => ({
                     id: producto.ProductoID,  
                     Nombre: producto.Nombre,    

@@ -1,3 +1,4 @@
+/* Combos.css */
 .contenedorCombo {
     display: flex;
     justify-content: center;
@@ -14,7 +15,7 @@
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    width: 90%;
     max-width: 1600px;
     text-align: center;
 }
@@ -29,8 +30,7 @@
 .comboContenedor input[type="text"],
 .comboContenedor input[type="number"],
 .comboContenedor input[type="date"] {
-    width: 100%;
-    max-width: 400px;
+    width: 50%;
     padding: 12px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -54,18 +54,17 @@
     gap: 20px;
     flex-wrap: wrap;
     margin-bottom: 20px;
-    width: 100%;
 }
 
 .ParaCombo input[type="text"] {
-    flex-grow: 1;
-    min-width: 48%;
+    width: 48%;
 }
 
 button {
     background-color: #3498db;
     color: white;
     padding: 12px 25px;
+    /* margin-top: 20px; */
     border: none;
     border-radius: 6px;
     font-size: 18px;
@@ -82,11 +81,10 @@ button:hover {
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
 }
 
 .tablaScroll {
-    max-height: auto;
+    max-height: auto; 
     overflow-y: auto;
 }
 
@@ -95,7 +93,7 @@ button:hover {
     border-collapse: collapse;
 }
 
-.tablaScroll th,
+.tablaScroll th, 
 .tablaScroll td {
     padding: 12px;
     text-align: left;
@@ -122,8 +120,7 @@ button:hover {
 }
 
 .costos input[type="number"] {
-    width: 100%;
-    max-width: 150px;
+    width: 30%;
 }
 
 .duracionCombo {
@@ -134,11 +131,10 @@ button:hover {
 }
 
 .duracionCombo input[type="date"] {
-    width: 100%;
-    max-width: 150px;
+    width: 30%;
 }
 
-/* Media query para pantallas pequeñas */
+
 @media (max-width: 768px) {
     .comboContenedor {
         padding: 20px;
@@ -148,19 +144,28 @@ button:hover {
         width: 100%;
     }
 
+    .costos input[type="number"],
+    .duracionCombo input[type="date"] {
+        width: 100%;
+    }
+
     .costos,
     .duracionCombo {
         flex-direction: column;
         gap: 10px;
     }
-
-    .costos input[type="number"],
-    .duracionCombo input[type="date"] {
-        width: 100%;
-    }
 }
 
-/* Estilos para lista de sugerencias */
+
+.ParaCombo {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative; /* Necesario para controlar la posición de la lista de sugerencias */
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
 .sugerencias {
     list-style-type: none;
     padding: 0;
@@ -170,11 +175,11 @@ button:hover {
     overflow-y: auto;
     background-color: white;
     position: absolute;
-    width: calc(100% - 20px);
+    width: calc(100% - 20px); /* Se ajusta a todo el ancho del contenedor */
     z-index: 1000;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    top: 100%;
+    top: 100%; /* Asegura que la lista aparezca justo debajo del input */
 }
 
 .sugerencias li {
@@ -197,14 +202,12 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+  }
 
 .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .modal button {
@@ -214,5 +217,4 @@ button:hover {
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 6px;
 }

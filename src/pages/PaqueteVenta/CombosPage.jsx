@@ -1,32 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/AdmiVentaCss/Combos.css';
 import { insertarCombo } from '../../api/auth';
+import { useAuth } from '../../context/AuthContext';
 
 function CombosPage() {
-    const [productos, setProductos] = useState([
-        { id: "1", nombre: "Sprite 500ml", precio: "12" },
-        { id: "2", nombre: "Sprite 1L", precio: "15" },
-        { id: "3", nombre: "Coca-Cola 500ml", precio: "13" },
-        { id: "4", nombre: "Coca-Cola 1L", precio: "18" },
-        { id: "5", nombre: "Del Valle Durazno 500ml", precio: "16" },
-        { id: "6", nombre: "Del Valle Manzana 1L", precio: "20" },
-        { id: "7", nombre: "Paceña 330ml", precio: "14" },
-        { id: "8", nombre: "Paceña 620ml", precio: "22" },
-        { id: "9", nombre: "Agua Vital 500ml", precio: "8" },
-        { id: "10", nombre: "Agua Vital 1L", precio: "12" },
-        { id: "11", nombre: "Pepsi 500ml", precio: "11" },
-        { id: "12", nombre: "Pepsi 1.5L", precio: "17" },
-        { id: "13", nombre: "Fanta Naranja 500ml", precio: "12" },
-        { id: "14", nombre: "Fanta Naranja 1L", precio: "16" },
-        { id: "15", nombre: "Red Bull 250ml", precio: "20" },
-        { id: "16", nombre: "Monster Energy 473ml", precio: "25" },
-        { id: "17", nombre: "Lipton Té Limón 500ml", precio: "10" },
-        { id: "18", nombre: "Lipton Té Durazno 1L", precio: "14" },
-        { id: "19", nombre: "7-Up 500ml", precio: "12" },
-        { id: "20", nombre: "7-Up 1L", precio: "15" },
-        { id: "21", nombre: "Combo Familiar: 2x Coca-Cola 1L + 2x Fanta Naranja 500ml + 4x Hamburguesas con papas", precio: "120" },
-    ]);
 
+    const {productosBackend} = useAuth();
+    const [productos,setProductos] = useState([]);
+
+    
+    
     const [busquedaId, setBusquedaId] = useState('');
     const [busquedaNombre, setBusquedaNombre] = useState('');
     const [sugerencias, setSugerencias] = useState([]);
@@ -36,6 +19,19 @@ function CombosPage() {
     const [nuevoPrecio, setNuevoPrecio] = useState(''); // Estado para el nuevo precio
     const [fechaInicio, setFechaInicio] = useState(''); // Estado para la fecha de inicio
     const [fechaFin, setFechaFin] = useState(''); // Estado para la fecha de fin
+
+    useEffect(() => {
+        if (productosBackend && productosBackend.data) {
+            const productosObtenidos = productosBackend.data.map((producto) => ({
+                id: producto.ProductoID,  
+                nombre: producto.Nombre,    
+                precio: producto.Precio
+            }));
+
+            setProductos(productosObtenidos); 
+        }
+    }, [productosBackend]); 
+
 
     useEffect(() => {
         const total = productosEnCombo.reduce((sum, product) => {

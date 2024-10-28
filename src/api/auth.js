@@ -40,11 +40,12 @@ export const eliminarUsuario = user => instance.delete('/usuario/del', {
 export const registrarProveedorRequest = user => instance.post(`/proveedor`, user);
 export const extraerID = user => instance.post(`/proveedor/ex`, user);
 export const eliminarProveedor = id => instance.delete(`/proveedor/delete`, {
-    data: id,
+    data: { data: { id } }, // Asegúrate de que el ID esté dentro del objeto 'data'
     headers: {
         'Content-Type': 'application/json',
     },
 });
+
 export const actualizarProveedores = user => instance.patch(`/proveedor/update`, {
     data: user,
     headers: {

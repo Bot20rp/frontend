@@ -47,6 +47,7 @@ function UsuarioPages() {
 
   const confirmarEliminar = async () => {
     try {
+      console.log(usuarioSeleccionado)
       await eliminarUsuario(usuarioSeleccionado);
       setDatos(datos.filter(dato => dato.id !== usuarioSeleccionado));
       setMostrarEliminar(false); // Ocultar la ventana modal después de eliminar

@@ -258,6 +258,21 @@ function CombosPage() {
                                     <th>Editar</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                {combosEnLista.map((comb, index) => (
+                                    <tr key={index}>
+                                        <td>{comb.Codigo}</td>
+                                        <td>{comb.Descripcion}</td>
+                                        <td>{comb.Precio}</td>
+                                        <td>{comb.FechaFin}</td>
+                                        <td>{comb.Estado}</td>
+                                        <th className='imagenFactura'>Imagen</th>
+                                        <td>
+                                            <button onClick={() => handleRemonveProduct(index)}>Eliminar</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                         </table>
                     </div>
                 )}

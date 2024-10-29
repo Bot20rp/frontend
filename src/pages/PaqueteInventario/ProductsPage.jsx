@@ -92,9 +92,15 @@ function ProductsPage() {
 
     // Eliminar producto
     const eliminarProductos = async (id) => {
-        await eliminarProducto(id)
-        const nuevosProductos = productos.filter(p => p.id !== id);
-        setProductos(nuevosProductos);
+        try {
+            console.log(id)
+            await eliminarProducto(id)
+            const nuevosProductos = productos.filter(p => p.id !== id);
+            setProductos(nuevosProductos);
+        } catch (error) {
+            console.log(error)
+        }
+
     };
 
     // Modificar producto

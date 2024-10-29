@@ -6,7 +6,7 @@ import jsPDF from 'jspdf'; // Importa jsPDF
 import 'jspdf-autotable'; // Importa la funcionalidad para tablas
 
 function UsuarioPages() {
-  const { tableUser } = useAuth();
+  const { tableUser, user } = useAuth();
   const [datos, setDatos] = useState([]);
   const [filtroNombre, setFiltroNombre] = useState('');
   const [filtroInicial, setFiltroInicial] = useState('');
@@ -81,7 +81,7 @@ function UsuarioPages() {
   // Función para generar el PDF
   const generarReportePDF = () => {
     const doc = new jsPDF();
-    
+
     // Añadir un título al PDF
     doc.text('Reporte de Usuarios', 14, 20);
 
@@ -165,7 +165,11 @@ function UsuarioPages() {
                   <td className='table-item2'>{dato.genero}</td>
                   <td className='table-item2'>{dato.rol}</td>
                   <td className='table-item2' id='option'>
-                    <button className="buttonOpcion" onClick={() => eliminarDato(dato.id)}>Eliminar</button>
+
+                    {user?.user.permisos.some(
+                      (permiso) => permiso.Descripcion === "poder eliminar usuarios") &&
+                      (<button className="buttonOpcion" onClick={() => eliminarDato(dato.id)}>Eliminar</button>)
+                    }
                     <button className="buttonOpcion" onClick={() => actualizarDato(dato.id)}>Actualizar</button>
                   </td>
                 </tr>
@@ -173,7 +177,7 @@ function UsuarioPages() {
             </tbody>
           </table>
         </div>
-        
+
         {/* Botón para generar el PDF */}
         <button className="btn" onClick={generarReportePDF}>Generar Reporte en PDF</button>
 

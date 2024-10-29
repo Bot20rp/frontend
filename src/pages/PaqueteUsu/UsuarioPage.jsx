@@ -166,11 +166,17 @@ function UsuarioPages() {
                   <td className='table-item2'>{dato.rol}</td>
                   <td className='table-item2' id='option'>
 
-                    {user?.user.permisos.some(
-                      (permiso) => permiso.Descripcion === "poder eliminar usuarios") &&
+                    {
+                      user?.user.permisos.some(
+                        (permiso) => permiso.Descripcion === "poder eliminar usuarios") &&
                       (<button className="buttonOpcion" onClick={() => eliminarDato(dato.id)}>Eliminar</button>)
                     }
-                    <button className="buttonOpcion" onClick={() => actualizarDato(dato.id)}>Actualizar</button>
+                    {
+                      user?.user.permisos.some(
+                        (permiso) => permiso.Descripcion === "poder actualizar usuarios") &&
+                      <button className="buttonOpcion" onClick={() => actualizarDato(dato.id)}>Actualizar</button>
+                    }
+
                   </td>
                 </tr>
               ))}

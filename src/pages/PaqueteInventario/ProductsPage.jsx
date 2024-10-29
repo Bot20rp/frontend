@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import '../../css/AdmiInventarioCss/ProductsPage.css'
-import { insertarProducto,actualizarProducto} from '../../api/auth';
+import { insertarProducto,actualizarProducto,eliminarProducto} from '../../api/auth';
 import { useAuth } from '../../context/AuthContext';
 
 function ProductsPage() {
@@ -91,7 +91,8 @@ function ProductsPage() {
     };
 
     // Eliminar producto
-    const eliminarProducto = (id) => {
+    const eliminarProducto = async (id) => {
+        await eliminarProducto(id)
         const nuevosProductos = productos.filter(p => p.id !== id);
         setProductos(nuevosProductos);
     };

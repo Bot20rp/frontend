@@ -102,6 +102,13 @@ export const actualizarProducto = user => instance.patch(`/producto/actualizar`,
     },
 });
 
+export const eliminarProducto = id => instance.delete('/producto/delete', {
+    data: { data: { id } },
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+
 
 // BITACORA 
 

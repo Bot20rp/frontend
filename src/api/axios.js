@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create({
     baseURL: 'https://backend-si1-production-0e10.up.railway.app/api',
-    timeout: 5000
+    timeout: 10000
 });
 
 // Interceptor para añadir el token en la cabecera de autorización

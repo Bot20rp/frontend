@@ -251,8 +251,15 @@ function CategoriaProductPage() {
                 <td>{cat.id}</td>
                 <td>{cat.nombre}</td>
                 <td>
+                  {
+                    user?.user.permisos.some((permiso) => permiso.Descripcion === "porder eliminar categoria") &&
                   <button className="btn-eliminarCategoria" onClick={() => handleDelete(cat.id, false)}>Eliminar</button>
-                  <button className="btn-modificarCategoria" onClick={() => handleEdit(cat.id, false)}>Modificar</button>
+                  }
+                  
+                  {
+                    user?.user.permisos.some((permiso) => permiso.Descripcion === "poder actualizar categoria") &&
+                    <button className="btn-modificarCategoria" onClick={() => handleEdit(cat.id, false)}>Modificar</button>
+                  }
                 </td>
               </tr>
             ))}

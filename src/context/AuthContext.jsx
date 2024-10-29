@@ -173,7 +173,7 @@ export const AuthProvider = ({ children }) => {
 
                 setRol(res.data.user.rol);
                 // Cargar datos si el rol es "Administrador" o "Cliente"
-                if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente') {
+                if (res.data.user.rol === 'Administrador' || res.data.user.rol === 'Cliente' || res.data.user.rol === 'Empleado') {
                     cargarDatos();
                     cargarDatosProveedores();
                     cargarDatosPermisos();

@@ -124,7 +124,8 @@ function ProductsPage() {
                     Categoria: producto.Catego,
                     Volumen: producto.Vol,
                     Marca: producto.Marc,
-                    Estante: producto.Estant
+                    Estante: producto.Estant,
+                    Saldo: producto.Cantidad
                 }));
     
                 setProductos(productosFormateados);
@@ -161,6 +162,7 @@ function ProductsPage() {
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Precio</th>
+                                <th>Saldo</th>
                                 <th>Categoria</th>
                                 <th>Volumen</th>
                                 <th>Marca</th>
@@ -174,6 +176,7 @@ function ProductsPage() {
                                     <td>{prod.id}</td>
                                     <td>{prod.Nombre}</td>
                                     <td>{prod.Precio}</td>
+                                    <td>{prod.Saldo}</td>
                                     <td>{prod.Categoria}</td>
                                     <td>{prod.Volumen}</td>
                                     <td>{prod.Marca}</td>

@@ -91,7 +91,7 @@ function ProductsPage() {
     };
 
     // Eliminar producto
-    const eliminarProducto = async (id) => {
+    const eliminarProductos = async (id) => {
         await eliminarProducto(id)
         const nuevosProductos = productos.filter(p => p.id !== id);
         setProductos(nuevosProductos);
@@ -183,7 +183,7 @@ function ProductsPage() {
                                     <td>{prod.Marca}</td>
                                     <td>{prod.Estante}</td>
                                     <td className="editProduct">
-                                        <button className="eliminarProduct" onClick={() => eliminarProducto(prod.id)}>Eliminar</button>
+                                        <button className="eliminarProduct" onClick={() => eliminarProductos(prod.id)}>Eliminar</button>
                                         <button className="modificarProduct" onClick={() => modificarProducto(prod.id)}>Modificar</button>
                                     </td>
                                 </tr>

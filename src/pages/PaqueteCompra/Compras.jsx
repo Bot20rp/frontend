@@ -132,7 +132,7 @@ function Compras() {
         TInteres: "",
         TPagar: ""
       });
-      setProductosSeleccionados("");
+      setProductosSeleccionados([]);
       setShowFacturas(true); // Mostrar facturas automáticamente después de registrar una nueva compra
     } catch (error) {
       console.error('Error registrando la compra:', error);

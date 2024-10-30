@@ -1,23 +1,82 @@
+import React, { useState, useEffect } from 'react';
+import '../../css/AdmiCompraCss/lote.css'; // Tu archivo CSS adaptado
+import { useAuth } from '../../context/AuthContext';
 
-import React, { useState } from 'react';
-import '../../css/AdmiCompraCss/lote.css'
-
-export const Lote= () => {
+export const Lote = () => {
+  const { productosBackend } = useAuth();
   const [productos, setProductos] = useState([]);
+  const [sugerencias, setSugerencias] = useState([]);
+  const [busquedaId, setBusquedaId] = useState('');
+  const [busquedaNombre, setBusquedaNombre] = useState('');
+
+  useEffect(() => {
+    if (productosBackend && productosBackend.data) {
+      const productosObtenidos = productosBackend.data.map((producto) => ({
+        id: producto.ProductoID, 
+        nombre: producto.Nombre,  
+        fechaIni: producto.FechaInicio,
+        fechaVenc: producto.FechaVencimiento,
+        cantidad: producto.Cantidad
+      }));
+      setProductos(productosObtenidos);
+    }
+  }, [productosBackend]);
+
+  const buscarProductoPorId = (event) => {
+    const value = event.target.value;
+    setBusquedaId(value);
+    if (value.length > 0) {
+      const resultados = productos.filter(product => product.id.toString().startsWith(value));
+      setSugerencias(resultados);
+    } else {
+      setSugerencias([]);
+    }
+  };
+
+  const buscarProductoPorNombre = (event) => {
+    const value = event.target.value;
+    setBusquedaNombre(value);
+    if (value.length >= 3) {
+      const resultados = productos.filter(product => product.nombre.toLowerCase().startsWith(value.toLowerCase()));
+      setSugerencias(resultados);
+    } else {
+      setSugerencias([]);
+    }
+  };
 
   return (
-    /* contenedor principal  */
-    <div className="container">
-      {/* Gestión de Lote .. aqui habra un crud */}
-      <div className="gestion-lote">
-        <h2>GESTION DE LOTE</h2>
-        <div className="buscar-producto">
-          <label></label>
-          <input type="text" placeholder="Buscar producto que contendrá el combo" />
+    <div className="containerLote">
+      <div className="gestionLote">
+        <h2>GESTIÓN DE LOTE</h2>
+        <div className="buscarProductoLote">
+          <input
+            type="number"
+            className="inputBusquedaLote"
+            placeholder="Buscar por ID"
+            value={busquedaId}
+            onChange={buscarProductoPorId}
+          />
+          <input
+            type="text"
+            className="inputBusquedaLote"
+            placeholder="Buscar por nombre"
+            value={busquedaNombre}
+            onChange={buscarProductoPorNombre}
+          />
         </div>
-{/* aui va el consultarrrarr */}
-        <div className="descripcion-lotes">
-          <table>
+
+        {sugerencias.length > 0 && (
+          <ul className="sugerenciasLote">
+            {sugerencias.map((producto, index) => (
+              <li key={index}>
+                {producto.id} - {producto.nombre}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="descripcionLotes">
+          <table className="tablaLote">
             <thead>
               <tr>
                 <th>Id</th>
@@ -28,7 +87,6 @@ export const Lote= () => {
               </tr>
             </thead>
             <tbody>
-              {/* mapeadooooo ...consumir api  */}
               {productos.map((producto) => (
                 <tr key={producto.id}>
                   <td>{producto.id}</td>
@@ -41,14 +99,13 @@ export const Lote= () => {
             </tbody>
           </table>
         </div>
-        <button className="guardar-btn">Guardar</button>
+        <button className="guardarLoteBtn">Guardar</button>
       </div>
 
-      {/* Consultar Lotes */}
-      <div className="consultar-lotes">
-        <h2>CONSULTAR DE LOS LOTES DE PRODUCTOS</h2>
-        <button className="ordenar-btn">ACOMODAR POR MENOR TIEMPO</button>
-        <table>
+      <div className="consultarLotes">
+        <h2>CONSULTAR LOTES DE PRODUCTOS</h2>
+        <button className="ordenarLoteBtn">ACOMODAR POR MENOR TIEMPO</button>
+        <table className="tablaLote">
           <thead>
             <tr>
               <th>Id</th>
@@ -59,14 +116,13 @@ export const Lote= () => {
             </tr>
           </thead>
           <tbody>
-            {/* Aquí también puedes mapear los productos */}
             {productos.map((producto) => (
               <tr key={producto.id}>
                 <td>{producto.id}</td>
                 <td>{producto.nombre}</td>
                 <td>{producto.cantidad}</td>
                 <td>{producto.fechaVenc}</td>
-                <td>{producto.diferenciaTiempo}</td>
+                <td>{/* Calcular diferencia de tiempo aquí */}</td>
               </tr>
             ))}
           </tbody>
@@ -75,4 +131,3 @@ export const Lote= () => {
     </div>
   );
 };
-

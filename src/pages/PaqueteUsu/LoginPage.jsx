@@ -4,9 +4,11 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 function LoginPage() {
     const { register, handleSubmit } = useForm();
+    const {user} =useAuth();
     const { signin, esAutenticado, cargarDatos, cargarDatosProveedores } = useAuth();
     const navigate = useNavigate();
 
@@ -22,7 +24,12 @@ function LoginPage() {
 
     useEffect(() => {
         if (esAutenticado) {
-            navigate("/dasboard/homeda");
+            console.log(user.user)
+            if(user?.user.rol === "Cliente"){
+                navigate("/perfil")
+            }else {
+                navigate("/dasboard/homeda");
+            }
         }
     }, [esAutenticado, navigate]);
 

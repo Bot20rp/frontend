@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/AdmiCompraCss/lote.css'; // Tu archivo CSS adaptado
 import { useAuth } from '../../context/AuthContext';
+import { insertarLotes } from '../../api/auth';
 
 export const Lote = () => {
   const { productosBackend } = useAuth();
@@ -86,15 +87,20 @@ export const Lote = () => {
   };
 
   // Guardar los productos en una variable para mandar al backend
-  const guardarLotes = () => {
+  const guardarLotes = async () => {
     const productosParaGuardar = productosTabla.map(producto => ({
       id: producto.id,
-      fechaInicio: producto.fechaInicio,
-      fechaVencimiento: producto.fechaVencimiento,
-      cantidad: producto.cantidad
+      FechaInicio: producto.fechaInicio,
+      FechaVencimiento: producto.fechaVencimiento,
+      Cantidad: producto.cantidad
     }));
     console.log("Productos a enviar al backend: ", productosParaGuardar);
-    // Aquí puedes hacer la llamada al backend con 'productosParaGuardar'
+    try {
+      await insertarLotes(productosParaGuardar);
+      setProductosTabla([]);
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

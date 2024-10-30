@@ -155,3 +155,11 @@ export const insertaCompra = (data) => instance.post(`/compras`,{
         'Content-Type': 'application/json',
     }
 })
+
+//LOTES !!
+export const insertarLotes = (data) => instance.post(`/lote`,{
+    data,
+    headers:{
+        'Content-Type': 'application/json',
+    }
+})

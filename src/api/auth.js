@@ -163,3 +163,6 @@ export const insertarLotes = (data) => instance.post(`/lote`,{
         'Content-Type': 'application/json',
     }
 })
+
+//OBTENCIOS DE LOS ROLES
+export const obtenerRoles = () => {return  instance.get(`/obtRol`)};

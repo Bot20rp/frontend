@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, logoutRequest, verityTokenResquest, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos} from "../api/auth";
+import { loginRequest, logoutRequest, verityTokenResquest, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles} from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -13,6 +13,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [roles,setRoles] = useState(null);
     const [productosBackend, setProductosBackend] = useState(null);
     const [esAutenticado, setEsAutenticado] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -33,7 +34,6 @@ export const AuthProvider = ({ children }) => {
             setUser(res.data);
             setRol(res.data.user.rol);
             localStorage.setItem('token', res.data.token);
-            //sessionStorage.setItem('token', res.data.token);
         } catch (error) {
             console.error(error);
         }
@@ -46,9 +46,7 @@ export const AuthProvider = ({ children }) => {
         setRol(null);
         setTableUser([]);
         // Elimina el token de localStorage
-      localStorage.removeItem('token');
-
-        //sessionStorage.removeItem('token'); 
+        localStorage.removeItem('token');
     };
 
     const cargarDatos = async () => {
@@ -106,6 +104,17 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    
+    const cargarRoles = async () =>{
+        try {
+            const respuesta = await obtenerRoles();
+            console.log(respuesta);
+            setRoles(respuesta)
+        } catch (error) {
+            console.error('Error al obtener los datos:', error);
+        }
+    }
+
     const cargarDatosPermisos = async () => {
         try {
             const respuesta = await permisos(); // Llamada a la API
@@ -156,7 +165,6 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         async function checkLogin() {
             const token = localStorage.getItem('token');
-           // const token = sessionStorage.getItem('token'); 
             console.log(token)
             if (!token) {
                 setEsAutenticado(false);
@@ -182,6 +190,7 @@ export const AuthProvider = ({ children }) => {
                     cargarDatosProveedores();
                     cargarDatosPermisos();
                     cargarProductos();
+                    cargarRoles();
                 }
                 setLoading(false);
             } catch (error) {
@@ -205,6 +214,7 @@ export const AuthProvider = ({ children }) => {
             tableProveedor,
             permisoTable,
             productosBackend,
+            roles,
             cargarDatos,
             cargarDatosProveedores,
             cargarDatosPermisos,

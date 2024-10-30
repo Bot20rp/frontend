@@ -4,12 +4,10 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 
 function LoginPage() {
     const { register, handleSubmit } = useForm();
-    const {user} =useAuth();
-    const { signin, esAutenticado, cargarDatos, cargarDatosProveedores } = useAuth();
+    const { signin, esAutenticado, cargarDatos, cargarDatosProveedores,user } = useAuth();
     const navigate = useNavigate();
 
     const onSubmit = handleSubmit(async (data) => {

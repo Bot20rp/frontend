@@ -5,7 +5,7 @@ import { insertaCompra } from '../../api/auth';
 
 function Compras() {
 
-  const {productosBackend} = useAuth();
+  const {productosBackend,tableProveedor} = useAuth();
   const [productos,setProductos] = useState([]);
 
   const [Marcas, setMarcas] = useState([]);
@@ -50,12 +50,7 @@ function Compras() {
     tableFactura: "Tabla de las facturas" 
   };
 
-  const proveedores = [
-    "Proveedor 1",
-    "Proveedor 2",
-    "Proveedor 3",
-    "Proveedor 4",
-  ];
+  const proveedores = tableProveedor;
 
   const buscarProductoPorId = (event) => {
     const value = event.target.value;
@@ -114,7 +109,7 @@ function Compras() {
       Fecha: formValues.Fecha,
       CodigoAutorizacion: formValues.CodAutoriz,
       CodigoControl: formValues.CodControl,
-      ProveedorID: formValues.Proveedor, // Puedes necesitar un ID o manejar nombres si es necesario
+      ProveedorID: formValues.Proveedor.id, // Puedes necesitar un ID o manejar nombres si es necesario
       TotalInteres: formValues.TInteres,
       TotalPagar: formValues.TPagar,
       productos: productosSeleccionados.map(producto => ({

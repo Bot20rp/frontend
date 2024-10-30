@@ -9,9 +9,11 @@ import { FaUser } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
 import { useState } from "react";
 
+import { useAuth } from "../../context/AuthContext";
+
 export const Navbar = () => {
   const [mobile, setMobile] = useState(false);
-
+  const { esAutenticado, user, logout } = useAuth(); // Obtén el estado de autenticación y el usuario
   return (
     <>
       <nav className="navbar">
@@ -37,14 +39,20 @@ export const Navbar = () => {
         </ul>
 
         {/* Iconos de usuario y carrito */}
+        {/* link para el usuario  */}
         <div className="icons">
-          
-          <Link to={'/login'}>
-          
-          <FaUser className="icon" />
+          {esAutenticado ? (
+          <Link to={"/perfil"}>
+            <FaUser className="icon" />
+            <span>{user.nombre}</span>
           </Link>
 
-          
+          ) :   <Link to={"/login"}>
+          <FaUser className="icon" />
+        
+        </Link>}
+          {/* link para el carrito  */}
+
           <IoCart className="icon" />
         </div>
 

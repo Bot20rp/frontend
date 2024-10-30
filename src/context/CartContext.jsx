@@ -6,15 +6,24 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   // Estado para el carrito de compras
   const [cartList, setCartList] = useState(() => {
-    // Inicializar con datos del localStorage si existen
     const storedCartList = localStorage.getItem("cartList");
     return storedCartList ? JSON.parse(storedCartList) : [];
+  });
+
+  const [purchaseHistory, setPurchaseHistory] = useState(() => {
+    const storedHistory = localStorage.getItem("purchaseHistory");
+    return storedHistory ? JSON.parse(storedHistory) : [];
   });
 
   // Efecto para almacenar el carrito en localStorage
   useEffect(() => {
     localStorage.setItem("cartList", JSON.stringify(cartList));
   }, [cartList]);
+
+  // Efecto para almacenar el historial de compras en localStorage
+  useEffect(() => {
+    localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
+  }, [purchaseHistory]);
 
   // Funciones para manejar el carrito
   const addToCart = (product, num = 1) => {
@@ -51,8 +60,17 @@ export const CartProvider = ({ children }) => {
     setCartList(cartList.filter((item) => item.id !== product.id));
   };
 
+  const anadirCompra = (compra) => {
+    setPurchaseHistory((prevHistory) => {
+      const newHistory = [...prevHistory, compra];
+      localStorage.setItem("purchaseHistory", JSON.stringify(newHistory)); // Guardar en localStorage
+      return newHistory;
+    });
+    console.log("Compra añadida al historial:", compra);
+  };
+
   return (
-    <CartContext.Provider value={{ cartList, addToCart, decreaseQty, deleteProduct }}>
+    <CartContext.Provider value={{ cartList, addToCart, decreaseQty, deleteProduct, setCartList, anadirCompra, purchaseHistory }}>
       {children}
     </CartContext.Provider>
   );

@@ -32,7 +32,8 @@ export const AuthProvider = ({ children }) => {
             setEsAutenticado(true);
             setUser(res.data);
             setRol(res.data.user.rol);
-            localStorage.setItem('token', res.data.token);
+            //localStorage.setItem('token', res.data.token);
+            sessionStorage.setItem('token', res.data.token);
         } catch (error) {
             console.error(error);
         }
@@ -45,7 +46,9 @@ export const AuthProvider = ({ children }) => {
         setRol(null);
         setTableUser([]);
         // Elimina el token de localStorage
-        localStorage.removeItem('token');
+      //  localStorage.removeItem('token');
+
+        sessionStorage.removeItem('token'); 
     };
 
     const cargarDatos = async () => {
@@ -152,7 +155,8 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         async function checkLogin() {
-            const token = localStorage.getItem('token');
+            //const token = localStorage.getItem('token');
+            const token = sessionStorage.getItem('token'); 
             console.log(token)
             if (!token) {
                 setEsAutenticado(false);

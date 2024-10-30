@@ -23,6 +23,13 @@ import Compras from "../../pages/PaqueteCompra/Compras";
 import ProtectedRoute from "../../ProtectedRoute";
 import ProtectedRoutePrivilegios from "../../ProtectPrivilegios";
 
+/* paguinas no encontradas */
+import { NotFound } from "../../components/notfound/NotFound";
+import ProtecComponente from "../../ProtecComponente";
+import { Home } from "../../pages/Home";
+import { Shop } from "../../pages/Shop";
+import { Cart } from "../../pages/Cart";
+
 export const Homed = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -33,9 +40,54 @@ export const Homed = () => {
       {/* Ruta pública o sin protección */}
       <Routes>
         <Route path="/homeda" element={<HomeDas />} />
+        <Route path="*" element={<NotFound />} />
+
+        {/* rutas protegidas solo para el cliente  */}
+        {/* ruta para la parte principal  */}
+        <Route element={<ProtectedRoute roles={["cliente"]} />}>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver paguina de inicio" >
+                <Home/>
+              </ProtectedRoutePrivilegios>
+            }
+          />
+      {/* ruta el shop --  */}
+      <Route
+            path="/shop"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver paguina de shop" >
+                <Shop/>
+              </ProtectedRoutePrivilegios>
+            }
+          />
+
+          {/* ruta para el cart  */}
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver paguina de cart " >
+                <Shop/>
+              </ProtectedRoutePrivilegios>
+            }
+          />
+
+          {/* ruta para los id del shop: */}
+
+          {/* ruta para el contact  */}
+          <Route
+            path="/shop "
+            element={
+              <ProtectedRoutePrivilegios privilegeDescription="ver paguina de inicio" >
+                <Home/>
+              </ProtectedRoutePrivilegios>
+            }
+          />
+        </Route>
 
         {/* Rutas protegidas solo para "Administrador" */}
-        <Route element={<ProtectedRoute roles={['Administrador']} />}>
+        <Route element={<ProtectedRoute roles={["Administrador"]} />}>
           <Route
             path="/organizacion-productos"
             element={
@@ -60,12 +112,13 @@ export const Homed = () => {
               </ProtectedRoutePrivilegios>
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Route>
 
-
         {/* Rutas protegidas para "Administrador" o "Empleado" */}
-        <Route element={<ProtectedRoute roles={['Administrador', 'Empleado']} />}>
-
+        <Route
+          element={<ProtectedRoute roles={["Administrador", "Empleado"]} />}
+        >
           <Route
             path="/bitacora"
             element={
@@ -138,12 +191,15 @@ export const Homed = () => {
               </ProtectedRoutePrivilegios>
             }
           />
-
+          <Route path="*" element={<NotFound />} />
         </Route>
 
         {/* Rutas protegidas para cualquier usuario autenticado */}
-        <Route element={<ProtectedRoute roles={['Administrador', 'Cliente', 'Empleado']} />}>
+        <Route
+          element={<ProtectedRoute roles={["Administrador", "Empleado"]} />}
+        >
           <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
 

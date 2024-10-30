@@ -108,8 +108,8 @@ export const AuthProvider = ({ children }) => {
     const cargarRoles = async () =>{
         try {
             const respuesta = await obtenerRoles();
-            console.log(respuesta);
-            setRoles(respuesta)
+            console.log(respuesta.data);
+            setRoles(respuesta.data)
         } catch (error) {
             console.error('Error al obtener los datos:', error);
         }

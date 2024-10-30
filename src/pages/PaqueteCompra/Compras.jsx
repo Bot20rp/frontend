@@ -1,6 +1,7 @@
 import React, { useState, useEffect  } from 'react';
 import '../../css/AdmiCompraCss/compras.css';
 import { useAuth } from '../../context/AuthContext';
+import { insertaCompra } from '../../api/auth';
 
 function Compras() {
 
@@ -105,22 +106,43 @@ function Compras() {
     }));
   };
 
-  const handleNuevaCompra = () => {
-    setMarcas((prevMarcas) => [
-      ...prevMarcas,
-      { ...formValues }
-    ]);
-    setFormValues({
-      NroFactura: "",
-      Fecha: "",
-      CodAutoriz: "",
-      CodControl: "",
-      Proveedor: "",
-      TInteres: "",
-      TPagar: ""
-    });
-    setShowFacturas(true); // Mostrar facturas automáticamente después de registrar una nueva compra
+
+  const handleNuevaCompra = async () => {
+    // Construir el objeto con todos los datos de la compra
+    const compraData = {
+      NroFactura: formValues.NroFactura,
+      Fecha: formValues.Fecha,
+      CodigoAutorizacion: formValues.CodAutoriz,
+      CodigoControl: formValues.CodControl,
+      ProveedorID: formValues.Proveedor, // Puedes necesitar un ID o manejar nombres si es necesario
+      TotalInteres: formValues.TInteres,
+      TotalPagar: formValues.TPagar,
+      productos: productosSeleccionados.map(producto => ({
+        ProductoID: producto.id,
+        cantidad: producto.cantidad,
+        precioUnitario : producto.precioCosto
+      }))
+    };
+
+    try {
+      // Enviar la compra al backend usando insertaCompra
+      const response = await insertaCompra(compraData);
+      console.log('Compra registrada exitosamente:', response.data);
+      setFormValues({
+        NroFactura: "",
+        Fecha: "",
+        CodAutoriz: "",
+        CodControl: "",
+        Proveedor: "",
+        TInteres: "",
+        TPagar: ""
+      });
+      setShowFacturas(true); // Mostrar facturas automáticamente después de registrar una nueva compra
+    } catch (error) {
+      console.error('Error registrando la compra:', error);
+    }
   };
+
 
   const handleEditarProducto = (index, field, value) => {
     const productosActualizados = [...productosSeleccionados];

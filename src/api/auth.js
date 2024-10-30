@@ -147,3 +147,11 @@ export const actualizarEstadoCombo = (data) => instance.patch(`/updateCombos`,{
         'Content-Type': 'application/json',
     }
 })
+
+// COMPRAS!!
+export const insertaCompra = (data) => instance.post(`/compras`,{
+    data,
+    headers:{
+        'Content-Type': 'application/json',
+    }
+})

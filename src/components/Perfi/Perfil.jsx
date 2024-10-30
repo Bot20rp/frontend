@@ -4,7 +4,7 @@ import { CartContext } from '../../context/CartContext';
 import { useNavigate } from "react-router-dom";
 import './perfil.css';
 
-const Perfil = () => {
+export const Perfil = () => {
     const { logout, user } = useAuth();
     const { purchaseHistory } = useContext(CartContext);
     const navigate = useNavigate();
@@ -54,5 +54,3 @@ const Perfil = () => {
         </div>
     );
 };
-
-export default Perfil;

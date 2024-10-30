@@ -18,7 +18,7 @@ import { Lote } from "../../pages/PaqueteCompra/Lote";
 import PrivilegioPages from "../../pages/PaqueteUsu/PrivilegioPages";
 import OrganizacionProductPage from "../../pages/PaqueteInventario/OrganizacionProductPage";
 import Compras from "../../pages/PaqueteCompra/Compras";
-import Perfil from "../Perfi/Perfil";
+import { Perfil } from "../Perfi/Perfil";
 
 /* VAMOS A PROTEGER LAS RUTAS */
 import ProtectedRoute from "../../ProtectedRoute";

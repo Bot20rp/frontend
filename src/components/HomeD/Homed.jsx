@@ -18,6 +18,7 @@ import { Lote } from "../../pages/PaqueteCompra/Lote";
 import PrivilegioPages from "../../pages/PaqueteUsu/PrivilegioPages";
 import OrganizacionProductPage from "../../pages/PaqueteInventario/OrganizacionProductPage";
 import Compras from "../../pages/PaqueteCompra/Compras";
+import Perfil from "../Perfi/Perfil";
 
 /* VAMOS A PROTEGER LAS RUTAS */
 import ProtectedRoute from "../../ProtectedRoute";
@@ -46,10 +47,10 @@ export const Homed = () => {
         {/* ruta para la parte principal  */}
         <Route element={<ProtectedRoute roles={["cliente"]} />}>
           <Route
-            path="/"
+            path="/perfil"
             element={
               <ProtectedRoutePrivilegios privilegeDescription="ver paguina de inicio" >
-                <Home/>
+                <Perfil/>
               </ProtectedRoutePrivilegios>
             }
           />

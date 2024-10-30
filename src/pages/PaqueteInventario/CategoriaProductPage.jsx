@@ -1,17 +1,19 @@
 import React, { useState, useRef } from 'react';
 import '../../css/AdmiInventarioCss/CategoriaProductPage.css'
-import { insertarCategoriaPadre, obtenerCategorias,eliminarCategorias,insertarCategoriaHija} from '../../api/auth';
+import { insertarCategoriaPadre, obtenerCategorias, eliminarCategorias, insertarCategoriaHija } from '../../api/auth';
+import { useAuth } from '../../context/AuthContext';
 
 
 function CategoriaProductPage() {
   // ESTADOS PRINCIPALES
   // Aquí se almacenan todas las categorías y subcategorías
+  const { user } = useAuth();
   const [categorias, setCategorias] = useState([]);
-  
+
   // Control para saber si se está editando una categoría o subcategoría
   const [isEditing, setIsEditing] = useState(false);
   const [isEditingSubCategoria, setIsEditingSubCategoria] = useState(false);
-  
+
   // Estado para los valores del formulario de categoría o subcategoría
   const [formValues, setFormValues] = useState({
     id: "",
@@ -69,21 +71,21 @@ function CategoriaProductPage() {
     } else {
       // Agregando una nueva categoría o subcategoría
       setCategorias([...categorias, formValues]);
-      if(formValues.categoria != null){
+      if (formValues.categoria != null) {
         try {
-            await insertarCategoriaHija(formValues)
+          await insertarCategoriaHija(formValues)
         } catch (error) {
-            console.log(error)
+          console.log(error)
         }
-      }else{
+      } else {
         try {
-            await insertarCategoriaPadre(formValues)
+          await insertarCategoriaPadre(formValues)
         } catch (error) {
-            console.log(error)
+          console.log(error)
         }
       }
     }
-    
+
     resetForm();
     closeModal();
   };
@@ -136,15 +138,15 @@ function CategoriaProductPage() {
         const eliminar = categorias.find((cat) => cat.id === id && !cat.categoria)
         await eliminarCategorias(eliminar);
         const categoriaAEliminar = categorias.find((cat) => cat.id === id && !cat.categoria);
-      setCategorias((prevCategorias) =>
-        prevCategorias.filter(
-          (cat) => cat.id !== id && cat.categoria !== categoriaAEliminar.nombre
-        )
-      );
+        setCategorias((prevCategorias) =>
+          prevCategorias.filter(
+            (cat) => cat.id !== id && cat.categoria !== categoriaAEliminar.nombre
+          )
+        );
       } catch (error) {
         console.log(error)
       }
-      
+
     }
   };
 
@@ -176,21 +178,21 @@ function CategoriaProductPage() {
     });
   };
 
-  const listarCategoria = async() =>{
+  const listarCategoria = async () => {
     try {
-        const nuevosDatos = await obtenerCategorias();
-        console.log(nuevosDatos);
-            if (Array.isArray(nuevosDatos.data)) {
-                const categoriasNuevas = nuevosDatos.data.map((producto) => ({
-                    id: producto.CategoriaID,  
-                    nombre: producto.Nombre   
-                }));
-    
-                setCategorias(categoriasNuevas);
-            }
+      const nuevosDatos = await obtenerCategorias();
+      console.log(nuevosDatos);
+      if (Array.isArray(nuevosDatos.data)) {
+        const categoriasNuevas = nuevosDatos.data.map((producto) => ({
+          id: producto.CategoriaID,
+          nombre: producto.Nombre
+        }));
+
+        setCategorias(categoriasNuevas);
+      }
 
     } catch (error) {
-        console.log(error)
+      console.log(error)
     }
   }
 
@@ -220,8 +222,14 @@ function CategoriaProductPage() {
                 <td>{cat.nombre}</td>
                 <td>{cat.categoria}</td>
                 <td>
-                  <button className="btn-eliminar" onClick={() => handleDelete(cat.id, true)}>Eliminar</button>
-                  <button className="btn-modificar" onClick={() => handleEdit(cat.id, true)}>Modificar</button>
+                  { 
+                    user?.user.permisos.some((permiso) => permiso.Descripcion === "porder eliminar categoria") &&
+                    <button className="btn-eliminar" onClick={() => handleDelete(cat.id, true)}>Eliminar</button>
+                  }
+                  {
+                    user?.user.permisos.some((permiso) => permiso.Descripcion === "poder actualizar categoria") &&
+                    <button className="btn-modificar" onClick={() => handleEdit(cat.id, true)}>Modificar</button>
+                  }
                 </td>
               </tr>
             ))}
@@ -243,8 +251,15 @@ function CategoriaProductPage() {
                 <td>{cat.id}</td>
                 <td>{cat.nombre}</td>
                 <td>
+                  {
+                    user?.user.permisos.some((permiso) => permiso.Descripcion === "porder eliminar categoria") &&
                   <button className="btn-eliminarCategoria" onClick={() => handleDelete(cat.id, false)}>Eliminar</button>
-                  <button className="btn-modificarCategoria" onClick={() => handleEdit(cat.id, false)}>Modificar</button>
+                  }
+                  
+                  {
+                    user?.user.permisos.some((permiso) => permiso.Descripcion === "poder actualizar categoria") &&
+                    <button className="btn-modificarCategoria" onClick={() => handleEdit(cat.id, false)}>Modificar</button>
+                  }
                 </td>
               </tr>
             ))}

@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 
 function ProductsPage() {
     const tbodyProductos = useRef(null);
-    const { productosBackend } = useAuth();
+    const { productosBackend, user } = useAuth();
     const [producto, setProducto] = useState({
         id: '',
         Nombre: '',
@@ -189,8 +189,14 @@ function ProductsPage() {
                                     <td>{prod.Marca}</td>
                                     <td>{prod.Estante}</td>
                                     <td className="editProduct">
-                                        <button className="eliminarProduct" onClick={() => eliminarProductos(prod.id)}>Eliminar</button>
-                                        <button className="modificarProduct" onClick={() => modificarProducto(prod.id)}>Modificar</button>
+                                        {
+                                            user?.user.permisos.some((permiso) => permiso.Descripcion === "porder eliminar productos") &&
+                                            <button className="eliminarProduct" onClick={() => eliminarProductos(prod.id)}>Eliminar</button>
+                                        }
+                                        {
+                                            user?.user.permisos.some((permiso) => permiso.Descripcion === "poder modificar productos") &&
+                                            <button className="modificarProduct" onClick={() => modificarProducto(prod.id)}>Modificar</button>
+                                        }
                                     </td>
                                 </tr>
                             ))}

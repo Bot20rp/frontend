@@ -8,10 +8,7 @@ export const Lote = () => {
   const [sugerencias, setSugerencias] = useState([]); // Sugerencias al buscar
   const [busquedaId, setBusquedaId] = useState(''); // Para búsqueda por ID
   const [busquedaNombre, setBusquedaNombre] = useState(''); // Para búsqueda por nombre
-  const [productoSeleccionado, setProductoSeleccionado] = useState(null); // Producto seleccionado
-  const [cantidad, setCantidad] = useState(0); // Cantidad ingresada
-  const [fechaInicio, setFechaInicio] = useState(''); // Fecha de inicio
-  const [fechaVencimiento, setFechaVencimiento] = useState(''); // Fecha de vencimiento
+  const [productosTabla, setProductosTabla] = useState([]); // Productos agregados a la tabla
 
   // Obtener productos desde el backend
   useEffect(() => {
@@ -51,10 +48,51 @@ export const Lote = () => {
     }
   };
 
-  // Manejar selección de producto
+  // Manejar selección de producto y agregarlo a la tabla
   const seleccionarProducto = (producto) => {
-    setProductoSeleccionado(producto);
+    const productoExistente = productosTabla.find(p => p.id === producto.id);
+    if (productoExistente) {
+      // Si el producto ya está en la tabla, incrementamos la cantidad
+      const nuevosProductos = productosTabla.map(p => 
+        p.id === producto.id ? { ...p, cantidad: p.cantidad + 1 } : p
+      );
+      setProductosTabla(nuevosProductos);
+    } else {
+      // Si es un nuevo producto, lo agregamos con sus campos iniciales
+      setProductosTabla([
+        ...productosTabla,
+        {
+          id: producto.id,
+          nombre: producto.nombre,
+          fechaInicio: '',
+          fechaVencimiento: '',
+          cantidad: 1, // Cantidad inicial
+        },
+      ]);
+    }
     setSugerencias([]);
+  };
+
+  // Manejar cambios en la cantidad, fecha inicio o vencimiento
+  const manejarCambioProducto = (index, campo, valor) => {
+    const nuevosProductos = [...productosTabla];
+    nuevosProductos[index] = {
+      ...nuevosProductos[index],
+      [campo]: valor
+    };
+    setProductosTabla(nuevosProductos);
+  };
+
+  // Guardar los productos en una variable para mandar al backend
+  const guardarLotes = () => {
+    const productosParaGuardar = productosTabla.map(producto => ({
+      id: producto.id,
+      fechaInicio: producto.fechaInicio,
+      fechaVencimiento: producto.fechaVencimiento,
+      cantidad: producto.cantidad
+    }));
+    console.log("Productos a enviar al backend: ", productosParaGuardar);
+    // Aquí puedes hacer la llamada al backend con 'productosParaGuardar'
   };
 
   return (
@@ -89,52 +127,52 @@ export const Lote = () => {
           </ul>
         )}
 
-        {/* Mostrar producto seleccionado en la tabla */}
-        {productoSeleccionado && (
-          <div className="descripcionLotes">
-            <table className="tablaLote">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Nombre</th>
-                  <th className="highlighted">Fecha Ini</th>
-                  <th className="highlighted">Fecha Venc</th>
-                  <th>Cantidad</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{productoSeleccionado.id}</td>
-                  <td>{productoSeleccionado.nombre}</td>
+        {/* Mostrar productos seleccionados en la tabla */}
+        <div className="descripcionLotes">
+          <table className="tablaLote">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th className="highlighted">Fecha Ini</th>
+                <th className="highlighted">Fecha Venc</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              {productosTabla.map((producto, index) => (
+                <tr key={producto.id}>
+                  <td>{producto.id}</td>
+                  <td>{producto.nombre}</td>
                   <td>
                     <input 
                       type="date" 
-                      value={fechaInicio} 
-                      onChange={(e) => setFechaInicio(e.target.value)} 
+                      value={producto.fechaInicio} 
+                      onChange={(e) => manejarCambioProducto(index, 'fechaInicio', e.target.value)} 
                     />
                   </td>
                   <td>
                     <input 
                       type="date" 
-                      value={fechaVencimiento} 
-                      onChange={(e) => setFechaVencimiento(e.target.value)} 
+                      value={producto.fechaVencimiento} 
+                      onChange={(e) => manejarCambioProducto(index, 'fechaVencimiento', e.target.value)} 
                     />
                   </td>
                   <td>
                     <input 
                       type="number" 
-                      value={cantidad} 
-                      onChange={(e) => setCantidad(e.target.value)} 
+                      value={producto.cantidad} 
+                      onChange={(e) => manejarCambioProducto(index, 'cantidad', e.target.value)} 
                       placeholder="Cantidad"
                     />
                   </td>
                 </tr>
-              </tbody>
-            </table>
-          </div>
-        )}
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-        <button className="guardarLoteBtn">Guardar</button>
+        <button className="guardarLoteBtn" onClick={guardarLotes}>Guardar</button>
       </div>
 
       {/* Otra tabla, dejar vacía */}

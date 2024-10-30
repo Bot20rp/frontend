@@ -70,6 +70,8 @@ export const Lote = () => {
         },
       ]);
     }
+    setBusquedaId('');
+    setBusquedaNombre('');
     setSugerencias([]);
   };
 

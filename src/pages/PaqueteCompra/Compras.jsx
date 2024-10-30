@@ -109,7 +109,7 @@ function Compras() {
       Fecha: formValues.Fecha,
       CodigoAutorizacion: formValues.CodAutoriz,
       CodigoControl: formValues.CodControl,
-      ProveedorID: formValues.Proveedor.id, // Puedes necesitar un ID o manejar nombres si es necesario
+      ProveedorID: formValues.Proveedor, // Puedes necesitar un ID o manejar nombres si es necesario
       TotalInteres: formValues.TInteres,
       TotalPagar: formValues.TPagar,
       productos: productosSeleccionados.map(producto => ({
@@ -253,7 +253,7 @@ function Compras() {
           >
             <option value="">Seleccione un proveedor</option>
             {proveedores.map((proveedor, index) => (
-              <option key={index} value={proveedor}>{proveedor}</option>
+              <option key={index} value={proveedor.id}>{proveedor.Nombre}</option>
             ))}
           </select>
           <input

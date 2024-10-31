@@ -41,11 +41,9 @@
     width: 100%;
     /* max-width: 1100px; */
     margin: 0 auto;
-    border-collapse: collapse;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     /* table-layout: fixed; */
     border-radius: 8px;
-    overflow: hidden;
 }
 
 .tableProduct th, .tableProduct td {
@@ -58,8 +56,6 @@
 .tableProduct th {
     background-color: #0076f5;
     color: white;
-    text-transform: uppercase;
-    font-weight: bold;
 }
 
 .tableProduct tr:hover {
@@ -154,19 +150,7 @@
     font-size: 14px;
 }
 
-.modal-content .btn:first-of-type {
-    background-color: #007bff;
-    color: white;
-    margin-right: 10px;
-}
-
-.modal-content .btn:last-of-type {
-    background-color: #dc3545;
-    color: white;
-}
-
 .tableContainer {
-    max-height: 500px; /* Altura máxima de la tabla visible */
     overflow-y: auto;  /* Muestra una barra de desplazamiento si el contenido excede la altura */
     margin: 20px 0;    /* Margen alrededor de la tabla */
     border: 1px solid #ccc;  /* Borde opcional para definir el área */
@@ -191,7 +175,7 @@
         width: 100%;
     }
     .eliminarProduct,.modificarProduct{
-        width: 50%;
+        width: 80%;
         font-size: 10px;
     }
 }

@@ -176,3 +176,12 @@ export const insertarMarca = (data) => instance.post(`/createMarca`,{
         'Content-Type': 'application/json',
     }
 }) 
+
+//ESTANTE
+export const insertarEstante = (data) => instance.post(`/crearEst`,{
+    data,
+    headers:{
+        'Content-Type': 'application/json',
+    }
+}) 
+

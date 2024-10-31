@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import '../../css/AdmiInventarioCss/OrganizacionProductosPage.css';
-import { insertarMarca } from '../../api/auth';
+import { insertarMarca, insertarEstante} from '../../api/auth';
 
 function OrganizacionProductPage() {
     const [estantes, setEstantes] = useState([]);  // Lista para estantes
@@ -18,12 +18,18 @@ function OrganizacionProductPage() {
         setFormValues({ ...formValues, [e.target.name]: e.target.value });
     };
 
-    const handleSaveEstante = (e) => {
+    const handleSaveEstante = async(e) => {
         e.preventDefault();
         const nuevoEstante = { ...formValues };
         console.log('Estante guardado:', nuevoEstante); // Mostrar en consola
-        resetForm();
-        closeModal();
+        try {
+            await insertarEstante(nuevoEstante)
+            resetForm();
+            closeModal(); 
+        } catch (error) {
+            console.log(error)
+        }
+
     };
 
     const handleSaveMarca = async(e) => {

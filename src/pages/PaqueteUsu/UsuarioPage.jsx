@@ -6,9 +6,10 @@ import jsPDF from 'jspdf'; // Importa jsPDF
 import 'jspdf-autotable'; // Importa la funcionalidad para tablas
 
 function UsuarioPages() {
-  const { tableUser, user } = useAuth();
+  const { tableUser, user, roles } = useAuth();
   const [datos, setDatos] = useState([]);
   const [filtroNombre, setFiltroNombre] = useState('');
+  const nuevosRoles = roles;
   const [filtroInicial, setFiltroInicial] = useState('');
   const [filtroRol, setFiltroRol] = useState('');
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
@@ -136,9 +137,9 @@ function UsuarioPages() {
             onChange={(e) => setFiltroRol(e.target.value)}  // Filtrar por rol
           >
             <option value="">Listar por Rol</option>
-            <option value="Administrador">Administrador</option>
-            <option value="Empleado">Empleado</option>
-            <option value="Cliente">Cliente</option>
+            {nuevosRoles.map((rol, index) => (
+              <option key={index} value={rol.id}>{rol.Nombre}</option>
+            ))}
           </select>
           <button className="btn" onClick={() => setFiltroNombre('')}>Listar Todos</button>
         </div>

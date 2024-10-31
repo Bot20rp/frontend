@@ -41,6 +41,8 @@ function ProductsPage() {
 
     // Abrir el modal
     const openModal = () => {
+        console.log(tableEstante);
+        console.log(tableMarca);
         setModalVisible(true); // Muestra el modal
     };
 
@@ -56,8 +58,6 @@ function ProductsPage() {
             await insertarProducto(producto)
             setProductos([...productos, producto]);
             resetForm();
-            console.log(tableEstante);
-            console.log(tableMarca);
         } catch (error) {
             console.log(error)
         }

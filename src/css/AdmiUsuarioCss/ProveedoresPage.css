@@ -1,203 +1,127 @@
-/* ProveedoresPage.css */
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+* {
+    padding: 0; margin: 0; border: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;
+}
 
 body {
-    background-color: #f4f4f4; /* Fondo claro para toda la página */
-    margin: 0;
-    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
 }
 
-/* Contenedor principal */
 .containerProveedor {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff; /* Fondo blanco para el contenedor */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    display: flex; flex-direction: column; align-items: center; width: 80%; margin: 0 auto; padding: 20px; text-align: center;
 }
 
-/* Título de la página */
 .titleProveedor {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #4CAF50;
-    margin-bottom: 20px;
+    font-size: 2.5em; color: #4CAF50; margin-bottom: 20px;
 }
 
-/* Estilo de la barra de búsqueda */
 .buscarProveedor {
-    width: 100%;
-    max-width: 300px;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc; /* Borde gris claro */
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border 0.3s;
+    width: 100%; max-width: 400px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; margin-bottom: 20px; transition: border-color 0.3s;
 }
 
 .buscarProveedor:focus {
-    border: 1px solid #4CAF50; /* Borde verde al enfocar */
-    outline: none; /* Sin borde de enfoque predeterminado */
+    border-color: #4CAF50;
 }
 
-/* Botones principales */
 .openProveedor {
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 10px; width: 40%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s;
 }
 
 .openProveedor:hover {
-    background-color: #45a049; /* Color al pasar el mouse */
+    background-color: #45a049;
 }
 
-/* Estilo de la tabla */
 .tableProveedor {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    width: 100%; border-collapse: collapse; margin-top: 20px;
 }
 
-.tableProveedor th,
-.tableProveedor td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd; /* Línea divisoria */
+.tableProveedor th, .tableProveedor td {
+    padding: 12px; text-align: left; border-bottom: 1px solid #ddd;
 }
 
-.filasProveedor {
-    background-color: #f9f9f9; /* Fondo gris claro para las filas */
+.tableProveedor th {
+    background-color: #4CAF50; color: white;
 }
 
-.editProveedor button {
-    margin-right: 10px;
-    padding: 8px 12px;
-    font-size: 0.9rem;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+.tableProveedor tr:hover {
+    background-color: #f1f1f1;
 }
 
-/* Botones de eliminar y modificar */
+.editProveedor {
+    display: flex; gap: 10px;
+}
+
+.eliminarProveedor, .modificarProveedor {
+    padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; transition: background-color 0.3s;
+}
+
 .eliminarProveedor {
-    background-color: #e74c3c;
+    background-color: #f44336; color: white;
 }
 
 .eliminarProveedor:hover {
-    background-color: #c0392b; /* Color al pasar el mouse */
+    background-color: #e53935;
 }
 
 .modificarProveedor {
-    background-color: #3498db;
+    background-color: #2196F3; color: white;
 }
 
 .modificarProveedor:hover {
-    background-color: #2980b9; /* Color al pasar el mouse */
+    background-color: #1976D2;
 }
 
-/* Estilo del modal */
 .RegistroProveedor {
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
 }
 
-.show {
-    display: flex;
+.RegistroProveedor.show {
+    display: block;
 }
 
-/* Estilo del formulario dentro del modal */
+.containerProveedor.show2 {
+    opacity: 0.5; pointer-events: none;
+}
+
 .modaEProveedor {
-    background-color: white;
-    padding: 30px;
-    width: 100%;
-    max-width: 400px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: white; 
+    padding: 30px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    width: 100%; 
     text-align: center;
 }
 
-/* Título del modal */
 .modalProveedor {
-    font-size: 1.5rem;
-    color: #4CAF50;
-    margin-bottom: 20px;
+    font-size: 1.5em; color: #333; margin-bottom: 20px;
 }
 
-/* Estilo de los formularios */
-.form-nombreProveedor,
-.form-direccionProveedor,
-.form-telefonoProveedor {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-label {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-/* Estilo de los inputs */
 input {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc; /* Borde gris claro */
-    border-radius: 5px;
-    transition: border 0.3s;
+    width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px;
 }
 
 input:focus {
-    border: 1px solid #4CAF50; /* Borde verde al enfocar */
-    outline: none; /* Sin borde de enfoque predeterminado */
+    border-color: #4CAF50;
 }
 
-/* Botones dentro del modal */
+.saveProveedor, .closeProveedor {
+    padding: 10px 20px; border: none; 
+    border-radius: 5px; 
+    cursor: pointer; font-size: 16px; 
+    margin-top: 10px;
+    width: 50%;
+}
+
 .saveProveedor {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
+    background-color: #4CAF50; 
+    color: white ;
 }
 
-.saveProveedor:hover {
-    background-color: #45a049; /* Color al pasar el mouse */
-}
-
-/* Botón de cerrar en el modal */
 .closeProveedor {
-    background-color: #e74c3c;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
+    background-color: #f44336; color: white;
 }
 
 .closeProveedor:hover {
-    background-color: #c0392b; /* Color al pasar el mouse */
+    background-color: #e53935;
 }

@@ -96,7 +96,7 @@ function OrganizacionProductPage() {
                 <h1 className="titleOrganizacionPage">ORGANIZACION DE PRODUCTOS</h1>
                 <button className="openNuevoEstante" onClick={openEstante}>Nuevo Estante</button>
                 <button className="openNuevaMarca" onClick={openMarcaModal}>Nueva Marca</button>
-                <button className="openNuevoVolumen" onClick={openVolumenModal}>Nuevo Volumen</button> {/* Botón para abrir el modal de Volumen */}
+                <button className="openNuevaMarca" onClick={openVolumenModal}>Nuevo Volumen</button> {/* Botón para abrir el modal de Volumen */}
 
                 {/* Puedes mantener aquí las tablas si lo deseas, pero por ahora no se actualizan */}
             </div>
@@ -133,8 +133,8 @@ function OrganizacionProductPage() {
                     <h1 className="TitleMarca">Registrar Volumen</h1>
                     <input className="formMarca" placeholder="Volumen" name="Volumen" value={formValues.Volumen || ""} onChange={handleInputChange} required />
                     <div className="buttons">
-                        <button type="submit" className='saveVolumen'>Guardar</button>
-                        <button type="button" className='closeRegisterVolumen' onClick={closeModal}>Cerrar</button>
+                        <button type="submit" className='saveMarca'>Guardar</button>
+                        <button type="button" className='closeRegisterMarca' onClick={closeModal}>Cerrar</button>
                     </div>
                 </form>
             </div>

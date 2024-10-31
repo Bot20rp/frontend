@@ -232,7 +232,7 @@ function ProductsPage() {
                             onChange={handleChange}
                         >
                             <option value="">Seleccione una Categoria</option>
-                            {tableCategoria.data.map((cat) => (
+                            {tableCategoria.data.data.map((cat) => (
                                 <option key={cat.CategoriaID} value={cat.CategoriaID}>
                                     {cat.Nombre}
                                 </option>
@@ -260,7 +260,7 @@ function ProductsPage() {
                             onChange={handleChange}
                         >
                             <option value="">Seleccione una Marca</option>
-                            {tableMarca.data.map((marca) => (
+                            {tableMarca.data.data.map((marca) => (
                                 <option key={marca.MarcaID} value={marca.MarcaID}>
                                     {marca.Nombre}
                                 </option>
@@ -274,7 +274,7 @@ function ProductsPage() {
                             onChange={handleChange}
                         >
                             <option value="">Seleccione un Estante</option>
-                            {tableEstante.data.map((estante) => (
+                            {tableEstante.data.data.map((estante) => (
                                 <option key={estante.EstanteID} value={estante.EstanteID}>
                                     {estante.Nombre}
                                 </option>

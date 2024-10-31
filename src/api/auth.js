@@ -164,6 +164,8 @@ export const insertarLotes = (data) => instance.post(`/lote`,{
     }
 })
 
+export const obtenerLotes = () => {return instance.get(`/lote`)};
+
 //OBTENCIOS DE LOS ROLES
 export const obtenerRoles = () => {return  instance.get(`/obtRol`)};
 

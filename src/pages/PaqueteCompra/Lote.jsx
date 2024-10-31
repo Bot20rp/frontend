@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { insertarLotes } from '../../api/auth';
 
 export const Lote = () => {
-  const { productosBackend } = useAuth();
+  const { productosBackend, tableLotes } = useAuth();
   const [productos, setProductos] = useState([]); // Todos los productos disponibles
   const [sugerencias, setSugerencias] = useState([]); // Sugerencias al buscar
   const [busquedaId, setBusquedaId] = useState(''); // Para búsqueda por ID
@@ -13,6 +13,7 @@ export const Lote = () => {
 
   // Obtener productos desde el backend
   useEffect(() => {
+    console.log(tableLotes)
     if (productosBackend && productosBackend.data) {
       const productosObtenidos = productosBackend.data.map((producto) => ({
         id: producto.ProductoID, 
@@ -102,6 +103,7 @@ export const Lote = () => {
       console.log(error)
     }
   };
+  console.log(tableLotes)
 
   return (
     <div className="containerLote">

@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, logoutRequest, verityTokenResquest, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias} from "../api/auth";
+import { loginRequest, logoutRequest, verityTokenResquest, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes} from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
     const [tableMarca,setTableMarca] = useState([]);
     const [tableEstante,settableEstante] = useState([]);
     const[tableCategoria,setCategoria] = useState([]);
+    const [tableLotes,setTableLotes] = useState([]);
     const [permisoTable, setPermisos] = useState({
         administrador: [],
         cliente: [],
@@ -104,10 +105,12 @@ export const AuthProvider = ({ children }) => {
             const respuestaMarca = await obtenerMarca();
             const respuestaEstante = await obtenerEstante();
             const respuestaCategoria = await obtenerCategorias();
+            const respuestaLotes = await obtenerLotes();
             setTableMarca(respuestaMarca);
             settableEstante(respuestaEstante)
             setProductosBackend(respuesta);
             setCategoria(respuestaCategoria);
+            setTableLotes(respuestaLotes);
         } catch (error) {
             console.error('Error al obtener los datos:', error);
         }
@@ -227,6 +230,7 @@ export const AuthProvider = ({ children }) => {
             tableEstante,
             tableMarca,
             tableCategoria,
+            tableLotes,
             cargarDatos,
             cargarDatosProveedores,
             cargarDatosPermisos,

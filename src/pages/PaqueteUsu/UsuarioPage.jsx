@@ -99,16 +99,6 @@ function UsuarioPages() {
     doc.save('reporte_usuarios.pdf');
   };
 
-  useEffect(() => {
-    if (roles) {
-      console.log("Roles cargados:", roles);
-    }
-  }, [roles]);
-
-  const nuevosRoles = roles;
-  console.log("desde usu", roles);
-  console.log(nuevosRoles);
-
   // Función para determinar qué campos mostrar según el rol
   const camposPorRol = () => {
     const campos = {
@@ -148,8 +138,8 @@ function UsuarioPages() {
             onChange={(e) => setFiltroRol(e.target.value)}
           >
             <option value="">Listar por Rol</option>
-            {nuevosRoles && nuevosRoles.length > 0 ? (
-              nuevosRoles.map((rol, index) => (
+            {roles && roles.length > 0 ? (
+              roles.map((rol, index) => (
                 <option key={index} value={rol.Nombre}>{rol.Nombre}</option>
               ))
             ) : (

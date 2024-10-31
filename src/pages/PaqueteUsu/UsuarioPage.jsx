@@ -251,13 +251,37 @@ function UsuarioPages() {
             />
             {formActualizar.rol === "Empleado" && (
               <>
-                <label htmlFor="correo">Correo</label>
+                <label htmlFor="correo">Fecha Inicio</label>
                 <input
-                  name="correo"
+                  name="horarioInicio"
                   value={formActualizar.horarioInicio}
                   onChange={manejarCambio}
                   type='time'
                   placeholder="HoraInicio"
+                />
+              </>
+            )}
+            {formActualizar.rol === "Empleado" && (
+              <>
+                <label htmlFor="correo">Fecha Fin</label>
+                <input
+                  name="horarioFin"
+                  value={formActualizar.horarioFin}
+                  onChange={manejarCambio}
+                  type='time'
+                  placeholder="HoraFin"
+                />
+              </>
+            )}
+            {formActualizar.rol === "Empleado" && (
+              <>
+                <label htmlFor="correo">Fecha Fin</label>
+                <input
+                  name="salario"
+                  value={formActualizar.salario}
+                  onChange={manejarCambio}
+                  type='number'
+                  placeholder="Salario"
                 />
               </>
             )}

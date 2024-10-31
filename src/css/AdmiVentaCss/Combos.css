@@ -197,7 +197,7 @@ button:hover {
     border: none;
     cursor: pointer;
 }
-@media (min-width: 300px) {
+@media (max-width: 896px) {
     .comboContenedor {
         padding: 4px;
     }

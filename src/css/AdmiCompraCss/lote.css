@@ -80,7 +80,7 @@
 .guardarLoteBtn:hover, .ordenarLoteBtn:hover {
   background-color: #0056b3;
 }
-@media (min-width: 300px) {
+@media (max-width: 896px) {
   .guardarLoteBtn,.ordenarLoteBtn{
     width: 80%;
     margin: 10px;

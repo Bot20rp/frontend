@@ -199,3 +199,5 @@ export const insertarVolumen = (data) => instance.post(`/regVolumen`,{
         'Content-Type': 'application/json',
     }
 }) 
+
+export const obtenerVolumen = () =>{return instance.get(`/getVolumen`)};

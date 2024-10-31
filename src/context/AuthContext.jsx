@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, logoutRequest, verityTokenResquest, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes} from "../api/auth";
+import { loginRequest, logoutRequest, verityTokenResquest,obtenerVolumen, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes} from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
     const [tableProveedor, setTableProveedor] = useState([]);
     const [tableMarca,setTableMarca] = useState([]);
     const [tableEstante,settableEstante] = useState([]);
+    const [tableVolumen,setTableVolumen] = useState([]);
     const[tableCategoria,setCategoria] = useState([]);
     const [tableLotes,setTableLotes] = useState([]);
     const [permisoTable, setPermisos] = useState({
@@ -106,6 +107,8 @@ export const AuthProvider = ({ children }) => {
             const respuestaEstante = await obtenerEstante();
             const respuestaCategoria = await obtenerCategorias();
             const respuestaLotes = await obtenerLotes();
+            const respuestaVolumen = await obtenerVolumen();
+            setTableVolumen(respuestaVolumen)
             setTableMarca(respuestaMarca);
             settableEstante(respuestaEstante)
             setProductosBackend(respuesta);
@@ -231,6 +234,7 @@ export const AuthProvider = ({ children }) => {
             tableMarca,
             tableCategoria,
             tableLotes,
+            tableVolumen,
             cargarDatos,
             cargarDatosProveedores,
             cargarDatosPermisos,

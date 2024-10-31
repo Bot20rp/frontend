@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 
 function ProductsPage() {
     const tbodyProductos = useRef(null);
-    const { productosBackend, user, tableEstante, tableMarca, tableCategoria } = useAuth();
+    const { productosBackend, user, tableEstante, tableMarca, tableCategoria,tableVolumen } = useAuth();
     const [producto, setProducto] = useState({
         id: '',
         Nombre: '',
@@ -41,7 +41,7 @@ function ProductsPage() {
 
     // Abrir el modal
     const openModal = () => {
-        console.log(tableCategoria);
+        console.log(tableVolumen);
         setModalVisible(true);
     };
 

@@ -49,7 +49,7 @@ function Main() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Bitacora />} /> 
+        <Route path="/login" element={<LoginPage />} /> 
         <Route path="/perfil" element={<Perfil />} /> 
         <Route path="/perfil" element={user ? <Perfil /> : <Navigate to="/login" />} />
         <Route path="/registerPage" element={<RegisterPage />} />

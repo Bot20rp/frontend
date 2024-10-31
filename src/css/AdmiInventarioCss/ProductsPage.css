@@ -191,7 +191,7 @@
         margin: 10px auto;
         
     }
-    .tableProduct th{
+    .tableProduct th ,.tableProduct td{
         font-size: 7px;
         padding: 5px;
         width: 100%;

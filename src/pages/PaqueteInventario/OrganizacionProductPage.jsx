@@ -128,10 +128,10 @@ function OrganizacionProductPage() {
             </div>
 
             {/* Modal para volumen */}
-            <div className="modalVolumen" ref={modalVolumen}>
-                <form className="modalEvolumen" onSubmit={handleSaveVolumen}>
-                    <h1 className="TitleVolumen">Registrar Volumen</h1>
-                    <input className="formVolumen" placeholder="Volumen" name="Volumen" value={formValues.Volumen || ""} onChange={handleInputChange} required />
+            <div className="modalMarca" ref={modalVolumen}>
+                <form className="modalEMarca" onSubmit={handleSaveVolumen}>
+                    <h1 className="TitleMarca">Registrar Volumen</h1>
+                    <input className="formMarca" placeholder="Volumen" name="Volumen" value={formValues.Volumen || ""} onChange={handleInputChange} required />
                     <div className="buttons">
                         <button type="submit" className='saveVolumen'>Guardar</button>
                         <button type="button" className='closeRegisterVolumen' onClick={closeModal}>Cerrar</button>

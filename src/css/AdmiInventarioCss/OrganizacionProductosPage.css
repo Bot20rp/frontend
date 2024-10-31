@@ -146,7 +146,7 @@ td {
 .buttons{
   text-align: center;
 }
-@media (min-width: 300px) {
+@media (max-width: 896px) {
 
   .btn-modificarMarca,.btn-eliminarMarca
   ,.btn-modificar,.btn-eliminar

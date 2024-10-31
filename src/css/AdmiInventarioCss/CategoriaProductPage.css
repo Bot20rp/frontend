@@ -163,7 +163,7 @@ td {
 }
 
 /* Media Query para pantallas pequeñas */
-@media (min-width: 300px) {
+@media (max-width: 896px) {
   .containerCategoriaProduct {
     padding: 10px; /* Reducir el padding */
    

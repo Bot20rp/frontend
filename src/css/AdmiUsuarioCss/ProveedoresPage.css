@@ -129,7 +129,7 @@ input:focus {
 .closeProveedor:hover {
     background-color: #e53935;
 }
-@media (min-width: 300px) {
+@media (max-width: 896px) {
     *{
         
         font-size: 10px;

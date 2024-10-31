@@ -53,7 +53,7 @@ h1 {
 }
 
 
-@media (min-width: 300px) {
+@media (max-width: 896px) {
   *{
     width: 100%;
   }

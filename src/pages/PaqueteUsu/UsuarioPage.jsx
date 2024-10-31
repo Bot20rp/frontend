@@ -72,7 +72,7 @@ function UsuarioPages() {
   const confirmarActualizar = async () => {
     try {
       console.log(formActualizar)
-      // await actualizarUsuario(formActualizar);
+      await actualizarUsuario(formActualizar);
       setDatos(datos.map(dato => (dato.id === formActualizar.id ? formActualizar : dato)));
       setMostrarActualizar(false); // Ocultar la ventana modal después de actualizar
     } catch (error) {
@@ -114,7 +114,7 @@ function UsuarioPages() {
       console.log("Roles cargados:", roles);
     }
   }, [roles]);
-  
+
   const nuevosRoles = roles;
 
   return (

@@ -53,9 +53,6 @@
     text-align: left;
     border-bottom: 1px solid #ddd;
     font-size: 14px;
-    white-space: nowrap; /* Prevent text from breaking into new line */
-    overflow: hidden;
-    text-overflow: ellipsis; /* Adds "..." for long text */
 }
 
 .tableProduct th {
@@ -65,10 +62,6 @@
     font-weight: bold;
 }
 
-.tableProduct tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
 .tableProduct tr:hover {
     background-color: #f1f1f1;
 }
@@ -76,7 +69,6 @@
 /* Botones de Acción */
 .eliminarProduct, .modificarProduct {
     padding: 5px 10px;
-    border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 12px;
@@ -89,7 +81,7 @@
 }
 
 .eliminarProduct:hover {
-    background-color: #e60000;
+    background-color: #808080;
 }
 
 .modificarProduct {

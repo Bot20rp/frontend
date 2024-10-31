@@ -25,17 +25,6 @@ export const Lote = () => {
     }
   }, [productosBackend]);
 
-  useEffect(() => {
-    if (tableLotes && tableLotes.data) {
-      const lotes = tableLotes.data.map(lote => ({
-        loteId: lote.LoteID,
-        cantidad: lote.Cantidad,
-        fechaExpiracion: new Date(lote.FechaExpiracion),
-        nombre: lote.Nombre
-      }));
-      setLotesConsultados(lotes);
-    }
-  }, [tableLotes]);
 
   const buscarProductoPorId = (event) => {
     const value = event.target.value;
@@ -109,6 +98,17 @@ export const Lote = () => {
   };
 
   const acomodarPorTiempo = () => {
+    
+    if (tableLotes && tableLotes.data) {
+      const lotes = tableLotes.data.map(lote => ({
+        loteId: lote.LoteID,
+        cantidad: lote.Cantidad,
+        fechaExpiracion: new Date(lote.FechaExpiracion),
+        nombre: lote.Nombre
+      }));
+      setLotesConsultados(lotes);
+    }
+
     const hoy = new Date();
     const lotesOrdenados = [...lotesConsultados].sort((a, b) => a.fechaExpiracion - b.fechaExpiracion);
     setLotesConsultados(lotesOrdenados.map(lote => ({

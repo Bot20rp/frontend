@@ -13,7 +13,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [roles,setRoles] = useState(null);
+    const [roles,setRoles] = useState([]);
     const [productosBackend, setProductosBackend] = useState(null);
     const [esAutenticado, setEsAutenticado] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const respuesta = await obtenerRoles();
             console.log(respuesta.data);
-            setRoles(respuesta.data)
+            setRoles(respuesta.data);
         } catch (error) {
             console.error('Error al obtener los datos:', error);
         }

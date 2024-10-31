@@ -11,7 +11,7 @@ function UsuarioPages() {
   const [datos, setDatos] = useState([]);
   const [filtroNombre, setFiltroNombre] = useState('');
   const nuevosRoles = roles;
-  console.log("desde usu",roles);
+  console.log("desde usu", roles);
   conconsle.log(nuevosRoles);
   const [filtroInicial, setFiltroInicial] = useState('');
   const [filtroRol, setFiltroRol] = useState('');
@@ -111,6 +111,13 @@ function UsuarioPages() {
     doc.save('reporte_usuarios.pdf');
   };
 
+  useEffect(() => {
+    if (roles) {
+      console.log("Roles cargados:", roles);
+    }
+  }, [roles]);
+  
+
   return (
     <div className="containerUsuario">
       <div className='ventanaUser'>
@@ -140,9 +147,13 @@ function UsuarioPages() {
             onChange={(e) => setFiltroRol(e.target.value)}  // Filtrar por rol
           >
             <option value="">Listar por Rol</option>
-            {nuevosRoles.map((rol, index) => (
-              <option key={index} value={rol.RolID}>{rol.Nombre}</option>
-            ))}
+            {nuevosRoles && nuevosRoles.length > 0 ? (
+              nuevosRoles.map((rol, index) => (
+                <option key={index} value={rol.RolID}>{rol.Nombre}</option>
+              ))
+            ) : (
+              <option value="">No hay roles disponibles</option>
+            )}
           </select>
           <button className="btn" onClick={() => setFiltroNombre('')}>Listar Todos</button>
         </div>

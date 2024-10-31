@@ -114,11 +114,8 @@ function UsuarioPages() {
       console.log("Roles cargados:", roles);
     }
   }, [roles]);
-
+  
   const nuevosRoles = roles;
-  console.log("desde usu", roles);
-  console.log(nuevosRoles);
-
 
   return (
     <div className="containerUsuario">

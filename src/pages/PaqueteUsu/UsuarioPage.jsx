@@ -2,8 +2,8 @@ import { useAuth } from '../../context/AuthContext';
 import '../../css/AdmiUsuarioCss/UsuarioPage.css';
 import { useState, useEffect } from 'react';
 import { actualizarUsuario, eliminarUsuario } from '../../api/auth';
-import jsPDF from 'jspdf'; // Importa jsPDF
-import 'jspdf-autotable'; // Importa la funcionalidad para tablas
+import jsPDF from 'jspdf'; 
+import 'jspdf-autotable'; 
 
 function UsuarioPages() {
   const { tableUser, user, roles } = useAuth();
@@ -43,14 +43,14 @@ function UsuarioPages() {
 
   const eliminarDato = (id) => {
     setUsuarioSeleccionado(id);
-    setMostrarEliminar(true); // Mostrar la ventana modal de confirmación
+    setMostrarEliminar(true);
   };
 
   const confirmarEliminar = async () => {
     try {
       await eliminarUsuario(usuarioSeleccionado);
       setDatos(datos.filter(dato => dato.id !== usuarioSeleccionado));
-      setMostrarEliminar(false); // Ocultar la ventana modal después de eliminar
+      setMostrarEliminar(false);
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +59,7 @@ function UsuarioPages() {
   const actualizarDato = (id) => {
     const usuario = datos.find(dato => dato.id === id);
     setFormActualizar(usuario);
-    setMostrarActualizar(true); // Mostrar la ventana modal de actualización
+    setMostrarActualizar(true);
   };
 
   const manejarCambio = (e) => {
@@ -73,20 +73,15 @@ function UsuarioPages() {
     try {
       await actualizarUsuario(formActualizar);
       setDatos(datos.map(dato => (dato.id === formActualizar.id ? formActualizar : dato)));
-      setMostrarActualizar(false); // Ocultar la ventana modal después de actualizar
+      setMostrarActualizar(false);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // Función para generar el PDF
   const generarReportePDF = () => {
     const doc = new jsPDF();
-
-    // Añadir un título al PDF
     doc.text('Reporte de Usuarios', 14, 20);
-
-    // Convertir los datos de la tabla en un formato que jsPDF pueda interpretar
     const columnas = ['Documento', 'Usuario', 'Correo', 'Teléfono', 'Género', 'Rol'];
     const filas = datosFiltrados.map((dato) => [
       dato.id,
@@ -96,15 +91,11 @@ function UsuarioPages() {
       dato.genero,
       dato.rol
     ]);
-
-    // Generar la tabla con los datos
     doc.autoTable({
       head: [columnas],
       body: filas,
       startY: 30
     });
-
-    // Descargar el PDF con el nombre reporte_usuarios.pdf
     doc.save('reporte_usuarios.pdf');
   };
 
@@ -118,6 +109,15 @@ function UsuarioPages() {
   console.log("desde usu", roles);
   console.log(nuevosRoles);
 
+  // Función para determinar qué campos mostrar según el rol
+  const camposPorRol = () => {
+    const campos = {
+      cliente: ['usuario', 'correo', 'telefono', 'genero', 'fechaNacimiento', 'rol'],
+      administrador: ['usuario', 'correo', 'telefono', 'genero', 'fechaNacimiento', 'rol'],
+      empleado: ['usuario', 'correo', 'telefono', 'genero', 'fechaNacimiento', 'rol', 'salario', 'horarioInicio', 'horarioFin']
+    };
+    return campos[formActualizar.rol] || [];
+  };
 
   return (
     <div className="containerUsuario">
@@ -128,14 +128,14 @@ function UsuarioPages() {
             placeholder='Nombre'
             className="inputUser-box"
             value={filtroNombre}
-            onChange={(e) => setFiltroNombre(e.target.value)}  // Filtrar por nombre en tiempo real
+            onChange={(e) => setFiltroNombre(e.target.value)}
           />
         </div>
         <div className="inputUser-group">
           <select
             className="inputUser-box"
             value={filtroInicial}
-            onChange={(e) => setFiltroInicial(e.target.value)}  // Filtrar por inicial
+            onChange={(e) => setFiltroInicial(e.target.value)}
           >
             <option value="">Listar por Iniciales</option>
             {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letra => (
@@ -145,7 +145,7 @@ function UsuarioPages() {
           <select
             className="inputUser-box"
             value={filtroRol}
-            onChange={(e) => setFiltroRol(e.target.value)}  // Filtrar por rol
+            onChange={(e) => setFiltroRol(e.target.value)}
           >
             <option value="">Listar por Rol</option>
             {nuevosRoles && nuevosRoles.length > 0 ? (
@@ -181,18 +181,14 @@ function UsuarioPages() {
                   <td className='table-item2'>{dato.genero}</td>
                   <td className='table-item2'>{dato.rol}</td>
                   <td className='table-item2' id='option'>
-
-                    {
-                      user?.user.permisos.some(
-                        (permiso) => permiso.Descripcion === "poder eliminar usuarios") &&
+                    {user?.user.permisos.some(
+                      (permiso) => permiso.Descripcion === "poder eliminar usuarios") &&
                       (<button className="buttonOpcion" onClick={() => eliminarDato(dato.id)}>Eliminar</button>)
                     }
-                    {
-                      user?.user.permisos.some(
-                        (permiso) => permiso.Descripcion === "poder actualizar usuarios") &&
+                    {user?.user.permisos.some(
+                      (permiso) => permiso.Descripcion === "poder actualizar usuarios") &&
                       <button className="buttonOpcion" onClick={() => actualizarDato(dato.id)}>Actualizar</button>
                     }
-
                   </td>
                 </tr>
               ))}
@@ -200,7 +196,6 @@ function UsuarioPages() {
           </table>
         </div>
 
-        {/* Botón para generar el PDF */}
         <button className="btn" onClick={generarReportePDF}>Generar Reporte en PDF</button>
 
       </div>
@@ -221,48 +216,97 @@ function UsuarioPages() {
         <div className="modal">
           <div className="modal-content">
             <h3>Actualizar Usuario</h3>
-            <label htmlFor="usuario">Nombre</label>
-            <input
-              name="usuario"
-              value={formActualizar.usuario}
-              onChange={manejarCambio}
-              placeholder="Usuario"
-            />
-            <label htmlFor="correo">Correo</label>
-            <input
-              name="correo"
-              value={formActualizar.correo}
-              onChange={manejarCambio}
-              placeholder="Correo"
-            />
-            <label htmlFor="telefono">Teléfono</label>
-            <input
-              name="telefono"
-              value={formActualizar.telefono}
-              onChange={manejarCambio}
-              placeholder="Teléfono"
-            />
-            <label htmlFor="fechaNacimiento">Fecha Nacimiento</label>
-            <input
-              type='date'
-              name="fechaNacimiento"
-              value={formActualizar.fechaNacimiento}
-              onChange={manejarCambio}
-            />
-            <select name="genero" value={formActualizar.genero} onChange={manejarCambio}>
-              <option value="Masculino">Masculino</option>
-              <option value="Femenino">Femenino</option>
-            </select>
-            <select name="rol" value={formActualizar.rol} onChange={manejarCambio}>
-              {nuevosRoles && nuevosRoles.length > 0 ? (
-                nuevosRoles.map((rol, index) => (
-                  <option key={index} value={rol.id}>{rol.Nombre}</option>
-                ))
-              ) : (
-                <option value="">No hay roles disponibles</option>
-              )}
-            </select>
-            <button className="btn" onClick={confirmarActualizar}>Aceptar</button>
+
+            {camposPorRol().includes('usuario') && (
+              <>
+                <label htmlFor="usuario">Nombre</label>
+                <input
+                  name="usuario"
+                  value={formActualizar.usuario}
+                  onChange={manejarCambio}
+                  placeholder="Usuario"
+                />
+              </>
+            )}
+            {camposPorRol().includes('correo') && (
+              <>
+                <label htmlFor="correo">Correo</label>
+                <input
+                  name="correo"
+                  value={formActualizar.correo}
+                  onChange={manejarCambio}
+                  placeholder="Correo"
+                />
+              </>
+            )}
+            {camposPorRol().includes('telefono') && (
+              <>
+                <label htmlFor="telefono">Teléfono</label>
+                <input
+                  name="telefono"
+                  value={formActualizar.telefono}
+                  onChange={manejarCambio}
+                  placeholder="Teléfono"
+                />
+              </>
+            )}
+            {camposPorRol().includes('genero') && (
+              <>
+                <label htmlFor="genero">Género</label>
+                <input
+                  name="genero"
+                  value={formActualizar.genero}
+                  onChange={manejarCambio}
+                  placeholder="Género"
+                />
+              </>
+            )}
+            {camposPorRol().includes('fechaNacimiento') && (
+              <>
+                <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
+                <input
+                  type="date"
+                  name="fechaNacimiento"
+                  value={formActualizar.fechaNacimiento}
+                  onChange={manejarCambio}
+                />
+              </>
+            )}
+            {camposPorRol().includes('salario') && (
+              <>
+                <label htmlFor="salario">Salario</label>
+                <input
+                  name="salario"
+                  value={formActualizar.salario}
+                  onChange={manejarCambio}
+                  placeholder="Salario"
+                />
+              </>
+            )}
+            {camposPorRol().includes('horarioInicio') && (
+              <>
+                <label htmlFor="horarioInicio">Horario de Inicio</label>
+                <input
+                  name="horarioInicio"
+                  value={formActualizar.horarioInicio}
+                  onChange={manejarCambio}
+                  placeholder="Horario de Inicio"
+                />
+              </>
+            )}
+            {camposPorRol().includes('horarioFin') && (
+              <>
+                <label htmlFor="horarioFin">Horario de Fin</label>
+                <input
+                  name="horarioFin"
+                  value={formActualizar.horarioFin}
+                  onChange={manejarCambio}
+                  placeholder="Horario de Fin"
+                />
+              </>
+            )}
+
+            <button className="btn" onClick={confirmarActualizar}>Actualizar</button>
             <button className="btn" onClick={() => setMostrarActualizar(false)}>Cancelar</button>
           </div>
         </div>

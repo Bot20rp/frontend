@@ -204,6 +204,7 @@ function CombosPage() {
             <div className='comboContenedor'>
                 <h2>AGREGAR NUEVO COMBO</h2>
                 <input
+                    className='nombreCombro'
                     type="text"
                     placeholder='Ingresar el nombre del combo'
                     value={nombreCombo}

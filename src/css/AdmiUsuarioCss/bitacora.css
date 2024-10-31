@@ -52,31 +52,7 @@ h1 {
   font-size: 24px;
 }
 
-/* Estilos Responsive */
-@media (max-width: 768px) {
-  .bitacora-table th,
-  .bitacora-table td {
-    font-size: 14px; /* Reducir el tamaño de fuente en móviles */
-    padding: 10px;
-  }
-/* jfsdblkfbaskdfbskdfbklasudfi */
-  h1 {
-    font-size: 20px; /* Reducir el tamaño del título en móviles */
-  }
-}
 
-@media (max-width: 480px) {
-  .bitacora-table th,
-  .bitacora-table td {
-    font-size: 12px; /* Aún más pequeño en pantallas muy pequeñas */
-    padding: 8px;
-  }
-  
-  .bitacora-container {
-    padding: 10px;
-  }
-  
-}
 @media (min-width: 300px) {
   *{
     width: 100%;
@@ -85,11 +61,11 @@ h1 {
     width: 20%;
   }
   .bitacora-container {
-    padding: 5px;
+    padding: 2px;
   }
   .bitacora-table th{
-    font-size: 9px;
-    padding: 5px;
+    font-size: 8px;
+    padding: 3px;
     width: 100%;
     text-align: center;
   }

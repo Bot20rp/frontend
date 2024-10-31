@@ -30,12 +30,13 @@
 .comboContenedor input[type="text"],
 .comboContenedor input[type="number"],
 .comboContenedor input[type="date"] {
-    width: 50%;
-    padding: 12px;
-    margin: 10px 0;
+    width: 80%;
+    padding: 10px;
+    margin: 8px 0;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 13px;
+    text-align: center;
     box-sizing: border-box;
     transition: all 0.3s ease;
 }
@@ -63,8 +64,7 @@
 button {
     background-color: #3498db;
     color: white;
-    padding: 12px 25px;
-    /* margin-top: 20px; */
+    padding: 10px 10px;
     border: none;
     border-radius: 6px;
     font-size: 18px;
@@ -78,7 +78,6 @@ button:hover {
 
 .tablaCombo {
     margin-top: 30px;
-    border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -96,6 +95,7 @@ button:hover {
 .tablaScroll th, 
 .tablaScroll td {
     padding: 12px;
+    
     text-align: left;
     border-bottom: 1px solid #ddd;
     font-size: 16px;
@@ -109,6 +109,7 @@ button:hover {
 
 .tablaScroll tr:nth-child(even) {
     background-color: #ffffff;
+    
 }
 
 .costos {
@@ -132,28 +133,6 @@ button:hover {
 
 .duracionCombo input[type="date"] {
     width: 30%;
-}
-
-
-@media (max-width: 768px) {
-    .comboContenedor {
-        padding: 20px;
-    }
-
-    .ParaCombo input[type="text"] {
-        width: 100%;
-    }
-
-    .costos input[type="number"],
-    .duracionCombo input[type="date"] {
-        width: 100%;
-    }
-
-    .costos,
-    .duracionCombo {
-        flex-direction: column;
-        gap: 10px;
-    }
 }
 
 
@@ -220,10 +199,11 @@ button:hover {
 }
 @media (min-width: 300px) {
     .comboContenedor {
-        padding: 5px;
+        padding: 4px;
     }
 
-    .ParaCombo input[type="text"] {
+    .ParaCombo input[type="text"] ,
+ .comboContenedor input[type="text"]{
         width: 100%;
     }
  
@@ -238,18 +218,22 @@ button:hover {
         gap: 10px;
     }
 
-
-    .tablaScroll th, 
-    .tablaScroll td {
-        font-size: 12px;
-    }
-
     .tablaScroll th,.tablaScroll td  {
-        padding: 6px;
+        padding: 4px;
+        width: 15%;
+        font-size: 8px;
+        text-align: center;
     }
     
     .comboContenedor{
         width: 100%;
+    }
+    button{
+        width: 100%;
+        font-size: 10px;
+    }
+    .nombreCombro{
+        width: 10%;
     }
     
 }

@@ -12,7 +12,7 @@
   margin-bottom: 20px;
 }
 
-.inputBusquedaLote {
+.inputBusquedaLote ,.buscarProductoLote input[type="text"]{
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -20,7 +20,6 @@
   border-radius: 5px;
   color: #000; /* Letra negra */
 }
-
 .sugerenciasLote {
   list-style-type: none;
   padding: 0;
@@ -80,4 +79,10 @@
 
 .guardarLoteBtn:hover, .ordenarLoteBtn:hover {
   background-color: #0056b3;
+}
+@media (min-width: 300px) {
+  .guardarLoteBtn,.ordenarLoteBtn{
+    width: 80%;
+    margin: 10px;
+  }
 }

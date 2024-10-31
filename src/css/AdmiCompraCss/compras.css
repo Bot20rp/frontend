@@ -226,7 +226,9 @@ button:hover {
     height: 19%;
     text-align: center;
    }
-    
+    .inputCompra{
+        width: 100%;
+    }
 
 
     /* Mantiene el estilo de tus clases existentes */

@@ -43,8 +43,8 @@ export const Bitacora = () => {
       <table className="bitacora-table">
         <thead>
           <tr>
-            <th>BitacoraID</th>
-            <th>UsuarioID</th>
+            <th>ID</th>
+            <th>Usuario</th>
             <th>Nombre</th>
             <th>Correo</th>
             <th>Dirección IP</th>

@@ -13,7 +13,7 @@ body {
 }
 
 .titleProveedor {
-    font-size: 2.5em; color: #4CAF50; margin-bottom: 20px;
+    font-size: 2.5em; color: #007BFF; margin-bottom: 20px;
 }
 
 .buscarProveedor {
@@ -25,11 +25,12 @@ body {
 }
 
 .openProveedor {
-    padding: 10px; width: 40%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s;
+    padding: 10px; width: 40%; background-color: 
+    #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s;
 }
 
 .openProveedor:hover {
-    background-color: #45a049;
+    background-color: #007BFF;
 }
 
 .tableProveedor {
@@ -41,7 +42,7 @@ body {
 }
 
 .tableProveedor th {
-    background-color: #4CAF50; color: white;
+    background-color: #007BFF; color: white;
 }
 
 .tableProveedor tr:hover {
@@ -53,7 +54,8 @@ body {
 }
 
 .eliminarProveedor, .modificarProveedor {
-    padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; transition: background-color 0.3s;
+    padding: 5px 10px; border: none; border-radius: 5px; cursor: 
+    pointer; font-size: 14px; transition: background-color 0.3s;
 }
 
 .eliminarProveedor {
@@ -98,11 +100,12 @@ body {
 }
 
 input {
-    width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px;
+    width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; 
+    border: 1px solid #ccc; font-size: 16px;
 }
 
 input:focus {
-    border-color: #4CAF50;
+    border-color: #007BFF;
 }
 
 .saveProveedor, .closeProveedor {
@@ -116,6 +119,7 @@ input:focus {
 .saveProveedor {
     background-color: #4CAF50; 
     color: white ;
+    width: 80%;
 }
 
 .closeProveedor {
@@ -124,4 +128,24 @@ input:focus {
 
 .closeProveedor:hover {
     background-color: #e53935;
+}
+@media (min-width: 300px) {
+    *{
+        
+        font-size: 10px;
+    }
+    .buscarProveedor{
+        width: 80%;
+        display: flex;
+    }
+    .openProveedor{
+        width: 80%;
+        margin-top:5px;
+        display: flex;
+     }
+    .tableProveedor th{
+        font-size: 8px;
+        
+        
+    }
 }

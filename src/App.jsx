@@ -27,6 +27,11 @@ import Compras from "./pages/PaqueteCompra/Compras.jsx";
 import {NotFound} from './components/notfound/NotFound.jsx'
 
 import {Perfil} from './components/Perfi/Perfil.jsx'
+import ProveedoresPage from "./pages/PaqueteUsu/ProveedoresPage.jsx";
+import ProductsPage from "./pages/PaqueteInventario/ProductsPage.jsx";
+import { Lote } from "./pages/PaqueteCompra/Lote.jsx";
+import UsuarioPages from "./pages/PaqueteUsu/UsuarioPage.jsx";
+import { Bitacora } from "./pages/PaqueteUsu/Bitacora.jsx";
 /* ------------------------------------------------------------ */
 
 function Main() {
@@ -44,7 +49,7 @@ function Main() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginPage />} /> 
+        <Route path="/login" element={<Bitacora />} /> 
         <Route path="/perfil" element={<Perfil />} /> 
         <Route path="/perfil" element={user ? <Perfil /> : <Navigate to="/login" />} />
         <Route path="/registerPage" element={<RegisterPage />} />

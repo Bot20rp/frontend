@@ -12,7 +12,7 @@
 /* Ventana de usuarios */
 .ventanaUser {
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
@@ -71,7 +71,7 @@
 }
 
 .table th, .table td {
-  padding: 12px;
+  padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
@@ -141,8 +141,8 @@
   .inputUser-box{
     width: 100%;
   }
-  .table-item{
-    width: 100%;
-    font-size: 9px;
+  .table-item ,.table-item2{
+    padding: 0px;
+    font-size: 8px;
   }
 }

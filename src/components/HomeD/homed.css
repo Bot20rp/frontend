@@ -5,7 +5,7 @@
   .containe12 {
     display: grid;
     grid-template-columns: 100px auto; /* Ancho del sidebar */
-    /* background: #ffff; */
+    /* background: #ffff; a*/
     transition: all 0.3s;
 }
 

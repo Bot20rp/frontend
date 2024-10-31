@@ -160,7 +160,7 @@ function UsuarioPages() {
           <table className="table">
             <thead>
               <tr>
-                <th className='table-item'>Documento</th>
+                <th className='table-item'>ID</th>
                 <th className='table-item'>Usuario</th>
                 <th className='table-item'>Correo</th>
                 <th className='table-item'>Teléfono</th>

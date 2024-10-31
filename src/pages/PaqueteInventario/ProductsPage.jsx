@@ -55,7 +55,7 @@ function ProductsPage() {
     const agregarProducto = async (producto) => {
         try {
             console.log(producto)
-            // await insertarProducto(producto);
+            await insertarProducto(producto);
             setProductos([...productos, producto]);
             resetForm();
         } catch (error) {

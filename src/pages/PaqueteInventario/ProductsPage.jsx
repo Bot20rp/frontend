@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 
 function ProductsPage() {
     const tbodyProductos = useRef(null);
-    const { productosBackend, user, tableEstante, tableMarca, tableCategoria,tableVolumen } = useAuth();
+    const { productosBackend, user, tableEstante, tableMarca, tableCategoria, tableVolumen } = useAuth();
     const [producto, setProducto] = useState({
         id: '',
         Nombre: '',
@@ -78,11 +78,19 @@ function ProductsPage() {
     };
 
     // Guardar o modificar producto
+    // Guardar o modificar producto
     const handleSave = async (e) => {
         e.preventDefault();
         console.log(producto);
         if (isEditing) {
-            await actualizarProducto(producto);
+            // Envía solo los ID de los campos al modificar
+            await actualizarProducto({
+                ...producto,
+                Categoria: producto.Categoria,
+                Volumen: producto.Volumen,
+                Marca: producto.Marca,
+                Estante: producto.Estante,
+            });
             const nuevosProductos = productos.map(p => p.id === producto.id ? producto : p);
             setProductos(nuevosProductos);
         } else {
@@ -90,6 +98,7 @@ function ProductsPage() {
         }
         closeModal();
     };
+
 
     // Eliminar producto
     const eliminarProductos = async (id) => {
@@ -106,11 +115,18 @@ function ProductsPage() {
     const modificarProducto = (id) => {
         const productoAModificar = productos.find(p => p.id === id);
         if (productoAModificar) {
-            setProducto(productoAModificar);
+            setProducto({
+                ...productoAModificar,
+                Categoria: productoAModificar.Categoria, // Asegura que usa solo el ID
+                Volumen: productoAModificar.Volumen,
+                Marca: productoAModificar.Marca,
+                Estante: productoAModificar.Estante,
+            });
             setIsEditing(true);
             openModal();
         }
     };
+
 
     // Listar productos
     const listar = () => {

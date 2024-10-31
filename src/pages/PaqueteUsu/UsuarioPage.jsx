@@ -138,7 +138,7 @@ function UsuarioPages() {
           >
             <option value="">Listar por Rol</option>
             {nuevosRoles.map((rol, index) => (
-              <option key={index} value={rol.id}>{rol.Nombre}</option>
+              <option key={index} value={rol.RolID}>{rol.Nombre}</option>
             ))}
           </select>
           <button className="btn" onClick={() => setFiltroNombre('')}>Listar Todos</button>

@@ -80,7 +80,8 @@ function ProductsPage() {
     const handleSave = async (e) => {
         e.preventDefault();
         if (isEditing) {
-            await actualizarProducto(producto);
+            // await actualizarProducto(producto);
+            console.log(producto)
             const nuevosProductos = productos.map(p => p.id === producto.id ? producto : p);
             setProductos(nuevosProductos);
         } else {

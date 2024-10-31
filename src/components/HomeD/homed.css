@@ -1,8 +1,10 @@
 
-
+.logo{
+    font-size: 28px;
+}
   .containe12 {
     display: grid;
-    grid-template-columns: 90px auto; /* Ancho del sidebar */
+    grid-template-columns: 100px auto; /* Ancho del sidebar */
     /* background: #ffff; */
     transition: all 0.3s;
 }
@@ -14,3 +16,13 @@
 body {
     color: black;
 }
+   .links{
+        width: 80%;
+    }
+    .dropdown-label{
+        text-align: start;
+        width: 100%;
+        font-size: 15px;
+    }
+
+

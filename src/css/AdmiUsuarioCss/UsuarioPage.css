@@ -141,8 +141,14 @@
   .inputUser-box{
     width: 100%;
   }
+  .btn{
+    width: 50%;
+  }
   .table-item ,.table-item2{
     padding: 0px;
     font-size: 8px;
+  }
+  .buttonOpcion{
+    width: 100%;
   }
 }

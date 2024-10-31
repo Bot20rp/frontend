@@ -59,7 +59,7 @@
 }
 
 .tableProduct th {
-    background-color: #007bff;
+    background-color: #0076f5;
     color: white;
     text-transform: uppercase;
     font-weight: bold;
@@ -187,14 +187,16 @@
     }
     .openProduct{
         padding: 10px;
-        width: 70%;
-        margin: 10px auto;
+        width: 50%;
+        margin: 10px;
         
     }
     .tableProduct th ,.tableProduct td{
         font-size: 7px;
         padding: 5px;
         width: 100%;
-        background-color: #007bff;
+    }
+    .eliminarProduct,.modificarProduct{
+        width: 80%;
     }
 }

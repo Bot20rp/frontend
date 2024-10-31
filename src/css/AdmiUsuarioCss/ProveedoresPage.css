@@ -144,8 +144,9 @@ input:focus {
         display: flex;
      }
     .tableProveedor th{
-        font-size: 8px;
-        
-        
+        font-size: 8px;   
+    }
+    .eliminarProveedor,.modificarProveedor{
+        width: 100%;
     }
 }

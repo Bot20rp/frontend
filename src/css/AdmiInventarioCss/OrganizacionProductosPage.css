@@ -140,7 +140,7 @@ td {
 .buttons{
   text-align: center;
 }
-@media (max-width: 896px) {
+@media (min-width: 300px) {
 
   .editMarca{
     width: 50%;

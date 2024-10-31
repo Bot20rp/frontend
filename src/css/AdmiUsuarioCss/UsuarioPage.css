@@ -133,7 +133,7 @@
 .modal-content .btn {
   margin-right: 10px;
 }
-@media (max-width: 896px) {
+@media (min-width: 300px) {
   .containerUsuario{
     padding: 0px;
     width: 100%;

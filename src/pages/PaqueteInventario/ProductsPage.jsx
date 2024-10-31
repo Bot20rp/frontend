@@ -81,6 +81,7 @@ function ProductsPage() {
     const handleSave = async (e) => {
         e.preventDefault();
         if (isEditing) {
+            console.log(producto);
             await actualizarProducto(producto);
             const nuevosProductos = productos.map(p => p.id === producto.id ? producto : p);
             setProductos(nuevosProductos);

@@ -187,5 +187,5 @@ export const insertarEstante = (data) => instance.post(`/crearEst`,{
     }
 }) 
 
-export const obtenerEstante = () => {return instance.get(`/crearEst`)};
+export const obtenerEstante = () => {return instance.get(`/obtEst`)};
 

@@ -210,12 +210,21 @@ function ProductsPage() {
                             onChange={handleChange}
                             placeholder="Precio"
                         />
-                        <input
+
+                        {/* Select para Categoria */}
+                        <label htmlFor="Categoria">Categoria</label>
+                        <select
                             name="Categoria"
                             value={producto.Categoria}
                             onChange={handleChange}
-                            placeholder="Categoría"
-                        />
+                        >
+                            <option value="">Seleccione una Categoria</option>
+                            {tableCategoria.data.map((cat) => (
+                                <option key={cat.CategoriaID} value={cat.CategoriaID}>
+                                    {cat.Nombre}
+                                </option>
+                            ))}
+                        </select>
                         <input
                             name="Volumen"
                             value={producto.Volumen}

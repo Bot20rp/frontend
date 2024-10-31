@@ -80,8 +80,8 @@ function ProductsPage() {
     // Guardar o modificar producto
     const handleSave = async (e) => {
         e.preventDefault();
+        console.log(producto);
         if (isEditing) {
-            console.log(producto);
             await actualizarProducto(producto);
             const nuevosProductos = productos.map(p => p.id === producto.id ? producto : p);
             setProductos(nuevosProductos);

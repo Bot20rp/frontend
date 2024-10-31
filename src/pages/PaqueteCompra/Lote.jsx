@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import '../../css/AdmiCompraCss/lote.css'; // Tu archivo CSS adaptado
+import '../../css/AdmiCompraCss/lote.css';
 import { useAuth } from '../../context/AuthContext';
 import { insertarLotes } from '../../api/auth';
 
 export const Lote = () => {
   const { productosBackend, tableLotes } = useAuth();
-  const [productos, setProductos] = useState([]); // Todos los productos disponibles
-  const [sugerencias, setSugerencias] = useState([]); // Sugerencias al buscar
-  const [busquedaId, setBusquedaId] = useState(''); // Para búsqueda por ID
-  const [busquedaNombre, setBusquedaNombre] = useState(''); // Para búsqueda por nombre
-  const [productosTabla, setProductosTabla] = useState([]); // Productos agregados a la tabla
+  const [productos, setProductos] = useState([]);
+  const [sugerencias, setSugerencias] = useState([]);
+  const [busquedaId, setBusquedaId] = useState('');
+  const [busquedaNombre, setBusquedaNombre] = useState('');
+  const [productosTabla, setProductosTabla] = useState([]);
+  const [lotesConsultados, setLotesConsultados] = useState([]); // Nuevo estado para los lotes
 
-  // Obtener productos desde el backend
   useEffect(() => {
-    console.log(tableLotes)
     if (productosBackend && productosBackend.data) {
       const productosObtenidos = productosBackend.data.map((producto) => ({
-        id: producto.ProductoID, 
-        nombre: producto.Nombre,  
+        id: producto.ProductoID,
+        nombre: producto.Nombre,
         fechaIni: producto.FechaInicio,
         fechaVenc: producto.FechaVencimiento,
         cantidad: producto.Cantidad
@@ -26,7 +25,18 @@ export const Lote = () => {
     }
   }, [productosBackend]);
 
-  // Buscar producto por ID
+  useEffect(() => {
+    if (tableLotes && tableLotes.data) {
+      const lotes = tableLotes.data.map(lote => ({
+        loteId: lote.LoteID,
+        cantidad: lote.Cantidad,
+        fechaExpiracion: new Date(lote.FechaExpiracion),
+        nombre: lote.Nombre
+      }));
+      setLotesConsultados(lotes);
+    }
+  }, [tableLotes]);
+
   const buscarProductoPorId = (event) => {
     const value = event.target.value;
     setBusquedaId(value);
@@ -38,7 +48,6 @@ export const Lote = () => {
     }
   };
 
-  // Buscar producto por nombre
   const buscarProductoPorNombre = (event) => {
     const value = event.target.value;
     setBusquedaNombre(value);
@@ -50,17 +59,14 @@ export const Lote = () => {
     }
   };
 
-  // Manejar selección de producto y agregarlo a la tabla
   const seleccionarProducto = (producto) => {
     const productoExistente = productosTabla.find(p => p.id === producto.id);
     if (productoExistente) {
-      // Si el producto ya está en la tabla, incrementamos la cantidad
-      const nuevosProductos = productosTabla.map(p => 
+      const nuevosProductos = productosTabla.map(p =>
         p.id === producto.id ? { ...p, cantidad: p.cantidad + 1 } : p
       );
       setProductosTabla(nuevosProductos);
     } else {
-      // Si es un nuevo producto, lo agregamos con sus campos iniciales
       setProductosTabla([
         ...productosTabla,
         {
@@ -68,7 +74,7 @@ export const Lote = () => {
           nombre: producto.nombre,
           fechaInicio: '',
           fechaVencimiento: '',
-          cantidad: 1, // Cantidad inicial
+          cantidad: 1,
         },
       ]);
     }
@@ -77,7 +83,6 @@ export const Lote = () => {
     setSugerencias([]);
   };
 
-  // Manejar cambios en la cantidad, fecha inicio o vencimiento
   const manejarCambioProducto = (index, campo, valor) => {
     const nuevosProductos = [...productosTabla];
     nuevosProductos[index] = {
@@ -87,7 +92,6 @@ export const Lote = () => {
     setProductosTabla(nuevosProductos);
   };
 
-  // Guardar los productos en una variable para mandar al backend
   const guardarLotes = async () => {
     const productosParaGuardar = productosTabla.map(producto => ({
       id: producto.id,
@@ -100,10 +104,18 @@ export const Lote = () => {
       await insertarLotes(productosParaGuardar);
       setProductosTabla([]);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
-  console.log(tableLotes)
+
+  const acomodarPorTiempo = () => {
+    const hoy = new Date();
+    const lotesOrdenados = [...lotesConsultados].sort((a, b) => a.fechaExpiracion - b.fechaExpiracion);
+    setLotesConsultados(lotesOrdenados.map(lote => ({
+      ...lote,
+      diferenciaTiempo: Math.ceil((lote.fechaExpiracion - hoy) / (1000 * 60 * 60 * 24)) // Días restantes
+    })));
+  };
 
   return (
     <div className="containerLote">
@@ -126,7 +138,6 @@ export const Lote = () => {
           />
         </div>
 
-        {/* Mostrar sugerencias */}
         {sugerencias.length > 0 && (
           <ul className="sugerenciasLote">
             {sugerencias.map((producto, index) => (
@@ -137,7 +148,6 @@ export const Lote = () => {
           </ul>
         )}
 
-        {/* Mostrar productos seleccionados en la tabla */}
         <div className="descripcionLotes">
           <table className="tablaLote">
             <thead>
@@ -155,24 +165,24 @@ export const Lote = () => {
                   <td>{producto.id}</td>
                   <td>{producto.nombre}</td>
                   <td>
-                    <input 
-                      type="date" 
-                      value={producto.fechaInicio} 
-                      onChange={(e) => manejarCambioProducto(index, 'fechaInicio', e.target.value)} 
+                    <input
+                      type="date"
+                      value={producto.fechaInicio}
+                      onChange={(e) => manejarCambioProducto(index, 'fechaInicio', e.target.value)}
                     />
                   </td>
                   <td>
-                    <input 
-                      type="date" 
-                      value={producto.fechaVencimiento} 
-                      onChange={(e) => manejarCambioProducto(index, 'fechaVencimiento', e.target.value)} 
+                    <input
+                      type="date"
+                      value={producto.fechaVencimiento}
+                      onChange={(e) => manejarCambioProducto(index, 'fechaVencimiento', e.target.value)}
                     />
                   </td>
                   <td>
-                    <input 
-                      type="number" 
-                      value={producto.cantidad} 
-                      onChange={(e) => manejarCambioProducto(index, 'cantidad', e.target.value)} 
+                    <input
+                      type="number"
+                      value={producto.cantidad}
+                      onChange={(e) => manejarCambioProducto(index, 'cantidad', e.target.value)}
                       placeholder="Cantidad"
                     />
                   </td>
@@ -185,10 +195,9 @@ export const Lote = () => {
         <button className="guardarLoteBtn" onClick={guardarLotes}>Guardar</button>
       </div>
 
-      {/* Otra tabla, dejar vacía */}
       <div className="consultarLotes">
         <h2>CONSULTAR LOTES DE PRODUCTOS</h2>
-        <button className="ordenarLoteBtn">ACOMODAR POR MENOR TIEMPO</button>
+        <button className="ordenarLoteBtn" onClick={acomodarPorTiempo}>ACOMODAR POR MENOR TIEMPO</button>
         <table className="tablaLote">
           <thead>
             <tr>
@@ -196,11 +205,19 @@ export const Lote = () => {
               <th className="highlighted">Nombre</th>
               <th>Cantidad</th>
               <th>Fecha Vencimiento</th>
-              <th>Diferencia de Tiempo</th>
+              <th>Diferencia de Tiempo (días)</th>
             </tr>
           </thead>
           <tbody>
-            {/* Dejar vacía como solicitaste */}
+            {lotesConsultados.map((lote, index) => (
+              <tr key={index}>
+                <td>{lote.loteId}</td>
+                <td>{lote.nombre}</td>
+                <td>{lote.cantidad}</td>
+                <td>{lote.fechaExpiracion.toLocaleDateString()}</td>
+                <td>{lote.diferenciaTiempo >= 0 ? lote.diferenciaTiempo : 'Expirado'}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

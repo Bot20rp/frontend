@@ -25,6 +25,17 @@ export const Lote = () => {
     }
   }, [productosBackend]);
 
+  useEffect(() => {
+    if (tableLotes && tableLotes.data) {
+      const lotes = tableLotes.data.map(lote => ({
+        loteId: lote.LoteID,
+        cantidad: lote.Cantidad,
+        fechaExpiracion: new Date(lote.FechaExpiracion),
+        nombre: lote.Nombre
+      }));
+      setLotesConsultados(lotes);
+    }
+  }, [tableLotes]);
 
   const buscarProductoPorId = (event) => {
     const value = event.target.value;
@@ -98,17 +109,8 @@ export const Lote = () => {
   };
 
   const acomodarPorTiempo = () => {
-    
-    if (tableLotes && tableLotes.data) {
-      const lotes = tableLotes.data.map(lote => ({
-        loteId: lote.LoteID,
-        cantidad: lote.Cantidad,
-        fechaExpiracion: new Date(lote.FechaExpiracion),
-        nombre: lote.Nombre
-      }));
-      setLotesConsultados(lotes);
-    }
 
+    
     const hoy = new Date();
     const lotesOrdenados = [...lotesConsultados].sort((a, b) => a.fechaExpiracion - b.fechaExpiracion);
     setLotesConsultados(lotesOrdenados.map(lote => ({
@@ -215,7 +217,7 @@ export const Lote = () => {
                 <td>{lote.nombre}</td>
                 <td>{lote.cantidad}</td>
                 <td>{lote.fechaExpiracion.toLocaleDateString()}</td>
-                <td>{lote.diferenciaTiempo >= 0 ? lote.diferenciaTiempo : 'Expirado'}</td>
+                <td>{lote.diferenciaTiempo >= 0 ? lote.diferenciaTiempo : `Expirado ${lote.diferenciaTiempo}`}</td>
               </tr>
             ))}
           </tbody>

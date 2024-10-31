@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect  } from 'react';
 import '../../css/AdmiCompraCss/compras.css';
 import { useAuth } from '../../context/AuthContext';
 import { insertaCompra } from '../../api/auth';
 
 function Compras() {
 
-  const { productosBackend, tableProveedor } = useAuth();
-  const [productos, setProductos] = useState([]);
+  const {productosBackend,tableProveedor} = useAuth();
+  const [productos,setProductos] = useState([]);
 
   const [Marcas, setMarcas] = useState([]);
   const [formValues, setFormValues] = useState({
@@ -47,7 +47,7 @@ function Compras() {
     TInteres: "Tasa de Interés",
     TPagar: "Total a Pagar",
     imagen: "Imagen de la Factura",
-    tableFactura: "Tabla de las facturas"
+    tableFactura: "Tabla de las facturas" 
   };
 
   const proveedores = tableProveedor;
@@ -57,12 +57,12 @@ function Compras() {
     setBusquedaId(value);
 
     if (value.length > 0) {
-      const resultados = productos.filter(product => product.id.toString().startsWith(value));
-      setSugerencias(resultados);
+        const resultados = productos.filter(product => product.id.toString().startsWith(value));
+        setSugerencias(resultados);
     } else {
-      setSugerencias([]);
+        setSugerencias([]);
     }
-  };
+};
 
   const buscarProductoPorNombre = (event) => {
     const value = event.target.value;
@@ -115,7 +115,7 @@ function Compras() {
       productos: productosSeleccionados.map(producto => ({
         ProductoID: producto.id,
         cantidad: producto.cantidad,
-        precioUnitario: producto.precioCosto
+        precioUnitario : producto.precioCosto
       }))
     };
 
@@ -197,15 +197,15 @@ function Compras() {
 
   useEffect(() => {
     if (productosBackend && productosBackend.data) {
-      const productosObtenidos = productosBackend.data.map((producto) => ({
-        id: producto.ProductoID,
-        nombre: producto.Nombre,
-        precio: producto.Precio
-      }));
+        const productosObtenidos = productosBackend.data.map((producto) => ({
+            id: producto.ProductoID,  
+            nombre: producto.Nombre,    
+            precio: producto.Precio
+        }));
 
-      setProductos(productosObtenidos);
+        setProductos(productosObtenidos); 
     }
-  }, [productosBackend]);
+}, [productosBackend]); 
 
   return (
     <div className="containerCompraProductos">
@@ -370,58 +370,52 @@ function Compras() {
         {showFacturas && (
           <div className='facturas'>
             <h3 className='titleCompras'>Lista de Facturas</h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-              {Marcas.map((factura, index) => (
-                <table key={index} className="tableFactura">
-                  <thead>
-                    <tr>
-                      <th>Nro Factura</th>
-                      <th>Fecha</th>
-                      <th>Cod. Autoriz.</th>
-                      <th>Cod. Control</th>
-                      <th>Proveedor</th>
-                      <th>T/Interes</th>
-                      <th>T/Pagar</th>
-                      <th className='imagenFactura'>Imagen</th>
-                      <th>Editar</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{factura.NroFactura}</td>
-                      <td>{factura.Fecha}</td>
-                      <td>{factura.CodAutoriz}</td>
-                      <td>{factura.CodControl}</td>
-                      <td>{factura.Proveedor}</td>
-                      <td>{factura.TInteres}</td>
-                      <td>{factura.TPagar}</td>
-                      <td>
-                        {imagenes[index] ? (
-                          <img
-                            src={imagenes[index]}
-                            alt="Producto"
-                            onClick={() => setSelectedImage(imagenes[index])}
-                            className="imagenCompleta"
-                          />
-                        ) : (
-                          <label className="ActualizarImagen2">
-                            Imagen
-                            <input
-                              className='inputImagen'
-                              type="file"
-                              onChange={(e) => handleImagenChange(e, index)}
-                            />
-                          </label>
-                        )}
-                      </td>
-                      <td>
-                        <button onClick={() => handleEditarFactura(index)} className='btnEditarCompra'>Editar</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              ))}
-            </div>
+            <table className="tableFactura">
+              <thead>
+                <tr>
+                  <th>Nro Factura</th>
+                  <th>Fecha</th>
+                  <th>Cod. Autoriz.</th>
+                  <th>Cod. Control</th>
+                  <th>Proveedor</th>
+                  <th>T/Interes</th>
+                  <th>T/Pagar</th>
+                  <th className='imagenFactura'>Imagen</th>
+                  <th>Editar</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Marcas.map((factura, index) => (
+                  <tr key={index}>
+                    <td>{factura.NroFactura}</td>
+                    <td>{factura.Fecha}</td>
+                    <td>{factura.CodAutoriz}</td>
+                    <td>{factura.CodControl}</td>
+                    <td>{factura.Proveedor}</td>
+                    <td>{factura.TInteres}</td>
+                    <td>{factura.TPagar}</td>
+                    <td>
+                      {imagenes[index] ? (
+                        <img
+                          src={imagenes[index]}
+                          alt="Producto"
+                          onClick={() => setSelectedImage(imagenes[index])}
+                          className="imagenCompleta"
+                        />
+                      ) : (
+                        <input
+                          type="file"
+                          onChange={(e) => handleImagenChange(e, index)}
+                        />
+                      )}
+                    </td>
+                    <td>
+                      <button onClick={() => handleEditarFactura(index)}>Editar</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
 

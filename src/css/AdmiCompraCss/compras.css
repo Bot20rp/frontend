@@ -6,19 +6,14 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.inputProducto,
-.compraTitlePage,
-th,
-.inputCompra {
+.inputProducto,.compraTitlePage, th, .inputCompra {
     text-align: center;
 }
-
-.titleCompras {
+.titleCompras{
     color: rgb(0, 77, 192);
     width: 50%;
     left: 10%;
 }
-
 .containerCompraProductos {
     display: flex;
     flex-direction: column;
@@ -38,10 +33,7 @@ th,
     position: relative;
 }
 
-.inputCompra,
-.Compra input[type="text"],
-.paraProducto input[type="text"],
-.paraProducto input[type="number"] {
+.inputCompra, .Compra input[type="text"], .paraProducto input[type="text"], .paraProducto input[type="number"] {
     width: 100%;
     max-width: 400px;
     padding: 10px;
@@ -62,25 +54,22 @@ th,
     margin: 10px;
 }
 
-.tableProducto,
-.tableFacturas {
+.tableProducto, .tableFacturas {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 10px;
     text-align: center;
 }
 
-.ListarFacturas,
-.NuevaCompra {
+.ListarFacturas, .NuevaCompra {
     padding: 10px 35px;
     font-size: 16px;
     cursor: pointer;
-
+    
     border-radius: 5px;
     background-color: #2392ec;
     color: white;
 }
-
 .paraProducto {
     position: relative;
     display: flex;
@@ -108,46 +97,37 @@ th,
 .sugerencias li {
     padding: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease; 
 }
 
 .sugerencias li:hover {
     background-color: #f0f0f0;
 }
 
-.ActualizarCompra,
-.ActualizarImagen,.ActualizarImagen2,.btnEditarCompra {
+.ActualizarCompra,.ActualizarImagen {
     display: inline-block;
     width: 25%;
     font-size: 16px;
     text-align: center;
     padding: 10px 20px;
     cursor: pointer;
-    background-color: #2c8dfc;
-    /* Color de fondo */
-    color: white;
-    /* Color del texato */
-    border-radius: 5px;
-    /* Borde */
-    transition: background-color 0.3s;
-    /* Efecto de transición */
+    background-color: #0075fc; /* Color de fondo */
+    color: white; /* Color del texato */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #00ccff; /* Borde */
+    transition: background-color 0.3s; /* Efecto de transición */
 }
-.ActualizarImagen2,.btnEditarCompra{
-    width: 100%;
-}
-
-.ActualizarImagen:hover,.ActualizarImagen2:hover,
-button:hover {
+.ActualizarImagen:hover,button:hover
+{
     background-color: #00ccff;
 }
-
 .imagenMiniatura {
     width: 500px;
     height: 500px;
     cursor: pointer;
-}
-
-.modalImagen {
+  }
+  
+  .modalImagen {
     position: fixed;
     top: 0;
     left: 0;
@@ -158,18 +138,16 @@ button:hover {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
-
-.imagenCompleta {
+  }
+  
+  .imagenCompleta {
     max-width: 40%;
     max-height: 40%;
-}
-
-.imagenFactura {
+  }
+  .imagenFactura{
     width: 100px;
-}
-
-.inputTotalVenta {
+  }
+  .inputTotalVenta{
     width: 50%;
     max-width: 130px;
     padding: 10px;
@@ -179,106 +157,9 @@ button:hover {
     border-radius: 10px;
     border: 1px solid #8a8686;
     text-align: center;
-}
-.inputImagen {
-    display: none;
-    
-    /* Ocultar el input original */
-}
-.input-file{
-    display: none;
-}
+  }
 
 
-
-@media only screen and (max-width: 414px) and (max-height: 896px) {
-    .tableFactura {
-        display: flex;
-    }
-    .tableFactura thead {
-        display: flex;
-        flex-direction: column;
-    }
-    .tableFactura thead tr th  {
-        display: block;
-        width: 100%;  
-    }
-    .tableFactura tbody tr td{
-        width: 180px;
-        display: block;
-    }
-    .tableFactura tbody td {
-        text-align: center;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-    .ActualizarImagen2,.btnEditarCompra{
-        font-size: 11px;
-        padding: 1px;
-        width: 70%;
-    }
-    .imagenCompleta {
-        max-width: 20%;
-        max-height: 20%;
-    }
-   .imagenFactura{
-    height: 19%;
-    text-align: center;
-   }
-    
-
-
-    /* Mantiene el estilo de tus clases existentes */
-    .titleCompras {
-        width: 70%;
-        left: 55px;
-        text-align: center;
-    }
-
-    .compraTitlePage {
-        font-size: 25px;
-        text-align: center;
-    }
-
-    .containerCompraProductos {
-        width: 90%;
-        padding: 10px;
-    }
-
-    .buscarProducto {
-        width: 90%;
-    }
-    .paraProducto {
-        margin-bottom: 20px;
-        gap: 20px;
-    }
-
-    .sugerencias {
-        font-size: 14px;
-    }
-
-    .sugerencias li {
-        padding: 8px;
-    }
-
-    .ActualizarCompra,
-    .ActualizarImagen {
-        width: 40%;
-        font-size: 14px;
-        padding: 8px 15px;
-    }
-    .NuevaCompra, .ListarFacturas {
-        font-size: 14px;
-        padding: 5px;
-        width: 100%;
-    }
-  
-    .tableProducto th, .tableProducto td {
-        padding: 6px; /* Espaciado dentro de las celdas */
-        text-align: center; /* Alineación del texto */
-    }
-    
-}
-
-    
+  .input-file {
+    display: none; /* Ocultar el input original */
+  }

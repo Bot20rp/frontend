@@ -114,7 +114,7 @@ function RegisterClientPage() {
                          />
                     </div>
                 </div>
-                <button className='RegistrarCliente' type="submit">Registrar</button>
+                <button type="submit">Registrar</button>
             </form>
         </div>
     );

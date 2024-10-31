@@ -218,38 +218,3 @@ button:hover {
     border: none;
     cursor: pointer;
 }
-@media (max-width: 896px) {
-    .comboContenedor {
-        padding: 5px;
-    }
-
-    .ParaCombo input[type="text"] {
-        width: 100%;
-    }
- 
-    .costos input[type="number"],
-    .duracionCombo input[type="date"] {
-        width: 100%;
-    }
-
-    .costos,
-    .duracionCombo {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-
-    .tablaScroll th, 
-    .tablaScroll td {
-        font-size: 12px;
-    }
-
-    .tablaScroll th,.tablaScroll td  {
-        padding: 6px;
-    }
-    
-    .comboContenedor{
-        width: 100%;
-    }
-    
-}

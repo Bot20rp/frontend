@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import '../../css/AdmiInventarioCss/ProductsPage.css';
 import { insertarProducto, actualizarProducto, eliminarProducto } from '../../api/auth';
 import { useAuth } from '../../context/AuthContext';
@@ -12,16 +12,19 @@ function ProductsPage() {
         Precio: '',
         Categoria: '',
         Volumen: '',
-        Marca: '',  // Almacenará el ID de la marca seleccionada
-        Estante: '' // Almacenará el ID del estante seleccionado
+        Marca: '', 
+        Estante: ''
     });
 
     const [productos, setProductos] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
-    const [mostrarActualizar, setMostrarActualizar] = useState(false);
 
-    // Manejar los cambios en el formulario
+    useEffect(() => {
+        listar(); // Carga los productos al montar el componente
+    }, []);
+
+    // Manejar cambios en el formulario
     const handleChange = (e) => {
         setProducto({
             ...producto,
@@ -29,7 +32,7 @@ function ProductsPage() {
         });
     };
 
-    // Manejar la búsqueda de productos
+    // Manejar búsqueda de productos
     const handleSearch = (e) => {
         const textoBuscar = e.target.value.toLowerCase();
         const filas = tbodyProductos.current.querySelectorAll('tr');
@@ -41,7 +44,6 @@ function ProductsPage() {
 
     // Abrir el modal
     const openModal = () => {
-        console.log(tableVolumen);
         setModalVisible(true);
     };
 
@@ -54,7 +56,6 @@ function ProductsPage() {
     // Agregar producto a la tabla
     const agregarProducto = async (producto) => {
         try {
-            console.log(producto)
             await insertarProducto(producto);
             setProductos([...productos, producto]);
             resetForm();
@@ -71,34 +72,34 @@ function ProductsPage() {
             Precio: '',
             Categoria: '',
             Volumen: '',
-            Marca: '', // Asegúrate de que se reinicie
-            Estante: '' // Asegúrate de que se reinicie
+            Marca: '', 
+            Estante: ''
         });
         setIsEditing(false);
     };
 
     // Guardar o modificar producto
-    // Guardar o modificar producto
     const handleSave = async (e) => {
         e.preventDefault();
-        console.log(producto);
+        const productoData = {
+            id: producto.id,
+            Nombre: producto.Nombre,
+            Precio: producto.Precio,
+            Categoria: producto.Categoria, // Solo el ID
+            Volumen: producto.Volumen,     // Solo el ID
+            Marca: producto.Marca,         // Solo el ID
+            Estante: producto.Estante      // Solo el ID
+        };
+        console.log(productoData)
+        
         if (isEditing) {
-            // Envía solo los ID de los campos al modificar
-            await actualizarProducto({
-                ...producto,
-                Categoria: producto.Categoria,
-                Volumen: producto.Volumen,
-                Marca: producto.Marca,
-                Estante: producto.Estante,
-            });
-            const nuevosProductos = productos.map(p => p.id === producto.id ? producto : p);
-            setProductos(nuevosProductos);
+            await actualizarProducto(productoData);
+            setProductos(productos.map(p => p.id === producto.id ? producto : p));
         } else {
-            agregarProducto(producto);
+            agregarProducto(productoData);
         }
         closeModal();
     };
-
 
     // Eliminar producto
     const eliminarProductos = async (id) => {
@@ -117,7 +118,7 @@ function ProductsPage() {
         if (productoAModificar) {
             setProducto({
                 ...productoAModificar,
-                Categoria: productoAModificar.Categoria, // Asegura que usa solo el ID
+                Categoria: productoAModificar.Categoria, 
                 Volumen: productoAModificar.Volumen,
                 Marca: productoAModificar.Marca,
                 Estante: productoAModificar.Estante,
@@ -127,25 +128,20 @@ function ProductsPage() {
         }
     };
 
-
     // Listar productos
     const listar = () => {
-        try {
-            if (Array.isArray(productosBackend.data)) {
-                const productosFormateados = productosBackend.data.map((producto) => ({
-                    id: producto.ProductoID,
-                    Nombre: producto.Nombre,
-                    Precio: producto.Precio,
-                    Categoria: producto.Catego,
-                    Volumen: producto.Vol,
-                    Marca: producto.Marc,
-                    Estante: producto.Estant,
-                    Saldo: producto.Cantidad
-                }));
-                setProductos(productosFormateados);
-            }
-        } catch (error) {
-            console.log(error);
+        if (Array.isArray(productosBackend.data)) {
+            const productosFormateados = productosBackend.data.map((producto) => ({
+                id: producto.ProductoID,
+                Nombre: producto.Nombre,
+                Precio: producto.Precio,
+                Categoria: producto.Catego,
+                Volumen: producto.Vol,
+                Marca: producto.Marc,
+                Estante: producto.Estant,
+                Saldo: producto.Cantidad
+            }));
+            setProductos(productosFormateados);
         }
     };
 
@@ -191,7 +187,7 @@ function ProductsPage() {
                                 <td>{prod.Estante}</td>
                                 <td className="editProduct">
                                     {
-                                        user?.user.permisos.some((permiso) => permiso.Descripcion === "porder eliminar productos") &&
+                                        user?.user.permisos.some((permiso) => permiso.Descripcion === "poder eliminar productos") &&
                                         <button className="eliminarProduct" onClick={() => eliminarProductos(prod.id)}>Eliminar</button>
                                     }
                                     {
@@ -205,7 +201,6 @@ function ProductsPage() {
                 </table>
             </div>
 
-            {/* Mostrar el modal cuando modalVisible sea true */}
             {modalVisible && (
                 <div className="modal">
                     <div className="modal-content">
@@ -215,6 +210,7 @@ function ProductsPage() {
                             value={producto.id}
                             onChange={handleChange}
                             placeholder="ID de producto"
+                            disabled={isEditing}
                         />
                         <input
                             name="Nombre"
@@ -229,7 +225,6 @@ function ProductsPage() {
                             placeholder="Precio"
                         />
 
-                        {/* Select para Categoria */}
                         <label htmlFor="Categoria">Categoria</label>
                         <select
                             name="Categoria"
@@ -244,8 +239,7 @@ function ProductsPage() {
                             ))}
                         </select>
 
-                        {/* Select para Volumen */}
-                        <label htmlFor="Categoria">Volumen</label>
+                        <label htmlFor="Volumen">Volumen</label>
                         <select
                             name="Volumen"
                             value={producto.Volumen}
@@ -258,14 +252,14 @@ function ProductsPage() {
                                 </option>
                             ))}
                         </select>
-                        {/* Select para marcas */}
+
                         <label htmlFor="Marca">Marca</label>
                         <select
                             name="Marca"
                             value={producto.Marca}
                             onChange={handleChange}
                         >
-                            <option value="">Seleccione una marca</option>
+                            <option value="">Seleccione una Marca</option>
                             {tableMarca.data.map((marca) => (
                                 <option key={marca.MarcaID} value={marca.MarcaID}>
                                     {marca.Nombre}
@@ -273,14 +267,13 @@ function ProductsPage() {
                             ))}
                         </select>
 
-                        {/* Select para estantes */}
                         <label htmlFor="Estante">Estante</label>
                         <select
                             name="Estante"
                             value={producto.Estante}
                             onChange={handleChange}
                         >
-                            <option value="">Seleccione un estante</option>
+                            <option value="">Seleccione un Estante</option>
                             {tableEstante.data.map((estante) => (
                                 <option key={estante.EstanteID} value={estante.EstanteID}>
                                     {estante.Nombre}
@@ -291,9 +284,7 @@ function ProductsPage() {
                         <button className="btn" onClick={handleSave}>
                             {isEditing ? "Modificar" : "Guardar"}
                         </button>
-                        <button className="btn" onClick={closeModal}>
-                            Cancelar
-                        </button>
+                        <button className="btn" onClick={closeModal}>Cerrar</button>
                     </div>
                 </div>
             )}

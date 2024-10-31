@@ -173,10 +173,7 @@ function ProductsPage() {
                                 <td>{prod.Marca}</td>
                                 <td>{prod.Estante}</td>
                                 <td className="editProduct">
-                                    {
-                                        user?.user.permisos.some((permiso) => permiso.Descripcion === "poder eliminar productos") &&
-                                        <button className="eliminarProduct" onClick={() => eliminarProductos(prod.id)}>Eliminar</button>
-                                    }
+                                    <button className="eliminarProduct" onClick={() => eliminarProductos(prod.id)}>Eliminar</button>
                                     {
                                         user?.user.permisos.some((permiso) => permiso.Descripcion === "poder modificar productos") &&
                                         <button className="modificarProduct" onClick={() => modificarProducto(prod.id)}>Modificar</button>

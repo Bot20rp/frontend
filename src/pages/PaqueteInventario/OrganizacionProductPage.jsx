@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import '../../css/AdmiInventarioCss/OrganizacionProductosPage.css';
-import { insertarMarca, insertarEstante} from '../../api/auth';
+import { insertarMarca, insertarEstante } from '../../api/auth';
 
 function OrganizacionProductPage() {
     const [estantes, setEstantes] = useState([]);  // Lista para estantes
@@ -8,43 +8,51 @@ function OrganizacionProductPage() {
     const [formValues, setFormValues] = useState({
         Nombre: "",       // Inicializado como cadena vacía
         Region: "",       // Inicializado como cadena vacía
-        Ubicacion: ""     // Inicializado como cadena vacía
+        Ubicacion: "",    // Inicializado como cadena vacía
+        Volumen: ""       // Nuevo atributo Volumen
     });
     const modalEstante = useRef(null);
     const modalMarca = useRef(null);
+    const modalVolumen = useRef(null); // Referencia para el modal de Volumen
     const container = useRef(null);
 
     const handleInputChange = (e) => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value });
     };
 
-    const handleSaveEstante = async(e) => {
+    const handleSaveEstante = async (e) => {
         e.preventDefault();
         const nuevoEstante = { ...formValues };
         console.log('Estante guardado:', nuevoEstante); // Mostrar en consola
         try {
-            await insertarEstante(nuevoEstante)
+            await insertarEstante(nuevoEstante);
             resetForm();
-            closeModal(); 
+            closeModal();
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-
     };
 
-    const handleSaveMarca = async(e) => {
+    const handleSaveMarca = async (e) => {
         e.preventDefault();
         const nuevaMarca = { ...formValues };
         console.log('Marca guardada:', nuevaMarca); // Mostrar en consola
         try {
-            
-            await insertarMarca(nuevaMarca)
+            await insertarMarca(nuevaMarca);
             resetForm();
             closeModal();
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
+    };
 
+    const handleSaveVolumen = async (e) => {
+        e.preventDefault();
+        const nuevoVolumen = { ...formValues };
+        console.log('Volumen guardado:', nuevoVolumen); // Mostrar en consola
+        // Aquí podrías añadir la lógica para insertar el volumen en tu API
+        resetForm();
+        closeModal();
     };
 
     const openEstante = () => {
@@ -59,9 +67,16 @@ function OrganizacionProductPage() {
         container.current.classList.add('show2');
     };
 
+    const openVolumenModal = () => {
+        setFormValues({ Volumen: "" }); // Reiniciar campo de Volumen
+        modalVolumen.current.classList.add('show');
+        container.current.classList.add('show2');
+    };
+
     const closeModal = () => {
         modalEstante.current.classList.remove('show');
         modalMarca.current.classList.remove('show');
+        modalVolumen.current.classList.remove('show'); // Cerrar el modal de Volumen
         container.current.classList.remove('show2');
         resetForm(); // Reiniciar formulario
     };
@@ -70,7 +85,8 @@ function OrganizacionProductPage() {
         setFormValues({
             Nombre: "",
             Region: "",
-            Ubicacion: ""
+            Ubicacion: "",
+            Volumen: "" // Reiniciar Volumen también
         });
     };
 
@@ -80,6 +96,7 @@ function OrganizacionProductPage() {
                 <h1 className="titleOrganizacionPage">ORGANIZACION DE PRODUCTOS</h1>
                 <button className="openNuevoEstante" onClick={openEstante}>Nuevo Estante</button>
                 <button className="openNuevaMarca" onClick={openMarcaModal}>Nueva Marca</button>
+                <button className="openNuevoVolumen" onClick={openVolumenModal}>Nuevo Volumen</button> {/* Botón para abrir el modal de Volumen */}
 
                 {/* Puedes mantener aquí las tablas si lo deseas, pero por ahora no se actualizan */}
             </div>
@@ -106,6 +123,18 @@ function OrganizacionProductPage() {
                     <div className="buttons">
                         <button type="submit" className='saveMarca'>Guardar</button>
                         <button type="button" className='closeRegisterMarca' onClick={closeModal}>Cerrar</button>
+                    </div>
+                </form>
+            </div>
+
+            {/* Modal para volumen */}
+            <div className="modalVolumen" ref={modalVolumen}>
+                <form className="modalEvolumen" onSubmit={handleSaveVolumen}>
+                    <h1 className="TitleVolumen">Registrar Volumen</h1>
+                    <input className="formVolumen" placeholder="Volumen" name="Volumen" value={formValues.Volumen || ""} onChange={handleInputChange} required />
+                    <div className="buttons">
+                        <button type="submit" className='saveVolumen'>Guardar</button>
+                        <button type="button" className='closeRegisterVolumen' onClick={closeModal}>Cerrar</button>
                     </div>
                 </form>
             </div>

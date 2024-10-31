@@ -7,9 +7,12 @@ import 'jspdf-autotable'; // Importa la funcionalidad para tablas
 
 function UsuarioPages() {
   const { tableUser, user, roles } = useAuth();
+
   const [datos, setDatos] = useState([]);
   const [filtroNombre, setFiltroNombre] = useState('');
   const nuevosRoles = roles;
+  console.log("desde usu",roles);
+  conconsle.log(nuevosRoles);
   const [filtroInicial, setFiltroInicial] = useState('');
   const [filtroRol, setFiltroRol] = useState('');
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);

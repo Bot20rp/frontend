@@ -235,7 +235,7 @@ function ProductsPage() {
                             onChange={handleChange}
                         >
                             <option value="">Seleccione el Volumen</option>
-                            {tableVolumen.data.map((vol) => (
+                            {tableVolumen.data.data.map((vol) => (
                                 <option key={vol.VolumenID} value={vol.VolumenID}>
                                     {vol.Descripcion}
                                 </option>

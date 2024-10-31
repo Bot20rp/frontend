@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 
 function ProductsPage() {
     const tbodyProductos = useRef(null);
-    const { productosBackend, user } = useAuth();
+    const { productosBackend, user, tableEstante,tableMarca } = useAuth();
     const [producto, setProducto] = useState({
         id: '',
         Nombre: '',
@@ -56,6 +56,8 @@ function ProductsPage() {
             await insertarProducto(producto)
             setProductos([...productos, producto]);
             resetForm();
+            console.log(tableEstante);
+            console.log(tableMarca);
         } catch (error) {
             console.log(error)
         }

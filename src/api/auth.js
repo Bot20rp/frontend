@@ -177,6 +177,8 @@ export const insertarMarca = (data) => instance.post(`/createMarca`,{
     }
 }) 
 
+export const obtenerMarca = () => {return instance.get(`/obtMarca`)};
+
 //ESTANTE
 export const insertarEstante = (data) => instance.post(`/crearEst`,{
     data,
@@ -184,4 +186,6 @@ export const insertarEstante = (data) => instance.post(`/crearEst`,{
         'Content-Type': 'application/json',
     }
 }) 
+
+export const obtenerEstante = () => {return instance.get(`/crearEst`)};
 

@@ -117,7 +117,7 @@ function UsuarioPages() {
   const nuevosRoles = roles;
   console.log("desde usu", roles);
   console.log(nuevosRoles);
-  
+
 
   return (
     <div className="containerUsuario">
@@ -150,7 +150,7 @@ function UsuarioPages() {
             <option value="">Listar por Rol</option>
             {nuevosRoles && nuevosRoles.length > 0 ? (
               nuevosRoles.map((rol, index) => (
-                <option key={index} value={rol.RolID}>{rol.Nombre}</option>
+                <option key={index} value={rol.Nombre}>{rol.Nombre}</option>
               ))
             ) : (
               <option value="">No hay roles disponibles</option>
@@ -254,9 +254,13 @@ function UsuarioPages() {
               <option value="Femenino">Femenino</option>
             </select>
             <select name="rol" value={formActualizar.rol} onChange={manejarCambio}>
-              <option value="Administrador">Administrador</option>
-              <option value="Empleado">Empleado</option>
-              <option value="Cliente">Cliente</option>
+              {nuevosRoles && nuevosRoles.length > 0 ? (
+                nuevosRoles.map((rol, index) => (
+                  <option key={index} value={rol.id}>{rol.Nombre}</option>
+                ))
+              ) : (
+                <option value="">No hay roles disponibles</option>
+              )}
             </select>
             <button className="btn" onClick={confirmarActualizar}>Aceptar</button>
             <button className="btn" onClick={() => setMostrarActualizar(false)}>Cancelar</button>

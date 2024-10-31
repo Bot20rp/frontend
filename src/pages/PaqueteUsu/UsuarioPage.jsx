@@ -10,9 +10,6 @@ function UsuarioPages() {
 
   const [datos, setDatos] = useState([]);
   const [filtroNombre, setFiltroNombre] = useState('');
-  const nuevosRoles = roles;
-  console.log("desde usu", roles);
-  conconsle.log(nuevosRoles);
   const [filtroInicial, setFiltroInicial] = useState('');
   const [filtroRol, setFiltroRol] = useState('');
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
@@ -116,6 +113,10 @@ function UsuarioPages() {
       console.log("Roles cargados:", roles);
     }
   }, [roles]);
+
+  const nuevosRoles = roles;
+  console.log("desde usu", roles);
+  console.log(nuevosRoles);
   
 
   return (

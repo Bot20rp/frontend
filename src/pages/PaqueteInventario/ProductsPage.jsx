@@ -226,13 +226,21 @@ function ProductsPage() {
                                 </option>
                             ))}
                         </select>
-                        <input
+
+                        {/* Select para Volumen */}
+                        <label htmlFor="Categoria">Volumen</label>
+                        <select
                             name="Volumen"
                             value={producto.Volumen}
                             onChange={handleChange}
-                            placeholder="Volumen"
-                        />
-                        
+                        >
+                            <option value="">Seleccione el Volumen</option>
+                            {tableVolumen.data.map((vol) => (
+                                <option key={vol.VolumenID} value={vol.VolumenID}>
+                                    {vol.Descripcion}
+                                </option>
+                            ))}
+                        </select>
                         {/* Select para marcas */}
                         <label htmlFor="Marca">Marca</label>
                         <select

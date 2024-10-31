@@ -39,7 +39,7 @@
 /* Tabla de Productos */
 .tableProduct {
     width: 100%;
-    max-width: 1100px;
+    /* max-width: 1100px; */
     margin: 0 auto;
     border-collapse: collapse;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -172,6 +172,7 @@
     border: 1px solid #ccc;  /* Borde opcional para definir el área */
     border-radius: 8px; /* Esquinas redondeadas para un diseño más limpio */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para resaltar */
+    overflow-x: auto;
 }
 @media (max-width: 896px) {
     .buscarProduct{

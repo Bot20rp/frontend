@@ -71,6 +71,7 @@
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%;
     font-size: 12px;
     transition: background-color 0.3s ease;
 }
@@ -189,6 +190,7 @@
         width: 100%;
     }
     .eliminarProduct,.modificarProduct{
-        width: 80%;
+        width: 50%;
+        font-size: 10px;
     }
 }

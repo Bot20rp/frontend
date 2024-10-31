@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import '../../css/AdmiInventarioCss/OrganizacionProductosPage.css';
-import { insertarMarca, insertarEstante } from '../../api/auth';
+import { insertarMarca, insertarEstante,insertarVolumen } from '../../api/auth';
 
 function OrganizacionProductPage() {
     const [estantes, setEstantes] = useState([]);  // Lista para estantes
@@ -9,7 +9,7 @@ function OrganizacionProductPage() {
         Nombre: "",       // Inicializado como cadena vacía
         Region: "",       // Inicializado como cadena vacía
         Ubicacion: "",    // Inicializado como cadena vacía
-        Volumen: ""       // Nuevo atributo Volumen
+        Descripcion: ""       // Nuevo atributo Volumen
     });
     const modalEstante = useRef(null);
     const modalMarca = useRef(null);
@@ -50,9 +50,14 @@ function OrganizacionProductPage() {
         e.preventDefault();
         const nuevoVolumen = { ...formValues };
         console.log('Volumen guardado:', nuevoVolumen); // Mostrar en consola
-        // Aquí podrías añadir la lógica para insertar el volumen en tu API
-        resetForm();
-        closeModal();
+        try {
+            await insertarVolumen(nuevoVolumen)
+            resetForm();
+            closeModal();
+        } catch (error) {
+            console.log(error)
+        }
+
     };
 
     const openEstante = () => {
@@ -68,7 +73,7 @@ function OrganizacionProductPage() {
     };
 
     const openVolumenModal = () => {
-        setFormValues({ Volumen: "" }); // Reiniciar campo de Volumen
+        setFormValues({ Descripcion: "" }); // Reiniciar campo de Volumen
         modalVolumen.current.classList.add('show');
         container.current.classList.add('show2');
     };
@@ -86,7 +91,7 @@ function OrganizacionProductPage() {
             Nombre: "",
             Region: "",
             Ubicacion: "",
-            Volumen: "" // Reiniciar Volumen también
+            Descripcion: "" // Reiniciar Volumen también
         });
     };
 
@@ -131,7 +136,7 @@ function OrganizacionProductPage() {
             <div className="modalMarca" ref={modalVolumen}>
                 <form className="modalEMarca" onSubmit={handleSaveVolumen}>
                     <h1 className="TitleMarca">Registrar Volumen</h1>
-                    <input className="formMarca" placeholder="Volumen" name="Volumen" value={formValues.Volumen || ""} onChange={handleInputChange} required />
+                    <input className="formMarca" placeholder="Volumen" name="Descripcion" value={formValues.Descripcion || ""} onChange={handleInputChange} required />
                     <div className="buttons">
                         <button type="submit" className='saveMarca'>Guardar</button>
                         <button type="button" className='closeRegisterMarca' onClick={closeModal}>Cerrar</button>

@@ -33,7 +33,6 @@
     width: 100%;
     /* max-width: 1100px; */
     margin: 0 auto;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     /* table-layout: fixed; */
     border-radius: 8px;
 }
@@ -130,24 +129,21 @@
 .modal-content input:focus {
     border-color: #007bff;
     box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
-    outline: none;
 }
 
 .modal-content .btn {
     padding: 10px 20px;
-    border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
 }
 
 .tableContainer {
-    overflow-y: auto;  /* Muestra una barra de desplazamiento si el contenido excede la altura */
-    margin: 20px 0;    /* Margen alrededor de la tabla */
+     margin: 20px 0;    /* Margen alrededor de la tabla */
     border: 1px solid #ccc;  /* Borde opcional para definir el área */
     border-radius: 8px; /* Esquinas redondeadas para un diseño más limpio */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para resaltar */
-    overflow-x: auto;
+  
 }
 @media (max-width: 896px) {
     .buscarProduct{

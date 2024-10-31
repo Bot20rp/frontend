@@ -58,8 +58,12 @@ function UsuarioPages() {
 
   const actualizarDato = (id) => {
     const usuario = datos.find(dato => dato.id === id);
-    setFormActualizar(usuario);
-    setMostrarActualizar(true);
+    if (usuario) {
+      setFormActualizar(usuario);
+      setMostrarActualizar(true);
+    } else {
+      console.error('Usuario no encontrado');
+    }
   };
 
   const manejarCambio = (e) => {
@@ -206,7 +210,7 @@ function UsuarioPages() {
         <div className="modal">
           <div className="modal-content">
             <h3>Actualizar Usuario</h3>
-
+            {console.log(formActualizar)} {/* Para depurar */}
             {camposPorRol().includes('usuario') && (
               <>
                 <label htmlFor="usuario">Nombre</label>
@@ -275,27 +279,26 @@ function UsuarioPages() {
             )}
             {camposPorRol().includes('horarioInicio') && (
               <>
-                <label htmlFor="horarioInicio">Horario de Inicio</label>
+                <label htmlFor="horarioInicio">Horario Inicio</label>
                 <input
+                  type="time"
                   name="horarioInicio"
                   value={formActualizar.horarioInicio}
                   onChange={manejarCambio}
-                  placeholder="Horario de Inicio"
                 />
               </>
             )}
             {camposPorRol().includes('horarioFin') && (
               <>
-                <label htmlFor="horarioFin">Horario de Fin</label>
+                <label htmlFor="horarioFin">Horario Fin</label>
                 <input
+                  type="time"
                   name="horarioFin"
                   value={formActualizar.horarioFin}
                   onChange={manejarCambio}
-                  placeholder="Horario de Fin"
                 />
               </>
             )}
-
             <button className="btn" onClick={confirmarActualizar}>Actualizar</button>
             <button className="btn" onClick={() => setMostrarActualizar(false)}>Cancelar</button>
           </div>

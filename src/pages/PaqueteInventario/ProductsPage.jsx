@@ -54,7 +54,8 @@ function ProductsPage() {
     // Agregar producto a la tabla
     const agregarProducto = async (producto) => {
         try {
-            await insertarProducto(producto);
+            console.log(producto)
+            // await insertarProducto(producto);
             setProductos([...productos, producto]);
             resetForm();
         } catch (error) {
@@ -80,8 +81,7 @@ function ProductsPage() {
     const handleSave = async (e) => {
         e.preventDefault();
         if (isEditing) {
-            // await actualizarProducto(producto);
-            console.log(producto)
+            await actualizarProducto(producto);
             const nuevosProductos = productos.map(p => p.id === producto.id ? producto : p);
             setProductos(nuevosProductos);
         } else {

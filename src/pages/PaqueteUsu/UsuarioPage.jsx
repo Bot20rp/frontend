@@ -71,7 +71,8 @@ function UsuarioPages() {
 
   const confirmarActualizar = async () => {
     try {
-      await actualizarUsuario(formActualizar);
+      console.log(formActualizar)
+      // await actualizarUsuario(formActualizar);
       setDatos(datos.map(dato => (dato.id === formActualizar.id ? formActualizar : dato)));
       setMostrarActualizar(false); // Ocultar la ventana modal después de actualizar
     } catch (error) {

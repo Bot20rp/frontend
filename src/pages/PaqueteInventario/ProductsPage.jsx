@@ -2,18 +2,20 @@ import React, { useRef, useState } from 'react';
 import '../../css/AdmiInventarioCss/ProductsPage.css';
 import { insertarProducto, actualizarProducto, eliminarProducto } from '../../api/auth';
 import { useAuth } from '../../context/AuthContext';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 function ProductsPage() {
     const tbodyProductos = useRef(null);
-    const { productosBackend, user, tableEstante, tableMarca, tableCategoria,tableVolumen } = useAuth();
+    const { productosBackend, user, tableEstante, tableMarca, tableCategoria, tableVolumen } = useAuth();
     const [producto, setProducto] = useState({
         id: '',
         Nombre: '',
         Precio: '',
         Categoria: '',
         Volumen: '',
-        Marca: '',  // Almacenará el ID de la marca seleccionada
-        Estante: '' // Almacenará el ID del estante seleccionado
+        Marca: '',
+        Estante: ''
     });
 
     const [productos, setProductos] = useState([]);
@@ -21,7 +23,6 @@ function ProductsPage() {
     const [modalVisible, setModalVisible] = useState(false);
     const [mostrarActualizar, setMostrarActualizar] = useState(false);
 
-    // Manejar los cambios en el formulario
     const handleChange = (e) => {
         setProducto({
             ...producto,
@@ -29,7 +30,6 @@ function ProductsPage() {
         });
     };
 
-    // Manejar la búsqueda de productos
     const handleSearch = (e) => {
         const textoBuscar = e.target.value.toLowerCase();
         const filas = tbodyProductos.current.querySelectorAll('tr');
@@ -39,19 +39,16 @@ function ProductsPage() {
         });
     };
 
-    // Abrir el modal
     const openModal = () => {
         console.log(tableVolumen);
         setModalVisible(true);
     };
 
-    // Cerrar el modal
     const closeModal = () => {
         setModalVisible(false);
         resetForm();
     };
 
-    // Agregar producto a la tabla
     const agregarProducto = async (producto) => {
         try {
             console.log(producto)
@@ -63,7 +60,6 @@ function ProductsPage() {
         }
     };
 
-    // Resetear formulario
     const resetForm = () => {
         setProducto({
             id: '',
@@ -71,13 +67,12 @@ function ProductsPage() {
             Precio: '',
             Categoria: '',
             Volumen: '',
-            Marca: '', // Asegúrate de que se reinicie
-            Estante: '' // Asegúrate de que se reinicie
+            Marca: '',
+            Estante: ''
         });
         setIsEditing(false);
     };
 
-    // Guardar o modificar producto
     const handleSave = async (e) => {
         e.preventDefault();
         console.log(producto);
@@ -91,7 +86,6 @@ function ProductsPage() {
         closeModal();
     };
 
-    // Eliminar producto
     const eliminarProductos = async (id) => {
         try {
             await eliminarProducto(id);
@@ -102,13 +96,12 @@ function ProductsPage() {
         }
     };
 
-    // Modificar producto
     const modificarProducto = (id) => {
         const productoAModificar = productos.find(p => p.id === id);
         if (productoAModificar) {
             setProducto({
                 ...productoAModificar,
-                Categoria: productoAModificar.Categoria, // Asegura que usa solo el ID
+                Categoria: productoAModificar.Categoria,
                 Volumen: productoAModificar.Volumen,
                 Marca: productoAModificar.Marca,
                 Estante: productoAModificar.Estante,
@@ -118,8 +111,6 @@ function ProductsPage() {
         }
     };
     
-
-    // Listar productos
     const listar = () => {
         try {
             if (Array.isArray(productosBackend.data)) {
@@ -140,6 +131,30 @@ function ProductsPage() {
         }
     };
 
+    // Generar PDF con la lista de productos
+    const generarReportePDF = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Productos', 20, 20);
+
+        const productosData = productos.map(prod => [
+            prod.id,
+            prod.Nombre,
+            prod.Precio,
+            prod.Saldo,
+            prod.Categoria,
+            prod.Volumen,
+            prod.Marca,
+            prod.Estante
+        ]);
+
+        doc.autoTable({
+            head: [['Id', 'Nombre', 'Precio', 'Saldo', 'Categoria', 'Volumen', 'Marca', 'Estante']],
+            body: productosData
+        });
+
+        doc.save('Reporte_Productos.pdf');
+    };
+
     return (
         <div className="containerProduct">
             <h1 className="titleProduct">Productos</h1>
@@ -153,6 +168,9 @@ function ProductsPage() {
             </button>
             <button className="openProduct" onClick={listar}>
                 Listar Productos
+            </button>
+            <button className="openProduct" onClick={generarReportePDF}>
+                Generar Reporte PDF
             </button>
             <div className="tableContainer">
                 <table className="tableProduct">
@@ -196,7 +214,6 @@ function ProductsPage() {
                 </table>
             </div>
 
-            {/* Mostrar el modal cuando modalVisible sea true */}
             {modalVisible && (
                 <div className="modal">
                     <div className="modal-content">
@@ -220,7 +237,6 @@ function ProductsPage() {
                             placeholder="Precio"
                         />
 
-                        {/* Select para Categoria */}
                         <label htmlFor="Categoria">Categoria</label>
                         <select
                             name="Categoria"
@@ -235,8 +251,7 @@ function ProductsPage() {
                             ))}
                         </select>
 
-                        {/* Select para Volumen */}
-                        <label htmlFor="Categoria">Volumen</label>
+                        <label htmlFor="Volumen">Volumen</label>
                         <select
                             name="Volumen"
                             value={producto.Volumen}
@@ -249,7 +264,7 @@ function ProductsPage() {
                                 </option>
                             ))}
                         </select>
-                        {/* Select para marcas */}
+
                         <label htmlFor="Marca">Marca</label>
                         <select
                             name="Marca"
@@ -264,7 +279,6 @@ function ProductsPage() {
                             ))}
                         </select>
 
-                        {/* Select para estantes */}
                         <label htmlFor="Estante">Estante</label>
                         <select
                             name="Estante"

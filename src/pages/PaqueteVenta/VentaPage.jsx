@@ -44,12 +44,12 @@ function VentaPage() {
           </table>
         </div>
 
+        <h2>Detalle De Pago</h2>
+        
         <div id='fact5'>
           <button>efectivo</button>
           <button>qr</button>
         </div>
-
-        <h2>Detalle De Pago</h2>
 
       </div>
       <div className='detalleFactura'>

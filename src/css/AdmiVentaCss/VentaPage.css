@@ -7,105 +7,78 @@
     height: auto;
     min-height: 100vh;
     margin: 0;
-    padding: 0;
-    background-color: #ffff;
     padding: 20px;
     box-sizing: border-box;
-    
+    background-color: #f1f5f9; /* Fondo general ligeramente gris para contraste */
 }
 
 .facturaPrincipal {
     margin: 0;
-    padding: 10px;
-    min-width: 65%; 
-    /* height: 100px; */
+    padding: 20px;
+    min-width: 65%;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background: #ffff;
-    border: 1px solid #ccc;
+    background: #ffffff; /* Fondo blanco brillante */
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
-
-.facturaPrincipal #fact1{
-    display: flex;
-    padding: 10px;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content:left;
-}
-
-.facturaPrincipal #fact2{
-    display: flex;
-    padding: 10px;
-    gap: 20px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: left;
-}
-
-.facturaPrincipal #fact3{
-    display: flex;
-    padding: 10px;
-    gap: 20px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: left;
-}
-
-.facturaPrincipal #fact4{
-    display: flex;
-    padding: 10px;
-    gap: 20px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: left;
-}
-
-.facturaPrincipal #fact4 #table4{
-    display: flexbox;
-    width: 100%;
-}
-
-.facturaPrincipal #fact5{
-    display: flex;
-    padding: 10px;
-    gap: 20px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 
 .detalleFactura {
     margin: 10px;
-    flex-basis: 30%; /* Define el ancho base como porcentaje */
-    height: 100vh; /* Asegura que la altura sea la misma */
-    /* background: rgba(255, 255, 255, 0.259); */
-    background-color: #f7f9fc;
+    flex-basis: 30%;
+    height: 100vh;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 20px;
 }
 
-input[type="date"]{
+.facturaPrincipal #fact1,
+.facturaPrincipal #fact2,
+.facturaPrincipal #fact3,
+.facturaPrincipal #fact4,
+.facturaPrincipal #fact5 {
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.facturaPrincipal #fact5 {
+    justify-content: center;
+}
+
+.facturaPrincipal #fact4 #table4{
+    flex-direction: column;
+    width: 100%;
+}
+
+input[type="date"],
+input[type="text"],
+.seleccion {
     margin: 0;
-    padding: 0;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para inputs */
+}
+
+input[type="date"] {
     width: 200px;
     height: 50px;
-    border: 1px solid #ccc;
 }
 
-input[type="text"]{
-    margin: 0;
-    padding: 0;
-    height: auto;
+input[type="text"] {
     width: 40%;
     min-width: 150px;
-    background: #ffff;
-    border: 1px solid #ccc;
 }
 
-.seleccion{
-    margin: 0;
-    padding: 0;
+.seleccion {
     width: 200px;
     height: 50px;
 }
@@ -118,16 +91,13 @@ input[type="text"]{
     }
 
     .facturaPrincipal {
-        width: 100%; /* Ocupa el ancho completo */
-        height: auto; 
+        width: 100%;
+        height: auto;
     }
 
     .detalleFactura {
-        width: 100%; /* Se alinea al 100% debajo de facturaPrincipal */
-        margin-top: 10px; /* Agrega un espacio entre los elementos */
-        height: auto; /* Permite que la altura se ajuste al contenido */
+        width: 100%;
+        margin-top: 10px;
+        height: auto;
     }
 }
-
-
-

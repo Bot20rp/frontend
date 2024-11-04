@@ -32,6 +32,7 @@ import ProductsPage from "./pages/PaqueteInventario/ProductsPage.jsx";
 import { Lote } from "./pages/PaqueteCompra/Lote.jsx";
 import UsuarioPages from "./pages/PaqueteUsu/UsuarioPage.jsx";
 import { Bitacora } from "./pages/PaqueteUsu/Bitacora.jsx";
+import VentaPage from "./pages/PaqueteVenta/VentaPage.jsx";
 /* ------------------------------------------------------------ */
 
 function Main() {
@@ -60,6 +61,7 @@ function Main() {
         <Route path="/organiz" element={<OrganizacionProductPage />} />
         <Route path="/combo" element={<CombosPage />} />
         <Route path="/compras" element={<Compras />} />
+        <Route path="/factura" element={<VentaPage/>} />
         <Route path="*" element={<NotFound />} />
         {/* auqi elimine el rol de cliente ___ */}
         <Route path="/dasboard/*" element ={<ProtectedRoute roles={['Administrador','Empleado']} element={<ProtecComponente component={Homed} />} />

@@ -18,6 +18,7 @@ import { Lote } from "../../pages/PaqueteCompra/Lote";
 import PrivilegioPages from "../../pages/PaqueteUsu/PrivilegioPages";
 import OrganizacionProductPage from "../../pages/PaqueteInventario/OrganizacionProductPage";
 import Compras from "../../pages/PaqueteCompra/Compras";
+import VentaPage from "../../pages/PaqueteVenta/VentaPage";
 import { Perfil } from "../Perfi/Perfil";
 
 /* VAMOS A PROTEGER LAS RUTAS */
@@ -200,6 +201,7 @@ export const Homed = () => {
           element={<ProtectedRoute roles={["Administrador", "Empleado"]} />}
         >
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/venta" element={<VentaPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

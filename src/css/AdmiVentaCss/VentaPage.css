@@ -1,0 +1,123 @@
+.contPrincipalVenta {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 20px;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.facturaPrincipal {
+    margin: 0;
+    padding: 10px;
+    min-width: 65%; 
+    /* height: 100px; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.facturaPrincipal #fact1{
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content:left;
+}
+
+.facturaPrincipal #fact2{
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.facturaPrincipal #fact3{
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.facturaPrincipal #fact4{
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.facturaPrincipal #fact4 #table4{
+    display: flexbox;
+    width: 100%;
+}
+
+.facturaPrincipal #fact5{
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.detalleFactura {
+    margin: 10px;
+    flex-basis: 30%; /* Define el ancho base como porcentaje */
+    height: 100vh; /* Asegura que la altura sea la misma */
+    background: rgba(92, 89, 89, 0.259);
+    border-radius: 10px;
+}
+
+input[type="date"]{
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    height: 50px;
+}
+
+input[type="text"]{
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: 400px;
+    background: #ffff;
+}
+
+.seleccion{
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    height: 50px;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 1200px) {
+    .contPrincipalVenta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .facturaPrincipal {
+        width: 100%; /* Ocupa el ancho completo */
+        height: auto; 
+    }
+
+    .detalleFactura {
+        width: 100%; /* Se alinea al 100% debajo de facturaPrincipal */
+        margin-top: 10px; /* Agrega un espacio entre los elementos */
+        height: auto; /* Permite que la altura se ajuste al contenido */
+    }
+}
+
+
+

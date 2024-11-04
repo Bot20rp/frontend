@@ -201,7 +201,7 @@ export const Homed = () => {
           element={<ProtectedRoute roles={["Administrador", "Empleado"]} />}
         >
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/venta" element={<VentaPage />} />
+          <Route path="/factura" element={<VentaPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

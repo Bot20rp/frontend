@@ -261,5 +261,10 @@ const enlaceventa =[
     label: "Combos",
     icon: <MdOutlineAnalytics />,
     to: "/dasboard/combos",
+  },
+  {
+    label: "Facturacion",
+    icon: <MdOutlineAnalytics />,
+    to: "/dasboard/factura",
   }
 ]

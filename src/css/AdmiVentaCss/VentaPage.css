@@ -15,16 +15,21 @@
 }
 
 .facturaPrincipal {
+    color: #0044fff4;
     margin: 0;
     padding: 20px;
     min-width: 65%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0;
     background: #ffffffff; /* Fondo blanco brillante */
     border: 1px solid #ddd;
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.facturaPrincipal #pago{
+    text-align: right;
 }
 
 .facturaPrincipal #fact1{
@@ -32,7 +37,7 @@
     padding: 10px;
     gap: 20px;
     flex-wrap: wrap;
-    justify-content:left;
+    justify-content:right;
 }
 
 .facturaPrincipal #fact2{
@@ -42,6 +47,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: left;
+}
+
+.facturaPrincipal #fact2 #opt{
+    display: flex;
+    padding: 0;
+    width: 40%;
 }
 
 .facturaPrincipal #fact3{
@@ -63,8 +74,40 @@
 }
 
 .facturaPrincipal #fact4 #table4{
-    display: flexbox;
+    margin-top: 30px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.facturaPrincipal #fact4 #table4 {
+    max-height: auto; 
+    overflow-y: auto;
+}
+
+.facturaPrincipal #fact4 #table4 table {
     width: 100%;
+    border-collapse: collapse;
+}
+
+.facturaPrincipal #fact4 #table4 th, 
+.facturaPrincipal #fact4 #table4 td {
+    padding: 12px;
+    
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.facturaPrincipal #fact4 #table4 th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+.facturaPrincipal #fact4 #table4 tr:nth-child(even) {
+    background-color: #ffffff;
+    
 }
 
 .facturaPrincipal #fact5{
@@ -78,16 +121,40 @@
 
 
 .detalleFactura {
+    display: flex;
     flex-basis: 30%;
     height: 100vh;
-    background-color: #ffffff;
+    background-color: #2ecffb3b;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     padding: 20px;
+    flex-direction: column;
+    gap: 20px;
 }
 
+.detalleFactura #pedidos,
+.detalleFactura #resumen{
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    height: auto;
+    min-height: 150px;
+
+}
+
+.detalleFactura #pedidos #textVenta,
+.detalleFactura #resumen #textVenta{
+    color:#0044fff4 ;
+    text-align: center;
+    background-color: #ccc;
+    width: 100%;
+}
+
+
+
 input[type="date"]{
+    background: #ccc;
     margin: 0;
     padding: 0;
     width: 200px;
@@ -98,18 +165,32 @@ input[type="date"]{
 input[type="text"]{
     margin: 0;
     padding: 0;
-    height: auto;
+    height: 50px;
     width: 40%;
     min-width: 150px;
     background: #ffff;
     border: 1px solid #ccc;
 }
 
-.seleccion{
+input[type="number"]{
     margin: 0;
     padding: 0;
+    height: 50px;
+    width: 100%;
+    min-width: 150px;
+    background: #ffff;
+    border: 1px solid #ccc;
+}
+
+
+.seleccion{
+    margin: 0;
+    padding: 5px;
     width: 200px;
     height: 50px;
+    background-color: #ccc;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 /* Ajuste para pantallas pequeñas */
@@ -131,5 +212,31 @@ input[type="text"]{
     }
 }
 
+
+.sugerenciasVenta {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    position: absolute;
+    width: calc(100% - 50%); /* Se ajusta a todo el ancho del contenedor */
+    z-index: 1000;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    top: 58%; 
+}
+
+.sugerenciasVenta li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.sugerenciasVenta li:hover {
+    background-color: #83eaee;
+}
 
 

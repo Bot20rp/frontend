@@ -19,6 +19,7 @@ import PrivilegioPages from "../../pages/PaqueteUsu/PrivilegioPages";
 import OrganizacionProductPage from "../../pages/PaqueteInventario/OrganizacionProductPage";
 import Compras from "../../pages/PaqueteCompra/Compras";
 import VentaPage from "../../pages/PaqueteVenta/VentaPage";
+import AperturaPage from "../../pages/PaqueteVenta/AperturaPage";
 import { Perfil } from "../Perfi/Perfil";
 
 /* VAMOS A PROTEGER LAS RUTAS */
@@ -202,6 +203,7 @@ export const Homed = () => {
         >
           <Route path="/login" element={<LoginPage />} />
           <Route path="/factura" element={<VentaPage />} />
+          <Route path="/apertura" element={<AperturaPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

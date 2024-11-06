@@ -258,6 +258,11 @@ const enlacesecundario = [
 
 const enlaceventa =[
   {
+    label: "Aperturas",
+    icon: <MdOutlineAnalytics />,
+    to: "/dasboard/apertura",
+  },
+  {
     label: "Combos",
     icon: <MdOutlineAnalytics />,
     to: "/dasboard/combos",

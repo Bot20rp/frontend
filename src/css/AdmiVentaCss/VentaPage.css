@@ -64,7 +64,8 @@
     justify-content: left;
 }
 
-.facturaPrincipal #fact4{
+
+.facturaPrincipal45 #fact4{
     display: flex;
     gap: 20px;
     flex-direction: row;
@@ -172,7 +173,7 @@
 input[type="date"]{
     background: #ccc;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     width: 200px;
     height: 50px;
     border: 1px solid #ccc;
@@ -180,7 +181,7 @@ input[type="date"]{
 
 input[type="text"]{
     margin: 0;
-    padding: 0;
+    padding: 10px;
     height: 50px;
     width: 40%;
     min-width: 150px;
@@ -190,10 +191,10 @@ input[type="text"]{
 
 input[type="number"]{
     margin: 0;
-    padding: 0;
+    padding: 10px;
     height: 50px;
     width: 100%;
-    min-width: 150px;
+    min-width: 50px;
     background: #ffff;
     border: 1px solid #ccc;
 }

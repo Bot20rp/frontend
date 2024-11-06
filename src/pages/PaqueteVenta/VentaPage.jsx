@@ -195,7 +195,6 @@ function VentaPage() {
                     <td className="precio">{product.precio}</td>
                     <td className="cantidad">
                       <input
-                        id='ds'
                         type="number"
                         name="cantidad"
                         value={product.cantidad}

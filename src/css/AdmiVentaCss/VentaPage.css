@@ -73,6 +73,7 @@
     justify-content: left;
     width: 100%;
     overflow-x: scroll;
+    scroll-behavior: inherit;
 }
 #table4 {
     width: 100%;

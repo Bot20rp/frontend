@@ -255,12 +255,13 @@ input[type="number"]{
     max-height: 200px;
     overflow-y: auto;
     background-color: white;
-    position: absolute;
+    position:static;
     width: calc(100% - 50%); /* Se ajusta a todo el ancho del contenedor */
     z-index: 1000;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     top: 58%; 
+    margin-top: -20px;
 }
 
 .sugerenciasVenta li {
@@ -279,4 +280,8 @@ input[type="number"]{
 
 .MetodoPago button{
     background-color: #db0707;
+}
+
+#fact5 button{
+    width: 100px;
 }

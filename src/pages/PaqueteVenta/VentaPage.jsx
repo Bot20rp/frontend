@@ -8,8 +8,10 @@ function VentaPage() {
   const [productosEnVenta, setProductosEnVenta] = useState([]);
   const [pagoQR, setPagoQR] = useState([]);
   const [pagoEfectivo, setPagoEfectivo] = useState([]);
+  const [pagoTarjeta, setPagoTarjeta] = useState([]);
   const [mostrarQR, setMostrarQR] = useState(false);
   const [mostrarEfectivo, setMostrarEfectivo] = useState(false);
+  const [mostrarTarjeta, setMostrarTarjeta] = useState(false);
 
   const producto = [
     { id: 1, nombre: "Coca-Cola", precio: 1.5 },
@@ -85,16 +87,29 @@ function VentaPage() {
     const totalRestante = totalVenta - totalPago;
     setPagoQR([...pagoQR, totalRestante > 0 ? totalRestante : 0]);
   };
-  
+
   const handleAddEfectivo = () => {
     const totalRestante = totalVenta - totalPago;
     setPagoEfectivo([...pagoEfectivo, totalRestante > 0 ? totalRestante : 0]);
   };
 
+  const handleAddTarjeta = () => {
+    const totalRestante = totalVenta - totalPago;
+    setPagoTarjeta([...pagoTarjeta, totalRestante > 0 ? totalRestante : 0]);
+  }
+
+
+
   const handleQRChange = (index, value) => {
     const updatedQR = [...pagoQR];
     updatedQR[index] = Number(value);
     setPagoQR(updatedQR);
+  };
+
+  const handleTarjetaChange = (index, value) => {
+    const updatedTarjeta = [...pagoTarjeta];
+    updatedTarjeta[index] = Number(value);
+    setMostrarTarjeta(updatedTarjeta);
   };
 
   const handleEfectivoChange = (index, value) => {
@@ -110,6 +125,10 @@ function VentaPage() {
   const handleRemoveEfectivo = (index) => {
     setPagoEfectivo(pagoEfectivo.filter((_, i) => i !== index));
   };
+
+  const handleRemoveTarjeta = (index) => {
+    setPagoTarjeta(pagoTarjeta.filter((_, i) => i !== index));
+  }
 
   const totalVenta = productosEnVenta.reduce(
     (total, producto) => total + producto.cantidad * producto.precio,
@@ -210,24 +229,43 @@ function VentaPage() {
 
         <h3>Detalle De Pago</h3>
         <div id='fact5'>
+          <button onClick={() => { setMostrarTarjeta(true); handleAddTarjeta(); }}>TARJETA</button>
           <button onClick={() => { setMostrarEfectivo(true); handleAddEfectivo(); }}>EFECTIVO</button>
           <button onClick={() => { setMostrarQR(true); handleAddQR(); }}>QR</button>
         </div>
 
+        {mostrarTarjeta && (
+          <div>
+            {pagoTarjeta.length > 0 && <h2>Pagos por Tarjeta</h2>}
+            {pagoTarjeta.map((amount, index) => (
+              <div key={`qr-${index}`} className='MetodoPago'>
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => handleTarjetaChange(index, e.target.value)}
+                  placeholder="Pago con Tarjeta"
+                />
+                <button onClick={() => handleRemoveTarjeta(index)}>x</button>
+              </div>
+            ))}
+          </div>
+        )}
+
+
         {mostrarEfectivo && (
           <div>
-          {pagoEfectivo.length > 0 && <h2>Pagos por Efectivo</h2>}
-          {pagoEfectivo.map((amount, index) => (
-            <div key={`efectivo-${index}`} className='MetodoPago' >
-              <input
-                type="number"
-                value={amount}
-                onChange={(e) => handleEfectivoChange(index, e.target.value)}
-                placeholder="Pago en Efectivo"
-              />
-              <button onClick={() => handleRemoveEfectivo(index)}>x</button>
-            </div>
-          ))}
+            {pagoEfectivo.length > 0 && <h2>Pagos por Efectivo</h2>}
+            {pagoEfectivo.map((amount, index) => (
+              <div key={`efectivo-${index}`} className='MetodoPago' >
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => handleEfectivoChange(index, e.target.value)}
+                  placeholder="Pago en Efectivo"
+                />
+                <button onClick={() => handleRemoveEfectivo(index)}>x</button>
+              </div>
+            ))}
           </div>
         )}
 

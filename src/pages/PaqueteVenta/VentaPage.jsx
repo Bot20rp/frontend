@@ -104,12 +104,24 @@ function VentaPage() {
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
-    const nuevoValor = Math.max(1, value);
+    
+    // Permitir campo vacío, pero sin valores negativos
+    const nuevoValor = value === '' ? '' : Math.max(0, value);
+  
     const nuevoProducto = [...productosEnVenta];
     nuevoProducto[index][name] = nuevoValor;
+  
+    // Calcular importe solo si cantidad tiene un valor numérico
+    nuevoProducto[index].importe = nuevoValor ? nuevoValor * nuevoProducto[index].precio : 0;
+  
     setProductosEnVenta(nuevoProducto);
   };
+  
 
+  const handleRemonveProduct = (index) => {
+    const newProducts = productosEnVenta.filter((_, i) => i !== index);
+    setProductosEnVenta(newProducts);
+  };
 
   return (
     <div className='contPrincipalVenta'>
@@ -191,14 +203,11 @@ function VentaPage() {
                       />
                     </td>
                     <td className="importe">
-                      <input
-                        id='ds'
-                        type="number"
-                        value={product.importe}
-                      />
+                      {product.cantidad * product.precio}
                     </td>
+
                     <td className="accion">
-                      <button onClick={() => handleRemoveProduct(index)}>Eliminar</button>
+                      <button onClick={() => handleRemonveProduct(index)}>Eliminar</button>
                     </td>
                   </tr>
                 ))}

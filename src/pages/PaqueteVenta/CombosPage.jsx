@@ -54,7 +54,7 @@ function CombosPage() {
 
     const handleInputChange = (index, event) => {
         const { name, value } = event.target;
-        const nuevoValor = Math.max(1, value);
+        const nuevoValor =value === '' ? '' : Math.max(0, value);
         const nuevoProducto = [...productosEnCombo];
         nuevoProducto[index][name] = nuevoValor;
         setProductosEnCombo(nuevoProducto);

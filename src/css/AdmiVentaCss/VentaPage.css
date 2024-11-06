@@ -72,12 +72,13 @@
     flex-wrap: wrap;
     justify-content: left;
     width: 100%;
-    overflow-x: scroll;
     scroll-padding-inline-start: 0;
+    text-overflow: ellipsis;
+    overflow-x:auto;
 }
 #table4 {
     width: 100%;
-    /* table-layout: fixed; */
+    table-layout:auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
   }
@@ -221,6 +222,7 @@ input[type="number"]{
 
     .facturaPrincipal {
         width: 100%; /* Ocupa el ancho completo */
+        overflow-y: auto;
         height: auto; 
     }
 

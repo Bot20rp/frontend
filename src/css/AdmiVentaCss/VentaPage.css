@@ -18,7 +18,7 @@
     color: #0044fff4;
     margin: 0;
     padding: 20px;
-    min-width: 65%;
+    width: 75%;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -66,49 +66,61 @@
 
 .facturaPrincipal #fact4{
     display: flex;
-    padding: 10px;
     gap: 20px;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: left;
-}
-
-.facturaPrincipal #fact4 #table4{
-    margin-top: 30px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-
-.facturaPrincipal #fact4 #table4 {
-    max-height: auto; 
-    overflow-y: auto;
-}
-
-.facturaPrincipal #fact4 #table4 table {
     width: 100%;
-    border-collapse: collapse;
 }
-
-.facturaPrincipal #fact4 #table4 th, 
-.facturaPrincipal #fact4 #table4 td {
+#table4 {
+    width: 100%;
+    table-layout: fixed;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  #table4 th,
+  #table4 td {
     padding: 12px;
-    
     text-align: left;
     border-bottom: 1px solid #ddd;
     font-size: 16px;
-}
-
-.facturaPrincipal #fact4 #table4 th {
-    background-color: #3498db;
-    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  /* Ancho de cada columna */
+  .codigo {
+    width: 15%; /* Ajusta el valor para el ancho deseado */
+  }
+  
+  .descripcion {
+    width: 30%;
+  }
+  
+  .precio,
+  .cantidad,
+  .importe {
+    width: 25%;
+  }
+  
+  .accion {
+    width: 15%;
+  }
+  
+  
+  #table4 th {
+    background-color: #eeeeee;
+    color: rgb(0, 0, 0);
     font-weight: bold;
-}
-
-.facturaPrincipal #fact4 #table4 tr:nth-child(even) {
+  }
+  
+  #table4 tr:nth-child(even) {
     background-color: #ffffff;
-    
-}
+  }
+  
+  
 
 .facturaPrincipal #fact5{
     display: flex;
@@ -122,7 +134,7 @@
 
 .detalleFactura {
     display: flex;
-    flex-basis: 30%;
+    flex-basis: 25%;
     height: 100vh;
     background-color: #2ecffb3b;
     border: 1px solid #ddd;
@@ -139,7 +151,7 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     height: auto;
-    min-height: 150px;
+    min-height: 250px;
 
 }
 
@@ -149,6 +161,10 @@
     text-align: center;
     background-color: #ccc;
     width: 100%;
+}
+
+.detalleFactura #siguiente{
+    background-color: #27db07;
 }
 
 

@@ -102,6 +102,14 @@ function VentaPage() {
     }
   };
 
+  const handleInputChange = (index, event) => {
+    const { name, value } = event.target;
+    const nuevoValor = Math.max(1, value);
+    const nuevoProducto = [...productosEnVenta];
+    nuevoProducto[index][name] = nuevoValor;
+    setProductosEnVenta(nuevoProducto);
+  };
+
 
   return (
     <div className='contPrincipalVenta'>
@@ -154,45 +162,51 @@ function VentaPage() {
 
         <h3>Detalle Venta</h3>
 
-        <div id='fact4'>
-          <table id='table4'>
-            <thead>
-              <th>Codigo</th>
-              <th>Descripcion</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Importe</th>
-            </thead>
-          </table>
-          <tbody>
-            {productosEnVenta.map((product, index) => (
-              <tr key={index}>
-                <td>{product.id}</td>
-                <td>{product.nombre}</td>
-                <td>{product.precio}</td>
-                <td>
-                  <input
-                    type='number'
-                    name='cantidad'
-                    value={product.cantidad}
-                    onChange={(event) => handleInputChange(index, event)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type='number'
-                    name='importe'
-                    value={product.cantidad}
-                    onChange={(event) => handleInputChange(index, event)}
-                  />
-                </td>
-                <td>
-                  <button onClick={() => handleRemonveProduct(index)}>Eliminar</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+        <div className="facturaPrincipal45">
+          <div id="fact4">
+            <table id="table4">
+              <thead>
+                <tr>
+                  <th className="codigo">Codigo</th>
+                  <th className="descripcion">Descripcion</th>
+                  <th className="precio">Precio</th>
+                  <th className="cantidad">Cantidad</th>
+                  <th className="importe">Importe</th>
+                  <th className="accion">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                {productosEnVenta.map((product, index) => (
+                  <tr key={index}>
+                    <td className="codigo">{product.id}</td>
+                    <td className="descripcion">{product.nombre}</td>
+                    <td className="precio">{product.precio}</td>
+                    <td className="cantidad">
+                      <input
+                        id='ds'
+                        type="number"
+                        name="cantidad"
+                        value={product.cantidad}
+                        onChange={(event) => handleInputChange(index, event)}
+                      />
+                    </td>
+                    <td className="importe">
+                      <input
+                        id='ds'
+                        type="number"
+                        value={product.importe}
+                      />
+                    </td>
+                    <td className="accion">
+                      <button onClick={() => handleRemoveProduct(index)}>Eliminar</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
+
 
         <h3>Detalle De Pago</h3>
 
@@ -212,6 +226,7 @@ function VentaPage() {
         <div id='pedidos'>
           <h3 id='textVenta'>Pedidos Carrito</h3>
         </div>
+        <button id='siguiente'> siguiente</button>
       </div>
     </div>
   )

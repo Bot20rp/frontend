@@ -136,7 +136,8 @@ function VentaPage() {
   );
 
   const totalPago = pagoQR.reduce((sum, amount) => sum + amount, 0) +
-    pagoEfectivo.reduce((sum, amount) => sum + amount, 0);
+    pagoEfectivo.reduce((sum, amount) => sum + amount, 0)+
+    pagoTarjeta.reduce((sum,amount) => sum +amount, 0);
 
 
   return (

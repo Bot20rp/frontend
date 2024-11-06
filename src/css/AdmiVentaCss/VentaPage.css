@@ -72,10 +72,11 @@
     flex-wrap: wrap;
     justify-content: left;
     width: 100%;
+    overflow-x: scroll;
 }
 #table4 {
     width: 100%;
-    table-layout: fixed;
+    /* table-layout: fixed; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
   }

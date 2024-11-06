@@ -73,7 +73,7 @@
     justify-content: left;
     width: 100%;
     overflow-x: scroll;
-    scroll-behavior: inherit;
+    scroll-padding-inline-start: 0;
 }
 #table4 {
     width: 100%;

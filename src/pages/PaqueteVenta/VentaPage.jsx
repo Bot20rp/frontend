@@ -1,72 +1,34 @@
-import React, { useState } from 'react'
-import '../../css/AdmiVentaCss/VentaPage.css'
+import React, { useState } from 'react';
+import '../../css/AdmiVentaCss/VentaPage.css';
 
 function VentaPage() {
-
   const [sugerencias, setSugerencias] = useState([]);
   const [busquedaId, setBusquedaId] = useState('');
   const [busquedaNombre, setBusquedaNombre] = useState('');
   const [productosEnVenta, setProductosEnVenta] = useState([]);
+  const [pagoQR, setPagoQR] = useState([]);
+  const [pagoEfectivo, setPagoEfectivo] = useState([]);
+  const [mostrarQR, setMostrarQR] = useState(false);
+  const [mostrarEfectivo, setMostrarEfectivo] = useState(false);
 
   const producto = [
-    {
-      id: 1,
-      nombre: "Coca-Cola",
-      precio: 1.5
-    },
-    {
-      id: 2,
-      nombre: "Pepsi",
-      precio: 1.4
-    },
-    {
-      id: 3,
-      nombre: "Agua Mineral",
-      precio: 1.0
-    },
-    {
-      id: 4,
-      nombre: "Jugo de Naranja",
-      precio: 2.0
-    },
-    {
-      id: 5,
-      nombre: "Té Helado",
-      precio: 1.8
-    },
-    {
-      id: 6,
-      nombre: "Café Frío",
-      precio: 2.5
-    },
-    {
-      id: 7,
-      nombre: "Energizante Red Bull",
-      precio: 3.0
-    },
-    {
-      id: 8,
-      nombre: "Leche de Almendras",
-      precio: 2.2
-    },
-    {
-      id: 9,
-      nombre: "Limonada",
-      precio: 1.7
-    },
-    {
-      id: 10,
-      nombre: "Smoothie de Fresa",
-      precio: 3.5
-    }
+    { id: 1, nombre: "Coca-Cola", precio: 1.5 },
+    { id: 2, nombre: "Pepsi", precio: 1.4 },
+    { id: 3, nombre: "Agua Mineral", precio: 1.0 },
+    { id: 4, nombre: "Jugo de Naranja", precio: 2.0 },
+    { id: 5, nombre: "Té Helado", precio: 1.8 },
+    { id: 6, nombre: "Café Frío", precio: 2.5 },
+    { id: 7, nombre: "Energizante Red Bull", precio: 3.0 },
+    { id: 8, nombre: "Leche de Almendras", precio: 2.2 },
+    { id: 9, nombre: "Limonada", precio: 1.7 },
+    { id: 10, nombre: "Smoothie de Fresa", precio: 3.5 }
   ];
 
-
   const seleccionarProducto = (producto) => {
-    const productoExistente = productosEnVenta.find(p => p.id === producto.id);
+    const productoExistente = productosEnVenta.find((p) => p.id === producto.id);
 
     if (productoExistente) {
-      const productosActualizados = productosEnVenta.map(p =>
+      const productosActualizados = productosEnVenta.map((p) =>
         p.id === producto.id ? { ...p, cantidad: p.cantidad + 1 } : p
       );
       setProductosEnVenta(productosActualizados);
@@ -78,24 +40,25 @@ function VentaPage() {
     setBusquedaNombre('');
   };
 
-
   const buscarProductoPorNombre = (event) => {
     const value = event.target.value;
     setBusquedaNombre(value);
     if (value.length >= 3) {
-      const resultados = producto.filter(product => product.nombre.toLowerCase().startsWith(value.toLowerCase()));
+      const resultados = producto.filter((product) =>
+        product.nombre.toLowerCase().startsWith(value.toLowerCase())
+      );
       setSugerencias(resultados);
     } else {
       setSugerencias([]);
     }
-  }
+  };
 
   const buscarProductoPorId = (event) => {
     const value = event.target.value;
     setBusquedaId(value);
 
     if (value.length > 0) {
-      const resultados = producto.filter(prod => prod.id.toString().startsWith(value));
+      const resultados = producto.filter((prod) => prod.id.toString().startsWith(value));
       setSugerencias(resultados);
     } else {
       setSugerencias([]);
@@ -104,24 +67,58 @@ function VentaPage() {
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
-    
-    // Permitir campo vacío, pero sin valores negativos
     const nuevoValor = value === '' ? '' : Math.max(0, value);
-  
+
     const nuevoProducto = [...productosEnVenta];
     nuevoProducto[index][name] = nuevoValor;
-  
-    // Calcular importe solo si cantidad tiene un valor numérico
     nuevoProducto[index].importe = nuevoValor ? nuevoValor * nuevoProducto[index].precio : 0;
-  
+
     setProductosEnVenta(nuevoProducto);
   };
-  
 
-  const handleRemonveProduct = (index) => {
+  const handleRemoveProduct = (index) => {
     const newProducts = productosEnVenta.filter((_, i) => i !== index);
     setProductosEnVenta(newProducts);
   };
+
+  const handleAddQR = () => {
+    const totalRestante = totalVenta - totalPago;
+    setPagoQR([...pagoQR, totalRestante > 0 ? totalRestante : 0]);
+  };
+  
+  const handleAddEfectivo = () => {
+    const totalRestante = totalVenta - totalPago;
+    setPagoEfectivo([...pagoEfectivo, totalRestante > 0 ? totalRestante : 0]);
+  };
+
+  const handleQRChange = (index, value) => {
+    const updatedQR = [...pagoQR];
+    updatedQR[index] = Number(value);
+    setPagoQR(updatedQR);
+  };
+
+  const handleEfectivoChange = (index, value) => {
+    const updatedEfectivo = [...pagoEfectivo];
+    updatedEfectivo[index] = Number(value);
+    setPagoEfectivo(updatedEfectivo);
+  };
+
+  const handleRemoveQR = (index) => {
+    setPagoQR(pagoQR.filter((_, i) => i !== index));
+  };
+
+  const handleRemoveEfectivo = (index) => {
+    setPagoEfectivo(pagoEfectivo.filter((_, i) => i !== index));
+  };
+
+  const totalVenta = productosEnVenta.reduce(
+    (total, producto) => total + producto.cantidad * producto.precio,
+    0
+  );
+
+  const totalPago = pagoQR.reduce((sum, amount) => sum + amount, 0) +
+    pagoEfectivo.reduce((sum, amount) => sum + amount, 0);
+
 
   return (
     <div className='contPrincipalVenta'>
@@ -143,7 +140,6 @@ function VentaPage() {
             <input type="number" placeholder='NIT/CI' />
           </div>
           <input type="text" placeholder='NOMBRE' />
-
         </div>
 
         <h3>Busqueda De Producto</h3>
@@ -173,7 +169,6 @@ function VentaPage() {
         </div>
 
         <h3>Detalle Venta</h3>
-
         <div className="facturaPrincipal45">
           <div id="fact4">
             <table id="table4">
@@ -184,7 +179,6 @@ function VentaPage() {
                   <th className="precio">Precio</th>
                   <th className="cantidad">Cantidad</th>
                   <th className="importe">Importe</th>
-                  <th className="accion">Acción</th>
                 </tr>
               </thead>
               <tbody>
@@ -204,9 +198,8 @@ function VentaPage() {
                     <td className="importe">
                       {product.cantidad * product.precio}
                     </td>
-
                     <td className="accion">
-                      <button onClick={() => handleRemonveProduct(index)}>Eliminar</button>
+                      <button onClick={() => handleRemoveProduct(index)}>x</button>
                     </td>
                   </tr>
                 ))}
@@ -215,21 +208,54 @@ function VentaPage() {
           </div>
         </div>
 
-
         <h3>Detalle De Pago</h3>
-
         <div id='fact5'>
-          <button>EFECTIVO</button>
-          <button>QR</button>
+          <button onClick={() => { setMostrarEfectivo(true); handleAddEfectivo(); }}>EFECTIVO</button>
+          <button onClick={() => { setMostrarQR(true); handleAddQR(); }}>QR</button>
         </div>
 
-        <h3 id='pago'>TOTAL PAGO BS</h3>
+        {mostrarEfectivo && (
+          <div>
+          {pagoEfectivo.length > 0 && <h2>Pagos por Efectivo</h2>}
+          {pagoEfectivo.map((amount, index) => (
+            <div key={`efectivo-${index}`} className='MetodoPago' >
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => handleEfectivoChange(index, e.target.value)}
+                placeholder="Pago en Efectivo"
+              />
+              <button onClick={() => handleRemoveEfectivo(index)}>x</button>
+            </div>
+          ))}
+          </div>
+        )}
 
+        {mostrarQR && (
+          <div>
+            {pagoQR.length > 0 && <h2>Pagos por QR</h2>}
+            {pagoQR.map((amount, index) => (
+              <div key={`qr-${index}`} className='MetodoPago'>
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => handleQRChange(index, e.target.value)}
+                  placeholder="Pago con QR"
+                />
+                <button onClick={() => handleRemoveQR(index)}>x</button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <h3 id='pago'>TOTAL PAGO BS: {totalPago.toFixed(2)}</h3>
       </div>
+
       <div className='detalleFactura'>
         <h1>Resumen</h1>
         <div id='resumen'>
           <h3 id='textVenta'>Detalles De Venta</h3>
+          <h3 >Total Bs: {totalVenta.toFixed(2)}</h3>
         </div>
         <div id='pedidos'>
           <h3 id='textVenta'>Pedidos Carrito</h3>
@@ -237,7 +263,7 @@ function VentaPage() {
         <button id='siguiente'> siguiente</button>
       </div>
     </div>
-  )
+  );
 }
 
-export default VentaPage
+export default VentaPage;

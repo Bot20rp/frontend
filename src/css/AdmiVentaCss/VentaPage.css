@@ -112,6 +112,9 @@
   .accion {
     width: 15%;
   }
+  .accion button{
+    background-color: #db0707;
+  }
   
   
   #table4 th {
@@ -231,6 +234,14 @@ input[type="number"]{
         margin-top: 10px; /* Agrega un espacio entre los elementos */
         height: auto; /* Permite que la altura se ajuste al contenido */
     }
+    .facturaPrincipal45 {
+        width: 100%; /* Usa el 100% del ancho disponible */
+        overflow-x: auto; /* Activa el desplazamiento horizontal */
+    }
+    
+    #fact4 {
+        min-width: 1000px; /* O el ancho mínimo que necesites para la tabla */
+    }
 }
 
 
@@ -260,4 +271,10 @@ input[type="number"]{
     background-color: #83eaee;
 }
 
+.MetodoPago input[type="number"]{
+    width: 150px;
+}
 
+.MetodoPago button{
+    background-color: #db0707;
+}

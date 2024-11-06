@@ -20,6 +20,8 @@ import OrganizacionProductPage from "../../pages/PaqueteInventario/OrganizacionP
 import Compras from "../../pages/PaqueteCompra/Compras";
 import VentaPage from "../../pages/PaqueteVenta/VentaPage";
 import AperturaPage from "../../pages/PaqueteVenta/AperturaPage";
+import ComprobantesPage from "../../pages/PaqueteVenta/ComprobantesPage";
+import DetalleFacturaPage from "../../pages/PaqueteVenta/DetalleFacturaPage";
 import { Perfil } from "../Perfi/Perfil";
 
 /* VAMOS A PROTEGER LAS RUTAS */
@@ -204,6 +206,8 @@ export const Homed = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/factura" element={<VentaPage />} />
           <Route path="/apertura" element={<AperturaPage />} />
+          <Route path="/comprobantes" element={<ComprobantesPage />} />
+          <Route path="/detalleFactura" element={<DetalleFacturaPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

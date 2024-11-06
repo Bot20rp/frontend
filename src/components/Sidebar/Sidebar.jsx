@@ -271,5 +271,15 @@ const enlaceventa =[
     label: "Facturacion",
     icon: <MdOutlineAnalytics />,
     to: "/dasboard/factura",
+  },
+  {
+    label: "Comprobante",
+    icon: <MdOutlineAnalytics />,
+    to: "/dasboard/comprobantes",
+  },
+  {
+    label: "Detalles De Facturas",
+    icon: <MdOutlineAnalytics />,
+    to: "/dasboard/detalleFactura",
   }
 ]

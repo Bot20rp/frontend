@@ -109,7 +109,7 @@ function VentaPage() {
   const handleTarjetaChange = (index, value) => {
     const updatedTarjeta = [...pagoTarjeta];
     updatedTarjeta[index] = Number(value);
-    setMostrarTarjeta(updatedTarjeta);
+    setPagoTarjeta(updatedTarjeta);
   };
 
   const handleEfectivoChange = (index, value) => {

@@ -5,6 +5,10 @@ import { TbBackground } from 'react-icons/tb';
 function AperturaPage() {
 
     const [mostar, setMostrar] = useState(false);
+    const [mostarInicioApertura, setMostrarInicioApertura] = useState(false);
+    const [mostrarNuevaApertura,setMostrarNuevaApertura] = useState(true);
+    const [mostrarCierreApertura,setMostrarCierreApertura] = useState(false);
+    const [mostarNuevoCierreApertura,setMostarNuevoCierreApertura] =useState(false);
 
 
 
@@ -33,7 +37,7 @@ function AperturaPage() {
                         <h4 id='c1'>Pago por QR</h4>
                         <input type="number" value={1} disabled style={{ backgroundColor: "lightgray" }} />
                         <input type="number" />
-                        <input type="number" value={-1} disabled style={{ backgroundColor: "lightgray" }}/>
+                        <input type="number" value={-1} disabled style={{ backgroundColor: "lightgray" }} />
                         <input type="number" disabled style={{ backgroundColor: "lightgray" }}
                         />
                     </div>
@@ -41,8 +45,8 @@ function AperturaPage() {
                         <h4 id='c1'>Pago por Tarjeta</h4>
                         <input type="number" value={1} disabled style={{ backgroundColor: "lightgray" }} />
                         <input type="number" />
-                        <input type="number" value={-1} disabled style={{ backgroundColor: "lightgray" }}/>
-                        <input type="number" disabled style={{ backgroundColor: "lightgray" }} 
+                        <input type="number" value={-1} disabled style={{ backgroundColor: "lightgray" }} />
+                        <input type="number" disabled style={{ backgroundColor: "lightgray" }}
                         />
 
                     </div>
@@ -58,7 +62,44 @@ function AperturaPage() {
 
             )}
 
-            <button onClick={() => { mostar === false ? setMostrar(true) : setMostrar(false) }}> probando</button>
+            {mostrarNuevaApertura && (
+                <button onClick={() => {
+                    { setMostrar(true)}
+                    { setMostrarInicioApertura(true) }
+                    { setMostrarNuevaApertura(false) }
+                }}> Nueva Apertura</button>
+            )
+            }
+
+            { mostarInicioApertura &&(
+                <button onClick={ () => {
+                    {setMostrar(false)}
+                    {setMostrarCierreApertura(true)}
+                    {setMostrarInicioApertura(false)}
+                }}>Iniciar Apertura</button>
+            )
+            }
+
+            { mostrarCierreApertura && (
+                <button onClick={() =>{
+                    {setMostrar(true)}
+                    {setMostarNuevoCierreApertura(true)}
+                    {setMostrarCierreApertura(false)}
+                }}>Comenzar Cierre</button>
+            )
+
+            }
+            {mostarNuevoCierreApertura && (
+                <button onClick={() =>{
+                    {setMostrar(false)}
+                    {setMostrarNuevaApertura(true)}
+                    {setMostarNuevoCierreApertura(false)}
+                }}>Cerrar Apertura</button>
+            )
+
+            }
+
+
         </div>
     )
 }

@@ -201,3 +201,14 @@ export const insertarVolumen = (data) => instance.post(`/regVolumen`,{
 }) 
 
 export const obtenerVolumen = () =>{return instance.get(`/getVolumen`)};
+
+
+//PAGO ONLINE TARJETA
+
+export const insertarPago = (id) => instance.post(`/pagoTarget`,{
+    id,
+    amount:10000,
+    headers:{
+        'Content-Type': 'application/json',
+    }
+})

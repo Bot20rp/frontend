@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.8.1",
+    "@stripe/stripe-js": "^4.9.0",
     "axios": "^1.7.7",
+    "bootswatch": "^5.3.3",
     "font-awesome": "^4.7.0",
     "js-cookie": "^3.0.5",
     "jspdf": "^2.5.2",

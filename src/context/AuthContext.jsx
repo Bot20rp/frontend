@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }) => {
     const [tableVolumen,setTableVolumen] = useState([]);
     const[tableCategoria,setCategoria] = useState([]);
     const [tableLotes,setTableLotes] = useState([]);
+    const [montoPago,setMonto] = useState(null);
     const [permisoTable, setPermisos] = useState({
         administrador: [],
         cliente: [],
@@ -235,6 +236,8 @@ export const AuthProvider = ({ children }) => {
             tableCategoria,
             tableLotes,
             tableVolumen,
+            setMonto,
+            montoPago,
             cargarDatos,
             cargarDatosProveedores,
             cargarDatosPermisos,

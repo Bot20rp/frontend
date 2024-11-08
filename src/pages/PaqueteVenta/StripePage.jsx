@@ -2,18 +2,24 @@ import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { insertarPago } from '../../api/auth';
+import { useAuth } from '../../context/AuthContext';
 
 const stripePromes = loadStripe("pk_test_51QIewwDhm58X9ebvL2b9ZGx2AxItSBgRuWMyPxDu88d4rV5fI8XDJUe43PVGcLvOwNIWtTYBcEZM8J4nl9JDiESg005uydqNOc");
 
-const CheckoutForm = () => {
+
+
+const CheckoutForm = () => {  
     const stripe = useStripe();
     const elements = useElements();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
+    const {montoPago} = useAuth();
+
+    console.log(montoPago)
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Esto es clave para prevenir el recargado de la página
         setLoading(true);
         setError(null);
 
@@ -25,7 +31,8 @@ const CheckoutForm = () => {
         if (!error) {
             try {
                 const { id } = paymentMethod;
-                const { data } = await insertarPago(id);
+                // Llamada a la API con el monto total
+                const { data } = await insertarPago(id, montoPago*10);
                 setSuccess(true);
                 elements.getElement(CardElement).clear(); // Limpia el formulario
 
@@ -43,6 +50,9 @@ const CheckoutForm = () => {
             <CardElement options={styles.cardElement} />
             {error && <p style={styles.error}>{error}</p>}
             {success && <p style={styles.success}>Pago exitoso</p>}
+            <div style={styles.totalAmount}>
+                <h4>Total a pagar: Bs {montoPago}.00</h4>  {/* Muestra el total recibido */}
+            </div>
             <button type="submit" style={styles.button(loading)} disabled={loading}>
                 {loading ? "Procesando..." : "Pagar"}
             </button>
@@ -50,13 +60,13 @@ const CheckoutForm = () => {
     );
 };
 
-function StripePage() {
+function StripePage() {  // Recibimos totalAmount como prop
     return (
         <Elements stripe={stripePromes}>
             <div style={styles.container}>
                 <div style={styles.innerContainer}>
                     <h2>Formulario de Pago</h2>
-                    <CheckoutForm />
+                    <CheckoutForm />  {/* Pasamos totalAmount al formulario */}
                 </div>
             </div>
         </Elements>
@@ -114,7 +124,10 @@ const styles = {
         fontSize: "14px",
     },
     success: {
-        color: "#4BB543",
+        color: "green",
         fontSize: "14px",
+    },
+    totalAmount: {
+        marginBottom: "20px",
     }
 };

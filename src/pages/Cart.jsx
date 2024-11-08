@@ -1,24 +1,25 @@
-import { useEffect, useContext } from "react";
-import { CartContext } from "../context/CartContext"; // Asegúrate de que la ruta sea correcta
-import { useAuth } from '../context/AuthContext'; // Asegúrate de importar correctamente el contexto de autenticación
-import "./cart.css"; // Asegúrate de crear este archivo CSS
+import { useState, useEffect, useContext } from "react";
+import { CartContext } from "../context/CartContext"; 
+import { useAuth } from '../context/AuthContext'; 
+import "./cart.css"; 
 import 'font-awesome/css/font-awesome.min.css';
 import { IoIosAdd } from "react-icons/io";
 import { GrFormSubtract } from "react-icons/gr";
 import { GrFormClose } from "react-icons/gr";
+import StripePage from "./PaqueteVenta/StripePage";
 
 export const Cart = () => {
-  const { cartList, addToCart, decreaseQty, deleteProduct, setCartList } = useContext(CartContext); // Usar el contexto
-  const { anadirCompra } = useContext(CartContext); // Asegúrate de usar el contexto correcto
+  const { cartList, addToCart, decreaseQty, deleteProduct, setCartList } = useContext(CartContext);
+  const { anadirCompra } = useContext(CartContext); 
+  const {setMonto} = useAuth();
 
   const totalPrice = cartList.reduce(
     (price, item) => price + item.qty * item.price,
     0
   );
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const [isPaymentVisible, setPaymentVisible] = useState(false);  // Estado para mostrar el pago
+
   const handlePayment = () => {
     cartList.forEach(item => {
       const compra = {
@@ -28,9 +29,14 @@ export const Cart = () => {
       };
       anadirCompra(compra);
     });
-  
+    setMonto(totalPrice)
     setCartList([]); // Vaciar el carrito después de la compra
+    setPaymentVisible(true);  // Mostrar formulario de pago
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section className="cart-items">
@@ -79,14 +85,17 @@ export const Cart = () => {
           })}
         </div>
         <div className="cart-summary">
-          <h2>Carritoo</h2>
+          <h2>Carrito</h2>
           <div className="total-price">
             <h4>Total precio :</h4>
             <h3>Bs {totalPrice}.00</h3>
           </div>
-          <button onClick={handlePayment}>Pagar</button>
+          <button onClick={handlePayment}>Seguir con el Pago</button>
         </div>
       </div>
+
+      {/* Condicionalmente renderiza el formulario de pago si el estado isPaymentVisible es true */}
+      {isPaymentVisible && <StripePage/>}
     </section>
   );
 };

@@ -32,7 +32,7 @@ const CheckoutForm = () => {
             try {
                 const { id } = paymentMethod;
                 // Llamada a la API con el monto total
-                const { data } = await insertarPago(id, montoPago*10);
+                const { data } = await insertarPago(id, montoPago*100);
                 setSuccess(true);
                 elements.getElement(CardElement).clear(); // Limpia el formulario
 

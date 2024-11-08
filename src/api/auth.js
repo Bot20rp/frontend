@@ -206,7 +206,7 @@ export const obtenerVolumen = () =>{return instance.get(`/getVolumen`)};
 //PAGO ONLINE TARJETA
 
 export const insertarPago = (id) => instance.post(`/pagoTarget`,{
-    id,
+    data: { data : id },
     amount:10000,
     headers:{
         'Content-Type': 'application/json',

@@ -13,7 +13,7 @@ function LoginPage() {
     const onSubmit = handleSubmit(async (data) => {
         try {
             await signin(data);
-            // await cargarDatos();
+            await cargarDatos();
             // await cargarDatosProveedores();
         } catch (error) {
             console.error("Error al iniciar sesión o cargar datos:", error);

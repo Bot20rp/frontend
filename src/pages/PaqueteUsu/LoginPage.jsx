@@ -14,7 +14,7 @@ function LoginPage() {
         try {
             await signin(data);
             await cargarDatos();
-            // await cargarDatosProveedores();
+            await cargarDatosProveedores();
         } catch (error) {
             console.error("Error al iniciar sesión o cargar datos:", error);
         }

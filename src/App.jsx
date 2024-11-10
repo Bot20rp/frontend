@@ -35,6 +35,7 @@ import { Bitacora } from "./pages/PaqueteUsu/Bitacora.jsx";
 import VentaPage from "./pages/PaqueteVenta/VentaPage.jsx";
 import AperturaPage from "./pages/PaqueteVenta/AperturaPage.jsx";
 import StripePage from "./pages/PaqueteVenta/StripePage.jsx";
+import RegisterClientPage from "./pages/PaqueteUsu/RegisterClientPage.jsx";
 /* ------------------------------------------------------------ */
 
 function Main() {
@@ -66,6 +67,7 @@ function Main() {
         <Route path="/factura" element={<VentaPage/>} />
         <Route path="/apertura" element={<AperturaPage/>} />
         <Route path="/pago" element={<StripePage/>} />
+        <Route path="/admi" element={<RegisterClientPage/>} />
         <Route path="*" element={<NotFound />} />
         {/* auqi elimine el rol de cliente ___ */}
         <Route path="/dasboard/*" element ={<ProtectedRoute roles={['Administrador','Empleado']} element={<ProtecComponente component={Homed} />} />

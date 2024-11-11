@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import '../../css/AdmiVentaCss/AperturaPage.css'
 import { TbBackground } from 'react-icons/tb';
 import { useAuth } from '../../context/AuthContext';
+import { insertarNuevaApertura } from '../../api/auth';
 
 function AperturaPage() {
 
@@ -11,6 +12,7 @@ function AperturaPage() {
     const [mostrarNuevaApertura,setMostrarNuevaApertura] = useState(true);
     const [mostrarCierreApertura,setMostrarCierreApertura] = useState(false);
     const [mostarNuevoCierreApertura,setMostarNuevoCierreApertura] =useState(false);
+    const [cajaChica,setCajaChica]= useState(0);
 
     useEffect(() => {
         // Si existe apertura, ocultar botón de nueva apertura y mostrar botón de cierre
@@ -23,6 +25,27 @@ function AperturaPage() {
             setMostrarCierreApertura(false);
         }
     }, [existeApertura]);
+
+
+
+    const handleCajaChicaChange = (e) =>{
+        const value = parseFloat(e.target.value);
+        setCajaChica(value >=0 ? value: 0);
+    }
+
+    const crearApertura = () =>{
+        try {
+            const datos = {
+                CajaChica: cajaChica || 0,
+                FechaInicio: new Date().toLocaleDateString(),
+                HoraInicio: new Date().toLocaleTimeString()
+            };
+            // await insertarNuevaApertura(datos)
+            console.log(datos)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     
 
 
@@ -45,7 +68,12 @@ function AperturaPage() {
                         <input type="number" value={1} disabled style={{ backgroundColor: "lightgray" }} />
                         <input type="number" />
                         <input type="number" value={-1} disabled style={{ backgroundColor: "lightgray" }} />
-                        <input type="number" />
+                        <input 
+                            type="number"
+                            name="CajaChica"
+                            value={cajaChica}
+                            onChange={handleCajaChicaChange}
+                            />
                     </div>
                     <div className='cuentas'>
                         <h4 id='c1'>Pago por QR</h4>
@@ -90,6 +118,7 @@ function AperturaPage() {
                     {setMostrar(false)}
                     {setMostrarCierreApertura(true)}
                     {setMostrarInicioApertura(false)}
+                    {crearApertura}
                 }}>Iniciar Apertura</button>
             )
             }
@@ -108,6 +137,7 @@ function AperturaPage() {
                     {setMostrar(false)}
                     {setMostrarNuevaApertura(true)}
                     {setMostarNuevoCierreApertura(false)}
+                    {setExisteApertura(false)}
                 }}>Cerrar Apertura</button>
             )
 

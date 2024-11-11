@@ -198,8 +198,20 @@ export const AuthProvider = ({ children }) => {
                 console.log("no existe");
             }
         } catch (error) {
+            // Verificar si hay un error relacionado con la respuesta HTTP
+            if (error.response) {
+                // Error de respuesta del servidor
+                console.error('Error en el servidor:', error.response.data.message);
+            } else if (error.request) {
+                // Error al hacer la solicitud (por ejemplo, no respuesta)
+                console.error('No se recibió respuesta del servidor:', error.request);
+            } else {
+                // Error general en la configuración de la solicitud
+                console.error('Error en la solicitud:', error.message);
+            }
+    
             // También podrías mostrar un mensaje amigable al usuario aquí
-            alert('Hubo un problema al obtener la apertura, por favor intente nuevamente.');
+            // alert('Hubo un problema al obtener la apertura, por favor intente nuevamente.');
         }
     };
     

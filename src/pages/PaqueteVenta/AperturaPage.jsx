@@ -1,15 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import '../../css/AdmiVentaCss/AperturaPage.css'
 import { TbBackground } from 'react-icons/tb';
+import { useAuth } from '../../context/AuthContext';
 
 function AperturaPage() {
 
+    const {existeApertura,setExisteApertura}= useAuth();
     const [mostar, setMostrar] = useState(false);
     const [mostarInicioApertura, setMostrarInicioApertura] = useState(false);
     const [mostrarNuevaApertura,setMostrarNuevaApertura] = useState(true);
     const [mostrarCierreApertura,setMostrarCierreApertura] = useState(false);
     const [mostarNuevoCierreApertura,setMostarNuevoCierreApertura] =useState(false);
 
+    useEffect(() => {
+        // Si existe apertura, ocultar botón de nueva apertura y mostrar botón de cierre
+        if (existeApertura) {
+            setMostrarNuevaApertura(false);
+            setMostarNuevoCierreApertura(true);
+        } else {
+            // Si no existe apertura, restablece los valores por defecto
+            setMostrarNuevaApertura(true);
+            setMostarNuevoCierreApertura(false);
+        }
+    }, [existeApertura]);
+    
 
 
     return (

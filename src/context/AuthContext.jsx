@@ -184,8 +184,6 @@ export const AuthProvider = ({ children }) => {
             const res  = await obtenerApertura();
             if (res?.data?.data?.[0]?.Estado) {
                 console.log("si existe")
-                console.log(res)
-                console.log(res.data.data.Estado)
                 setExisteApertura(true);
             } else {
                 setExisteApertura(false);
@@ -258,6 +256,7 @@ export const AuthProvider = ({ children }) => {
             tableVolumen,
             montoPago,
             existeApertura,
+            setExisteApertura,
             cargarDatos,
             cargarDatosProveedores,
             cargarDatosPermisos,

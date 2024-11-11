@@ -76,6 +76,8 @@ export const AuthProvider = ({ children }) => {
                 salario: usuario.salario,
                 horarioInicio: usuario.horarioInicio,
                 horarioFin: usuario.horarioFin,
+                ci: usuario.ci,
+                nit: usuario.nit
             }));
             setTableUser(datosNuevos);
         } catch (error) {

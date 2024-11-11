@@ -9,6 +9,8 @@ function VentaPage() {
   const [usuarios, setUsuarios] = useState([]);
   const [sugerenciasUsuario, setSugerenciasUsuario] = useState([]);
   const [busquedaUsuarioId, setBusquedaUsuarioId] = useState('');
+  const [busquedaUsuarioCi, setBusquedaUsuarioCi] = useState('');
+  const [busquedaUsuarioNit, setBusquedaUsuarioNit] = useState('');
   const [busquedaUsuarioNombre, setBusquedaUsuarioNombre] = useState('');
   const [sugerencias, setSugerencias] = useState([]);
   const [busquedaId, setBusquedaId] = useState('');
@@ -76,16 +78,38 @@ function VentaPage() {
     }
   };
 
-  const buscarUsuarioID = (event) => {
+  const buscarUsuario = (event) => {
     const value = event.target.value;
-    setBusquedaUsuarioId(value);
-    if (value.length > 0) {
-      const resultados = usuarios.filter((user) => user.id.toString().startsWith(value));
-      setSugerenciasUsuario(resultados);
+    setBusquedaUsuarioId(value); // Mantén el valor en el estado de busquedaUsuarioId
+  
+    // Si el valor tiene al menos 3 caracteres, comienza la búsqueda
+    if (value.length >= 3) {
+      // Determina qué campo buscar: ID, CI o NIT
+      const resultados = usuarios.filter((user) => {
+        return (
+          user.id.toString().startsWith(value) ||       // Buscar por ID
+          user.ci.toString().startsWith(value) ||        // Buscar por CI (si lo tienes)
+          user.nit.toString().startsWith(value)          // Buscar por NIT (si lo tienes)
+        );
+      });
+      setSugerenciasUsuario(resultados); // Establece las sugerencias encontradas
     } else {
-      setSugerenciasUsuario([]);
+      setSugerenciasUsuario([]); // Si el valor es demasiado corto, limpia las sugerencias
     }
   };
+  
+
+
+  // const buscarUsuarioID = (event) => {
+  //   const value = event.target.value;
+  //   setBusquedaUsuarioId(value);
+  //   if (value.length > 0) {
+  //     const resultados = usuarios.filter((user) => user.id.toString().startsWith(value));
+  //     setSugerenciasUsuario(resultados);
+  //   } else {
+  //     setSugerenciasUsuario([]);
+  //   }
+  // };
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -237,8 +261,8 @@ function VentaPage() {
             <input
               type="text"
               placeholder='NIT/CI'
-              value={busquedaUsuarioId}
-              onChange={buscarUsuarioID}
+              value={busquedaUsuarioId} 
+              onChange={buscarUsuario}
             />
           </div>
           <input

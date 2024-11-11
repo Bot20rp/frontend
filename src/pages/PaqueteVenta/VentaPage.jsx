@@ -151,13 +151,12 @@ function VentaPage() {
     try {
       const datos = {
         fechaVenta,
-        pagoQR,
-        pagoEfectivo,
-        pagoTarjeta,
+        pagoQR: pagoQR[0]  || 0,
+        pagoEfectivo: pagoEfectivo[0] || 0,
+        pagoTarjeta: pagoTarjeta[0] || 0,
         productosEnVenta,
         totalVenta
       }
-
       console.log(datos)
 
     } catch (error) {

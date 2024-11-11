@@ -118,7 +118,7 @@ function AperturaPage() {
                     {setMostrar(false)}
                     {setMostrarCierreApertura(true)}
                     {setMostrarInicioApertura(false)}
-                    {crearApertura}
+                    {crearApertura()}
                 }}>Iniciar Apertura</button>
             )
             }

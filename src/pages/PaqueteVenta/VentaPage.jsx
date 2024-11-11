@@ -16,6 +16,7 @@ function VentaPage() {
   const [mostrarQR, setMostrarQR] = useState(false);
   const [mostrarEfectivo, setMostrarEfectivo] = useState(false);
   const [mostrarTarjeta, setMostrarTarjeta] = useState(false);
+  const [fechaVenta,setFechaVenta] = useState(new Date().toISOString().split('T')[0]);
 
   const seleccionarProducto = (producto) => {
     const productoExistente = productosEnVenta.find((p) => p.id === producto.id);
@@ -121,6 +122,10 @@ function VentaPage() {
     setPagoTarjeta(pagoTarjeta.filter((_, i) => i !== index));
   }
 
+  const handleChangeVenta = (e) =>{
+    setFechaVenta(e.target.value)
+  }
+
   const totalVenta = productosEnVenta.reduce(
     (total, producto) => total + producto.cantidad * producto.precio,
     0
@@ -150,7 +155,11 @@ function VentaPage() {
           <h1>Facturación</h1>
         </div>
         <div id='fact1'>
-          <input type="date" />
+          <input 
+          type="date"
+          value = {fechaVenta}
+          onChange={handleChangeVenta}
+          />
           <select className='seleccion'>
             <option value="TipoVenta">Venta En Tienda</option>
             <option value="TipoVenta">Venta Delivery</option>

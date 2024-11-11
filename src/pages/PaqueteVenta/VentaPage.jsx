@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import '../../css/AdmiVentaCss/VentaPage.css';
 
 function VentaPage() {
+
+  const { productosBackend } = useAuth();
+  const [producto, setProductos] = useState([]);
   const [sugerencias, setSugerencias] = useState([]);
   const [busquedaId, setBusquedaId] = useState('');
   const [busquedaNombre, setBusquedaNombre] = useState('');
@@ -12,19 +16,6 @@ function VentaPage() {
   const [mostrarQR, setMostrarQR] = useState(false);
   const [mostrarEfectivo, setMostrarEfectivo] = useState(false);
   const [mostrarTarjeta, setMostrarTarjeta] = useState(false);
-
-  const producto = [
-    { id: 1, nombre: "Coca-Cola", precio: 1.5 },
-    { id: 2, nombre: "Pepsi", precio: 1.4 },
-    { id: 3, nombre: "Agua Mineral", precio: 1.0 },
-    { id: 4, nombre: "Jugo de Naranja", precio: 2.0 },
-    { id: 5, nombre: "Té Helado", precio: 1.8 },
-    { id: 6, nombre: "Café Frío", precio: 2.5 },
-    { id: 7, nombre: "Energizante Red Bull", precio: 3.0 },
-    { id: 8, nombre: "Leche de Almendras", precio: 2.2 },
-    { id: 9, nombre: "Limonada", precio: 1.7 },
-    { id: 10, nombre: "Smoothie de Fresa", precio: 3.5 }
-  ];
 
   const seleccionarProducto = (producto) => {
     const productoExistente = productosEnVenta.find((p) => p.id === producto.id);
@@ -138,6 +129,18 @@ function VentaPage() {
   const totalPago = pagoQR.reduce((sum, amount) => sum + amount, 0) +
     pagoEfectivo.reduce((sum, amount) => sum + amount, 0)+
     pagoTarjeta.reduce((sum,amount) => sum +amount, 0);
+
+    useEffect(() => {
+      if (productosBackend && productosBackend.data) {
+          const productosObtenidos = productosBackend.data.map((producto) => ({
+              id: producto.ProductoID,
+              nombre: producto.Nombre,
+              precio: producto.Precio
+          }));
+
+          setProductos(productosObtenidos);
+      }
+  }, [productosBackend]);
 
 
   return (

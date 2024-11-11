@@ -49,7 +49,11 @@ function LoginPage() {
                     <input type="password" placeholder='Contraseña' {...register('password', { required: true })} />
                     <FaLock className='iconLogin' />
                 </div>
-                <button type="submit">Iniciar Sesión</button>
+
+                <button type="submit" style={styles.button(loading)} disabled={loading}>
+                    {loading ? "Procesando..." : "Iniciar Sesión<"}
+                </button>
+                {/* <button type="submit">Iniciar Sesión</button> */}
                 <p className='register-link'>
                     ¿No tienes cuenta? <Link to="/registerPage">Regístrate</Link>
                 </p>
@@ -59,3 +63,16 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+const styles = {
+    button: (loading) => ({
+        backgroundColor: loading ? "#cccccc" : "#6772e5",
+        color: "#fff",
+        padding: "10px 0",
+        border: "none",
+        borderRadius: "4px",
+        cursor: loading ? "not-allowed" : "pointer",
+        fontWeight: "bold",
+        transition: "background-color 0.2s ease",
+    })
+};

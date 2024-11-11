@@ -29,7 +29,7 @@ function LoginPage() {
                     navigate("/perfil");
                 } else {
                     await cargarApertura(); // Llamada asíncrona esperada
-                    navigate("/dashboard/homeda");
+                    navigate("/dasboard/homeda");
                 }
             }
         };

@@ -39,7 +39,7 @@ function RegisterClientPage() {
                             className="inputClient"
                             type="number"
                             placeholder="NIT"
-                            {...register('NumeroDocumento', { required: true })}
+                            {...register('NIT', { required: true })}
                         />
                     </div>
                     <div className="inputWrapper">

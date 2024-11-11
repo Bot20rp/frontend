@@ -4,8 +4,9 @@ import '../../css/AdmiVentaCss/VentaPage.css';
 
 function VentaPage() {
 
-  const { productosBackend } = useAuth();
+  const { productosBackend, tableUser } = useAuth();
   const [producto, setProductos] = useState([]);
+  const [usuarios,setUsuarios] = useState([]);
   const [sugerencias, setSugerencias] = useState([]);
   const [busquedaId, setBusquedaId] = useState('');
   const [busquedaNombre, setBusquedaNombre] = useState('');
@@ -147,6 +148,17 @@ function VentaPage() {
       }
   }, [productosBackend]);
 
+
+  useEffect( () => {
+    if(tableUser){
+      const usuariosObtenidos = tableUser.map( (user) => ({
+        id: user.id,
+        usuario: user.usuario
+      }));
+      setUsuarios(usuariosObtenidos)
+    }
+  },[tableUser])
+
   const handleVentaChange = () => {
     try {
       const datos = {
@@ -158,6 +170,7 @@ function VentaPage() {
         totalVenta
       }
       console.log(datos)
+      console.log(usuarios)
 
     } catch (error) {
       console.log(error)

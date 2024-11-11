@@ -230,7 +230,6 @@ function VentaPage() {
         totalVenta
       }
       console.log(datos)
-      console.log(usuarios)
 
     } catch (error) {
       console.log(error)

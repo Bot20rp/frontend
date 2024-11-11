@@ -7,37 +7,36 @@ import { useNavigate, Link } from 'react-router-dom';
 
 function LoginPage() {
     const { register, handleSubmit } = useForm();
-    const { signin, esAutenticado, cargarDatos, cargarDatosProveedores,user,cargarApertura } = useAuth();
+    const { signin, esAutenticado, cargarDatos, cargarDatosProveedores, user, cargarApertura } = useAuth();
     const navigate = useNavigate();
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            await signin(data); 
-            if (esAutenticado) {
-                if (user?.user?.rol === "Administrador" || user?.user?.rol === "Empleado") {
-                    await cargarDatosProveedores();
-                    await cargarApertura();
-                }
-                await cargarDatos();  // Cargar datos generales
-            }
-
+            await signin(data);
+            await cargarDatos();
+            await cargarDatosProveedores();
         } catch (error) {
             console.error("Error al iniciar sesión o cargar datos:", error);
         }
     });
 
     useEffect(() => {
-        if (esAutenticado && user?.user) {
-            console.log(user.user);
-            if (user.user.rol === "Cliente") {
-                navigate("/perfil");
-            } else {
-                navigate("/dashboard/homeda");
-            }
-        }
-    }, [esAutenticado, user, navigate]); 
+        const fetchData = async () => {
+            if (esAutenticado) {
+                console.log(user?.user);
 
-    
+                if (user?.user?.rol === "Cliente") {
+                    navigate("/perfil");
+                } else {
+                    await cargarApertura(); // Llamada asíncrona esperada
+                    navigate("/dashboard/homeda");
+                }
+            }
+        };
+
+        fetchData(); // Llamar la función asíncrona dentro del useEffect
+    }, [esAutenticado, navigate, user]); // Asegúrate de agregar `user` a las dependencias
+
     return (
         <div className='contenedor' id='body3'>
             <form onSubmit={onSubmit} className='formulario'>

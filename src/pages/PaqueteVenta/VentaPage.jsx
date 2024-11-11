@@ -210,7 +210,9 @@ function VentaPage() {
     if (tableUser) {
       const usuariosObtenidos = tableUser.map((user) => ({
         id: user.id,
-        usuario: user.usuario
+        usuario: user.usuario,
+        ci: user.ci,
+        nit: user.nit
       }));
       setUsuarios(usuariosObtenidos)
     }

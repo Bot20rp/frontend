@@ -8,6 +8,7 @@ import { useNavigate, Link } from 'react-router-dom';
 function LoginPage() {
     const { register, handleSubmit } = useForm();
     const { signin, esAutenticado, cargarDatos, cargarDatosProveedores, user, cargarApertura } = useAuth();
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const onSubmit = handleSubmit(async (data) => {

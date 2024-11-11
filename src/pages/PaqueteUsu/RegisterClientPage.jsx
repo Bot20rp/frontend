@@ -11,6 +11,7 @@ function RegisterClientPage() {
     const onSubmit = async (data) => {
         setLoading(true); // Iniciar carga
         try {
+            console.log(data)
             const res = await registerRequest(data);
             if (res.data) {
                 reset(); // Limpiar el formulario después del éxito

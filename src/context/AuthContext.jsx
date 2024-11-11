@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
     const [tableLotes,setTableLotes] = useState([]);
     const [montoPago,setMonto] = useState(null);
     const [existeApertura,setExisteApertura] = useState(false);
+    const [AperturaID,setAperturaID] = useState(0);
     const [permisoTable, setPermisos] = useState({
         administrador: [],
         cliente: [],
@@ -185,6 +186,8 @@ export const AuthProvider = ({ children }) => {
             if (res?.data?.data?.[0]?.Estado) {
                 console.log("si existe")
                 setExisteApertura(true);
+                console.log(res?.data?.data?.[0]?.AperturaID)
+                setAperturaID(res?.data?.data?.[0]?.AperturaID);
             } else {
                 setExisteApertura(false);
                 console.log("no existe")
@@ -256,6 +259,7 @@ export const AuthProvider = ({ children }) => {
             tableVolumen,
             montoPago,
             existeApertura,
+            AperturaID,
             setExisteApertura,
             cargarDatos,
             cargarDatosProveedores,

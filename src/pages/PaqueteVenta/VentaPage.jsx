@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import '../../css/AdmiVentaCss/VentaPage.css';
 
@@ -6,7 +6,10 @@ function VentaPage() {
 
   const { productosBackend, tableUser } = useAuth();
   const [producto, setProductos] = useState([]);
-  const [usuarios,setUsuarios] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+  const [sugerenciasUsuario, setSugerenciasUsuario] = useState([]);
+  const [busquedaUsuarioId, setBusquedaUsuarioId] = useState('');
+  const [busquedaUsuarioNombre, setBusquedaUsuarioNombre] = useState('');
   const [sugerencias, setSugerencias] = useState([]);
   const [busquedaId, setBusquedaId] = useState('');
   const [busquedaNombre, setBusquedaNombre] = useState('');
@@ -17,7 +20,7 @@ function VentaPage() {
   const [mostrarQR, setMostrarQR] = useState(false);
   const [mostrarEfectivo, setMostrarEfectivo] = useState(false);
   const [mostrarTarjeta, setMostrarTarjeta] = useState(false);
-  const [fechaVenta,setFechaVenta] = useState(new Date().toISOString().split('T')[0]);
+  const [fechaVenta, setFechaVenta] = useState(new Date().toISOString().split('T')[0]);
 
   const seleccionarProducto = (producto) => {
     const productoExistente = productosEnVenta.find((p) => p.id === producto.id);
@@ -48,6 +51,19 @@ function VentaPage() {
     }
   };
 
+  const buscarUsuarioNombre = (event) => {
+    const value = event.target.value;
+    setBusquedaUsuarioNombre(value);
+    if (value.length >= 3) {
+      const resultados = usuarios.filter((user) =>
+        user.usuario.toLowerCase().startsWith(value.toLowerCase())
+      );
+      setSugerenciasUsuario(resultados);
+    } else {
+      setSugerenciasUsuario([]);
+    }
+  };
+
   const buscarProductoPorId = (event) => {
     const value = event.target.value;
     setBusquedaId(value);
@@ -57,6 +73,17 @@ function VentaPage() {
       setSugerencias(resultados);
     } else {
       setSugerencias([]);
+    }
+  };
+
+  const buscarUsuarioID = (event) => {
+    const value = event.target.value;
+    setBusquedaUsuarioId(value);
+    if (value.length > 0) {
+      const resultados = usuarios.filter((user) => user.id.toString().startsWith(value));
+      setSugerenciasUsuario(resultados);
+    } else {
+      setSugerenciasUsuario([]);
     }
   };
 
@@ -123,7 +150,7 @@ function VentaPage() {
     setPagoTarjeta(pagoTarjeta.filter((_, i) => i !== index));
   }
 
-  const handleChangeVenta = (e) =>{
+  const handleChangeVenta = (e) => {
     setFechaVenta(e.target.value)
   }
 
@@ -133,37 +160,37 @@ function VentaPage() {
   );
 
   const totalPago = pagoQR.reduce((sum, amount) => sum + amount, 0) +
-    pagoEfectivo.reduce((sum, amount) => sum + amount, 0)+
-    pagoTarjeta.reduce((sum,amount) => sum +amount, 0);
+    pagoEfectivo.reduce((sum, amount) => sum + amount, 0) +
+    pagoTarjeta.reduce((sum, amount) => sum + amount, 0);
 
-    useEffect(() => {
-      if (productosBackend && productosBackend.data) {
-          const productosObtenidos = productosBackend.data.map((producto) => ({
-              id: producto.ProductoID,
-              nombre: producto.Nombre,
-              precio: producto.Precio
-          }));
+  useEffect(() => {
+    if (productosBackend && productosBackend.data) {
+      const productosObtenidos = productosBackend.data.map((producto) => ({
+        id: producto.ProductoID,
+        nombre: producto.Nombre,
+        precio: producto.Precio
+      }));
 
-          setProductos(productosObtenidos);
-      }
+      setProductos(productosObtenidos);
+    }
   }, [productosBackend]);
 
 
-  useEffect( () => {
-    if(tableUser){
-      const usuariosObtenidos = tableUser.map( (user) => ({
+  useEffect(() => {
+    if (tableUser) {
+      const usuariosObtenidos = tableUser.map((user) => ({
         id: user.id,
         usuario: user.usuario
       }));
       setUsuarios(usuariosObtenidos)
     }
-  },[tableUser])
+  }, [tableUser])
 
   const handleVentaChange = () => {
     try {
       const datos = {
         fechaVenta,
-        pagoQR: pagoQR[0]  || 0,
+        pagoQR: pagoQR[0] || 0,
         pagoEfectivo: pagoEfectivo[0] || 0,
         pagoTarjeta: pagoTarjeta[0] || 0,
         productosEnVenta,
@@ -185,10 +212,10 @@ function VentaPage() {
           <h1>Facturación</h1>
         </div>
         <div id='fact1'>
-          <input 
-          type="date"
-          value = {fechaVenta}
-          onChange={handleChangeVenta}
+          <input
+            type="date"
+            value={fechaVenta}
+            onChange={handleChangeVenta}
           />
           <select className='seleccion'>
             <option value="TipoVenta">Venta En Tienda</option>
@@ -199,9 +226,29 @@ function VentaPage() {
         <div id='fact2'>
           <div id='opt'>
             <button>+</button>
-            <input type="number" placeholder='NIT/CI' />
+            <input
+              type="text"
+              placeholder='NIT/CI'
+              value={busquedaUsuarioId}
+              onChange={buscarUsuarioID}
+            />
           </div>
-          <input type="text" placeholder='NOMBRE' />
+          <input
+            type="text"
+            placeholder='NOMBRE'
+            value={busquedaUsuarioNombre}
+            onChange={buscarUsuarioNombre}
+          />
+
+          {sugerenciasUsuario.length > 0 && (
+            <ul className='sugerenciasVenta'>
+              {sugerenciasUsuario.map((user, index) => (
+                <li key={index} onClick={() => {/* lógica para seleccionar usuario */ }}>
+                  {user.id} - {user.usuario}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <h3>Busqueda De Producto</h3>

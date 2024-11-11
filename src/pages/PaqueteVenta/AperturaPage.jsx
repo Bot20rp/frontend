@@ -16,11 +16,11 @@ function AperturaPage() {
         // Si existe apertura, ocultar botón de nueva apertura y mostrar botón de cierre
         if (existeApertura) {
             setMostrarNuevaApertura(false);
-            setMostarNuevoCierreApertura(true);
+            setMostrarCierreApertura(true);
         } else {
             // Si no existe apertura, restablece los valores por defecto
             setMostrarNuevaApertura(true);
-            setMostarNuevoCierreApertura(false);
+            setMostrarCierreApertura(false);
         }
     }, [existeApertura]);
     

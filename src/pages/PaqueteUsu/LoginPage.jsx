@@ -8,14 +8,17 @@ import { useNavigate, Link } from 'react-router-dom';
 function LoginPage() {
     const { register, handleSubmit } = useForm();
     const { signin, esAutenticado, cargarDatos, cargarDatosProveedores, user, cargarApertura } = useAuth();
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const onSubmit = handleSubmit(async (data) => {
         try {
+            setLoading(true);
             await signin(data);
             await cargarDatos();
             await cargarDatosProveedores();
         } catch (error) {
+            setLoading(false);
             console.error("Error al iniciar sesión o cargar datos:", error);
         }
     });
@@ -26,9 +29,11 @@ function LoginPage() {
                 console.log(user?.user);
 
                 if (user?.user?.rol === "Cliente") {
+                    setLoading(false);
                     navigate("/perfil");
                 } else {
                     await cargarApertura(); // Llamada asíncrona esperada
+                    setLoading(false);
                     navigate("/dasboard/homeda");
                 }
             }
@@ -49,7 +54,11 @@ function LoginPage() {
                     <input type="password" placeholder='Contraseña' {...register('password', { required: true })} />
                     <FaLock className='iconLogin' />
                 </div>
-                <button type="submit">Iniciar Sesión</button>
+
+                <button type="submit" disabled={loading}>
+                    {loading ? "Procesando..." : "Iniciar Sesión"}
+                </button>
+                {/* <button type="submit">Iniciar Sesión</button> */}
                 <p className='register-link'>
                     ¿No tienes cuenta? <Link to="/registerPage">Regístrate</Link>
                 </p>

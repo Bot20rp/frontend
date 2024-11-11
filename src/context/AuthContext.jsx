@@ -185,20 +185,36 @@ export const AuthProvider = ({ children }) => {
 
     const cargarApertura = async () => {
         try {
-            const res  = await obtenerApertura();
-            if (res?.data?.data?.[0]?.Estado) {
-                console.log("si existe")
+            const res = await obtenerApertura();
+    
+            // Verifica si la respuesta contiene datos
+            if (res?.data?.data?.length > 0 && res?.data?.data[0]?.Estado) {
+                console.log("si existe");
                 setExisteApertura(true);
-                console.log(res?.data?.data?.[0]?.AperturaID)
-                setAperturaID(res?.data?.data?.[0]?.AperturaID);
+                console.log(res?.data?.data[0]?.AperturaID);
+                setAperturaID(res?.data?.data[0]?.AperturaID);
             } else {
                 setExisteApertura(false);
-                console.log("no existe")
+                console.log("no existe");
             }
         } catch (error) {
-            console.error('Error al obtener la apertura', error);
+            // Verificar si hay un error relacionado con la respuesta HTTP
+            if (error.response) {
+                // Error de respuesta del servidor
+                console.error('Error en el servidor:', error.response.data.message);
+            } else if (error.request) {
+                // Error al hacer la solicitud (por ejemplo, no respuesta)
+                console.error('No se recibió respuesta del servidor:', error.request);
+            } else {
+                // Error general en la configuración de la solicitud
+                console.error('Error en la solicitud:', error.message);
+            }
+    
+            // También podrías mostrar un mensaje amigable al usuario aquí
+            alert('Hubo un problema al obtener la apertura, por favor intente nuevamente.');
         }
     };
+    
     
 
     useEffect(() => {

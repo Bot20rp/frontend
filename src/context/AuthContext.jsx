@@ -181,7 +181,7 @@ export const AuthProvider = ({ children }) => {
 
     const cargarApertura = async () => {
         try {
-            const { error, res } = await obtenerApertura();
+            const res  = await obtenerApertura();
             if (!error) {
                 console.log("si existe")
                 console.log(res)

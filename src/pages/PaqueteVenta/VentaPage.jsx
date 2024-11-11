@@ -163,6 +163,12 @@ function VentaPage() {
     pagoEfectivo.reduce((sum, amount) => sum + amount, 0) +
     pagoTarjeta.reduce((sum, amount) => sum + amount, 0);
 
+  const seleccionarUsuario = (user) => {
+    setBusquedaUsuarioId(user.id);  // Muestra el ID del usuario seleccionado
+    setBusquedaUsuarioNombre(user.usuario);  // Muestra el nombre del usuario seleccionado
+    setSugerenciasUsuario([]); // Limpia las sugerencias tras la selección
+  };
+
   useEffect(() => {
     if (productosBackend && productosBackend.data) {
       const productosObtenidos = productosBackend.data.map((producto) => ({
@@ -243,7 +249,7 @@ function VentaPage() {
           {sugerenciasUsuario.length > 0 && (
             <ul className='sugerenciasVenta'>
               {sugerenciasUsuario.map((user, index) => (
-                <li key={index} onClick={() => {/* lógica para seleccionar usuario */ }}>
+                <li key={index} onClick={() => { seleccionarUsuario(user) }}>
                   {user.id} - {user.usuario}
                 </li>
               ))}

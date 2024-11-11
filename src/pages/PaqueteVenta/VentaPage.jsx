@@ -195,6 +195,8 @@ function VentaPage() {
   const handleVentaChange = () => {
     try {
       const datos = {
+        clienteID: busquedaUsuarioId,
+        cliente: busquedaUsuarioNombre,
         fechaVenta,
         pagoQR: pagoQR[0] || 0,
         pagoEfectivo: pagoEfectivo[0] || 0,

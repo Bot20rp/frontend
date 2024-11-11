@@ -83,7 +83,7 @@ function VentaPage() {
     setBusquedaUsuarioId(value); // Mantén el valor en el estado de busquedaUsuarioId
   
     // Si el valor tiene al menos 3 caracteres, comienza la búsqueda
-    if (value.length >= 3) {
+    if (value.length > 0) {
       // Determina qué campo buscar: ID, CI o NIT
       const resultados = usuarios.filter((user) => {
         return (

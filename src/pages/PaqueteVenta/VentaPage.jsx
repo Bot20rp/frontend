@@ -9,8 +9,7 @@ function VentaPage() {
   const [usuarios, setUsuarios] = useState([]);
   const [sugerenciasUsuario, setSugerenciasUsuario] = useState([]);
   const [busquedaUsuarioId, setBusquedaUsuarioId] = useState('');
-  const [busquedaUsuarioCi, setBusquedaUsuarioCi] = useState('');
-  const [busquedaUsuarioNit, setBusquedaUsuarioNit] = useState('');
+  // const [usuarioSeleccionado, setusuarioSeleccionado] = useState('');
   const [busquedaUsuarioNombre, setBusquedaUsuarioNombre] = useState('');
   const [sugerencias, setSugerencias] = useState([]);
   const [busquedaId, setBusquedaId] = useState('');
@@ -263,7 +262,7 @@ function VentaPage() {
             <input
               type="text"
               placeholder='NIT/CI'
-              value={busquedaUsuarioId} 
+              // value={usuarioSeleccionado} 
               onChange={buscarUsuario}
             />
           </div>

@@ -48,7 +48,7 @@ function RegisterClientPage() {
                             className="inputClient"
                             type="number"
                             placeholder="CI"
-                            {...register('ci', { required: true })}
+                            {...register('CI', { required: true })}
                         />
                     </div>
                     <div className="inputWrapper">

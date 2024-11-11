@@ -4,21 +4,18 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import { obtenerApertura } from '../../api/auth';
 
 function LoginPage() {
     const { register, handleSubmit } = useForm();
-    const { signin, esAutenticado, cargarDatos, cargarDatosProveedores,user } = useAuth();
+    const { signin, esAutenticado, cargarDatos, cargarDatosProveedores,user,cargarApertura } = useAuth();
     const navigate = useNavigate();
-    const [apertura,setApertura] = useState([]);
 
     const onSubmit = handleSubmit(async (data) => {
         try {
             await signin(data);
             await cargarDatos();
             await cargarDatosProveedores();
-            const res = await obtenerApertura();
-            console.log(res)
+            await cargarApertura();
         } catch (error) {
             console.error("Error al iniciar sesión o cargar datos:", error);
         }

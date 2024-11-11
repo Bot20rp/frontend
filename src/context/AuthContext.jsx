@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, logoutRequest, verityTokenResquest,obtenerVolumen, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes} from "../api/auth";
+import { loginRequest, logoutRequest, verityTokenResquest,obtenerVolumen, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes,obtenerApertura} from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
     const[tableCategoria,setCategoria] = useState([]);
     const [tableLotes,setTableLotes] = useState([]);
     const [montoPago,setMonto] = useState(null);
+    const [existeApertura,setExisteApertura] = useState(false);
     const [permisoTable, setPermisos] = useState({
         administrador: [],
         cliente: [],
@@ -178,6 +179,21 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const cargarApertura = async () => {
+        try {
+            const { error, res } = await obtenerApertura();
+            if (!error && res?.data?.data?.Estado) {
+                console.log(res.data.data.Estado)
+                setExisteApertura(true);
+            } else {
+                setExisteApertura(false);
+            }
+        } catch (error) {
+            console.error('Error al obtener la apertura', error);
+        }
+    };
+    
+
     useEffect(() => {
         async function checkLogin() {
             const token = localStorage.getItem('token');
@@ -207,6 +223,7 @@ export const AuthProvider = ({ children }) => {
                     cargarDatosPermisos();
                     cargarProductos();
                     cargarRoles();
+                    cargarApertura();
                 }
                 setLoading(false);
             } catch (error) {
@@ -236,13 +253,15 @@ export const AuthProvider = ({ children }) => {
             tableCategoria,
             tableLotes,
             tableVolumen,
-            setMonto,
             montoPago,
+            existeApertura,
             cargarDatos,
             cargarDatosProveedores,
             cargarDatosPermisos,
             cargarProductos,
-            logout
+            logout,
+            cargarApertura,
+            setMonto
         }}>
             {children}
         </AuthContext.Provider>

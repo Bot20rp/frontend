@@ -13,9 +13,13 @@ function LoginPage() {
     const onSubmit = handleSubmit(async (data) => {
         try {
             await signin(data);
+            console.log(user.user)
+            if(user?.user.rol === "Administrador" || user?.user.rol === "Empleado"){
+                await cargarDatosProveedores();
+                await cargarApertura();
+            }
             await cargarDatos();
-            await cargarDatosProveedores();
-            await cargarApertura();
+
         } catch (error) {
             console.error("Error al iniciar sesión o cargar datos:", error);
         }

@@ -12,13 +12,14 @@ function LoginPage() {
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            await signin(data);
-            console.log(user.user)
-            if(user?.user.rol === "Administrador" || user?.user.rol === "Empleado"){
-                await cargarDatosProveedores();
-                await cargarApertura();
+            await signin(data); 
+            if (esAutenticado) {
+                if (user?.user?.rol === "Administrador" || user?.user?.rol === "Empleado") {
+                    await cargarDatosProveedores();
+                    await cargarApertura();
+                }
+                await cargarDatos();  // Cargar datos generales
             }
-            await cargarDatos();
 
         } catch (error) {
             console.error("Error al iniciar sesión o cargar datos:", error);
@@ -26,16 +27,17 @@ function LoginPage() {
     });
 
     useEffect(() => {
-        if (esAutenticado) {
-            console.log(user.user)
-            if(user?.user.rol === "Cliente"){
-                navigate("/perfil")
-            }else {
-                navigate("/dasboard/homeda");
+        if (esAutenticado && user?.user) {
+            console.log(user.user);
+            if (user.user.rol === "Cliente") {
+                navigate("/perfil");
+            } else {
+                navigate("/dashboard/homeda");
             }
         }
-    }, [esAutenticado, navigate]);
+    }, [esAutenticado, user, navigate]); 
 
+    
     return (
         <div className='contenedor' id='body3'>
             <form onSubmit={onSubmit} className='formulario'>

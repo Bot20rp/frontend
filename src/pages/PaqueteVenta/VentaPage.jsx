@@ -147,6 +147,24 @@ function VentaPage() {
       }
   }, [productosBackend]);
 
+  const handleVentaChange = () => {
+    try {
+      const datos = {
+        fechaVenta,
+        pagoQR,
+        pagoEfectivo,
+        pagoTarjeta,
+        productosEnVenta,
+        totalVenta
+      }
+
+      console.log(datos)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   return (
     <div className='contPrincipalVenta'>
@@ -311,7 +329,7 @@ function VentaPage() {
         <div id='pedidos'>
           <h3 id='textVenta'>Pedidos Carrito</h3>
         </div>
-        <button id='siguiente'> siguiente</button>
+        <button id='siguiente' onClick={handleVentaChange()}> siguiente</button>
       </div>
     </div>
   );

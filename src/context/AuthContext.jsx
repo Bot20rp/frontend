@@ -184,6 +184,7 @@ export const AuthProvider = ({ children }) => {
             const { error, res } = await obtenerApertura();
             if (!error) {
                 console.log("si existe")
+                console.log(res)
                 console.log(res.data.data.Estado)
                 setExisteApertura(true);
             } else {

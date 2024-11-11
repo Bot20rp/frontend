@@ -33,15 +33,15 @@ function AperturaPage() {
         setCajaChica(value >=0 ? value: 0);
     }
 
-    const crearApertura = () =>{
+    const crearApertura = async () =>{
         try {
             const datos = {
                 CajaChica: cajaChica || 0,
                 FechaInicio: new Date().toLocaleDateString(),
                 HoraInicio: new Date().toLocaleTimeString()
             };
-            // await insertarNuevaApertura(datos)
             console.log(datos)
+            await insertarNuevaApertura(datos)
         } catch (error) {
             console.log(error)
         }

@@ -212,3 +212,22 @@ export const insertarPago = (id,amount) => instance.post(`/pagoTarget`,{
         'Content-Type': 'application/json',
     }
 })
+
+
+//APERTURA
+
+export const insertarNuevaApertura = (data) => instance.post(`/apertura`,{
+    data,
+    headers:{
+        'Content-Type': 'application/json',
+    }
+});
+
+export const obtenerApertura = () => {return instance.get(`/getapertura`)};
+
+export const cerrarAperturaAbierta = (data) => instance.patch(`/cierre`,{
+    data,
+    headers:{
+        'Content-Type': 'application/json',
+    }
+});

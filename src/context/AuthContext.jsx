@@ -64,6 +64,7 @@ export const AuthProvider = ({ children }) => {
 
         try {
             const respuesta = await obtenerRequest();
+            console.log(respuesta)
             // Procesa la respuesta
             const datosNuevos = respuesta.data.usuarios.map(usuario => ({
                 id: usuario.id,

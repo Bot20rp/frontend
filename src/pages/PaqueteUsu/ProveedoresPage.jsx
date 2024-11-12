@@ -188,7 +188,7 @@ function ProveedoresPage() {
                                 <td>{prod.Contacto}</td>
                                 <td className='editProveedor'>
                                     <button className='eliminarProveedor' onClick={() => eliminarproveedores(prod.id)}>Eliminar</button>
-                                    <button className='modificarProveedor' onClick={() => modificarproveedor(prod.id)}>Modificar1</button>
+                                    <button className='modificarProveedor' onClick={() => modificarproveedor(prod.id)}>Modificar</button>
                                 </td>
                             </tr>
                         ))}
@@ -208,7 +208,7 @@ function ProveedoresPage() {
                         />
                     </div>
                     <div className="form-direccionProveedor">
-                        <label>Direccion :</label>
+                        <label>Direccion:</label>
                         <input
                             name="Direccion"
                             value={proveedor.Direccion}

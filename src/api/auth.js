@@ -235,4 +235,11 @@ export const cerrarAperturaAbierta = (data) => instance.patch(`/cierre`,{
 
 //VENTAS
 
+export const insertarFactura = (data) => instance.post(`/Factura`,{
+    data,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+})
+
 export const obtenerTipoVenta = () => {return instance.get(`/getVentas`)}

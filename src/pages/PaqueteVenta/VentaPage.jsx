@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import '../../css/AdmiVentaCss/VentaPage.css';
+import { insertarFactura } from '../../api/auth';
 
 function VentaPage() {
 
@@ -210,7 +211,7 @@ function VentaPage() {
     }
   }, [tableUser, tipoVenta])
 
-  const handleVentaChange = () => {
+  const handleVentaChange = async() => {
     if (existeApertura) {
 
       if (totalPago === totalVenta) {
@@ -218,16 +219,16 @@ function VentaPage() {
           const datos = {
             clienteID: busquedaUsuarioId,
             cliente: busquedaUsuarioNombre,
-            fechaVenta,
+            fecha: fechaVenta,
             pagoQR: pagoQR[0] || 0,
             pagoEfectivo: pagoEfectivo[0] || 0,
             pagoTarjeta: pagoTarjeta[0] || 0,
-            productosEnVenta,
+            productos : productosEnVenta,
             totalVenta,
-            tipoVentaSeleccionado
+            tipoVenta:tipoVentaSeleccionado
           }
           console.log(datos)
-
+          await insertarFactura(datos);
         } catch (error) {
           console.log(error)
         }

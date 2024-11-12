@@ -9,7 +9,7 @@ function VentaPage() {
   const [usuarios, setUsuarios] = useState([]);
   const [sugerenciasUsuario, setSugerenciasUsuario] = useState([]);
   const [busquedaUsuarioId, setBusquedaUsuarioId] = useState('');
-  // const [usuarioSeleccionado, setusuarioSeleccionado] = useState('');
+   const [tipoVentaSeleccionado, setTipoVentaSeleccionado] = useState('');
   const [busquedaUsuarioNombre, setBusquedaUsuarioNombre] = useState('');
   const [sugerencias, setSugerencias] = useState([]);
   const [busquedaId, setBusquedaId] = useState('');
@@ -180,6 +180,10 @@ function VentaPage() {
     setSugerenciasUsuario([]); // Limpia las sugerencias tras la selección
   };
 
+  const handleSelectChange = (e) => {
+    setTipoVentaSeleccionado(e.target.value)
+  }
+
   useEffect(() => {
     if (productosBackend && productosBackend.data) {
       const productosObtenidos = productosBackend.data.map((producto) => ({
@@ -202,6 +206,7 @@ function VentaPage() {
         nit: user.nit
       }));
       setUsuarios(usuariosObtenidos)
+      setTipoVentaSeleccionado(tipoVenta[0]?.TipoVID)
     }
   }, [tableUser])
 
@@ -216,7 +221,8 @@ function VentaPage() {
           pagoEfectivo: pagoEfectivo[0] || 0,
           pagoTarjeta: pagoTarjeta[0] || 0,
           productosEnVenta,
-          totalVenta
+          totalVenta,
+          tipoVentaSeleccionado
         }
         console.log(datos)
   
@@ -241,7 +247,7 @@ function VentaPage() {
             value={fechaVenta}
             onChange={handleChangeVenta}
           />
-          <select className='seleccion'>
+          <select className='seleccion'  onChange={handleSelectChange} value={tipoVentaSeleccionado} >
             <option value={tipoVenta[0]?.TipoVID}>{tipoVenta[0]?.Nombre}</option>
             <option value={tipoVenta[1]?.TipoVID}>{tipoVenta[1]?.Nombre}</option>
             <option value={tipoVenta[2]?.TipoVID}>{tipoVenta[2]?.Nombre}</option>

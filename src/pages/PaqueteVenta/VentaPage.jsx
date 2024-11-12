@@ -208,7 +208,7 @@ function VentaPage() {
       setUsuarios(usuariosObtenidos)
       setTipoVentaSeleccionado(tipoVenta[0]?.TipoVID)
     }
-  }, [tableUser])
+  }, [tableUser,tipoVenta])
 
   const handleVentaChange = () => {
     if(existeApertura){

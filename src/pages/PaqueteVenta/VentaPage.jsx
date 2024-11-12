@@ -549,7 +549,7 @@ function VentaPage() {
                 </div>
               </div>
 
-              <h3>Detalle De Pago:</h3>
+              <h3>Detalle De Pago</h3>
               {
                 (totalTarjeta > 0) && (
                   <div >

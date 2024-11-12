@@ -25,7 +25,11 @@ function VentaPage() {
   const [fechaVenta, setFechaVenta] = useState(new Date().toISOString().split('T')[0]);
   const [mostrarMenuPrincipal, setMostrarMenuPrincipal] = useState(true);
   const [mostrarConfirmarcion, setMostrarConfirmacion] = useState(false);
-  const [estado,setEstado] = useState(true);
+  const [estado, setEstado] = useState(true);
+  const [totalTarjeta, setTotalTarjeta] = useState('');
+  const [totalQr, setTotalQr] = useState('');
+  const [totalEfectivo, setTotalEfectivo] = useState('');
+  const [loading,setLoading] = useState(false);
 
   const seleccionarProducto = (producto) => {
     const productoExistente = productosEnVenta.find((p) => p.id === producto.id);
@@ -214,7 +218,7 @@ function VentaPage() {
     }
   }, [tableUser, tipoVenta])
 
-  const handleVentaChange =  () => {
+  const handleVentaChange = async () => {
     if (existeApertura) {
 
       if (totalPago === totalVenta) {
@@ -223,15 +227,16 @@ function VentaPage() {
             clienteID: busquedaUsuarioId,
             cliente: busquedaUsuarioNombre,
             fecha: fechaVenta,
-            pagoQr: pagoQR[0] || 0,
-            pagoEfectivo: pagoEfectivo[0] || 0,
-            pagoTarjeta: pagoTarjeta[0] || 0,
+            pagoQr: Number(totalQr) || 0,
+            pagoEfectivo: Number(totalEfectivo) || 0,
+            pagoTarjeta: Number(totalTarjeta) || 0,
             productos: productosEnVenta,
             totalVenta,
             tipoVenta: tipoVentaSeleccionado
           }
           console.log(datos)
-          // await insertarFactura(datos);
+          await insertarFactura(datos);
+          setLoading(true)
         } catch (error) {
           console.log(error)
         }
@@ -241,6 +246,19 @@ function VentaPage() {
     } else {
       alert('Necesitas Iniciar Nueva Apertura');
     }
+  }
+
+
+  const handleSiguiente = () => {
+    setTotalTarjeta(pagoTarjeta.reduce((sum, amount) => sum + amount, 0));
+    setTotalEfectivo(pagoEfectivo.reduce((sum, amount) => sum + amount, 0));
+    setTotalQr(pagoQR.reduce((sum, amount) => sum + amount, 0))
+  }
+
+  const handleConfirmado = () => {
+    setMostrarConfirmacion(false);
+    setMostrarMenuPrincipal(true);
+    setLoading(false)
   }
 
 
@@ -434,9 +452,9 @@ function VentaPage() {
               <button
                 id='siguiente'
                 onClick={() => {
-                  handleVentaChange();
                   setMostrarConfirmacion(true);
                   setMostrarMenuPrincipal(false);
+                  handleSiguiente();
                 }}
               >
                 Siguiente
@@ -455,7 +473,7 @@ function VentaPage() {
       {
         mostrarConfirmarcion && (
           <div className='contPrincipalVenta'>
-            <div className='facturaPrincipal'>
+            <div className='facturaPrincipal2'>
               <div>
                 <h1>Confirmacion</h1>
               </div>
@@ -532,66 +550,40 @@ function VentaPage() {
               </div>
 
               <h3>Detalle De Pago</h3>
-              <div id='fact5'>
-                <button onClick={() => { setMostrarTarjeta(true); handleAddTarjeta(); }}>TARJETA</button>
-                <button onClick={() => { setMostrarEfectivo(true); handleAddEfectivo(); }}>EFECTIVO</button>
-                <button onClick={() => { setMostrarQR(true); handleAddQR(); }}>QR</button>
+              {
+                (totalTarjeta > 0) && (
+                  <div >
+                    <h4>Total Tarjeta</h4>
+                    <h3>{totalTarjeta}</h3>
+                  </div>
+
+                )
+              }
+              {
+                (totalEfectivo > 0) && (
+                  <div>
+                    <h4>Total Efectivo</h4>
+                    <h3>{totalEfectivo}</h3>
+                  </div>
+                )
+              }
+              {
+                (totalQr > 0) && (
+                  <div>
+                    <h4>Total Qr</h4>
+                    <h3>{totalQr}</h3>
+                  </div>
+                )
+              }
+
+              <h3 id='pago'>TOTAL VENTA BS: {totalPago.toFixed(2)}</h3>
+
+              <div>
+                <button onClick={handleConfirmado}>{loading ? "Nuevo": "Atras"}</button>
+                <button onClick={handleVentaChange}>{loading ? "Imprimir": "Confirmar"}</button>
               </div>
-
-              {mostrarTarjeta && (
-                <div>
-                  {pagoTarjeta.length > 0 && <h2>Pagos por Tarjeta</h2>}
-                  {pagoTarjeta.map((amount, index) => (
-                    <div key={`qr-${index}`} className='MetodoPago'>
-                      <input
-                        type="number"
-                        value={amount}
-                        onChange={(e) => handleTarjetaChange(index, e.target.value)}
-                        placeholder="Pago con Tarjeta"
-                      />
-                      <button onClick={() => handleRemoveTarjeta(index)}>x</button>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-
-              {mostrarEfectivo && (
-                <div>
-                  {pagoEfectivo.length > 0 && <h2>Pagos por Efectivo</h2>}
-                  {pagoEfectivo.map((amount, index) => (
-                    <div key={`efectivo-${index}`} className='MetodoPago' >
-                      <input
-                        type="number"
-                        value={amount}
-                        onChange={(e) => handleEfectivoChange(index, e.target.value)}
-                        placeholder="Pago en Efectivo"
-                      />
-                      <button onClick={() => handleRemoveEfectivo(index)}>x</button>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {mostrarQR && (
-                <div>
-                  {pagoQR.length > 0 && <h2>Pagos por QR</h2>}
-                  {pagoQR.map((amount, index) => (
-                    <div key={`qr-${index}`} className='MetodoPago'>
-                      <input
-                        type="number"
-                        value={amount}
-                        onChange={(e) => handleQRChange(index, e.target.value)}
-                        placeholder="Pago con QR"
-                      />
-                      <button onClick={() => handleRemoveQR(index)}>x</button>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <h3 id='pago'>TOTAL PAGO BS: {totalPago.toFixed(2)}</h3>
             </div>
+
 
           </div>
         )

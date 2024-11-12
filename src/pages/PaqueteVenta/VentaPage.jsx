@@ -23,6 +23,9 @@ function VentaPage() {
   const [mostrarEfectivo, setMostrarEfectivo] = useState(false);
   const [mostrarTarjeta, setMostrarTarjeta] = useState(false);
   const [fechaVenta, setFechaVenta] = useState(new Date().toISOString().split('T')[0]);
+  const [mostrarMenuPrincipal, setMostrarMenuPrincipal] = useState(true);
+  const [mostrarConfirmarcion, setMostrarConfirmacion] = useState(false);
+  const [estado,setEstado] = useState(true);
 
   const seleccionarProducto = (producto) => {
     const productoExistente = productosEnVenta.find((p) => p.id === producto.id);
@@ -211,7 +214,7 @@ function VentaPage() {
     }
   }, [tableUser, tipoVenta])
 
-  const handleVentaChange = async() => {
+  const handleVentaChange = async () => {
     if (existeApertura) {
 
       if (totalPago === totalVenta) {
@@ -223,16 +226,16 @@ function VentaPage() {
             pagoQr: pagoQR[0] || 0,
             pagoEfectivo: pagoEfectivo[0] || 0,
             pagoTarjeta: pagoTarjeta[0] || 0,
-            productos : productosEnVenta,
+            productos: productosEnVenta,
             totalVenta,
-            tipoVenta:tipoVentaSeleccionado
+            tipoVenta: tipoVentaSeleccionado
           }
           console.log(datos)
           await insertarFactura(datos);
         } catch (error) {
           console.log(error)
         }
-      }else{
+      } else {
         alert('El Total Pagar es diferente al Total Venta');
       }
     } else {
@@ -242,192 +245,360 @@ function VentaPage() {
 
 
   return (
-    <div className='contPrincipalVenta'>
-      <div className='facturaPrincipal'>
-        <div>
-          <h1>Facturación</h1>
-        </div>
-        <div id='fact1'>
-          <input
-            type="date"
-            value={fechaVenta}
-            onChange={handleChangeVenta}
-          />
-          <select className='seleccion' onChange={handleSelectChange} value={tipoVentaSeleccionado} >
-            <option value={tipoVenta[0]?.TipoVID}>{tipoVenta[0]?.Nombre}</option>
-            <option value={tipoVenta[1]?.TipoVID}>{tipoVenta[1]?.Nombre}</option>
-            <option value={tipoVenta[2]?.TipoVID}>{tipoVenta[2]?.Nombre}</option>
-          </select>
-        </div>
-        <h3>Cliente</h3>
-        <div id='fact2'>
-          <div id='opt'>
-            <button>+</button>
-            <input
-              type="text"
-              placeholder='NIT/CI'
-              // value={usuarioSeleccionado} 
-              onChange={buscarUsuario}
-            />
-          </div>
-          <input
-            type="text"
-            placeholder='NOMBRE'
-            value={busquedaUsuarioNombre}
-            onChange={buscarUsuarioNombre}
-          />
+    <div >
+      {
+        mostrarMenuPrincipal && (
+          <div className='contPrincipalVenta'>
+            <div className='facturaPrincipal'>
+              <div>
+                <h1>Facturación</h1>
+              </div>
+              <div id='fact1'>
+                <input
+                  type="date"
+                  value={fechaVenta}
+                  onChange={handleChangeVenta}
+                />
+                <select className='seleccion' onChange={handleSelectChange} value={tipoVentaSeleccionado} >
+                  <option value={tipoVenta[0]?.TipoVID}>{tipoVenta[0]?.Nombre}</option>
+                  <option value={tipoVenta[1]?.TipoVID}>{tipoVenta[1]?.Nombre}</option>
+                  <option value={tipoVenta[2]?.TipoVID}>{tipoVenta[2]?.Nombre}</option>
+                </select>
+              </div>
+              <h3>Cliente</h3>
+              <div id='fact2'>
+                <div id='opt'>
+                  <button>+</button>
+                  <input
+                    type="text"
+                    placeholder='NIT/CI'
+                    // value={usuarioSeleccionado} 
+                    onChange={buscarUsuario}
+                  />
+                </div>
+                <input
+                  type="text"
+                  placeholder='NOMBRE'
+                  value={busquedaUsuarioNombre}
+                  onChange={buscarUsuarioNombre}
+                />
 
-          {sugerenciasUsuario.length > 0 && (
-            <ul className='sugerenciasVenta'>
-              {sugerenciasUsuario.map((user, index) => (
-                <li key={index} onClick={() => { seleccionarUsuario(user) }}>
-                  {user.id} - {user.usuario}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+                {sugerenciasUsuario.length > 0 && (
+                  <ul className='sugerenciasVenta'>
+                    {sugerenciasUsuario.map((user, index) => (
+                      <li key={index} onClick={() => { seleccionarUsuario(user) }}>
+                        {user.id} - {user.usuario}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
-        <h3>Busqueda De Producto</h3>
-        <div id='fact3'>
-          <input
-            type="text"
-            placeholder='ID del producto'
-            value={busquedaId}
-            onChange={buscarProductoPorId}
-          />
-          <input
-            type="text"
-            placeholder='Buscar producto'
-            value={busquedaNombre}
-            onChange={buscarProductoPorNombre}
-          />
+              <h3>Busqueda De Producto</h3>
+              <div id='fact3'>
+                <input
+                  type="text"
+                  placeholder='ID del producto'
+                  value={busquedaId}
+                  onChange={buscarProductoPorId}
+                />
+                <input
+                  type="text"
+                  placeholder='Buscar producto'
+                  value={busquedaNombre}
+                  onChange={buscarProductoPorNombre}
+                />
 
-          {sugerencias.length > 0 && (
-            <ul className='sugerenciasVenta'>
-              {sugerencias.map((producto, index) => (
-                <li key={index} onClick={() => seleccionarProducto(producto)}>
-                  {producto.id} - {producto.nombre}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+                {sugerencias.length > 0 && (
+                  <ul className='sugerenciasVenta'>
+                    {sugerencias.map((producto, index) => (
+                      <li key={index} onClick={() => seleccionarProducto(producto)}>
+                        {producto.id} - {producto.nombre}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
-        <h3>Detalle Venta</h3>
-        <div className="facturaPrincipal45">
-          <div id="fact4">
-            <table id="table4">
-              <thead>
-                <tr>
-                  <th className="codigo">Codigo</th>
-                  <th className="descripcion">Descripcion</th>
-                  <th className="precio">Precio</th>
-                  <th className="cantidad">Cantidad</th>
-                  <th className="importe">Importe</th>
-                </tr>
-              </thead>
-              <tbody>
-                {productosEnVenta.map((product, index) => (
-                  <tr key={index}>
-                    <td className="codigo">{product.id}</td>
-                    <td className="descripcion">{product.nombre}</td>
-                    <td className="precio">{product.precio}</td>
-                    <td className="cantidad">
+              <h3>Detalle Venta</h3>
+              <div className="facturaPrincipal45">
+                <div id="fact4">
+                  <table id="table4">
+                    <thead>
+                      <tr>
+                        <th className="codigo">Codigo</th>
+                        <th className="descripcion">Descripcion</th>
+                        <th className="precio">Precio</th>
+                        <th className="cantidad">Cantidad</th>
+                        <th className="importe">Importe</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {productosEnVenta.map((product, index) => (
+                        <tr key={index}>
+                          <td className="codigo">{product.id}</td>
+                          <td className="descripcion">{product.nombre}</td>
+                          <td className="precio">{product.precio}</td>
+                          <td className="cantidad">
+                            <input
+                              type="number"
+                              name="cantidad"
+                              value={product.cantidad}
+                              onChange={(event) => handleInputChange(index, event)}
+                            />
+                          </td>
+                          <td className="importe">
+                            {product.cantidad * product.precio}
+                          </td>
+                          <td className="accion">
+                            <button onClick={() => handleRemoveProduct(index)}>x</button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <h3>Detalle De Pago</h3>
+              <div id='fact5'>
+                <button onClick={() => { setMostrarTarjeta(true); handleAddTarjeta(); }}>TARJETA</button>
+                <button onClick={() => { setMostrarEfectivo(true); handleAddEfectivo(); }}>EFECTIVO</button>
+                <button onClick={() => { setMostrarQR(true); handleAddQR(); }}>QR</button>
+              </div>
+
+              {mostrarTarjeta && (
+                <div>
+                  {pagoTarjeta.length > 0 && <h2>Pagos por Tarjeta</h2>}
+                  {pagoTarjeta.map((amount, index) => (
+                    <div key={`qr-${index}`} className='MetodoPago'>
                       <input
                         type="number"
-                        name="cantidad"
-                        value={product.cantidad}
-                        onChange={(event) => handleInputChange(index, event)}
+                        value={amount}
+                        onChange={(e) => handleTarjetaChange(index, e.target.value)}
+                        placeholder="Pago con Tarjeta"
                       />
-                    </td>
-                    <td className="importe">
-                      {product.cantidad * product.precio}
-                    </td>
-                    <td className="accion">
-                      <button onClick={() => handleRemoveProduct(index)}>x</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                      <button onClick={() => handleRemoveTarjeta(index)}>x</button>
+                    </div>
+                  ))}
+                </div>
+              )}
 
-        <h3>Detalle De Pago</h3>
-        <div id='fact5'>
-          <button onClick={() => { setMostrarTarjeta(true); handleAddTarjeta(); }}>TARJETA</button>
-          <button onClick={() => { setMostrarEfectivo(true); handleAddEfectivo(); }}>EFECTIVO</button>
-          <button onClick={() => { setMostrarQR(true); handleAddQR(); }}>QR</button>
-        </div>
 
-        {mostrarTarjeta && (
-          <div>
-            {pagoTarjeta.length > 0 && <h2>Pagos por Tarjeta</h2>}
-            {pagoTarjeta.map((amount, index) => (
-              <div key={`qr-${index}`} className='MetodoPago'>
-                <input
-                  type="number"
-                  value={amount}
-                  onChange={(e) => handleTarjetaChange(index, e.target.value)}
-                  placeholder="Pago con Tarjeta"
-                />
-                <button onClick={() => handleRemoveTarjeta(index)}>x</button>
+              {mostrarEfectivo && (
+                <div>
+                  {pagoEfectivo.length > 0 && <h2>Pagos por Efectivo</h2>}
+                  {pagoEfectivo.map((amount, index) => (
+                    <div key={`efectivo-${index}`} className='MetodoPago' >
+                      <input
+                        type="number"
+                        value={amount}
+                        onChange={(e) => handleEfectivoChange(index, e.target.value)}
+                        placeholder="Pago en Efectivo"
+                      />
+                      <button onClick={() => handleRemoveEfectivo(index)}>x</button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {mostrarQR && (
+                <div>
+                  {pagoQR.length > 0 && <h2>Pagos por QR</h2>}
+                  {pagoQR.map((amount, index) => (
+                    <div key={`qr-${index}`} className='MetodoPago'>
+                      <input
+                        type="number"
+                        value={amount}
+                        onChange={(e) => handleQRChange(index, e.target.value)}
+                        placeholder="Pago con QR"
+                      />
+                      <button onClick={() => handleRemoveQR(index)}>x</button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <h3 id='pago'>TOTAL PAGO BS: {totalPago.toFixed(2)}</h3>
+            </div>
+
+            <div className='detalleFactura'>
+              <h1>Resumen</h1>
+              <div id='resumen'>
+                <h3 id='textVenta'>Detalles De Venta</h3>
+                <h3 >Total Bs: {totalVenta.toFixed(2)}</h3>
               </div>
-            ))}
-          </div>
-        )}
-
-
-        {mostrarEfectivo && (
-          <div>
-            {pagoEfectivo.length > 0 && <h2>Pagos por Efectivo</h2>}
-            {pagoEfectivo.map((amount, index) => (
-              <div key={`efectivo-${index}`} className='MetodoPago' >
-                <input
-                  type="number"
-                  value={amount}
-                  onChange={(e) => handleEfectivoChange(index, e.target.value)}
-                  placeholder="Pago en Efectivo"
-                />
-                <button onClick={() => handleRemoveEfectivo(index)}>x</button>
+              <div id='pedidos'>
+                <h3 id='textVenta'>Pedidos Carrito</h3>
               </div>
-            ))}
-          </div>
-        )}
+              <button
+                id='siguiente'
+                onClick={() => {
+                  handleVentaChange();
+                  setMostrarConfirmacion(true);
+                  setMostrarMenuPrincipal(false);
+                }}
+              >
+                Siguiente
+              </button>
 
-        {mostrarQR && (
-          <div>
-            {pagoQR.length > 0 && <h2>Pagos por QR</h2>}
-            {pagoQR.map((amount, index) => (
-              <div key={`qr-${index}`} className='MetodoPago'>
-                <input
-                  type="number"
-                  value={amount}
-                  onChange={(e) => handleQRChange(index, e.target.value)}
-                  placeholder="Pago con QR"
-                />
-                <button onClick={() => handleRemoveQR(index)}>x</button>
+            </div>
+
+          </div>
+
+        )
+
+
+      }
+
+
+      {
+        mostrarConfirmarcion && (
+          <div className='contPrincipalVenta'>
+            <div className='facturaPrincipal'>
+              <div>
+                <h1>Confirmacion</h1>
               </div>
-            ))}
+              <div id='fact1'>
+                <input
+                  type="date"
+                  value={fechaVenta}
+                  onChange={handleChangeVenta}
+                  disabled={estado}
+                />
+                <select className='seleccion' onChange={handleSelectChange} value={tipoVentaSeleccionado} disabled={estado} >
+                  <option value={tipoVenta[0]?.TipoVID}>{tipoVenta[0]?.Nombre}</option>
+                  <option value={tipoVenta[1]?.TipoVID}>{tipoVenta[1]?.Nombre}</option>
+                  <option value={tipoVenta[2]?.TipoVID}>{tipoVenta[2]?.Nombre}</option>
+                </select>
+              </div>
+              <h3>Cliente</h3>
+              <div id='fact2'>
+                <div id='opt'>
+                  <button>+</button>
+                  <input
+                    type="text"
+                    placeholder='NIT/CI'
+                    // value={usuarioSeleccionado} 
+                    onChange={buscarUsuario}
+                    disabled={estado}
+                  />
+                </div>
+                <input
+                  type="text"
+                  placeholder='NOMBRE'
+                  value={busquedaUsuarioNombre}
+                  onChange={buscarUsuarioNombre}
+                  disabled={estado}
+                />
+              </div>
+
+              <h3>Detalle Venta</h3>
+              <div className="facturaPrincipal45">
+                <div id="fact4">
+                  <table id="table4">
+                    <thead>
+                      <tr>
+                        <th className="codigo">Codigo</th>
+                        <th className="descripcion">Descripcion</th>
+                        <th className="precio">Precio</th>
+                        <th className="cantidad">Cantidad</th>
+                        <th className="importe">Importe</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {productosEnVenta.map((product, index) => (
+                        <tr key={index}>
+                          <td className="codigo">{product.id}</td>
+                          <td className="descripcion">{product.nombre}</td>
+                          <td className="precio">{product.precio}</td>
+                          <td className="cantidad">
+                            <input
+                              type="number"
+                              name="cantidad"
+                              value={product.cantidad}
+                              onChange={(event) => handleInputChange(index, event)}
+                              disabled={estado}
+                            />
+                          </td>
+                          <td className="importe">
+                            {product.cantidad * product.precio}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <h3>Detalle De Pago</h3>
+              <div id='fact5'>
+                <button onClick={() => { setMostrarTarjeta(true); handleAddTarjeta(); }}>TARJETA</button>
+                <button onClick={() => { setMostrarEfectivo(true); handleAddEfectivo(); }}>EFECTIVO</button>
+                <button onClick={() => { setMostrarQR(true); handleAddQR(); }}>QR</button>
+              </div>
+
+              {mostrarTarjeta && (
+                <div>
+                  {pagoTarjeta.length > 0 && <h2>Pagos por Tarjeta</h2>}
+                  {pagoTarjeta.map((amount, index) => (
+                    <div key={`qr-${index}`} className='MetodoPago'>
+                      <input
+                        type="number"
+                        value={amount}
+                        onChange={(e) => handleTarjetaChange(index, e.target.value)}
+                        placeholder="Pago con Tarjeta"
+                      />
+                      <button onClick={() => handleRemoveTarjeta(index)}>x</button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+
+              {mostrarEfectivo && (
+                <div>
+                  {pagoEfectivo.length > 0 && <h2>Pagos por Efectivo</h2>}
+                  {pagoEfectivo.map((amount, index) => (
+                    <div key={`efectivo-${index}`} className='MetodoPago' >
+                      <input
+                        type="number"
+                        value={amount}
+                        onChange={(e) => handleEfectivoChange(index, e.target.value)}
+                        placeholder="Pago en Efectivo"
+                      />
+                      <button onClick={() => handleRemoveEfectivo(index)}>x</button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {mostrarQR && (
+                <div>
+                  {pagoQR.length > 0 && <h2>Pagos por QR</h2>}
+                  {pagoQR.map((amount, index) => (
+                    <div key={`qr-${index}`} className='MetodoPago'>
+                      <input
+                        type="number"
+                        value={amount}
+                        onChange={(e) => handleQRChange(index, e.target.value)}
+                        placeholder="Pago con QR"
+                      />
+                      <button onClick={() => handleRemoveQR(index)}>x</button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <h3 id='pago'>TOTAL PAGO BS: {totalPago.toFixed(2)}</h3>
+            </div>
+
           </div>
-        )}
+        )
+      }
 
-        <h3 id='pago'>TOTAL PAGO BS: {totalPago.toFixed(2)}</h3>
-      </div>
-
-      <div className='detalleFactura'>
-        <h1>Resumen</h1>
-        <div id='resumen'>
-          <h3 id='textVenta'>Detalles De Venta</h3>
-          <h3 >Total Bs: {totalVenta.toFixed(2)}</h3>
-        </div>
-        <div id='pedidos'>
-          <h3 id='textVenta'>Pedidos Carrito</h3>
-        </div>
-        <button id='siguiente' onClick={handleVentaChange}> siguiente</button>
-      </div>
     </div>
+
   );
 }
 

@@ -189,6 +189,13 @@ export const AuthProvider = ({ children }) => {
             const res = await obtenerApertura();
             const resT = await obtenerTipoVenta();
             console.log(resT)
+
+            if(resT?.data?.tiposVentas.length > 0 ){
+                console.log(resT?.data?.tiposVentas)
+                setTipoVenta(resT?.data?.tiposVentas)
+            }else{
+
+            }
     
             // Verifica si la respuesta contiene datos
             if (res?.data?.data?.length > 0 && res?.data?.data[0]?.Estado) {

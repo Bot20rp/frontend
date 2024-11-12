@@ -231,3 +231,8 @@ export const cerrarAperturaAbierta = (data) => instance.patch(`/cierre`,{
         'Content-Type': 'application/json',
     }
 });
+
+
+//VENTAS
+
+export const obtenerTipoVenta = () => {return instance.get(`/getVentas`)}

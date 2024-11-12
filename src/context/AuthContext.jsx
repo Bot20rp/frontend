@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, logoutRequest, verityTokenResquest,obtenerVolumen, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes,obtenerApertura} from "../api/auth";
+import { loginRequest, logoutRequest, verityTokenResquest,obtenerVolumen, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes,obtenerApertura,obtenerTipoVenta} from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [roles,setRoles] = useState([]);
     const [productosBackend, setProductosBackend] = useState(null);
+    const [tipoVenta,setTipoVenta] = useState([]);
     const [esAutenticado, setEsAutenticado] = useState(false);
     const [loading, setLoading] = useState(true);
     const [rol, setRol] = useState(null);
@@ -186,6 +187,8 @@ export const AuthProvider = ({ children }) => {
     const cargarApertura = async () => {
         try {
             const res = await obtenerApertura();
+            const resT = await obtenerTipoVenta();
+            console.log(resT)
     
             // Verifica si la respuesta contiene datos
             if (res?.data?.data?.length > 0 && res?.data?.data[0]?.Estado) {

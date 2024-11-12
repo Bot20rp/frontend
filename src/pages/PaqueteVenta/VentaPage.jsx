@@ -4,7 +4,7 @@ import '../../css/AdmiVentaCss/VentaPage.css';
 
 function VentaPage() {
 
-  const { productosBackend, tableUser,existeApertura } = useAuth();
+  const { productosBackend, tableUser,existeApertura,tipoVenta} = useAuth();
   const [producto, setProductos] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
   const [sugerenciasUsuario, setSugerenciasUsuario] = useState([]);
@@ -97,18 +97,6 @@ function VentaPage() {
     }
   };
   
-
-
-  // const buscarUsuarioID = (event) => {
-  //   const value = event.target.value;
-  //   setBusquedaUsuarioId(value);
-  //   if (value.length > 0) {
-  //     const resultados = usuarios.filter((user) => user.id.toString().startsWith(value));
-  //     setSugerenciasUsuario(resultados);
-  //   } else {
-  //     setSugerenciasUsuario([]);
-  //   }
-  // };
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -254,8 +242,9 @@ function VentaPage() {
             onChange={handleChangeVenta}
           />
           <select className='seleccion'>
-            <option value="TipoVenta">Venta En Tienda</option>
-            <option value="TipoVenta">Venta Delivery</option>
+            <option value={tipoVenta[0]?.TipoVID}>{tipoVenta[0]?.Nombre}</option>
+            <option value={tipoVenta[1]?.TipoVID}>{tipoVenta[1]?.Nombre}</option>
+            <option value={tipoVenta[2]?.TipoVID}>{tipoVenta[2]?.Nombre}</option>
           </select>
         </div>
         <h3>Cliente</h3>

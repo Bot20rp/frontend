@@ -188,10 +188,8 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await obtenerApertura();
             const resT = await obtenerTipoVenta();
-            console.log(resT)
 
             if(resT?.data?.tiposVentas.length > 0 ){
-                console.log(resT?.data?.tiposVentas)
                 setTipoVenta(resT?.data?.tiposVentas)
             }else{
 
@@ -289,6 +287,7 @@ export const AuthProvider = ({ children }) => {
             montoPago,
             existeApertura,
             AperturaID,
+            tipoVenta,
             setExisteApertura,
             cargarDatos,
             cargarDatosProveedores,

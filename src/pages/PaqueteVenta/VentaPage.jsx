@@ -220,7 +220,7 @@ function VentaPage() {
             clienteID: busquedaUsuarioId,
             cliente: busquedaUsuarioNombre,
             fecha: fechaVenta,
-            pagoQR: pagoQR[0] || 0,
+            pagoQr: pagoQR[0] || 0,
             pagoEfectivo: pagoEfectivo[0] || 0,
             pagoTarjeta: pagoTarjeta[0] || 0,
             productos : productosEnVenta,

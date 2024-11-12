@@ -4,12 +4,12 @@ import '../../css/AdmiVentaCss/VentaPage.css';
 
 function VentaPage() {
 
-  const { productosBackend, tableUser,existeApertura,tipoVenta} = useAuth();
+  const { productosBackend, tableUser, existeApertura, tipoVenta } = useAuth();
   const [producto, setProductos] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
   const [sugerenciasUsuario, setSugerenciasUsuario] = useState([]);
   const [busquedaUsuarioId, setBusquedaUsuarioId] = useState('');
-   const [tipoVentaSeleccionado, setTipoVentaSeleccionado] = useState('');
+  const [tipoVentaSeleccionado, setTipoVentaSeleccionado] = useState('');
   const [busquedaUsuarioNombre, setBusquedaUsuarioNombre] = useState('');
   const [sugerencias, setSugerencias] = useState([]);
   const [busquedaId, setBusquedaId] = useState('');
@@ -80,7 +80,7 @@ function VentaPage() {
   const buscarUsuario = (event) => {
     const value = event.target.value;
     setBusquedaUsuarioId(value); // Mantén el valor en el estado de busquedaUsuarioId
-  
+
     // Si el valor tiene al menos 3 caracteres, comienza la búsqueda
     if (value.length > 0) {
       // Determina qué campo buscar: ID, CI o NIT
@@ -96,7 +96,7 @@ function VentaPage() {
       setSugerenciasUsuario([]); // Si el valor es demasiado corto, limpia las sugerencias
     }
   };
-  
+
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -208,28 +208,33 @@ function VentaPage() {
       setUsuarios(usuariosObtenidos)
       setTipoVentaSeleccionado(tipoVenta[0]?.TipoVID)
     }
-  }, [tableUser,tipoVenta])
+  }, [tableUser, tipoVenta])
 
   const handleVentaChange = () => {
-    if(existeApertura){
-      try {
-        const datos = {
-          clienteID: busquedaUsuarioId,
-          cliente: busquedaUsuarioNombre,
-          fechaVenta,
-          pagoQR: pagoQR[0] || 0,
-          pagoEfectivo: pagoEfectivo[0] || 0,
-          pagoTarjeta: pagoTarjeta[0] || 0,
-          productosEnVenta,
-          totalVenta,
-          tipoVentaSeleccionado
+    if (existeApertura) {
+
+      if (totalPago === totalVenta) {
+        try {
+          const datos = {
+            clienteID: busquedaUsuarioId,
+            cliente: busquedaUsuarioNombre,
+            fechaVenta,
+            pagoQR: pagoQR[0] || 0,
+            pagoEfectivo: pagoEfectivo[0] || 0,
+            pagoTarjeta: pagoTarjeta[0] || 0,
+            productosEnVenta,
+            totalVenta,
+            tipoVentaSeleccionado
+          }
+          console.log(datos)
+
+        } catch (error) {
+          console.log(error)
         }
-        console.log(datos)
-  
-      } catch (error) {
-        console.log(error)
+      }else{
+        alert('El Total Pagar es diferente al Total Venta');
       }
-    }else{
+    } else {
       alert('Necesitas Iniciar Nueva Apertura');
     }
   }
@@ -247,7 +252,7 @@ function VentaPage() {
             value={fechaVenta}
             onChange={handleChangeVenta}
           />
-          <select className='seleccion'  onChange={handleSelectChange} value={tipoVentaSeleccionado} >
+          <select className='seleccion' onChange={handleSelectChange} value={tipoVentaSeleccionado} >
             <option value={tipoVenta[0]?.TipoVID}>{tipoVenta[0]?.Nombre}</option>
             <option value={tipoVenta[1]?.TipoVID}>{tipoVenta[1]?.Nombre}</option>
             <option value={tipoVenta[2]?.TipoVID}>{tipoVenta[2]?.Nombre}</option>

@@ -4,7 +4,7 @@ import '../../css/AdmiVentaCss/VentaPage.css';
 
 function VentaPage() {
 
-  const { productosBackend, tableUser } = useAuth();
+  const { productosBackend, tableUser,existeApertura } = useAuth();
   const [producto, setProductos] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
   const [sugerenciasUsuario, setSugerenciasUsuario] = useState([]);
@@ -218,21 +218,25 @@ function VentaPage() {
   }, [tableUser])
 
   const handleVentaChange = () => {
-    try {
-      const datos = {
-        clienteID: busquedaUsuarioId,
-        cliente: busquedaUsuarioNombre,
-        fechaVenta,
-        pagoQR: pagoQR[0] || 0,
-        pagoEfectivo: pagoEfectivo[0] || 0,
-        pagoTarjeta: pagoTarjeta[0] || 0,
-        productosEnVenta,
-        totalVenta
+    if(existeApertura){
+      try {
+        const datos = {
+          clienteID: busquedaUsuarioId,
+          cliente: busquedaUsuarioNombre,
+          fechaVenta,
+          pagoQR: pagoQR[0] || 0,
+          pagoEfectivo: pagoEfectivo[0] || 0,
+          pagoTarjeta: pagoTarjeta[0] || 0,
+          productosEnVenta,
+          totalVenta
+        }
+        console.log(datos)
+  
+      } catch (error) {
+        console.log(error)
       }
-      console.log(datos)
-
-    } catch (error) {
-      console.log(error)
+    }else{
+      alert('Necesitas Iniciar Nueva Apertura');
     }
   }
 

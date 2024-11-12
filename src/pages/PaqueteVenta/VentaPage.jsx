@@ -214,7 +214,7 @@ function VentaPage() {
     }
   }, [tableUser, tipoVenta])
 
-  const handleVentaChange = async () => {
+  const handleVentaChange =  () => {
     if (existeApertura) {
 
       if (totalPago === totalVenta) {
@@ -231,7 +231,7 @@ function VentaPage() {
             tipoVenta: tipoVentaSeleccionado
           }
           console.log(datos)
-          await insertarFactura(datos);
+          // await insertarFactura(datos);
         } catch (error) {
           console.log(error)
         }

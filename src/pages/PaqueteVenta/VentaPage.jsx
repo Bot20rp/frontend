@@ -181,7 +181,7 @@ function VentaPage() {
   };
 
   const handleSelectChange = (e) => {
-    setTipoVentaSeleccionado(e.target.value)
+    setTipoVentaSeleccionado(Number(e.target.value))
   }
 
   useEffect(() => {

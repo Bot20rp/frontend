@@ -138,11 +138,11 @@ function DetalleFacturaPage() {
                 <td>{fact.cliente}</td>
                 <td>{fact.monto}</td>
                 <td>
-                  <button > <FaPrint /></button>
+                  <button onClick={() => handleImprimirFactura(index)} > <FaPrint /></button>
                 </td>
                 <td>{fact.estado ? "Activo" : "Inactivo"}</td>
                 <td>
-                  <button onClick={() => handleImprimirFactura(index)} > <FaPrint /></button>
+                  <button >{fact.estado ? "Anular" : "Anulada"}</button>
                 </td>
               </tr>
             ))}

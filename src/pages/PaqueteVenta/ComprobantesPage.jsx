@@ -52,6 +52,14 @@ function ComprobantesPage() {
     }
   };
 
+  const handleImprimirFactura = (index) => {
+    const comprobanteSeleccionado = tableComprobantes[index].comprobante;
+    console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);
+    
+    // Aquí puedes agregar la lógica para imprimir o visualizar el comprobante seleccionado
+  };
+  
+
   return (
     <div className='comprobantes'>
       <h1>Listado de Comprobantes</h1>
@@ -109,7 +117,7 @@ function ComprobantesPage() {
                 <td>{comprob.cliente}</td>
                 <td>{comprob.monto}</td>
                 <td>
-                  <button > <FaPrint /></button>
+                  <button onClick={() => handleImprimirFactura(index)} > <FaPrint /></button>
                 </td>
               </tr>
             ))}

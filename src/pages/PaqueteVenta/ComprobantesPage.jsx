@@ -52,19 +52,17 @@ function ComprobantesPage() {
     }
   };
 
-  const handleImprimirFactura = async(index) => {
+  const handleImprimirFactura = async (index) => {
     const comprobanteSeleccionado = tableComprobantes[index].comprobante;
-    console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);
     try {
-
-      await imprimirFactura(Number(comprobanteSeleccionado));
-      
+       await imprimirFactura({ id: Number(comprobanteSeleccionado) }); // id como un objeto
     } catch (error) {
-      console.log(error)
-      alert('Se produjo un error al imprimir: Consulte a su mannagger')
+       console.log(error);
+       alert('Se produjo un error al imprimir: Consulte a su manager');
     }
-    
-  };
+    console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);
+ };
+ 
   
 
   return (

@@ -262,6 +262,12 @@ export const obtenerDetalleFactura = (data) => instance.post(`/DetalleF`,{
     }
 })
 
-export const imprimirFactura =  (id) => {return instance.get(`/pdf`,{
-    id
-})}
+export const imprimirFactura = ({ id }) => {
+    return instance.get(`/pdf`, {
+       params: { id }, // Utiliza params correctamente aquí
+       headers: {
+          'Content-Type': 'application/json',
+       },
+    });
+ };
+ 

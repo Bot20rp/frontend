@@ -8,6 +8,7 @@
     max-width: auto;
     height: auto;
     min-height: 100vh;
+    overflow-x: auto;
 }
 
 .gestion{
@@ -30,7 +31,8 @@
     border: 1px solid #ddd;
     height: auto;
     min-height: 150px;
-    overflow-x: scroll;
+    border-collapse: collapse;
+    overflow-x:auto;
 }
 
 .tablaComprobantes table {

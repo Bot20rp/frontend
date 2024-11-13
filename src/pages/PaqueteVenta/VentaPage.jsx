@@ -237,7 +237,7 @@ function VentaPage() {
           console.log(datos)
           await insertarFactura(datos);
           setLoading(true);
-          setBusquedaNombre('');
+          setBusquedaUsuarioNombre([]);
           setProductosEnVenta([]);
           setPagoEfectivo([]);
           setPagoQR([]);

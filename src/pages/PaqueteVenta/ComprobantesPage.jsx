@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../../css/AdmiVentaCss/ComprobantesPage.css'
 import { FaPrint } from "react-icons/fa";
-import { obtenerComprobantes } from '../../api/auth';
+import { obtenerComprobantes, imprimirFactura} from '../../api/auth';
 
 function ComprobantesPage() {
   const [fechaHasta, setFechaHasta] = useState(new Date().toISOString().split('T')[0]);
@@ -52,11 +52,16 @@ function ComprobantesPage() {
     }
   };
 
-  const handleImprimirFactura = (index) => {
+  const handleImprimirFactura = async(index) => {
     const comprobanteSeleccionado = tableComprobantes[index].comprobante;
+    try {
+
+      await imprimirFactura(Number(comprobanteSeleccionado));
+      
+    } catch (error) {
+      alert('Se produjo un error al imprimir: Consulte a su mannagger')
+    }
     console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);
-    
-    // Aquí puedes agregar la lógica para imprimir o visualizar el comprobante seleccionado
   };
   
 

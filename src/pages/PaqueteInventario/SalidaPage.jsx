@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 // asdf
 const  SalidaPage =() => {
     const { productosBackend } = useAuth();
+    const [fechaNoPasar, setFechaNoPasar] = useState(new Date().toISOString().split('T')[0]);
     const [productos, setProductos] = useState([]);
     const [formValues, setFormValues] = useState({
         Fecha: "",
@@ -14,19 +15,20 @@ const  SalidaPage =() => {
     const [busquedaId, setBusquedaId] = useState('');
     const [busquedaNombre, setBusquedaNombre] = useState('');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [productosEjemplo,setProductosEjemplo] = useState([]);
 
     const proveedores = [
         { id: "1", Nombre: "Expirado" },
         { id: "2", Nombre: "Consumo Personal" }
     ];
 
-    const productosEjemplo = [
-        { id: 1, nombre: "coca"},
-        { id: 2, nombre: "sprite"},
-        { id: 3, nombre: "lukake"},
-        { id: 4, nombre: "agua"},
-        { id: 5, nombre: "bolo"}
-    ];
+    // const productosEjemplo = [
+    //     { id: 1, nombre: "coca"},
+    //     { id: 2, nombre: "sprite"},
+    //     { id: 3, nombre: "lukake"},
+    //     { id: 4, nombre: "agua"},
+    //     { id: 5, nombre: "bolo"}
+    // ];
 
     const buscarProductoPorId = (event) => {
         const value = event.target.value;
@@ -102,9 +104,9 @@ const  SalidaPage =() => {
                 nombre: producto.Nombre,
                 precio: producto.Precio
             }));
-            setProductos(productosObtenidos);
+            setProductosEjemplo(productosObtenidos);
         } else {
-            setProductos(productosEjemplo);
+            setProductosEjemplo([]);
         }
     }, [productosBackend]);
 
@@ -118,9 +120,8 @@ const  SalidaPage =() => {
                         className='inputSalida'
                         type="date"
                         name="Fecha"
-                        placeholder="Fecha"
-                        value={formValues.Fecha}
-                        onChange={handleInputChange}
+                        value={fechaNoPasar}
+                        disabled={true}
                     />
                     <select
                         className='inputSalida'

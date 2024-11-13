@@ -44,12 +44,12 @@ function DetalleFacturaPage() {
   const filtarTablaFactura = (event) => {
     const textoBusqueda = event.target.value.toLowerCase();
     if (textoBusqueda === '') {
-      setTableComprobantes(tableComprobantesOriginal); // Restaurar la lista original si el campo está vacío
+      setTableFacturas(tableFacturasOriginal); // Restaurar la lista original si el campo está vacío
     } else {
-      const comprobantesFiltrados = tableComprobantesOriginal.filter((comprob) =>
+      const facturasFiltradas = tableFacturasOriginal.filter((comprob) =>
         comprob.comprobante.toString().toLowerCase().includes(textoBusqueda)
       );
-      setTableComprobantes(comprobantesFiltrados); // Actualizar la lista con los comprobantes filtrados
+      setTableFacturas(facturasFiltradas); // Actualizar la lista con los comprobantes filtrados
     }
   };
   

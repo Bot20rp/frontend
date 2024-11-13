@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../../css/AdmiVentaCss/ComprobantesPage.css'
+import { FaPrint } from "react-icons/fa";
 import { obtenerComprobantes } from '../../api/auth';
 
 function ComprobantesPage() {
@@ -107,6 +108,9 @@ function ComprobantesPage() {
                 <td>{comprob.comprobante}</td>
                 <td>{comprob.cliente}</td>
                 <td>{comprob.monto}</td>
+                <td>
+                  <button > <FaPrint /></button>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -7,6 +7,7 @@ function ComprobantesPage() {
   const [fechaHasta, setFechaHasta] = useState(new Date().toISOString().split('T')[0]);
   const [fechaNoPasar, setFechaNoPasar] = useState(new Date().toISOString().split('T')[0]);
   const [fechaDesde, setFechaDesde] = useState('');
+  const [tableComprobantes, setTableComprobantes] = useState([])
 
   const handleChangeVenta = (e) => {
     setFechaVenta(e.target.value)
@@ -19,23 +20,33 @@ function ComprobantesPage() {
     setFechaDesde(event.target.value)
   }
 
-  const handleComprobantes = async() => {
-    if(fechaHasta >fechaNoPasar || fechaDesde > fechaNoPasar ){
+  const handleComprobantes = async () => {
+    if (fechaHasta > fechaNoPasar || fechaDesde > fechaNoPasar) {
       return alert('Las Fechas no son correspondidas')
 
-    }else{
+    } else {
 
       try {
-        const datos ={
+        const datos = {
           fechaDesde,
           fechaHasta
         }
+
+
         const respuesta = await obtenerComprobantes(datos)
+        const comprobantesObtenidos = respuesta.data.map((comprobantes) => ({
+          tipoVenta: comprobantes.tipoVenta,
+          comprobante: comprobantes.comprobante,
+          fechaComprobante: comprobantes.fecha,
+          monto: comprobantes.montoTotal,
+          cliente: comprobantes.cliente
+        }));
         console.log(respuesta)
+        setTableComprobantes(comprobantesObtenidos)
       } catch (error) {
         console.log(error)
       }
-      
+
     }
   }
 
@@ -63,7 +74,7 @@ function ComprobantesPage() {
             type="date"
             value={fechaHasta}
             onChange={handleFechaHasta}
-            
+
           />
         </div>
       </div>
@@ -84,6 +95,17 @@ function ComprobantesPage() {
               <th>Ver/Imprimir</th>
             </tr>
           </thead>
+          <tbody>
+            {tableComprobantes.map((comprob, index) => (
+              <tr key={index}>
+                <td >{comprob.tipoVenta}</td>
+                <td >{comprob.fechaComprobante}</td>
+                <td >{comprob.comprobante}</td>
+                <td >{comprob.cliente}</td>
+                <td >{comprob.monto}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
 

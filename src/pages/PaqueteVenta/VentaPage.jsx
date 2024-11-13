@@ -207,16 +207,24 @@ function VentaPage() {
 
   useEffect(() => {
     if (tableUser) {
-      const usuariosObtenidos = tableUser.map((user) => ({
-        id: user.id,
-        usuario: user.usuario,
-        ci: user.ci,
-        nit: user.nit
-      }));
-      setUsuarios(usuariosObtenidos)
-      setTipoVentaSeleccionado(tipoVenta[0]?.TipoVID)
+      const usuariosObtenidos = tableUser.map((user) => {
+        // Solo incluir el usuario si su rol es 'Client'
+        if (user.rol === 'Cliente') {
+          return {
+            id: user.id,
+            usuario: user.usuario,
+            ci: user.ci,
+            nit: user.nit
+          };
+        }
+        return null; // No incluir los usuarios que no sean 'Client'
+      }).filter(user => user !== null); // Eliminar los valores null
+  
+      setUsuarios(usuariosObtenidos);
+      setTipoVentaSeleccionado(tipoVenta[0]?.TipoVID);
     }
-  }, [tableUser, tipoVenta])
+  }, [tableUser, tipoVenta]);
+  
 
   const handleVentaChange = async () => {
     if (existeApertura) {

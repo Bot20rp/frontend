@@ -50,3 +50,20 @@
 .comprobantes button{
     width: 150px;
 }
+
+.btn-anular {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .btn-anulada {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: not-allowed;
+  }
+  

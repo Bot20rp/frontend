@@ -22,6 +22,8 @@ function ComprobantesPage() {
         </div>
       </div>
 
+      <button>Listar</button>
+
       <h1>Comprobantes</h1>
       
       <div className='tablaComprobantes'>

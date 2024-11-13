@@ -1,0 +1,45 @@
+.comprobantes{
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+}
+
+.gestion{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.gestion #xxiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tablaComprobantes{
+    width: 100%;
+    border-radius: 5px;
+    background: #ffffffff; /* Fondo blanco billante */
+    border: 1px solid #ddd;
+    height: auto;
+    min-height: 150px;
+    overflow-x: scroll;
+}
+
+.tablaComprobantes table {
+    width: 100%;
+    min-width: 1000px;
+    table-layout: fixed; /* Hace que cada columna tenga el mismo tamaño */
+}
+
+.tablaComprobantes td {
+    width: calc(100% / 6); /* Reemplaza "n" con el número de columnas */
+    overflow: hidden; /* Opcional: para manejar contenido que exceda el espacio */
+    text-align: center; /* Centra el texto en cada celda */
+}

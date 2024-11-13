@@ -41,6 +41,19 @@ function DetalleFacturaPage() {
     }
   }
 
+  const filtarTablaFactura = (event) => {
+    const textoBusqueda = event.target.value.toLowerCase();
+    if (textoBusqueda === '') {
+      setTableComprobantes(tableComprobantesOriginal); // Restaurar la lista original si el campo está vacío
+    } else {
+      const comprobantesFiltrados = tableComprobantesOriginal.filter((comprob) =>
+        comprob.comprobante.toString().toLowerCase().includes(textoBusqueda)
+      );
+      setTableComprobantes(comprobantesFiltrados); // Actualizar la lista con los comprobantes filtrados
+    }
+  };
+  
+
 
   return (
     <div className='comprobantes'>
@@ -48,7 +61,11 @@ function DetalleFacturaPage() {
       <h4>Nro Factura</h4>
 
       <div>
-        <input type="text" placeholder='nro factura' />
+      <input
+          type="number"
+          placeholder='Ingresar nro factura'
+          onChange={filtarTablaFactura}
+        />
       </div>
 
       <div className='gestion'>

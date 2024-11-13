@@ -272,4 +272,9 @@ export const imprimirFactura = ({ id }) => {
     });
 };
 
+
+//TIPO SALIDA
+
+export const obtenerTipoSalida = () => {return instance.get(`/getTipoSalida`)};
+
  

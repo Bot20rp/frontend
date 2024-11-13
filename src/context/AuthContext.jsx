@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, logoutRequest, verityTokenResquest,obtenerVolumen, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes,obtenerApertura,obtenerTipoVenta} from "../api/auth";
+import { loginRequest, logoutRequest, verityTokenResquest,obtenerVolumen, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes,obtenerApertura,obtenerTipoVenta,obtenerTipoSalida} from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     const [roles,setRoles] = useState([]);
     const [productosBackend, setProductosBackend] = useState(null);
     const [tipoVenta,setTipoVenta] = useState([]);
+    const [tipoSalida,setTipoSalida] = useState([]);
     const [esAutenticado, setEsAutenticado] = useState(false);
     const [loading, setLoading] = useState(true);
     const [rol, setRol] = useState(null);
@@ -188,12 +189,22 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await obtenerApertura();
             const resT = await obtenerTipoVenta();
+            const restSalida = await obtenerTipoSalida();
+
+            console.log(restSalida);
 
             if(resT?.data?.tiposVentas.length > 0 ){
                 setTipoVenta(resT?.data?.tiposVentas)
             }else{
-
+                alert('consulter a su mannager')
             }
+
+            if(restSalida?.data?.tipoSalida.length > 0 ){
+                setTipoSalida(restSalida?.data?.tipoSalida)
+            }else{
+                alert('consulter a su mannager')
+            }
+    
     
             // Verifica si la respuesta contiene datos
             if (res?.data?.data?.length > 0 && res?.data?.data[0]?.Estado) {
@@ -288,6 +299,7 @@ export const AuthProvider = ({ children }) => {
             existeApertura,
             AperturaID,
             tipoVenta,
+            tipoSalida,
             setExisteApertura,
             cargarDatos,
             cargarDatosProveedores,

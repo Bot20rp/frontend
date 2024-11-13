@@ -21,7 +21,7 @@ function ComprobantesPage() {
   }
 
   const handleComprobantes = async () => {
-    if (fechaHasta > fechaNoPasar || fechaDesde > fechaNoPasar) {
+    if (fechaHasta > fechaNoPasar || fechaDesde > fechaNoPasar || fechaDesde === '') {
       return alert('Las Fechas no son correspondidas')
 
     } else {

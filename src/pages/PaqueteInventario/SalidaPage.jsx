@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import '../../css/AdmiInventarioCss/SalidaPage.css';
 import { useAuth } from '../../context/AuthContext';
 // asdf
-const  SalidaPage =() => {
-    const { productosBackend,tipoSalida } = useAuth();
+const SalidaPage = () => {
+    const { productosBackend, tipoSalida } = useAuth();
     const [fechaNoPasar, setFechaNoPasar] = useState(new Date().toISOString().split('T')[0]);
     const [productos, setProductos] = useState([]);
+    const [tipoSalidaSeleccionado, setTipoSalidaSeleccionado] = useState('');
     const [formValues, setFormValues] = useState({
         Fecha: "",
         Proveedor: "",
@@ -15,7 +16,7 @@ const  SalidaPage =() => {
     const [busquedaId, setBusquedaId] = useState('');
     const [busquedaNombre, setBusquedaNombre] = useState('');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-    const [productosEjemplo,setProductosEjemplo] = useState([]);
+    const [productosEjemplo, setProductosEjemplo] = useState([]);
 
     const proveedores = [
         { id: "1", Nombre: "Expirado" },
@@ -71,8 +72,7 @@ const  SalidaPage =() => {
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
+        setTipoSalidaSeleccionado(Number(e.target.value))
     };
 
     const handleEditarProducto = (index, value) => {
@@ -106,10 +106,11 @@ const  SalidaPage =() => {
                 precio: producto.Precio
             }));
             setProductos(productosObtenidos);
+            setTipoSalidaSeleccionado(tipoSalida[0]?.TipoSalidaID)
         } else {
             setProductos([]);
         }
-    }, [productosBackend]);
+    }, [productosBackend, tipoSalida]);
 
     return (
         <div className="containerSalida">
@@ -127,14 +128,14 @@ const  SalidaPage =() => {
                     <select
                         className='inputSalida'
                         name="Proveedor"
-                        value={formValues.Proveedor}
+                        value={tipoSalidaSeleccionado}
                         onChange={handleInputChange}
                     >
-                        <option value="">Seleccione Tipo de Salida</option>
-                        {proveedores.map((proveedor, index) => (
-                            <option key={index} value={proveedor.id}>{proveedor.Nombre}</option>
-                        ))}
+                        <option value={tipoSalida[0]?.TipoSalidaID}>{tipoSalida[0]?.Descripcion}</option>
+                        <option value={tipoSalida[1]?.TipoSalidaID}>{tipoSalida[1]?.Descripcion}</option>
+                        <option value={tipoSalida[2]?.TipoSalidaID}>{tipoSalida[2]?.Descripcion}</option>
                     </select>
+
                 </div>
                 <h2 className='titleSalida'>Productos de Salida</h2>
                 <div className='paraProducto'>
@@ -199,8 +200,8 @@ const  SalidaPage =() => {
                         <div className="modalContent">
                             <h3>¿Estás seguro?</h3>
                             <p>¿Deseas confirmar la salida de los productos seleccionados?</p>
-                            <button className='confirmarSalida2'onClick={handleConfirmSalida}>Confirmar Salida</button>
-                            <button className='cancelarSalida'onClick={handleCloseConfirmModal}>Cancelar</button>
+                            <button className='confirmarSalida2' onClick={handleConfirmSalida}>Confirmar Salida</button>
+                            <button className='cancelarSalida' onClick={handleCloseConfirmModal}>Cancelar</button>
                         </div>
                     </div>
                 )}

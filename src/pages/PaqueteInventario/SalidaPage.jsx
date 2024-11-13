@@ -104,9 +104,9 @@ const  SalidaPage =() => {
                 nombre: producto.Nombre,
                 precio: producto.Precio
             }));
-            setProductosEjemplo(productosObtenidos);
+            setProductos(productosObtenidos);
         } else {
-            setProductosEjemplo([]);
+            setProductos([]);
         }
     }, [productosBackend]);
 

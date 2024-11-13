@@ -96,7 +96,7 @@ function DetalleFacturaPage() {
                 <td>{fact.comprobante}</td>
                 <td>{fact.cliente}</td>
                 <td>{fact.monto}</td>
-                <td>{fact.estado}</td>
+                <td>{fact.estado ? "Activo" : "Inactivo"}</td>
               </tr>
             ))}
           </tbody>

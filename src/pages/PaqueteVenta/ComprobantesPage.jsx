@@ -59,6 +59,7 @@ function ComprobantesPage() {
       await imprimirFactura(Number(comprobanteSeleccionado));
       
     } catch (error) {
+      console.log(error)
       alert('Se produjo un error al imprimir: Consulte a su mannagger')
     }
     console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);

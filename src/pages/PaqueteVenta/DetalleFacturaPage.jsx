@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { obtenerDetalleFactura } from '../../api/auth'
 
 function DetalleFacturaPage() {
@@ -17,7 +17,7 @@ function DetalleFacturaPage() {
     setFechaDesde(event.target.value);
   };
 
-  const handleFacturas = async() =>{
+  const handleFacturas = async () => {
     if (fechaHasta > fechaNoPasar || fechaDesde > fechaNoPasar || fechaDesde === '') {
       return alert('Las Fechas no son válidas');
     } else {
@@ -52,7 +52,7 @@ function DetalleFacturaPage() {
       setTableFacturas(facturasFiltradas); // Actualizar la lista con los comprobantes filtrados
     }
   };
-  
+
 
 
   return (
@@ -61,7 +61,7 @@ function DetalleFacturaPage() {
       <h4>Nro Factura</h4>
 
       <div>
-      <input
+        <input
           type="number"
           placeholder='Ingresar nro factura'
           onChange={filtarTablaFactura}
@@ -90,7 +90,7 @@ function DetalleFacturaPage() {
       <button onClick={handleFacturas}>Listar</button>
 
       <h1>Facturas</h1>
-      
+
       <div className='tablaComprobantes'>
         <table>
           <thead>
@@ -114,6 +114,9 @@ function DetalleFacturaPage() {
                 <td>{fact.cliente}</td>
                 <td>{fact.monto}</td>
                 <td>{fact.estado ? "Activo" : "Inactivo"}</td>
+                <td>
+                  <button>x</button>
+                </td>
               </tr>
             ))}
           </tbody>

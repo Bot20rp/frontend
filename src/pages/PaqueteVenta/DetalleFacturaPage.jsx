@@ -76,6 +76,10 @@ function DetalleFacturaPage() {
     console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);
   };
 
+  const handleAnular = () => {
+    console.log(anulando)
+  }
+
 
 
 
@@ -142,7 +146,11 @@ function DetalleFacturaPage() {
                 </td>
                 <td>{fact.estado ? "Activo" : "Inactivo"}</td>
                 <td>
-                  <button className={fact.estado ? "btn-anular" : "btn-anulada"} disabled={!fact.estado}>
+                  <button 
+                    className={fact.estado ? "btn-anular" : "btn-anulada"} 
+                    disabled={!fact.estado}
+                    onClick={handleAnular}
+                    >
                     {fact.estado ? "Anular" : "Anulada"}
                   </button>
                 </td>

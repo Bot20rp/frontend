@@ -243,3 +243,12 @@ export const insertarFactura = (data) => instance.post(`/Factura`,{
 })
 
 export const obtenerTipoVenta = () => {return instance.get(`/getVentas`)}
+
+//COMPROBANTES
+
+export const obtenerComprobantes = (data) => instance.post(`/comprobantes`,{
+    data,
+    headers :{
+        'Content-Type': 'application/json',
+    }
+})

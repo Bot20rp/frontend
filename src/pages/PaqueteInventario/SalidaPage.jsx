@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../../css/AdmiInventarioCss/SalidaPage.css';
 import { useAuth } from '../../context/AuthContext';
 // asdf
-function SalidaPage() {
+const  SalidaPage =() => {
     const { productosBackend } = useAuth();
     const [productos, setProductos] = useState([]);
     const [formValues, setFormValues] = useState({

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { obtenerDetalleFactura } from '../../api/auth'
+import { obtenerDetalleFactura,imprimirFactura } from '../../api/auth'
 import { FaPrint } from "react-icons/fa";
 
 function DetalleFacturaPage() {
@@ -53,6 +53,29 @@ function DetalleFacturaPage() {
       setTableFacturas(facturasFiltradas); // Actualizar la lista con los comprobantes filtrados
     }
   };
+
+  const handleImprimirFactura = async (index) => {
+    const comprobanteSeleccionado = tableFacturas[index].comprobante;
+    try {
+        const response = await imprimirFactura({ id: Number(comprobanteSeleccionado) }); // Solicitar el PDF
+        
+        // Crear una URL temporal para el blob y abrirla
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `factura_${comprobanteSeleccionado}.pdf`; // Nombre del archivo PDF
+        link.click();
+
+        // Liberar la URL después de descargar
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.log(error);
+        alert('Se produjo un error al imprimir: Consulte a su manager');
+    }
+    console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);
+};
+
 
 
 
@@ -119,7 +142,7 @@ function DetalleFacturaPage() {
                 </td>
                 <td>{fact.estado ? "Activo" : "Inactivo"}</td>
                 <td>
-                  <button>x</button>
+                  <button onClick={() => handleImprimirFactura(index)} > <FaPrint /></button>
                 </td>
               </tr>
             ))}

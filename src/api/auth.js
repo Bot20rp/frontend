@@ -264,10 +264,12 @@ export const obtenerDetalleFactura = (data) => instance.post(`/DetalleF`,{
 
 export const imprimirFactura = ({ id }) => {
     return instance.get(`/pdf`, {
-       params: { id }, // Utiliza params correctamente aquí
-       headers: {
-          'Content-Type': 'application/json',
-       },
+        params: { id },
+        responseType: 'blob', // Recibir la respuesta como blob
+        headers: {
+            'Content-Type': 'application/json',
+        },
     });
- };
+};
+
  

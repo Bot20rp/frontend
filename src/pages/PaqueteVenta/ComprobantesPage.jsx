@@ -55,13 +55,25 @@ function ComprobantesPage() {
   const handleImprimirFactura = async (index) => {
     const comprobanteSeleccionado = tableComprobantes[index].comprobante;
     try {
-       await imprimirFactura({ id: Number(comprobanteSeleccionado) }); // id como un objeto
+        const response = await imprimirFactura({ id: Number(comprobanteSeleccionado) }); // Solicitar el PDF
+        
+        // Crear una URL temporal para el blob y abrirla
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `factura_${comprobanteSeleccionado}.pdf`; // Nombre del archivo PDF
+        link.click();
+
+        // Liberar la URL después de descargar
+        window.URL.revokeObjectURL(url);
     } catch (error) {
-       console.log(error);
-       alert('Se produjo un error al imprimir: Consulte a su manager');
+        console.log(error);
+        alert('Se produjo un error al imprimir: Consulte a su manager');
     }
     console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);
- };
+};
+
  
   
 

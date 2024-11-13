@@ -142,7 +142,7 @@ function DetalleFacturaPage() {
                 </td>
                 <td>{fact.estado ? "Activo" : "Inactivo"}</td>
                 <td>
-                  <button className={fact.estado ? "btn-anular" : "btn-anulada"}>
+                  <button className={fact.estado ? "btn-anular" : "btn-anulada"} disabled={!fact.estado}>
                     {fact.estado ? "Anular" : "Anulada"}
                   </button>
                 </td>

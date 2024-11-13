@@ -236,7 +236,12 @@ function VentaPage() {
           }
           console.log(datos)
           await insertarFactura(datos);
-          setLoading(true)
+          setLoading(true);
+          setBusquedaNombre('');
+          setProductosEnVenta([]);
+          setPagoEfectivo([]);
+          setPagoQR([]);
+          setPagoTarjeta([]);
         } catch (error) {
           console.log(error)
         }

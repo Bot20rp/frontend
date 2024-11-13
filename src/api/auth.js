@@ -252,3 +252,12 @@ export const obtenerComprobantes = (data) => instance.post(`/comprobantes`,{
         'Content-Type': 'application/json',
     }
 })
+
+//DETALLE FACTURA, PARA ANULAR
+
+export const obtenerDetalleFactura = (data) => instance.post(`/DetalleF`,{
+    data,
+    headers:{
+        'Content-Type': 'application/json',
+    }
+})

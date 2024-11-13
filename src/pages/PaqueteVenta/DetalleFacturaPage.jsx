@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { obtenerDetalleFactura } from '../../api/auth'
+import { FaPrint } from "react-icons/fa";
 
 function DetalleFacturaPage() {
 
@@ -113,6 +114,9 @@ function DetalleFacturaPage() {
                 <td>{fact.comprobante}</td>
                 <td>{fact.cliente}</td>
                 <td>{fact.monto}</td>
+                <td>
+                  <button > <FaPrint /></button>
+                </td>
                 <td>{fact.estado ? "Activo" : "Inactivo"}</td>
                 <td>
                   <button>x</button>

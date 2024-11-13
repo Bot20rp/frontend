@@ -24,13 +24,14 @@ function DetalleFacturaPage() {
       try {
         const datos = { fechaDesde, fechaHasta };
         const respuesta = await obtenerDetalleFactura(datos);
+        console.log(respuesta)
         const facturasObtenidas = respuesta.data.map((factura) => ({
           tipoVenta: factura.tipoVenta,
           comprobante: factura.comprobante,
           fechaComprobante: factura.fecha,
           monto: factura.montoTotal,
           cliente: factura.cliente,
-          estado: factura.estado
+          estado: factura.estado,
         }));
         setTableFacturas(facturasObtenidas);
         setTableFacturasOriginal(facturasObtenidas); // Guardar la lista original para el filtro

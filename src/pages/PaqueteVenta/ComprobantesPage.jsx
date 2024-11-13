@@ -57,7 +57,7 @@ function ComprobantesPage() {
     console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);
     try {
 
-      await imprimirFactura({ id: Number(comprobanteSeleccionado) });
+      await imprimirFactura(Number(comprobanteSeleccionado));
       
     } catch (error) {
       console.log(error)

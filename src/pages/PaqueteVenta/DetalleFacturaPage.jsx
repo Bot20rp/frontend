@@ -35,6 +35,8 @@ function DetalleFacturaPage() {
               <th>Cliente</th>
               <th>Monto Total</th>
               <th>Ver/Imprimir</th>
+              <th>Estado</th>
+              <th>Accion</th>
             </tr>
           </thead>
         </table>

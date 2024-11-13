@@ -199,8 +199,8 @@ export const AuthProvider = ({ children }) => {
                 alert('consulter a su mannager')
             }
 
-            if(restSalida?.data?.tipoSalida.length > 0 ){
-                setTipoSalida(restSalida?.data?.tipoSalida)
+            if(restSalida?.data?.length > 0 ){
+                setTipoSalida(restSalida?.data)
             }else{
                 alert('consulter a su mannager')
             }

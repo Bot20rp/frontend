@@ -3,7 +3,7 @@ import '../../css/AdmiInventarioCss/SalidaPage.css';
 import { useAuth } from '../../context/AuthContext';
 // asdf
 const  SalidaPage =() => {
-    const { productosBackend } = useAuth();
+    const { productosBackend,tipoSalida } = useAuth();
     const [fechaNoPasar, setFechaNoPasar] = useState(new Date().toISOString().split('T')[0]);
     const [productos, setProductos] = useState([]);
     const [formValues, setFormValues] = useState({
@@ -86,6 +86,7 @@ const  SalidaPage =() => {
     };
 
     const handleConfirmSalida = () => {
+        console.log(tipoSalida)
         setShowConfirmModal(false);
         setFormValues({ Fecha: "", Proveedor: "" });
         setProductosSeleccionados([]);

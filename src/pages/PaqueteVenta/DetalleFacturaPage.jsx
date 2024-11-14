@@ -79,7 +79,7 @@ function DetalleFacturaPage() {
   const handleAnular = async(index) => {
     const comprobanteSeleccionado = tableFacturas[index].comprobante;
     try {
-      datos = {
+      const datos = {
         nroFactura: Number(comprobanteSeleccionado)
       }
       console.log(datos)

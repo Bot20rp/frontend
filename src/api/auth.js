@@ -273,6 +273,14 @@ export const imprimirFactura = ({ id }) => {
 };
 
 
+export const anularFactura = (data) => instance.patch(`/anularF`,{
+    data,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+})
+
+
 //TIPO SALIDA
 
 export const obtenerTipoSalida = () => {return instance.get(`/getTipoSalida`)};

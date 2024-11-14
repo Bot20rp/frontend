@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { obtenerDetalleFactura, imprimirFactura } from '../../api/auth'
+import { obtenerDetalleFactura, imprimirFactura,anularFactura } from '../../api/auth'
 import { FaPrint } from "react-icons/fa";
 
 function DetalleFacturaPage() {
@@ -76,8 +76,18 @@ function DetalleFacturaPage() {
     console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);
   };
 
-  const handleAnular = () => {
-    console.log(anulando)
+  const handleAnular = async() => {
+    const comprobanteSeleccionado = tableFacturas[index].comprobante;
+    try {
+      datos = {
+        nroFactura: Number(comprobanteSeleccionado)
+      }
+      await anularFactura(datos);
+      alert('EXITO EN ANULACION')
+
+    } catch (error) {
+      alert('Se produjo un error al anular: Consulte a su manager');
+    }
   }
 
 
@@ -149,7 +159,7 @@ function DetalleFacturaPage() {
                   <button 
                     className={fact.estado ? "btn-anular" : "btn-anulada"} 
                     disabled={!fact.estado}
-                    onClick={handleAnular}
+                    onClick={ () => handleAnular(index)}
                     >
                     {fact.estado ? "Anular" : "Anulada"}
                   </button>

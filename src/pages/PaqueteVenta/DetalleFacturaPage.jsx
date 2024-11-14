@@ -82,11 +82,13 @@ function DetalleFacturaPage() {
       datos = {
         nroFactura: Number(comprobanteSeleccionado)
       }
+      console.log(datos)
       await anularFactura(datos);
       alert('EXITO EN ANULACION: Recargue la pagina')
 
     } catch (error) {
       alert('Se produjo un error al anular: Consulte a su manager');
+      console.log(error)
     }
   }
 

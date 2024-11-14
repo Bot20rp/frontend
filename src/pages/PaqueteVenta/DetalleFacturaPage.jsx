@@ -76,14 +76,14 @@ function DetalleFacturaPage() {
     console.log(`Número de comprobante a imprimir: ${comprobanteSeleccionado}`);
   };
 
-  const handleAnular = async() => {
+  const handleAnular = async(index) => {
     const comprobanteSeleccionado = tableFacturas[index].comprobante;
     try {
       datos = {
         nroFactura: Number(comprobanteSeleccionado)
       }
       await anularFactura(datos);
-      alert('EXITO EN ANULACION')
+      alert('EXITO EN ANULACION: Recargue la pagina')
 
     } catch (error) {
       alert('Se produjo un error al anular: Consulte a su manager');

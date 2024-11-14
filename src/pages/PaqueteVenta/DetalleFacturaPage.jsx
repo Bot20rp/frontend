@@ -92,6 +92,7 @@ function DetalleFacturaPage() {
       console.log(datos)
       await anularFactura(datos);
       alert('EXITO EN ANULACION: Recargue la pagina')
+      setMostrarEliminar(false);
 
     } catch (error) {
       alert('Se produjo un error al anular: Consulte a su manager');

@@ -7,6 +7,8 @@ function DetalleFacturaPage() {
   const [fechaHasta, setFechaHasta] = useState(new Date().toISOString().split('T')[0]);
   const [fechaNoPasar, setFechaNoPasar] = useState(new Date().toISOString().split('T')[0]);
   const [fechaDesde, setFechaDesde] = useState('');
+  const [mostrarEliminar, setMostrarEliminar] = useState(false);
+  const [nroComprobante,setNroComprobante] = useState('');
   const [tableFacturas, setTableFacturas] = useState([]);
   const [tableFacturasOriginal, setTableFacturasOriginal] = useState([]); // Guardar la lista original para el filtrado
 
@@ -78,9 +80,14 @@ function DetalleFacturaPage() {
 
   const handleAnular = async(index) => {
     const comprobanteSeleccionado = tableFacturas[index].comprobante;
+    setNroComprobante(Number(comprobanteSeleccionado))
+    setMostrarEliminar(true)
+  }
+
+  const confirmarEliminar = async() => {
     try {
       const datos = {
-        nroFactura: Number(comprobanteSeleccionado)
+        nroFactura: nroComprobante
       }
       console.log(datos)
       await anularFactura(datos);
@@ -91,9 +98,6 @@ function DetalleFacturaPage() {
       console.log(error)
     }
   }
-
-
-
 
   return (
     <div className='comprobantes'>
@@ -172,6 +176,16 @@ function DetalleFacturaPage() {
           </tbody>
         </table>
       </div>
+
+      {mostrarEliminar && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>¿Estás seguro perrita?</h3>
+            <button className="btn" onClick={confirmarEliminar}>Sí, anular</button>
+            <button className="btn" onClick={() => setMostrarEliminar(false)}>Cancelar</button>
+          </div>
+        </div>
+      )}
 
     </div>
   )

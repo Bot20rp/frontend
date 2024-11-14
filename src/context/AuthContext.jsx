@@ -191,7 +191,7 @@ export const AuthProvider = ({ children }) => {
             const resT = await obtenerTipoVenta();
             const restSalida = await obtenerTipoSalida();
 
-            console.log(restSalida);
+            console.log(res);
 
             if(resT?.data?.tiposVentas.length > 0 ){
                 setTipoVenta(resT?.data?.tiposVentas)

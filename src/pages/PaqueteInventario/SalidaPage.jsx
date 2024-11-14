@@ -209,12 +209,12 @@ const SalidaPage = () => {
                 <button className='confirmarSalida' onClick={handleOpenConfirmModal}>Confirmar Salida</button>
 
                 {showConfirmModal && (
-                    <div className="modalConfirm">
-                        <div className="modalContent">
+                    <div className="modal">
+                        <div className="modal-content">
                             <h3>¿Estás seguro?</h3>
                             <p>¿Deseas confirmar la salida de los productos seleccionados?</p>
-                            <button className='confirmarSalida2' onClick={handleConfirmSalida}>Confirmar Salida</button>
-                            <button className='cancelarSalida' onClick={handleCloseConfirmModal}>Cancelar</button>
+                            <button className="btn" onClick={handleConfirmSalida}>Confirmar Salida</button>
+                            <button className="btn" onClick={handleCloseConfirmModal}>Cancelar</button>
                         </div>
                     </div>
                 )}

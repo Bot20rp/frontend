@@ -181,7 +181,7 @@ function DetalleFacturaPage() {
       {mostrarEliminar && (
         <div className="modal">
           <div className="modal-content">
-            <h3>¿Estás seguro perrita?</h3>
+            <h3>¿Estás seguro que quiere Anular la Factura?</h3>
             <button className="btn" onClick={confirmarEliminar}>Sí, anular</button>
             <button className="btn" onClick={() => setMostrarEliminar(false)}>Cancelar</button>
           </div>

@@ -193,11 +193,6 @@ const enlaceprincipal = [
     to: "/dasboard/clientRegister", // Corregido a "dashboard"
   },
   {
-    label: "Proveedores",
-    icon: <MdOutlineAnalytics />,
-    to: "/dasboard/proveedorRegister", // Corregido a "dashboard"
-  },
-  {
     label: "Empleados",
     icon: <AiOutlineApartment />,
     to: "/dasboard/empleadRegister", // Corregido a "dashboard"
@@ -237,6 +232,11 @@ const enlaceinventario = [
   },
 ];
 const enlacecompra = [
+  {
+    label: "Proveedores",
+    icon: <MdOutlineAnalytics />,
+    to: "/dasboard/proveedorRegister", // Corregido a "dashboard"
+  },
   {
     label: "Compras",
     icon: <MdOutlineAnalytics />,

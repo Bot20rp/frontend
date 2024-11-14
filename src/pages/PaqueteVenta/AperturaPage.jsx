@@ -52,7 +52,7 @@ function AperturaPage() {
 
             const datos = {
                 AperturaID,
-                FechaCierre: new Date().toLocaleDateString(),
+                FechaCierre: new Date().toISOString().split('T')[0],
                 HoraFin: new Date().toLocaleTimeString(),
                 CajaChica: cajaChica,
                 SaldoEfectivo: 10,

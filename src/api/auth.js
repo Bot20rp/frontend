@@ -284,5 +284,11 @@ export const anularFactura = (data) => instance.patch(`/anularF`,{
 //TIPO SALIDA
 
 export const obtenerTipoSalida = () => {return instance.get(`/getTipoSalida`)};
+export const insertarNotaSalida = (data) => instance.post(`/registrarNotaSalida`,{
+    data,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+})
 
  

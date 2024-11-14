@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/AdmiInventarioCss/SalidaPage.css';
 import { useAuth } from '../../context/AuthContext';
+import { insertarNotaSalida } from '../../api/auth';
 // asdf
 const SalidaPage = () => {
     const { productosBackend, tipoSalida } = useAuth();
@@ -85,14 +86,26 @@ const SalidaPage = () => {
         setProductosSeleccionados(productosSeleccionados.filter((_, i) => i !== index));
     };
 
-    const handleConfirmSalida = () => {
-        console.log(tipoSalida)
-        setShowConfirmModal(false);
-        setFormValues({ Fecha: "", Proveedor: "" });
-        setProductosSeleccionados([]);
-        setBusquedaId('');
-        setBusquedaNombre('');
-        setSugerencias([]);
+    const handleConfirmSalida = async () => {
+
+        try {
+            const datos = {
+                TipoSalidaID: tipoSalidaSeleccionado,
+                Fecha: fechaNoPasar,
+                productos: productosSeleccionados
+            }
+            console.log(datos)
+            await insertarNotaSalida(datos);
+            setShowConfirmModal(false);
+            setFormValues({ Fecha: "", Proveedor: "" });
+            setProductosSeleccionados([]);
+            setBusquedaId('');
+            setBusquedaNombre('');
+            setSugerencias([]);
+        } catch (error) {
+            console.log(error)
+        }
+
     };
 
     const handleOpenConfirmModal = () => setShowConfirmModal(true);

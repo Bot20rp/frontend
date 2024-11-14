@@ -37,7 +37,7 @@ function AperturaPage() {
         try {
             const datos = {
                 CajaChica: cajaChica || 0,
-                FechaInicio: new Date().toLocaleDateString(),
+                FechaInicio: new Date().toISOString().split('T')[0],
                 HoraInicio: new Date().toLocaleTimeString()
             };
             console.log(datos)

@@ -7,7 +7,7 @@ import "./homed.css";
 
 import RegisterClientPage from "../../pages/PaqueteUsu/RegisterClientPage";
 import ProductsPage from "../../pages/PaqueteInventario/ProductsPage";
-import ProveedoresPage from "../../pages/PaqueteUsu/ProveedoresPage";
+import ProveedoresPage from "../../pages/PaqueteCompra/ProveedoresPage";
 import UsuarioPage from "../../pages/PaqueteUsu/UsuarioPage";
 import CategoriaProductPage from "../../pages/PaqueteInventario/CategoriaProductPage";
 import RegisterEmplead from "../../pages/PaqueteUsu/RegisterEmplead";
@@ -55,16 +55,16 @@ export const Homed = () => {
             path="/perfil"
             element={
               <ProtectedRoutePrivilegios privilegeDescription="ver paguina de inicio" >
-                <Perfil/>
+                <Perfil />
               </ProtectedRoutePrivilegios>
             }
           />
-      {/* ruta el shop --  */}
-      <Route
+          {/* ruta el shop --  */}
+          <Route
             path="/shop"
             element={
               <ProtectedRoutePrivilegios privilegeDescription="ver paguina de shop" >
-                <Shop/>
+                <Shop />
               </ProtectedRoutePrivilegios>
             }
           />
@@ -74,7 +74,7 @@ export const Homed = () => {
             path="/cart"
             element={
               <ProtectedRoutePrivilegios privilegeDescription="ver paguina de cart " >
-                <Shop/>
+                <Shop />
               </ProtectedRoutePrivilegios>
             }
           />
@@ -86,7 +86,7 @@ export const Homed = () => {
             path="/shop "
             element={
               <ProtectedRoutePrivilegios privilegeDescription="ver paguina de inicio" >
-                <Home/>
+                <Home />
               </ProtectedRoutePrivilegios>
             }
           />
@@ -102,6 +102,7 @@ export const Homed = () => {
               </ProtectedRoutePrivilegios>
             }
           />
+          <Route path="/detalleFactura" element={<DetalleFacturaPage />} />
           <Route
             path="/empleadRegister"
             element={
@@ -208,7 +209,7 @@ export const Homed = () => {
           <Route path="/factura" element={<VentaPage />} />
           <Route path="/apertura" element={<AperturaPage />} />
           <Route path="/comprobantes" element={<ComprobantesPage />} />
-          <Route path="/detalleFactura" element={<DetalleFacturaPage />} />
+
           <Route path="/notaSalida" element={<SalidaPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>

@@ -27,7 +27,7 @@ import Compras from "./pages/PaqueteCompra/Compras.jsx";
 import {NotFound} from './components/notfound/NotFound.jsx'
 
 import {Perfil} from './components/Perfi/Perfil.jsx'
-import ProveedoresPage from "./pages/PaqueteUsu/ProveedoresPage.jsx";
+import ProveedoresPage from "./pages/PaqueteCompra/ProveedoresPage.jsx";
 import ProductsPage from "./pages/PaqueteInventario/ProductsPage.jsx";
 import { Lote } from "./pages/PaqueteCompra/Lote.jsx";
 import UsuarioPages from "./pages/PaqueteUsu/UsuarioPage.jsx";

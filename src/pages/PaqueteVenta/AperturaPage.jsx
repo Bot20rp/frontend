@@ -6,7 +6,7 @@ import { insertarNuevaApertura, cerrarAperturaAbierta } from '../../api/auth';
 
 function AperturaPage() {
 
-    const { existeApertura, setExisteApertura, AperturaID } = useAuth();
+    const { existeApertura, setExisteApertura, AperturaID, tableApertura } = useAuth();
     const [mostar, setMostrar] = useState(false);
     const [mostarInicioApertura, setMostrarInicioApertura] = useState(false);
     const [mostrarNuevaApertura, setMostrarNuevaApertura] = useState(true);
@@ -88,19 +88,19 @@ function AperturaPage() {
                     </div>
                     <div className='cuentas'>
                         <h4 id='c1'>Pago por Efectivo</h4>
-                        <input type="number" value={1} disabled style={{ backgroundColor: "lightgray" }} />
+                        <input type="number" value={tableApertura.SaldoEfectivo} disabled style={{ backgroundColor: "lightgray" }} />
                         <input type="number" />
                         <input type="number" value={-1} disabled style={{ backgroundColor: "lightgray" }} />
                         <input
                             type="number"
                             name="CajaChica"
-                            value={cajaChica}
+                            value={existeApertura ?cajaChica : tableApertura.CajaChica}
                             onChange={handleCajaChicaChange}
                         />
                     </div>
                     <div className='cuentas'>
                         <h4 id='c1'>Pago por QR</h4>
-                        <input type="number" value={1} disabled style={{ backgroundColor: "lightgray" }} />
+                        <input type="number" value={tableApertura.SaldoQr} disabled style={{ backgroundColor: "lightgray" }} />
                         <input type="number" />
                         <input type="number" value={-1} disabled style={{ backgroundColor: "lightgray" }} />
                         <input type="number" disabled style={{ backgroundColor: "lightgray" }}
@@ -108,7 +108,7 @@ function AperturaPage() {
                     </div>
                     <div className='cuentas'>
                         <h4 id='c1'>Pago por Tarjeta</h4>
-                        <input type="number" value={1} disabled style={{ backgroundColor: "lightgray" }} />
+                        <input type="number" value={tableApertura.SaldoTarjeta} disabled style={{ backgroundColor: "lightgray" }} />
                         <input type="number" />
                         <input type="number" value={-1} disabled style={{ backgroundColor: "lightgray" }} />
                         <input type="number" disabled style={{ backgroundColor: "lightgray" }}

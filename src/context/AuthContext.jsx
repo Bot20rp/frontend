@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }) => {
     const [tableMarca,setTableMarca] = useState([]);
     const [tableEstante,settableEstante] = useState([]);
     const [tableVolumen,setTableVolumen] = useState([]);
+    const [tableApertura,setTableApertura] = useState([]);
     const[tableCategoria,setCategoria] = useState([]);
     const [tableLotes,setTableLotes] = useState([]);
     const [montoPago,setMonto] = useState(null);
@@ -212,6 +213,7 @@ export const AuthProvider = ({ children }) => {
                 setExisteApertura(true);
                 console.log(res?.data?.data[0]?.AperturaID);
                 setAperturaID(res?.data?.data[0]?.AperturaID);
+                setTableApertura(res?.data?.data[0]);
             } else {
                 setExisteApertura(false);
                 console.log("no existe");
@@ -300,6 +302,7 @@ export const AuthProvider = ({ children }) => {
             AperturaID,
             tipoVenta,
             tipoSalida,
+            tableApertura,
             setExisteApertura,
             cargarDatos,
             cargarDatosProveedores,

@@ -104,7 +104,13 @@ function AperturaPage() {
                         <input type="number" value={tableApertura.SaldoEfectivo} disabled style={{ backgroundColor: "lightgray" }} />
                         <input type="number" value={recuentoEfectivo} onChange={handleEfectivo} />
                         <input type="number" value={diferenciaEfectivo} disabled style={{ backgroundColor: "lightgray" }} />
-                        <input type="number" name="CajaChica" value={existeApertura ? tableApertura.CajaChica : cajaChica} onChange={handleCajaChicaChange} />
+                        <input 
+                            type="number" 
+                            name="CajaChica" 
+                            value={existeApertura ? tableApertura.CajaChica : cajaChica} 
+                            onChange={handleCajaChicaChange} 
+                            disabled={existeApertura}
+                        />
                     </div>
                     <div className='cuentas'>
                         <h4 id='c1'>Pago por QR</h4>

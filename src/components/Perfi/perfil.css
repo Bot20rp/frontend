@@ -57,6 +57,7 @@
 .profile #datosPersonales button {
   margin: 0;
   margin-left: auto;
+  width: 150px;
 }
 
 .personaje {

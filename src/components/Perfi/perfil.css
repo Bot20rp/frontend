@@ -1,68 +1,159 @@
 /* Profile.css */
 .profile {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .profile p {
-    font-size: 16px;
-    color: #555;
-    margin: 8px 0;
-  }
-  
-  .profile strong {
-    color: #333;
-  }
-  
-  .profile h3 {
-    font-size: 20px;
-    margin-top: 30px;
-    color: #333;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-  }
-  
-  .profile ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .profile li {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  }
-  
-  .profile li p {
-    margin: 5px 0;
-  }
-  
-  .profile button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .profile button:hover {
-    background-color: #0056b3;
-  }
-  
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.profile h3 {
+  font-size: 22px;
+  margin-top: 30px;
+  color: #34495e;
+  border-bottom: 2px solid #bdc3c7;
+  padding-bottom: 10px;
+}
+
+.profile strong {
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.profile button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 14px;
+  color: #fff;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.profile button:hover {
+  background: linear-gradient(135deg, #04bcff, #007bff);
+  transform: scale(1.05);
+}
+
+.profile #datosPersonales {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile #datosPersonales button {
+  margin-left: auto;
+}
+
+.personaje {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.personaje #datos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1 1 calc(50% - 20px); /* Los elementos ocuparán el 50% del ancho menos el gap */
+  box-sizing: border-box; /* Asegura que padding y border no alteren el ancho */
+  background: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  transition: transform 0.3s ease;
+}
+
+.personaje #datos:hover {
+  transform: translateY(-5px);
+}
+
+.personaje #minis1 {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile #pedidos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile #pedidos a {
+  margin-left: auto;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.profile #pedidos a:hover {
+  color: #04bcff;
+}
+
+.soyPedidos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.soyPedidos #numeroP {
+  width: 200px;
+  background: #7f8c8d;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.soyPedidos #numeroP:hover {
+  background: #95a5a6;
+}
+
+.profile #historial {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile #historial button {
+  font-size: 12px;
+  width: 150px;
+  padding: 10px;
+  color: #fff;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.profile #historial button:hover {
+  background: linear-gradient(135deg, #3cff92, #2ecc71);
+}
+
+.profile #historial h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #2c3e50;
+}

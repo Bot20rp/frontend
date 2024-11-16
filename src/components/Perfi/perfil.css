@@ -34,6 +34,7 @@
 }
 
 .profile button {
+  width: 100%;
   margin-top: 20px;
   padding: 12px 25px;
   font-size: 14px;

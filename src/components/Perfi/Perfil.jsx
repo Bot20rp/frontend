@@ -88,7 +88,8 @@ export const Perfil = () => {
                         </div>
                     ))}
                 </div>
-                <a href="">Consultar Empresa</a>
+                <a href="https://wa.me/59176672191?text=Hola,%20quiero%20consultar%20sobre%20la%20empresa" target="_blank">Consultar Empresa</a>
+
             </div>
 
             <div id="historial">

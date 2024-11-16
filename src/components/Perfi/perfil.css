@@ -55,6 +55,7 @@
 }
 
 .profile #datosPersonales button {
+  margin: 0;
   margin-left: auto;
 }
 

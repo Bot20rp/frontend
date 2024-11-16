@@ -1,11 +1,9 @@
 /* Profile.css */
 .profile {
   width: 100%;
-  margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(135deg, #e0eafc, #cfdef3);
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #777777, #cfdef3);
+  border-radius: 5px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -14,11 +12,11 @@
 .profile h2 {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #2c3e50;
+  color: #ffffff;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.profile h3 {
+.titleDatosPersonales {
   font-size: 22px;
   margin-top: 30px;
   color: #34495e;
@@ -132,15 +130,13 @@
   background: #95a5a6;
 }
 
-.profile #historial {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.historial h2{
+  top:40px;
 }
 
-.profile #historial button {
+.profile .historial button {
   font-size: 12px;
-  width: 150px;
+  width: 30%;
   padding: 10px;
   color: #fff;
   background: linear-gradient(135deg, #2ecc71, #27ae60);
@@ -150,12 +146,47 @@
   transition: background 0.3s ease;
 }
 
-.profile #historial button:hover {
+.profile .historial button:hover {
   background: linear-gradient(135deg, #3cff92, #2ecc71);
 }
 
-.profile #historial h2 {
-  margin: 0;
-  font-size: 22px;
-  color: #2c3e50;
+.tableHistorial{
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  /* table-layout: fixed; */
+  border-radius: 8px;
+  overflow: hidden;
+}
+.tableHistorial tr, .tableHistorial td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds "..." for long text */
+}
+.tableHistorial th {
+  background-color: #0076f5;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 40%;
+}
+
+.tableHistorial td:hover {
+  background-color: #f1f1f1;
+}
+.profile-image {
+  width: 10%; /* Ajusta el tamaño según sea necesario */
+  height: 10%; /* Ajusta el tamaño según sea necesario */
+  margin-right: 10px; /* Espacio entre la imagen y el nombre */
+}
+.nombre , .imagen{
+  top: 16%;
+  position: fixed;
+}
+.imagen{
+  top:12%;
+  left: 70%;
 }

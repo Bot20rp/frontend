@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useAuth } from '../../context/AuthContext';
 import { CartContext } from '../../context/CartContext';
 import { useNavigate } from "react-router-dom";
+import fotoCliente from './foto.png';
 import './perfil.css';
 
 export const Perfil = () => {
@@ -24,13 +25,15 @@ export const Perfil = () => {
         <div className="profile">
             <h2>Perfil del Usuario</h2>
 
-            <div>
+            <div className="nombre">
                 <h1>JOAN DANIEL</h1>
             </div>
-
+            <div className="imagen">
+                <img src={fotoCliente} alt="FotoCliente" className="profile-image" />
+            </div>
             <div id="datosPersonales">
 
-                <h3>Datos Personales</h3>
+                <h2 className="titleDatosPersonales">Datos Personales</h2>
                 <div className="personaje">
 
                     <div id="datos">
@@ -92,16 +95,20 @@ export const Perfil = () => {
 
             </div>
 
-            <div id="historial">
+            <div className="historial">
                 <h2>Historial de mis Pedidos</h2>
-                <button>listar mis Comprobantes</button>
-                <table>
-                    <thead>
-                        <td>Fecha</td>
-                        <td>Monto Total</td>
-                        <td>Ver/Imprimir</td>
-                    </thead>
-                </table>
+                <button>Listar Mis Comprobantes</button>
+                <div>
+                    <table className="tableHistorial">
+                        <thead>
+                            <tr>
+                            <th>Fecha</th>
+                            <th>Monto Total</th>
+                            <th>Ver/Imprimir</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
 
 

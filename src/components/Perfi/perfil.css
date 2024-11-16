@@ -1,14 +1,18 @@
 /* Profile.css */
+
 .profile {
   width: 100%;
   padding: 20px;
-  background: linear-gradient(135deg, #777777, #cfdef3);
+  background: linear-gradient(135deg, #727272, #cfdef3);
   border-radius: 5px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
-
+.profile h1{
+  color: white;
+  font-size: 50px;
+}
 .profile h2 {
   font-size: 28px;
   margin-bottom: 20px;
@@ -54,6 +58,7 @@
 
 .profile #datosPersonales button {
   margin: 0;
+  margin-top: 10px;
   margin-left: auto;
   width: 150px;
 }
@@ -98,7 +103,7 @@
 
 .profile #pedidos a {
   margin-left: auto;
-  color: #007bff;
+  color: #ffffff;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
@@ -112,49 +117,31 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 10px;
 }
 
 .soyPedidos #numeroP {
-  width: 200px;
-  background: #7f8c8d;
+  width: 150px;
+  background: #ffffff;
   padding: 10px;
   border-radius: 5px;
-  color: #fff;
+  color: #000000;
   font-weight: bold;
   text-align: center;
   transition: background 0.3s ease;
 }
 
 .soyPedidos #numeroP:hover {
-  background: #95a5a6;
+  background: linear-gradient(135deg, #04bcff, #007bff);
 }
 
-.historial h2{
-  top:40px;
+.titlehistorial{
+  top: 20px;
 }
 
-.profile .historial button {
-  font-size: 12px;
-  width: 30%;
-  padding: 10px;
-  color: #fff;
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.profile .historial button:hover {
-  background: linear-gradient(135deg, #3cff92, #2ecc71);
-}
 
 .tableHistorial{
   width: 100%;
-  max-width: 1500px;
-  margin: 0 auto;
-  /* table-layout: fixed; */
   border-radius: 8px;
   overflow: hidden;
 }
@@ -167,8 +154,9 @@
   text-overflow: ellipsis; /* Adds "..." for long text */
 }
 .tableHistorial th {
-  background-color: #0076f5;
-  color: white;
+  background-color: #ffffff;
+  color: #007bff;
+  border-radius: 4px;
   text-transform: uppercase;
   font-weight: bold;
   width: 40%;
@@ -180,13 +168,29 @@
 .profile-image {
   width: 10%; /* Ajusta el tamaño según sea necesario */
   height: 10%; /* Ajusta el tamaño según sea necesario */
-  margin-right: 10px; /* Espacio entre la imagen y el nombre */
-}
-.nombre , .imagen{
-  top: 16%;
-  position: fixed;
-}
-.imagen{
-  top:12%;
+  position: absolute;
   left: 70%;
+  top: 14%;
+}
+.personaje ,#pedidos,.historial{
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  padding: 20px;
+
+  border-radius: 15px;
+  gap:15px;
+}
+.historial button{
+  font-size: 12px;
+  width: 100%;
+
+  padding: 10px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #3cff92, #2ecc71);
+  border: none;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+.historial button:hover {
+  background: linear-gradient(135deg, #04bcff, #007bff);
+  transform: scale(1.05);
 }

@@ -78,9 +78,9 @@ export const Perfil = () => {
                 <button>EditarPerfil</button>
 
             </div>
-
+            <h2>Mis Pedidos</h2>
             <div id="pedidos">
-                <h2>Mis Pedidos</h2>
+                
                 <div className="soyPedidos">
                     {pedidos.map((pedido, index) => (
                         <div key={index} id="numeroP">
@@ -95,9 +95,9 @@ export const Perfil = () => {
 
             </div>
 
+                <h2 className="titlehistorial">Historial de mis Pedidos</h2>          
             <div className="historial">
-                <h2>Historial de mis Pedidos</h2>
-                <button>Listar Mis Comprobantes</button>
+                <button className="buttonHistorial">Listar Mis Comprobantes</button>
                 <div>
                     <table className="tableHistorial">
                         <thead>

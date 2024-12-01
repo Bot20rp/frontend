@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, logoutRequest, verityTokenResquest,obtenerVolumen, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes,obtenerApertura,obtenerTipoVenta,obtenerTipoSalida} from "../api/auth";
+import { loginRequest, logoutRequest, verityTokenResquest,obtenerVolumen, obtenerRequest, obtenerRequestProveedor, permisos, obtenerProductos,obtenerRoles,obtenerMarca,obtenerEstante,obtenerCategorias,obtenerLotes,obtenerApertura,obtenerTipoVenta,obtenerTipoSalida,obtenerCombos} from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [roles,setRoles] = useState([]);
     const [productosBackend, setProductosBackend] = useState(null);
+    const [combosBackend,setcombosBackend]= useState([]);
     const [tipoVenta,setTipoVenta] = useState([]);
     const [tipoSalida,setTipoSalida] = useState([]);
     const [esAutenticado, setEsAutenticado] = useState(false);
@@ -110,8 +111,10 @@ export const AuthProvider = ({ children }) => {
     }
 
     const cargarProductos = async () => {
+
         try {
             const respuesta = await obtenerProductos();
+            const respuesta2 = await obtenerCombos();
             const respuestaMarca = await obtenerMarca();
             const respuestaEstante = await obtenerEstante();
             const respuestaCategoria = await obtenerCategorias();
@@ -121,6 +124,7 @@ export const AuthProvider = ({ children }) => {
             setTableMarca(respuestaMarca);
             settableEstante(respuestaEstante)
             setProductosBackend(respuesta);
+            setcombosBackend(respuesta2); 
             setCategoria(respuestaCategoria);
             setTableLotes(respuestaLotes);
         } catch (error) {
@@ -310,7 +314,8 @@ export const AuthProvider = ({ children }) => {
             cargarProductos,
             logout,
             cargarApertura,
-            setMonto
+            setMonto,
+            combosBackend
         }}>
             {children}
         </AuthContext.Provider>

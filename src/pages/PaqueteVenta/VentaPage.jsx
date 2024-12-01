@@ -5,7 +5,7 @@ import { insertarFactura } from '../../api/auth';
 
 function VentaPage() {
 
-  const { productosBackend, tableUser, existeApertura, tipoVenta } = useAuth();
+  const { productosBackend, tableUser, existeApertura, tipoVenta, combosBackend} = useAuth();
   const [producto, setProductos] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
   const [sugerenciasUsuario, setSugerenciasUsuario] = useState([]);
@@ -199,7 +199,7 @@ function VentaPage() {
         nombre: producto.Nombre,
         precio: producto.Precio
       }));
-
+      console.log(combosBackend);
       setProductos(productosObtenidos);
     }
   }, [productosBackend]);

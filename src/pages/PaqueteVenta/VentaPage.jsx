@@ -191,7 +191,7 @@ function VentaPage() {
   const handleSelectChange = (e) => {
     setTipoVentaSeleccionado(Number(e.target.value))
   }
-
+/*
   useEffect(() => {
     if (productosBackend && productosBackend.data) {
       const productosObtenidos = productosBackend.data.map((producto) => ({
@@ -202,8 +202,30 @@ function VentaPage() {
       console.log(combosBackend);
       setProductos(productosObtenidos);
     }
-  }, [productosBackend]);
+  }, [productosBackend]);*/
+  useEffect(() => {
+  if (productosBackend && productosBackend.data && combosBackend && combosBackend.data) {
+    // Formatear productos
+    const productosObtenidos = productosBackend.data.map((producto) => ({
+      id: producto.ProductoID,
+      nombre: producto.Nombre,
+      precio: producto.Precio
+    }));
 
+    // Formatear combos
+    const combosObtenidos = combosBackend.data.map((combo) => ({
+      id: combo.ComboID,
+      nombre: combo.Descripcion,
+      precio: combo.Precio
+    }));
+
+    // Combinar ambos arreglos
+    const todosLosItems = [...productosObtenidos, ...combosObtenidos];
+
+    // Actualizar el estado
+    setProductos(todosLosItems);
+  }
+}, [productosBackend, combosBackend]);
 
   useEffect(() => {
     if (tableUser) {

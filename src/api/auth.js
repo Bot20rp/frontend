@@ -95,7 +95,7 @@ export const insertarProducto = user => instance.post(`/productoReg`,  user,{
 }
 });
 
-
+/* sssss */
 
 export const obtenerProductos = () => { return instance.get(`/producto`) };
 

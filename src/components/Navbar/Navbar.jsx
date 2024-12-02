@@ -17,9 +17,9 @@ export const Navbar = () => {
   return (
     <>
       <nav className="navbar">
-      <Link to="/" className="logo">
-  <h3>"El Bunker"</h3>
-</Link>
+        <Link to="/" className="logo">
+          <h3>"El Bunker"</h3>
+        </Link>
 
         {/* Enlaces de navegación */}
         <ul
@@ -44,22 +44,29 @@ export const Navbar = () => {
         {/* link para el usuario  */}
         <div className="icons">
           {esAutenticado ? (
-          <Link to={"/perfil"}>
-            <FaUser className="icon" />
-            <span>{user.nombre}</span>
-          </Link>
+            user.user.id === 3 ? (
+              <Link to={"/perfil"}>
+                <FaUser className="icon" />
+                <span>{user.nombre}</span>
+              </Link>
+            ) : (
+              <Link to={"/dasboard/homeda"}>
+                {/* Aquí puedes agregar contenido si lo necesitas */}
+              </Link>
+            )
+          ) : (
+            <Link to={"/login"}>
+              <FaUser className="icon" />
+            </Link>
+          )}
 
-          ) :   <Link to={"/login"}>
-          <FaUser className="icon" />
-        
-        </Link>}
           {/* link para el carrito  */}
 
-         
+
 
           <Link to={"/cart"}>
-    <IoCart className="icon" />
-  </Link>
+            <IoCart className="icon" />
+          </Link>
         </div>
 
         {/* Botón del menú hamburguesa */}

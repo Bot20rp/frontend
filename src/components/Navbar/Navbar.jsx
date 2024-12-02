@@ -44,7 +44,7 @@ export const Navbar = () => {
         {/* link para el usuario  */}
         <div className="icons">
           {esAutenticado ? (
-            user.user.id === 3 ? (
+            user.user.rol === "Cliente" ? (
               <Link to={"/perfil"}>
                 <FaUser className="icon" />
                 <span>{user.nombre}</span>

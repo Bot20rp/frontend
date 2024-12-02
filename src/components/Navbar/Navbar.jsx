@@ -51,6 +51,7 @@ export const Navbar = () => {
               </Link>
             ) : (
               <Link to={"/dasboard/homeda"}>
+                <FaUser className="icon" />
                 {/* Aquí puedes agregar contenido si lo necesitas */}
               </Link>
             )

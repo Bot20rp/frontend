@@ -13,8 +13,10 @@ function LoginPage() {
 
     const onSubmit = handleSubmit(async (data) => {
         try {
+         console.log("Datos del usuario loginnnnn:", data); // Ver los datos del formulario
             setLoading(true);
             await signin(data);
+            
             await cargarDatos();
             await cargarDatosProveedores();
         } catch (error) {
@@ -26,7 +28,7 @@ function LoginPage() {
     useEffect(() => {
         const fetchData = async () => {
             if (esAutenticado) {
-                console.log(user?.user);
+                console.log("datos del cliente : ",user?.user);
 
                 if (user?.user?.rol === "Cliente") {
                     setLoading(false);
@@ -61,6 +63,9 @@ function LoginPage() {
                 {/* <button type="submit">Iniciar Sesión</button> */}
                 <p className='register-link'>
                     ¿No tienes cuenta? <Link to="/registerPage">Regístrate</Link>
+                </p>
+                <p className='register-link'>
+                     <Link to="/recuperarPage">¿Ha olvidado su contraseña?</Link>
                 </p>
             </form>
         </div>

@@ -9,13 +9,14 @@ function ProductsPage() {
     const tbodyProductos = useRef(null);
     const { productosBackend, user, tableEstante, tableMarca, tableCategoria, tableVolumen } = useAuth();
     const [producto, setProducto] = useState({
-        id: '',
+        id:'',
         Nombre: '',
         Precio: '',
         Categoria: '',
         Volumen: '',
         Marca: '',
-        Estante: ''
+        Estante: '',
+        imagen:null
     });
 
     const [productos, setProductos] = useState([]);
@@ -52,9 +53,22 @@ function ProductsPage() {
     const agregarProducto = async (producto) => {
         try {
             console.log(producto)
-            await insertarProducto(producto);
-            setProductos([...productos, producto]);
-            resetForm();
+            const formData = new FormData();
+            formData.append('id', producto.id);
+            formData.append('Nombre', producto.Nombre);
+            formData.append('Precio', producto.Precio);
+            formData.append('Categoria', producto.Categoria);
+            formData.append('Volumen', producto.Volumen);
+            formData.append('Marca', producto.Marca);
+            formData.append('Estante', producto.Estante);
+            formData.append('imagen', producto.imagen);
+            console.log(formData)
+                await insertarProducto(formData);
+                setProductos([...productos, producto]);
+                resetForm();
+            // await insertarProducto(producto);
+            // setProductos([...productos, producto]);
+            // resetForm();
         } catch (error) {
             console.log(error);
         }
@@ -77,7 +91,19 @@ function ProductsPage() {
         e.preventDefault();
         console.log(producto);
         if (isEditing) {
-            await actualizarProducto(producto);
+            console.log(producto)
+            const formData = new FormData();
+            formData.append('id', producto.id);
+            formData.append('Nombre', producto.Nombre);
+            formData.append('Precio', producto.Precio);
+            formData.append('Categoria', producto.Categoria);
+            formData.append('Volumen', producto.Volumen);
+            formData.append('Marca', producto.Marca);
+            formData.append('Estante', producto.Estante);
+            formData.append('imagen', producto.imagen);
+            console.log(formData)
+            await actualizarProducto(formData)
+            // await actualizarProducto(producto);
             const nuevosProductos = productos.map(p => p.id === producto.id ? producto : p);
             setProductos(nuevosProductos);
         } else {
@@ -116,6 +142,7 @@ function ProductsPage() {
             if (Array.isArray(productosBackend.data)) {
                 const productosFormateados = productosBackend.data.map((producto) => ({
                     id: producto.ProductoID,
+                    DirImagen:producto.DirImagen,
                     Nombre: producto.Nombre,
                     Precio: producto.Precio,
                     Categoria: producto.Catego,
@@ -177,6 +204,7 @@ function ProductsPage() {
                     <thead>
                         <tr className="filasProduct">
                             <th>Id</th>
+                            <th>Imagen</th>
                             <th>Nombre</th>
                             <th>Precio</th>
                             <th>Saldo</th>
@@ -188,9 +216,21 @@ function ProductsPage() {
                         </tr>
                     </thead>
                     <tbody ref={tbodyProductos} className="datosProduct">
+                        {console.log(productos)}
                         {productos.map((prod) => (
                             <tr key={prod.id} data-id={prod.id}>
                                 <td>{prod.id}</td>
+                                <td>
+                                    {prod.DirImagen ? (
+                                        <img
+                                            src={prod.DirImagen}
+                                            alt={`Imagen de ${prod.Nombre}`}
+                                            style={{ width: '50px', height: '50px', objectFit: 'cover' }} // Ajusta el tamaño según sea necesario
+                                        />
+                                    ) : (
+                                        'Sin Imagen'
+                                    )}
+                                </td> 
                                 <td>{prod.Nombre}</td>
                                 <td>{prod.Precio}</td>
                                 <td>{prod.Saldo}</td>
@@ -218,11 +258,39 @@ function ProductsPage() {
                 <div className="modal">
                     <div className="modal-content">
                         <h3>{isEditing ? "Modificar Producto" : "Nuevo Producto"}</h3>
+                        {/* {isEditing ? (
+                            // Mostrar input para ID del producto si se está editando
+                            <input
+                                name="id"
+                                value={producto.id}
+                                onChange={handleChange}
+                                placeholder="ID de producto"
+                            />
+                        ) : (
+                            // Mostrar input para imagen si es un nuevo producto
+                            <input
+                                name="imagen"
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) =>
+                                    setProducto({ ...producto, imagen: e.target.files[0] }) // Agregar la imagen al estado
+                                }
+                            />
+                        )} */}
                         <input
+                            name="imagen"
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) =>
+                                setProducto({ ...producto, imagen: e.target.files[0] }) // Agregar la imagen al estado
+                            }
+                        />
+
+                        <input
+                            type="hidden"
                             name="id"
                             value={producto.id}
-                            onChange={handleChange}
-                            placeholder="ID de producto"
+                            onChange={handleChange} // Si el ID puede cambiar, maneja el evento
                         />
                         <input
                             name="Nombre"

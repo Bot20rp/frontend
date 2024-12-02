@@ -17,7 +17,9 @@ export const Navbar = () => {
   return (
     <>
       <nav className="navbar">
-        <h3 className="logo">"El Bunker"</h3>
+      <Link to="/" className="logo">
+  <h3>"El Bunker"</h3>
+</Link>
 
         {/* Enlaces de navegación */}
         <ul
@@ -53,7 +55,11 @@ export const Navbar = () => {
         </Link>}
           {/* link para el carrito  */}
 
-          <IoCart className="icon" />
+         
+
+          <Link to={"/cart"}>
+    <IoCart className="icon" />
+  </Link>
         </div>
 
         {/* Botón del menú hamburguesa */}

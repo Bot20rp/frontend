@@ -18,6 +18,7 @@ function UsuarioPages() {
   const [formActualizar, setFormActualizar] = useState({
     id: '',
     usuario: '',
+    direccion :'',
     correo: '',
     telefono: '',
     genero: '',
@@ -162,6 +163,7 @@ function UsuarioPages() {
               <tr>
                 <th className='table-item'>ID</th>
                 <th className='table-item'>Usuario</th>
+                <th className='table-item'>Direccion</th>
                 <th className='table-item'>Correo</th>
                 <th className='table-item'>Teléfono</th>
                 <th className='table-item'>Género</th>
@@ -174,6 +176,7 @@ function UsuarioPages() {
                 <tr key={dato.id} id='table-user'>
                   <td className='table-item2'>{dato.id}</td>
                   <td className='table-item2'>{dato.usuario}</td>
+                  <td className='table-item2'>{dato.direccion}</td>
                   <td className='table-item2'>{dato.correo}</td>
                   <td className='table-item2'>{dato.telefono}</td>
                   <td className='table-item2'>{dato.genero}</td>

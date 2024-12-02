@@ -1,7 +1,9 @@
 import { useState } from "react";
 import "../../css/AdmiUsuarioCss/LoginPage.css";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/AuthContext";
 import { registerRequest } from "../../api/auth";
+import { useNavigate, Link } from 'react-router-dom';
 function RegisterPage() {
   const {
     register,
@@ -10,14 +12,18 @@ function RegisterPage() {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
-
+  const { login } = useAuth();
   // En la función onSubmit
   const onSubmit = async (data) => {
     setLoading(true); // Iniciar carga
     try {
       const res = await registerRequest(data);
       if (res.data) {
+        console.log('Datos recibidos:', res.data); 
+        
         reset(); // Limpiar el formulario después del éxito
+        console.log('Respuesta del servidor:', res.data);
+
       }
     } catch (error) {
       console.log(error);
@@ -40,7 +46,7 @@ function RegisterPage() {
           <input
             type="number"
             placeholder="NIT"
-            {...register("NumeroDocumento", { required: true })}
+            {...register("NIT", { required: true })}
           />
         </div>
         {/* ci */}
@@ -48,7 +54,7 @@ function RegisterPage() {
           <input
             type="number"
             placeholder="CI"
-            {...register("ci", { required: true })}
+            {...register("CI", { required: true })}
           />
         </div>
         {/* nombreee */}
@@ -57,6 +63,14 @@ function RegisterPage() {
             type="text"
             placeholder="Nombre completo"
             {...register("Nombre", { required: true })}
+          />
+        </div>
+        {/* direccion  */}
+        <div className="input-box">
+          <input
+            type="text"
+            placeholder="direccion "
+            {...register("Direccion", { required: true })}
           />
         </div>
         {/* correo  */}
@@ -105,6 +119,12 @@ function RegisterPage() {
           </select>
         </div>
         <button type="submit">Registrarse</button>
+        <p className="register-link">
+           <Link to="/login">Inicia Sesion</Link>
+        </p>
+        <p className="register-link">
+          <Link to="/recuperarPage">¿Ha olvidado su contraseña?</Link>
+        </p>
       </form>
     </div>
   );

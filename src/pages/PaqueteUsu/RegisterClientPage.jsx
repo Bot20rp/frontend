@@ -59,6 +59,16 @@ function RegisterClientPage() {
                             {...register('Nombre', { required: true })}
                         />
                     </div>
+
+                    <div className="inputWrapper">
+                        <label htmlFor="name">Direccion</label>
+                        <input
+                            className="inputClient"
+                            placeholder="Direccion"
+                            {...register('Direccion', { required: true })}
+                        />
+                    </div>
+
                     <div className="inputWrapper">
                         <label htmlFor="email">Correo</label>
                         <input

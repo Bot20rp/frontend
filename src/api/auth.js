@@ -5,9 +5,14 @@ import instance from "./axios"
 const tiempoEspera = 10000;
 
 export const registerRequest = user => instance.post(`/clientReg`, user)
+/* ESTO USAR PARA PERFIL  */
 export const loginRequest = user => instance.post(`/login`, user, {
     withCredentials: true
 });
+
+
+
+
 
 export const logoutRequest = () => instance.post('/logout')
 export const obtenerRequest = () => {
@@ -20,7 +25,7 @@ export const verityTokenResquest = (token) => instance.get('/verify', {
     headers: {
         Authorization: `Bearer ${token}`
     }
-});
+});  
 export const actualizarUsuario = user => instance.patch(`/usuario/actualizar`, {
     data: user,
     headers: {
@@ -34,7 +39,7 @@ export const eliminarUsuario = id => instance.delete('/usuario/del', {
     },
 })
 
-
+// login
 // GESTION PROVEEDOR
 
 export const registrarProveedorRequest = user => instance.post(`/proveedor`, user);
@@ -84,22 +89,20 @@ export const eliminarCategorias = user => instance.delete(`/DeleteCategoria`, {
 
 
 //GESTION PRODUCTO
-export const insertarProducto = user => instance.post(`/productoReg`, {
-    data: user,
+export const insertarProducto = user => instance.post(`/productoReg`,  user,{
     headers: {
-        'Content-Type': 'application/json',
-    },
+    'Content-Type': 'multipart/form-data',
+}
 });
 
 
 
 export const obtenerProductos = () => { return instance.get(`/producto`) };
 
-export const actualizarProducto = user => instance.patch(`/producto/actualizar`, {
-    data: user,
+export const actualizarProducto = user => instance.patch(`/producto/actualizar`, user,{
     headers: {
-        'Content-Type': 'application/json',
-    },
+    'Content-Type': 'multipart/form-data',
+    }
 });
 
 export const eliminarProducto = id => instance.delete('/producto/delete', {
@@ -231,8 +234,19 @@ export const cerrarAperturaAbierta = (data) => instance.patch(`/cierre`,{
         'Content-Type': 'application/json',
     }
 });
-
-
+ /* modificarContraseña  de criustuannnn*/
+ export const modificarContraseña = (data) => instance.patch(`/olvContra`, data, {
+    headers: {
+        'Content-Type': 'application/json',
+    }
+})
+    
+    /* de migueeellll */
+export const cambiarContrasena = (data) => instance.put(`/cambioContra`, data, {
+    headers: {
+        'Content-Type': 'application/json',
+    }
+})
 //VENTAS
 
 export const insertarFactura = (data) => instance.post(`/Factura`,{

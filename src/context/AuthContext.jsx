@@ -10,7 +10,7 @@ export const useAuth = () => {
     }
     return context;
 };
-
+obtenerRequest
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [roles,setRoles] = useState([]);
@@ -37,7 +37,9 @@ export const AuthProvider = ({ children }) => {
         empleado: []
     });
 
-
+    const setUserData = (data) => {
+        setUser(data);
+      };
     const signin = async (user) => {
         try {
             const res = await loginRequest(user);
@@ -59,7 +61,11 @@ export const AuthProvider = ({ children }) => {
         // Elimina el token de localStorage
         localStorage.removeItem('token');
     };
+/* ssssssssssssssssssss */
 
+
+
+/* sssssssssssssssssssssssssssss */
     const cargarDatos = async () => {
         // Utiliza el token almacenado en localStorage para las solicitudes
         const token = localStorage.getItem('token');
@@ -67,7 +73,7 @@ export const AuthProvider = ({ children }) => {
 
         try {
             const respuesta = await obtenerRequest();
-            console.log(respuesta)
+            
             // Procesa la respuesta
             const datosNuevos = respuesta.data.usuarios.map(usuario => ({
                 id: usuario.id,
@@ -75,10 +81,8 @@ export const AuthProvider = ({ children }) => {
                 correo: usuario.correo,
                 telefono: usuario.telefono,
                 genero: usuario.genero,
-                rol: usuario.rol,
-                salario: usuario.salario,
-                horarioInicio: usuario.horarioInicio,
-                horarioFin: usuario.horarioFin,
+             
+            
                 ci: usuario.ci,
                 nit: usuario.nit
             }));
@@ -87,7 +91,7 @@ export const AuthProvider = ({ children }) => {
             console.error(error);
         }
     };
-
+ 
     const cargarDatosProveedores = async () => {
         try {
             const respuesta = await obtenerRequestProveedor();
@@ -284,6 +288,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             signin,
             user,
+            setUserData ,
             esAutenticado,
             loading,
             rol,
@@ -305,12 +310,15 @@ export const AuthProvider = ({ children }) => {
             tableApertura,
             setExisteApertura,
             cargarDatos,
+            
             cargarDatosProveedores,
             cargarDatosPermisos,
             cargarProductos,
             logout,
             cargarApertura,
-            setMonto
+            setMonto,
+           
+            
         }}>
             {children}
         </AuthContext.Provider>

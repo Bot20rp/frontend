@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-   /*  baseURL: 'https://backendsi1-production.up.railway.app/api', */
-    baseURL : 'http://localhost:4000/api',
+    baseURL: 'https://backendsi1-production.up.railway.app/api',
+  /*   baseURL : 'http://localhost:4000/api', */
     timeout: 10000
 });
 

@@ -13,7 +13,7 @@ export const Lote = () => {
   const [busquedaNombre, setBusquedaNombre] = useState('');
   const [productosTabla, setProductosTabla] = useState([]);
   const [lotesConsultados, setLotesConsultados] = useState([]); // Nuevo estado para los lotes
-  const [datosLotes, setDatosLotes]= useState([]);
+
   useEffect(() => {
     if (productosBackend && productosBackend.data) {
       const productosObtenidos = productosBackend.data.map((producto) => ({
@@ -120,7 +120,7 @@ export const Lote = () => {
       diferenciaTiempo: Math.ceil((lote.fechaExpiracion - hoy) / (1000 * 60 * 60 * 24)) // Días restantes
     })));
   };
-  const generarReportePDF = () => {
+ /* const generarReportePDF = () => {
     const doc = new jsPDF();
  
     doc.text('Reporte de Lotes', 14, 10);
@@ -135,7 +135,7 @@ export const Lote = () => {
     ]),
 });
     doc.save('ReporteLote.pdf');
-};
+};*/
 
   return (
     <div className="containerLote">
@@ -218,7 +218,7 @@ export const Lote = () => {
       <div className="consultarLotes">
         <h2>CONSULTAR LOTES DE PRODUCTOS</h2>
         <button className="ordenarLoteBtn" onClick={acomodarPorTiempo}>ACOMODAR POR MENOR TIEMPO</button>
-        <button onClick={generarReportePDF}>Reporte Lote </button>
+    {/*    <button onClick={generarReportePDF}>Reporte Lote </button>*/}
         <table className="tablaLote">
           <thead>
             <tr>

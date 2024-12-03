@@ -244,6 +244,8 @@ function VentaPage() {
         return null; // No incluir los usuarios que no sean 'Client'
       }).filter(user => user !== null); // Eliminar los valores null
 
+      console.log(tableUser)
+
       setUsuarios(usuariosObtenidos);
       setTipoVentaSeleccionado(tipoVenta[0]?.TipoVID);
     }

@@ -82,8 +82,10 @@ export const AuthProvider = ({ children }) => {
                 correo: usuario.correo,
                 telefono: usuario.telefono,
                 genero: usuario.genero,
-             
-            
+                rol: usuario.rol,
+                salario: usuario.salario,
+                horarioInicio: usuario.horarioInicio,
+                horarioFin: usuario.horarioFin,
                 ci: usuario.ci,
                 nit: usuario.nit
             }));

@@ -11,16 +11,18 @@ import StripePage from "./PaqueteVenta/StripePage";
 export const Cart = () => {
   const { cartList, addToCart, decreaseQty, deleteProduct, setCartList } = useContext(CartContext);
   const { anadirCompra } = useContext(CartContext); 
-  const {setMonto} = useAuth();
+  const { setMonto } = useAuth();
 
   const totalPrice = cartList.reduce(
     (price, item) => price + item.qty * item.price,
     0
   );
 
-  const [isPaymentVisible, setPaymentVisible] = useState(false);  // Estado para mostrar el pago
+  const [isPaymentVisible, setPaymentVisible] = useState(false); // Estado para mostrar el pago
+  const [paymentCompleted, setPaymentCompleted] = useState(false); // Estado para verificar si el pago fue completado
 
   const handlePayment = () => {
+    // Agregar los productos a la compra
     cartList.forEach(item => {
       const compra = {
         productName: item.productName,
@@ -29,9 +31,15 @@ export const Cart = () => {
       };
       anadirCompra(compra);
     });
-    setMonto(totalPrice)
-    setCartList([]); // Vaciar el carrito después de la compra
+
+    setMonto(totalPrice);
     setPaymentVisible(true);  // Mostrar formulario de pago
+  };
+
+  // Callback que será ejecutado una vez se complete el pago
+  const onPaymentComplete = () => {
+    setCartList([]); // Vaciar el carrito solo cuando el pago haya sido completado
+    setPaymentCompleted(true); // Marcar el pago como completado
   };
 
   useEffect(() => {
@@ -42,7 +50,7 @@ export const Cart = () => {
     <section className="cart-items">
       <div className="cart-container">
         <div className="cart-content">
-          {cartList.length === 0 && (
+          {cartList.length === 0 && !paymentCompleted && (
             <h1 className="no-items">No se añadieron productos al carrito</h1>
           )}
           {cartList.map((item) => {
@@ -95,7 +103,7 @@ export const Cart = () => {
       </div>
 
       {/* Condicionalmente renderiza el formulario de pago si el estado isPaymentVisible es true */}
-      {isPaymentVisible && <StripePage/>}
+      {isPaymentVisible && <StripePage onPaymentComplete={onPaymentComplete} />}
     </section>
   );
 };

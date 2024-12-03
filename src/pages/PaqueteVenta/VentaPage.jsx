@@ -254,7 +254,6 @@ function VentaPage() {
 
   const handleVentaChange = async () => {
     if (existeApertura) {
-
       if (totalPago === totalVenta) {
         try {
           const datos = {
@@ -266,9 +265,9 @@ function VentaPage() {
             pagoTarjeta: Number(totalTarjeta) || 0,
             productos: productosEnVenta,
             totalVenta,
-            tipoVenta: tipoVentaSeleccionado
-          }
-          console.log(datos)
+            tipoVenta: tipoVentaSeleccionado,
+          };
+          console.log(datos);
           await insertarFactura(datos);
           setLoading(true);
           setBusquedaUsuarioNombre([]);
@@ -277,7 +276,12 @@ function VentaPage() {
           setPagoQR([]);
           setPagoTarjeta([]);
         } catch (error) {
-          console.log(error)
+          // Verificar si el error tiene una respuesta con datos (como el mensaje de error)
+          if (error.response && error.response.data) {
+            alert(`Error: ${error.response.data.message || 'Hubo un problema con la solicitud.'}`);
+          } else {
+            alert('Error desconocido. Intenta nuevamente.');
+          }
         }
       } else {
         alert('El Total Pagar es diferente al Total Venta');
@@ -285,7 +289,8 @@ function VentaPage() {
     } else {
       alert('Necesitas Iniciar Nueva Apertura');
     }
-  }
+  };
+  
 
 
   const handleSiguiente = () => {

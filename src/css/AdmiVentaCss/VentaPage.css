@@ -207,12 +207,14 @@
 
 .detalleFactura #pedidos,
 .detalleFactura #resumen{
+    display: flex;
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 10px;
     height: auto;
     min-height: 250px;
-
+    flex-direction: column;
+    gap: 10px;
 }
 
 .detalleFactura #pedidos #textVenta,
@@ -337,4 +339,20 @@ input[type="number"]{
 
 #fact5 button{
     width: 100px;
+}
+
+.TodosPedidos{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+.detalleFactura #pedidos #actualizar{
+    background-color: #27db07;
+}
+
+.TodosPedidos button{
+    background-color: #042eff;
 }

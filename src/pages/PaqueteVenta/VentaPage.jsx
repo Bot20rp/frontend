@@ -5,8 +5,9 @@ import { insertarFactura } from '../../api/auth';
 
 function VentaPage() {
 
-  const { productosBackend, tableUser, existeApertura, tipoVenta, combosBackend} = useAuth();
+  const { productosBackend, tableUser, existeApertura, tipoVenta, combosBackend } = useAuth();
   const [producto, setProductos] = useState([]);
+  const [pedidoSeleccionado, setPedidoSeleccionado] = useState(null);
   const [usuarios, setUsuarios] = useState([]);
   const [sugerenciasUsuario, setSugerenciasUsuario] = useState([]);
   const [busquedaUsuarioId, setBusquedaUsuarioId] = useState('');
@@ -29,11 +30,12 @@ function VentaPage() {
   const [totalTarjeta, setTotalTarjeta] = useState('');
   const [totalQr, setTotalQr] = useState('');
   const [totalEfectivo, setTotalEfectivo] = useState('');
-  const [loading,setLoading] = useState(false);
+  const [mostrarPedidos, setMostrarPedidos] = useState(false);
+  const [loading, setLoading] = useState(false);
   // para comboioo
-  const [buscarIdCombo ,setBuscarIdCombo ] = useState('') ;
-  const [combo,setComnbo] = useState([])
-    const [ComboEnVenta, setComboEnVenta] = useState([]);
+  const [buscarIdCombo, setBuscarIdCombo] = useState('');
+  const [combo, setComnbo] = useState([])
+  const [ComboEnVenta, setComboEnVenta] = useState([]);
 
   const seleccionarProducto = (producto) => {
     const productoExistente = productosEnVenta.find((p) => p.id === producto.id);
@@ -88,33 +90,33 @@ function VentaPage() {
       setSugerencias([]);
     }
   };
-/* ...................................combooo */
+  /* ...................................combooo */
 
-const buscarComboPorNombre = (event) => {
-  const value = event.target.value;
-  setBusquedaNombre(value);
-  if (value.length >= 3) {
-    const resultados = producto.filter((product) =>
-      combo.Descripcion.toLowerCase().startsWith(value.toLowerCase())
-    );
-    setSugerencias(resultados);
-  } else {
-    setSugerencias([]);
-  }
-};
+  const buscarComboPorNombre = (event) => {
+    const value = event.target.value;
+    setBusquedaNombre(value);
+    if (value.length >= 3) {
+      const resultados = producto.filter((product) =>
+        combo.Descripcion.toLowerCase().startsWith(value.toLowerCase())
+      );
+      setSugerencias(resultados);
+    } else {
+      setSugerencias([]);
+    }
+  };
 
-const bucarComboPorId  = () =>{
-  const value = event.target.value;
-  setBuscarIdCombo(value) 
-  if (value.length > 0) {
-    const resultados = combo.filter((com) => com.id.toString().startsWith(value));
-    setSugerencias(resultados);
-  } else {
-    setSugerencias([]);
+  const bucarComboPorId = () => {
+    const value = event.target.value;
+    setBuscarIdCombo(value)
+    if (value.length > 0) {
+      const resultados = combo.filter((com) => com.id.toString().startsWith(value));
+      setSugerencias(resultados);
+    } else {
+      setSugerencias([]);
+    }
   }
-}
-/* ...............comboooo,,,,,,,,,,,,,,,,,,,,,,,,,,,
- */
+  /* ...............comboooo,,,,,,,,,,,,,,,,,,,,,,,,,,,
+   */
   const buscarUsuario = (event) => {
     const value = event.target.value;
     setBusquedaUsuarioId(value); // Mantén el valor en el estado de busquedaUsuarioId
@@ -221,41 +223,41 @@ const bucarComboPorId  = () =>{
   const handleSelectChange = (e) => {
     setTipoVentaSeleccionado(Number(e.target.value))
   }
-/*
+  /*
+    useEffect(() => {
+      if (productosBackend && productosBackend.data) {
+        const productosObtenidos = productosBackend.data.map((producto) => ({
+          id: producto.ProductoID,
+          nombre: producto.Nombre,
+          precio: producto.Precio
+        }));
+        console.log(combosBackend);
+        setProductos(productosObtenidos);
+      }
+    }, [productosBackend]);*/
   useEffect(() => {
-    if (productosBackend && productosBackend.data) {
+    if (productosBackend && productosBackend.data && combosBackend && combosBackend.data) {
+      // Formatear productos
       const productosObtenidos = productosBackend.data.map((producto) => ({
         id: producto.ProductoID,
         nombre: producto.Nombre,
         precio: producto.Precio
       }));
-      console.log(combosBackend);
-      setProductos(productosObtenidos);
+
+      // Formatear combos
+      const combosObtenidos = combosBackend.data.map((combo) => ({
+        id: combo.ComboID,
+        nombre: combo.Descripcion,
+        precio: combo.Precio
+      }));
+
+      // Combinar ambos arreglos
+      const todosLosItems = [...productosObtenidos, ...combosObtenidos];
+
+      // Actualizar el estado
+      setProductos(todosLosItems);
     }
-  }, [productosBackend]);*/
-  useEffect(() => {
-  if (productosBackend && productosBackend.data && combosBackend && combosBackend.data) {
-    // Formatear productos
-    const productosObtenidos = productosBackend.data.map((producto) => ({
-      id: producto.ProductoID,
-      nombre: producto.Nombre,
-      precio: producto.Precio
-    }));
-
-    // Formatear combos
-    const combosObtenidos = combosBackend.data.map((combo) => ({
-      id: combo.ComboID,
-      nombre: combo.Descripcion,
-      precio: combo.Precio
-    }));
-
-    // Combinar ambos arreglos
-    const todosLosItems = [...productosObtenidos, ...combosObtenidos];
-
-    // Actualizar el estado
-    setProductos(todosLosItems);
-  }
-}, [productosBackend, combosBackend]);
+  }, [productosBackend, combosBackend]);
 
   useEffect(() => {
     if (tableUser) {
@@ -271,12 +273,12 @@ const bucarComboPorId  = () =>{
         }
         return null; // No incluir los usuarios que no sean 'Client'
       }).filter(user => user !== null); // Eliminar los valores null
-  
+
       setUsuarios(usuariosObtenidos);
       setTipoVentaSeleccionado(tipoVenta[0]?.TipoVID);
     }
   }, [tableUser, tipoVenta]);
-  
+
 
   const handleVentaChange = async () => {
     if (existeApertura) {
@@ -327,6 +329,45 @@ const bucarComboPorId  = () =>{
   }
 
 
+  const pedidos = [
+    {
+      id: 4,
+      nombre: "david Pardo",
+      productos: [{ id: 4, nombre: "CocaCola 2Lt", cantidad: 2, precio: 15, total: 30 },
+      { id: 14, nombre: "Vital sin gas", cantidad: 1, precio: 29, total: 29 },
+      { id: 15, nombre: "Vino", cantidad: 1, precio: 44, total: 44 }
+      ],
+      total: 103
+    }, {
+      id: 2,
+      nombre: "María Fernández",
+      productos: [
+        { id: 8, nombre: "Coca Cola Zero 3lt", cantidad: 1, precio: 16, total: 16 },
+        { id: 36, nombre: "Havana Especial 1lt", cantidad: 2, precio: 85, total: 170 },
+        { id: 43, nombre: "Kohlberg Tinto", cantidad: 2, precio: 26, total: 52 }
+      ],
+      total: 238
+    },
+    {
+      id: 1,
+      nombre: "Ana López",
+      productos: [
+        { id: 1, nombre: "Flor de Caña 1lt", cantidad: 2, precio: 70, total: 140 },
+        { id: 7, nombre: "Coca Cola Zero 2lt", cantidad: 1, precio: 12, total: 12 },
+        { id: 14, nombre: "Vital sin gas 2lt", cantidad: 1, precio: 7, total: 7 }
+      ],
+      total: 159
+    }]
+
+  const handleSelectPedido = (pedido) => {
+    setPedidoSeleccionado(pedido);
+    setProductosEnVenta(pedido.productos);
+    setBusquedaUsuarioId(pedido.id);
+    setBusquedaUsuarioNombre(pedido.nombre);
+    setMostrarPedidos(false); // Oculta los botones después de seleccionar un pedido
+  };
+
+
   return (
     <div >
       {
@@ -355,7 +396,7 @@ const bucarComboPorId  = () =>{
                   <input
                     type="text"
                     placeholder='NIT/CI'
-                    // value={usuarioSeleccionado} 
+                    value={busquedaUsuarioId}
                     onChange={buscarUsuario}
                   />
                 </div>
@@ -376,10 +417,10 @@ const bucarComboPorId  = () =>{
                   </ul>
                 )}
               </div>
-                {/* de aquii los cambiooooo  dddddd*/}
+              {/* de aquii los cambiooooo  dddddd*/}
               <h3>Busqueda De Producto</h3>
               <div id='fact3'>
-              {/* busqueda por id  */}
+                {/* busqueda por id  */}
                 <input
                   type="text"
                   placeholder='ID del producto'
@@ -404,8 +445,8 @@ const bucarComboPorId  = () =>{
                   </ul>
                 )}
               </div>
-                  {/* aquiiiii finalizaa */}
-                  {/* detallee ventaaaaaaaaaaa */}
+              {/* aquiiiii finalizaa */}
+              {/* detallee ventaaaaaaaaaaa */}
               <h3>Detalle Venta</h3>
               <div className="facturaPrincipal45">
                 <div id="fact4">
@@ -445,11 +486,11 @@ const bucarComboPorId  = () =>{
                   </table>
                 </div>
               </div>
-                    {/* aquii finalizaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */}
-                    {/* -----------------------------combooo........................................... */}
-                    <h3>Detalle Comboo</h3>
-                    <div id='fact3'>
-              {/* busqueda por id  */}
+              {/* aquii finalizaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */}
+              {/* -----------------------------combooo........................................... */}
+              <h3>Detalle Comboo</h3>
+              <div id='fact3'>
+                {/* busqueda por id  */}
                 <input
                   type="text"
                   placeholder='ID del Combo'
@@ -474,7 +515,7 @@ const bucarComboPorId  = () =>{
                   </ul>
                 )}
               </div>
-                    {/* ..............................aqui finaliza combooo................................................................... */}
+              {/* ..............................aqui finaliza combooo................................................................... */}
               <h3>Detalle De Pago</h3>
               <div id='fact5'>
                 <button onClick={() => { setMostrarTarjeta(true); handleAddTarjeta(); }}>TARJETA</button>
@@ -545,6 +586,21 @@ const bucarComboPorId  = () =>{
               </div>
               <div id='pedidos'>
                 <h3 id='textVenta'>Pedidos Carrito</h3>
+                <button
+                  id='actualizar'
+                  onClick={() => setMostrarPedidos(true)}>actualizar</button>
+                {
+                  mostrarPedidos && (
+                    <div className="TodosPedidos">
+                      {pedidos.map((pedido) => (
+                        <button key={pedido.id} onClick={() => handleSelectPedido(pedido)}>
+                          Pedido {pedido.id} {"+"}
+                        </button>
+                      ))}
+                    </div>
+                  )
+                }
+
               </div>
               <button
                 id='siguiente'
@@ -676,8 +732,8 @@ const bucarComboPorId  = () =>{
               <h3 id='pago'>TOTAL VENTA BS: {totalPago.toFixed(2)}</h3>
 
               <div>
-                <button onClick={handleConfirmado}>{loading ? "Nuevo": "Atras"}</button>
-                <button onClick={handleVentaChange}>{loading ? "Imprimir": "Confirmar"}</button>
+                <button onClick={handleConfirmado}>{loading ? "Nuevo" : "Atras"}</button>
+                <button onClick={handleVentaChange}>{loading ? "Imprimir" : "Confirmar"}</button>
               </div>
             </div>
 

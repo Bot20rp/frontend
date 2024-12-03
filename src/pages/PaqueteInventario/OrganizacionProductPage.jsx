@@ -125,6 +125,7 @@ function OrganizacionProductPage() {
                     <h1 className="TitleMarca">Registrar Marca</h1>
                     <input className="formMarca" placeholder="Nombre" name="Nombre" value={formValues.Nombre || ""} onChange={handleInputChange} required />
                     <input className="formMarca" placeholder="Región" name="Region" value={formValues.Region || ""} onChange={handleInputChange} required />
+                    <input className="formMarca" placeholder="Descripcion" name="Descripcion" value={formValues.Descripcion || ""} onChange={handleInputChange} required />
                     <div className="buttons">
                         <button type="submit" className='saveMarca'>Guardar</button>
                         <button type="button" className='closeRegisterMarca' onClick={closeModal}>Cerrar</button>

@@ -7,17 +7,22 @@ Bebidas de aperitivo: Incluye vermut, amari y licores de hierbas.
 Cócteles: Combinaciones de diferentes bebidas alcohólicas y otros ingredientes, como margaritas, mojitos y martinis.}
  */
 
-
-import productImg02 from "../img/cerveza-02.jpg";
-import productImg03 from "../img/cerveza-03.jpg";
-import productImg04 from "../img/cerveza-04.jpg";
-import productImg05 from "../img/cerveza-05.jpeg";
-import productImg06 from "../img/cerveza-06.jpg";
-import productImg07 from "../img/cerveza-07.jpeg";
+/* alcoholicasssss */
+import flor_caña from "../img/flor-cañaa.jpg";
 
 
-import vino1 from "../img/vino-1.jpeg";
-import vino2 from "../img/vino-2.jpeg";
+
+
+
+import productImg03 from "../img/Corona_On.jpg";
+import productImg04 from "../img/ducal_330.png";
+import productImg05 from "../img/Golden_269.png";
+import productImg06 from "../img/Huari_269.jpg";
+import productImg07 from "../img/paceña_269.jpg";
+
+
+import Campos_Solano_Oporto from "../img/Campos_Solano_Oporto.png";
+import Campos_Solano_Ros from "../img/Campos_Solano_Ros.png";
 import vino3 from "../img/vino-3.jpeg";
 import vino4 from "../img/vino-4.jpeg";
 import vino5 from "../img/vino-5.jpeg";
@@ -33,6 +38,16 @@ import licor5 from "../img/licores-5.jpeg";
 import licor8 from "../img/licores-8.jpeg";
 import licor7 from "../img/licores-7.jpeg";
 
+
+
+import venta1 from "../img/cocacola_4.jpg";
+import venta2 from "../img/aguasingas_14.jpg";
+import venta3 from "../img/vino_15.png";
+import venta4 from "../img/cocacola_8.jpg";
+import venta5 from "../img/havana_36.png";
+import venta6 from "../img/tinto_43.jpg";
+import venta7 from "../img/cocacola_7.jpg";
+import venta8 from "../img/aguasingas_14.jpg";
 // jorgeeee
 
 import bebidaaperitivo1 from "../img/bebidaaperitivo-1.jpeg";
@@ -58,7 +73,7 @@ export const SliderData = [
       id: 3,
       title: "combo3",
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.",
-      cover: vino2,
+      cover: Campos_Solano_Ros,
   },
   {
       id: 4,
@@ -101,54 +116,13 @@ export const serviceData = [
 /* productos con combossss */
 
 export const discoutProducts = [
-  {
-    id: "01",
-    productName: "vino1 ",
-    imgUrl: vino1,
-    category: "Vinos",
-    price: 193,
-    shortDesc:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
-    reviews: [
-      {
-        rating: 4.7,
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      },
-    ],
-    avgRating: 4.5,
-  },
 
   {
-    id: "02",
-    productName: "vino2 ",
-    imgUrl: vino2,
-    category: "Vinos",
-    price: 253,
-    shortDesc:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
-    reviews: [
-      {
-        rating: 4.8,
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      },
-      {
-        rating: 4.8,
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      },
-    ],
-    avgRating: 4.7,
-  },
-
-  {
-    id: "03",
-    productName: "cerveza1",
-    imgUrl: productImg02,
+    id: "25",
+    productName: "CocaCola 2Lt",
+    imgUrl: venta1,
     category: "Cervezas",
-    price: 173,
+    price: 15,
     shortDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
     description:
@@ -165,12 +139,265 @@ export const discoutProducts = [
     ],
     avgRating: 4.7,
   },
+
   {
     id: "26",
-    productName: "cervezaaa",
+    productName: "Vital sin gas",
+    imgUrl: venta2,
+    category: "Cervezas",
+    price: 29,
+    shortDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    reviews: [
+      {
+        rating: 4.6,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        rating: 4.9,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+    ],
+    avgRating: 4.7,
+  },
+
+
+  {
+    id: "27",
+    productName: "Vino",
+    imgUrl: venta3,
+    category: "Cervezas",
+    price: 15,
+    shortDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    reviews: [
+      {
+        rating: 4.6,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        rating: 4.9,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+    ],
+    avgRating: 4.7,
+  },
+
+
+  {
+    id: "28",
+    productName: "Coca Cola Zero 3lt",
+    imgUrl: venta4,
+    category: "Cervezas",
+    price: 16,
+    shortDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    reviews: [
+      {
+        rating: 4.6,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        rating: 4.9,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+    ],
+    avgRating: 4.7,
+  },
+
+
+  {
+    id: "29",
+    productName: "Havana Especial 1lt",
+    imgUrl: venta5,
+    category: "Cervezas",
+    price: 85,
+    shortDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    reviews: [
+      {
+        rating: 4.6,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        rating: 4.9,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+    ],
+    avgRating: 4.7,
+  },
+
+  {
+    id: "30",
+    productName: "Kohlberg Tinto",
+    imgUrl: venta6,
+    category: "Cervezas",
+    price: 26,
+    shortDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    reviews: [
+      {
+        rating: 4.6,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        rating: 4.9,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+    ],
+    avgRating: 4.7,
+  },
+
+
+
+
+
+
+
+  {
+    id: "03",
+    productName: "flor de caña",
+    imgUrl: flor_caña,
+    category: "Cervezas",
+    price: 70,
+    shortDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    reviews: [
+      {
+        rating: 4.6,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        rating: 4.9,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+    ],
+    avgRating: 4.7,
+  },
+
+
+  {
+    id: "31",
+    productName: "Coca Cola Zero 2lt",
+    imgUrl: venta7,
+    category: "Cervezas",
+    price: 12,
+    shortDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    reviews: [
+      {
+        rating: 4.6,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        rating: 4.9,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+    ],
+    avgRating: 4.7,
+  },
+
+  {
+    id: "32",
+    productName: "Vital sin gas 2lt",
+    imgUrl: venta8,
+    category: "Cervezas",
+    price: 7,
+    shortDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    reviews: [
+      {
+        rating: 4.6,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        rating: 4.9,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+    ],
+    avgRating: 4.7,
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {
+    id: "01",
+    productName: "Campos Solano Oporto",
+    imgUrl: Campos_Solano_Oporto,
+    category: "Vinos",
+    price: 30,
+    shortDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    reviews: [
+      {
+        rating: 4.7,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+    ],
+    avgRating: 4.5,
+  },
+
+  {
+    id: "02",
+    productName: "Campos Solano Rose ",
+    imgUrl: Campos_Solano_Ros,
+    category: "Vinos",
+    price: 34,
+    shortDesc:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
+    reviews: [
+      {
+        rating: 4.8,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        rating: 4.8,
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+    ],
+    avgRating: 4.7,
+  },
+
+
+  {
+    id: "26",
+    productName: "Golden lata",
     imgUrl: productImg06,
     category: "Cervezas",
-    price: 253,
+    price: 5,
     shortDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
     description:
@@ -191,7 +418,7 @@ export const discoutProducts = [
     id: "04",
     productName: "bebidaaaa",
     imgUrl: bebidaespirituosa1,
-    category: "Bebidas espirituosas",
+    category: "Cervezas",
     price: 163,
     shortDesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
@@ -273,10 +500,10 @@ export const discoutProducts = [
   export const products = [
     {
       id: "01",
-      productName: "vino1 ",
-      imgUrl: vino1,
+      productName: "Campos Solano Oporto ",
+      imgUrl: Campos_Solano_Oporto,
       category: "Vinos",
-      price: 193,
+      price: 30,
       shortDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
       description:
@@ -292,10 +519,10 @@ export const discoutProducts = [
   
     {
       id: "02",
-      productName: "vino2 ",
-      imgUrl: vino2,
+      productName: "Campos Solano Rose ",
+      imgUrl: Campos_Solano_Ros,
       category: "Vinos",
-      price: 253,
+      price: 34,
       shortDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
       description:
@@ -315,10 +542,10 @@ export const discoutProducts = [
   
     {
       id: "03",
-      productName: "cerveza1",
-      imgUrl: productImg02,
+      productName: "flor de caña",
+      imgUrl: flor_caña,
       category: "Cervezas",
-      price: 173,
+      price: 70,
       shortDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
       description:
@@ -337,10 +564,10 @@ export const discoutProducts = [
     },
     {
       id: "26",
-      productName: "cervezaaa",
+      productName: "Golden lata",
       imgUrl: productImg06,
       category: "Cervezas",
-      price: 253,
+      price: 5,
       shortDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
       description:
@@ -427,10 +654,10 @@ export const discoutProducts = [
     },
     {
       id: "07",
-      productName: "Sakarias Armchair",
+      productName: "Paceña lata 269 ml",
       imgUrl: productImg07,
       category: "chair",
-      price: 99,
+      price: 5.5,
       shortDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
       description:
@@ -451,7 +678,7 @@ export const discoutProducts = [
     {
       id: "27",
       productName: "Modern Arm Sofa",
-      imgUrl: productImg02,
+      imgUrl: flor_caña,
       category: "sofa",
       price: 173,
       shortDesc:
@@ -473,10 +700,10 @@ export const discoutProducts = [
   
     {
       id: "08",
-      productName: "Baltsar Chair",
+      productName: "Paceña lata 269 ml",
       imgUrl: productImg07,
-      category: "chair",
-      price: 89,
+      category: "Cervezas",
+      price: 5.5,
       shortDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
       description:
@@ -632,7 +859,7 @@ export const discoutProducts = [
   
     {
       id: "14",
-      productName: "Cerveszaaa",
+      productName: "Corona One Way ",
       imgUrl: productImg03,
       category: "Cervezas",
       price: 899,
@@ -793,10 +1020,10 @@ export const discoutProducts = [
   
     {
       id: "21",
-      productName: "cerverzaaaa",
+      productName: "ducal ",
       imgUrl: productImg04,
       category: "Cervezas",
-      price: 199,
+      price: 6.5,
       shortDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
       description:

@@ -29,15 +29,16 @@ export const Navbar = () => {
           <Link to="/">
             <li>Home</li>
           </Link>
-          <Link to="/shop">
+
+        {/*   <Link to="/shop">
             <li>Shop</li>
-          </Link>
+          </Link> */}
           <Link to="/cart">
             <li>Cart</li>
           </Link>
-          <Link to="/contact">
+         {/*  <Link to="/contact">
             <li>Contact</li>
-          </Link>
+          </Link> */}
         </ul>
 
         {/* Iconos de usuario y carrito */}

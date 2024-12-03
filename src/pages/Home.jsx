@@ -13,14 +13,14 @@ const nuevosprodutcos = products.filter(
       <Sliders/>
       <Wrapper/>
       <Section
-        title = 'Productos en Promociones'
+        title = 'Productos '
         bgColor='#f6f9fc'
         productItems={discoutProducts}
       />
 
 
 <Section
-        title = 'Productos nuevos'
+        title = 'Productos'
         bgColor='white'
         productItems={nuevosprodutcos}
       />

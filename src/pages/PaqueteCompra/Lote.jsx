@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../../css/AdmiCompraCss/lote.css';
 import { useAuth } from '../../context/AuthContext';
 import { insertarLotes } from '../../api/auth';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 export const Lote = () => {
   const { productosBackend, tableLotes } = useAuth();
@@ -11,7 +13,7 @@ export const Lote = () => {
   const [busquedaNombre, setBusquedaNombre] = useState('');
   const [productosTabla, setProductosTabla] = useState([]);
   const [lotesConsultados, setLotesConsultados] = useState([]); // Nuevo estado para los lotes
-
+  const [datosLotes, setDatosLotes]= useState([]);
   useEffect(() => {
     if (productosBackend && productosBackend.data) {
       const productosObtenidos = productosBackend.data.map((producto) => ({
@@ -118,6 +120,22 @@ export const Lote = () => {
       diferenciaTiempo: Math.ceil((lote.fechaExpiracion - hoy) / (1000 * 60 * 60 * 24)) // Días restantes
     })));
   };
+  const generarReportePDF = () => {
+    const doc = new jsPDF();
+ 
+    doc.text('Reporte de Lotes', 14, 10);
+    doc.autoTable({
+    head :[ ['ID', 'Nombre', 'Cantidad', 'fechaExpiracion', 'diferenciaTiempo']],
+    body : datosLotes.map((lote) => [
+      lote.loteId,
+      lote.nombre,
+      lote.cantidad,
+      lote.fechaExpiracion,
+      lote.diferenciaTiempo
+    ]),
+});
+    doc.save('ReporteLote.pdf');
+};
 
   return (
     <div className="containerLote">
@@ -200,6 +218,7 @@ export const Lote = () => {
       <div className="consultarLotes">
         <h2>CONSULTAR LOTES DE PRODUCTOS</h2>
         <button className="ordenarLoteBtn" onClick={acomodarPorTiempo}>ACOMODAR POR MENOR TIEMPO</button>
+        <button onClick={generarReportePDF}>Reporte Lote </button>
         <table className="tablaLote">
           <thead>
             <tr>

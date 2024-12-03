@@ -7,7 +7,6 @@ import 'jspdf-autotable';
 export const Bitacora = () => {
   const [bitacoras, setBitacoras] = useState([]); // Estado para almacenar los registros de la bitácora
   const [loading, setLoading] = useState(true); // Estado para manejar el loading
-  const [datosBit,setDatosBit]= useState([]);
  
   // Función para obtener los registros de la bitácora desde el backend
   const fetchBitacoras = async () => {
@@ -39,25 +38,22 @@ export const Bitacora = () => {
   const generarReportePDF = () => {
     const doc = new jsPDF();
     doc.text('Reporte de Bitacora', 20, 20);
-
-    const bitacoraData = datosBit.map(bitacora => [
-      bitacora.BitacoraID,
-      bitacora.UsuarioID,
-      bitacora.Nombre,
-      bitacora.Correo,
-      bitacora.ip,
-      bitacora.fecha,
-      bitacora.Hora,
-      bitacora.Accion
-    ]);
-
     doc.autoTable({
-        head: [['Id', 'Usuario', 'Nombre', 'Correo', 'IP', 'Fecha', 'Hora', 'Accion']],
-        body: bitacoraData
+      head: [['Id', 'Usuario', 'Nombre', 'Correo', 'IP', 'Fecha', 'Hora', 'Accion']],
+      body: bitacoras.map(bitacora => [
+        bitacora.BitacoraID,
+        bitacora.UsuarioID,
+        bitacora.Nombre,
+        bitacora.Correo,
+        bitacora.ip,
+        bitacora.fecha,
+        bitacora.Hora,
+        bitacora.Accion,
+      ]),
     });
+    doc.save("bitacora_reporte.pdf");
+  };
 
-    doc.save('Reporte_Bitacora.pdf');
-};
 
 
   if (loading) {

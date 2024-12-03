@@ -303,7 +303,7 @@ function VentaPage() {
 
   const pedidos = [
     {
-      id: 4,
+      id: 32,
       nombre: "david Pardo",
       productos: [{ id: 4, nombre: "CocaCola 2Lt", cantidad: 2, precio: 15, total: 30 },
       { id: 14, nombre: "Vital sin gas", cantidad: 1, precio: 29, total: 29 },
@@ -311,8 +311,8 @@ function VentaPage() {
       ],
       total: 103
     }, {
-      id: 2,
-      nombre: "María Fernández",
+      id: 35,
+      nombre: "Maria Fernandez",
       productos: [
         { id: 8, nombre: "Coca Cola Zero 3lt", cantidad: 1, precio: 16, total: 16 },
         { id: 36, nombre: "Havana Especial 1lt", cantidad: 2, precio: 85, total: 170 },
@@ -321,8 +321,8 @@ function VentaPage() {
       total: 238
     },
     {
-      id: 1,
-      nombre: "Ana López",
+      id: 34,
+      nombre: "Ana Lopez",
       productos: [
         { id: 1, nombre: "Flor de Caña 1lt", cantidad: 2, precio: 70, total: 140 },
         { id: 7, nombre: "Coca Cola Zero 2lt", cantidad: 1, precio: 12, total: 12 },

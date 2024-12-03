@@ -32,10 +32,6 @@ function VentaPage() {
   const [totalEfectivo, setTotalEfectivo] = useState('');
   const [mostrarPedidos, setMostrarPedidos] = useState(false);
   const [loading, setLoading] = useState(false);
-  // para comboioo
-  const [buscarIdCombo, setBuscarIdCombo] = useState('');
-  const [combo, setComnbo] = useState([])
-  const [ComboEnVenta, setComboEnVenta] = useState([]);
 
   const seleccionarProducto = (producto) => {
     const productoExistente = productosEnVenta.find((p) => p.id === producto.id);
@@ -90,33 +86,7 @@ function VentaPage() {
       setSugerencias([]);
     }
   };
-  /* ...................................combooo */
 
-  const buscarComboPorNombre = (event) => {
-    const value = event.target.value;
-    setBusquedaNombre(value);
-    if (value.length >= 3) {
-      const resultados = producto.filter((product) =>
-        combo.Descripcion.toLowerCase().startsWith(value.toLowerCase())
-      );
-      setSugerencias(resultados);
-    } else {
-      setSugerencias([]);
-    }
-  };
-
-  const bucarComboPorId = () => {
-    const value = event.target.value;
-    setBuscarIdCombo(value)
-    if (value.length > 0) {
-      const resultados = combo.filter((com) => com.id.toString().startsWith(value));
-      setSugerencias(resultados);
-    } else {
-      setSugerencias([]);
-    }
-  }
-  /* ...............comboooo,,,,,,,,,,,,,,,,,,,,,,,,,,,
-   */
   const buscarUsuario = (event) => {
     const value = event.target.value;
     setBusquedaUsuarioId(value); // Mantén el valor en el estado de busquedaUsuarioId
@@ -486,36 +456,7 @@ function VentaPage() {
                   </table>
                 </div>
               </div>
-              {/* aquii finalizaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */}
-              {/* -----------------------------combooo........................................... */}
-              <h3>Detalle Comboo</h3>
-              <div id='fact3'>
-                {/* busqueda por id  */}
-                <input
-                  type="text"
-                  placeholder='ID del Combo'
-                  value={buscarIdCombo}
-                  onChange={bucarComboPorId}
-                />
-                {/* buscar combooo */}
-                <input
-                  type="text"
-                  placeholder='Buscar Combo'
-                  value={busquedaNombre}
-                  onChange={buscarComboPorNombre}
-                />
 
-                {sugerencias.length > 0 && (
-                  <ul className='sugerenciasVenta'>
-                    {sugerencias.map((producto, index) => (
-                      <li key={index} onClick={() => seleccionarProducto(producto)}>
-                        {producto.id} - {producto.nombre}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              {/* ..............................aqui finaliza combooo................................................................... */}
               <h3>Detalle De Pago</h3>
               <div id='fact5'>
                 <button onClick={() => { setMostrarTarjeta(true); handleAddTarjeta(); }}>TARJETA</button>

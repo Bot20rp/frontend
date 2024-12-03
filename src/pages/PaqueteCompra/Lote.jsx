@@ -126,7 +126,7 @@ export const Lote = () => {
     doc.text('Reporte de Lotes', 14, 10);
     doc.autoTable({
     head :[ ['ID', 'Nombre', 'Cantidad', 'fechaExpiracion', 'diferenciaTiempo']],
-    body : datosLotes.map((lote) => [
+    body : lotesConsultados.map((lote) => [
       lote.loteId,
       lote.nombre,
       lote.cantidad,

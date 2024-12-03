@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/AdmiUsuarioCss/bitacora.css'
 import { bitacoraa } from '../../api/auth';  
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
 export const Bitacora = () => {
   const [bitacoras, setBitacoras] = useState([]); // Estado para almacenar los registros de la bitácora
   const [loading, setLoading] = useState(true); // Estado para manejar el loading
-
+  const [datosBit,setDatosBit]= useState([]);
+ 
   // Función para obtener los registros de la bitácora desde el backend
   const fetchBitacoras = async () => {
     try {
@@ -32,6 +36,29 @@ export const Bitacora = () => {
   useEffect(() => {
     fetchBitacoras(); // Llamar a la función cuando el componente se monta ----------
   }, []);
+  const generarReportePDF = () => {
+    const doc = new jsPDF();
+    doc.text('Reporte de Bitacora', 20, 20);
+
+    const bitacoraData = datosBit.map(bitacora => [
+      bitacora.BitacoraID,
+      bitacora.UsuarioID,
+      bitacora.Nombre,
+      bitacora.Correo,
+      bitacora.ip,
+      bitacora.fecha,
+      bitacora.Hora,
+      bitacora.Accion
+    ]);
+
+    doc.autoTable({
+        head: [['Id', 'Usuario', 'Nombre', 'Correo', 'IP', 'Fecha', 'Hora', 'Accion']],
+        body: bitacoraData
+    });
+
+    doc.save('Reporte_Bitacora.pdf');
+};
+
 
   if (loading) {
     return <div>Cargando los registros de la bitácora...</div>;
@@ -40,6 +67,7 @@ export const Bitacora = () => {
   return (
     <div className="bitacora-container">
       <h1>Registros de la Bitácora</h1>
+      <button className='reporteBitacora' onClick={generarReportePDF}>Generar Reporte</button>
       <table className="bitacora-table">
         <thead>
           <tr>
